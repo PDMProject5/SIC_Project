@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.sic.pdm.vo.user.MemberVo;
 
 @Repository
-public class MembeDaoImpl implements IMemberDao{
+public class MemberDaoImpl implements IMemberDao{
 
 	private final String NS ="com.sic.pdm.sql.Member.";
 	

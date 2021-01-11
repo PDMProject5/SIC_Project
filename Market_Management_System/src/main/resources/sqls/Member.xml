@@ -47,19 +47,24 @@ WHERE ID = #{id}
 </update>
 
 <delete id="signoutusercoupon" parameterType="java.lang.String">
-DELETE FROM COUPON WHERE ID = #{id}
+DELETE FROM "COUPON" WHERE ID = #{id}
 </delete>
 
 <delete id="signoutusermileage" parameterType="java.lang.String">
-DELETE FROM MILEAGE WHERE ID = #{id}
+DELETE FROM "MILEAGE" WHERE ID = #{id}
 </delete>
 
 <delete id="signoutuserdeliverylist" parameterType="java.lang.String">
-DELETE FROM DELIVERYLIST WHERE ID = #{id}
+DELETE FROM "DELIVERYLIST" WHERE ID = #{id}
 </delete>
 
-<delete id="">
-DELETE FROM ORDER WHERE ID = #{id}
+<delete id="signoutuserrefund" parameterType="java.lang.String">
+DELETE FROM "REFUND"
+WHERE ONUM IN (SELECT ONUM FROM "ORDER" WHERE ID = #{id});
+</delete>
+
+<delete id="signoutuserorder">
+DELETE FROM "ORDER" WHERE ID = #{id}
 </delete>
 
 <delete id="deleteuser">
