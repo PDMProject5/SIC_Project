@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<button onclick="location.href='./singUp.do'">회원가입</button>
-<button onclick="location.href='./loginForm.do'">로그인</button>
 ${id}
-${sellerid}
+<button onclick="location.href='./logout.do'">로그아웃</button>
+<button onclick="location.href='./userModified.do'">회원정보 수정</button>
 </body>
 </html>

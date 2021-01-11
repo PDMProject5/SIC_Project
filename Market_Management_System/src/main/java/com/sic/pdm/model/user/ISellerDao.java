@@ -1,9 +1,11 @@
-package com.sic.pdm.service.user;
+package com.sic.pdm.model.user;
 
 import com.sic.pdm.vo.user.SellerVo;
 
-public interface ISellerService {
+public interface ISellerDao {
 	
 	public String sellerloginchk(SellerVo vo);
+	
+	
 	
 }

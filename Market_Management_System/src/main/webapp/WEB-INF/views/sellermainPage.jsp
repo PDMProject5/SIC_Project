@@ -7,6 +7,7 @@
 <title>판매자 페이지</title>
 </head>
 <body>
-
+${sellerid}
+<button onclick="location.href='./logout.do'">로그아웃</button>
 </body>
 </html>

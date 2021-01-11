@@ -1,10 +1,8 @@
-package com.sic.pdm.impl.user;
+package com.sic.pdm.model.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sic.pdm.dao.user.ISellerDao;
-import com.sic.pdm.service.user.ISellerService;
 import com.sic.pdm.vo.user.SellerVo;
 @Service
 public class SellerServiceImpl implements ISellerService {
@@ -16,5 +14,7 @@ public class SellerServiceImpl implements ISellerService {
 	public String sellerloginchk(SellerVo vo) {
 		return dao.sellerloginchk(vo);
 	}
+
+
 
 }
