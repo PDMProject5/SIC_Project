@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
-	<mappers>
-		
-	</mappers>
+<typeAliases>
+	<typeAlias type="com.sic.pdm.vo.user.MemberVo" alias="MemberVo"/>
+	<typeAlias type="com.sic.pdm.vo.user.SellerVo" alias="SellerVo"/>
+</typeAliases>
+
+<mappers>
+	<mapper resource="/sqls/Member.xml"/>
+	<mapper resource="/sqls/Seller.xml"/>
+</mappers>
 </configuration>

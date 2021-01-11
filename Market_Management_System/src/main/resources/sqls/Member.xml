@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.sql.Member">
+
+<insert id="singup" parameterType="MemberVo">
+INSERT INTO "MEMBER" (ID, PW, NAME, ROADADDR, ADDR, PHONE)
+VALUES(#{id}, #{pw}, #{name}, #{roadaddr}, #{addr}, #{phone})
+</insert>
+
+<insert id="userdeliverylist" parameterType="MemberVo">
+INSERT INTO MARKET.DELIVERYLIST(DNUM,ID,ROADADDR, ADDR, ADDRFLAG, DNAME)
+VALUES(DNUM_SEQ.NEXTVAL,#{id},#{roadaddr},#{addr},'Y', #{id})
+</insert>
+
+<select id="idchk" parameterType="java.lang.String" resultType="java.lang.String">
+SELECT ID, SINGOUT FROM "MEMBER"
+WHERE ID = #{id}
+</select>
+
+<select id="loginchk" parameterType="MemberVo" resultType="java.lang.String">
+SELECT ID FROM "MEMBER"
+ WHERE ID = #{id}
+ AND PW = #{pw}
+ AND SINGOUT = 'N'
+</select>
+
+</mapper>
