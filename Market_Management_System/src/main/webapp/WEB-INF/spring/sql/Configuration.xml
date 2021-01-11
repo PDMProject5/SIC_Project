@@ -4,10 +4,14 @@
 <typeAliases>
 	<typeAlias type="com.sic.pdm.vo.user.MemberVo" alias="MemberVo"/>
 	<typeAlias type="com.sic.pdm.vo.user.SellerVo" alias="SellerVo"/>
+	<typeAlias type="com.sic.pdm.vo.coupon.CouponVo" alias="CouponVo"/>
+	<typeAlias type="com.sic.pdm.vo.coupon.CouponDetailVo" alias="CouponDetailVo"/>
+	<typeAlias type="com.sic.pdm.vo.coupon.CouponBoxVo" alias="CouponBoxVo"/>
 </typeAliases>
 
 <mappers>
 	<mapper resource="/sqls/Member.xml"/>
 	<mapper resource="/sqls/Seller.xml"/>
+	<mapper resource="/sqls/Coupon.xml"/>
 </mappers>
 </configuration>

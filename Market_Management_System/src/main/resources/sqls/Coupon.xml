@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.model.coupon.ICouponDao">
+
+	<select id="CouponList" parameterType="java.util.ArrayList" resultType="CouponVo">
+		SELECT CTHUMBIMG, CNOTIFY, CDATE FROM COUPON
+	</select>
+	
+	<insert id = "insertCoupon" parameterType="CouponVo">
+		INSERT INTO COUPON (CSEQ, SELLERID, COUPON, CDATE, CNOTIFY, CENABLE, CIMG, CTHUMBIMG)
+		VALUES (COUPON_SEQ.NEXTVAL, 'admin01', #{coupon}, SYSDATE,#{cNotify},'Y', #{cImg}, #{cThumbImg})
+	</insert>
+	
+	<insert id = "CouponStateInsert" parameterType="java.lang.String">
+		INSERT INTO COUPONDETAIL (CDSEQ, CSEQ, SELLERID, CDSTATE)
+		VALUES (COUPONDETAIL_SEQ.NEXTVAL, COUPON_SEQ.CURRVAL, '#{sellerId}', #{cdState})
+	</insert>
+	
+	<update id = "updateCoupon" parameterType="CouponVo">
+		UPDATE COUPON SET 
+		CNOTIFY = #{cNotify},
+		CIMG = #{cImg},
+		COUPON = #{coupon},
+		WHERE CSEQ = #{cSeq}
+	</update>
+	
+	<delete id="deleteCoupon" parameterType="CouponVo">
+		DELETE FROM COUPON
+		WHERE CSEQ = #{cSeq}
+	</delete>
+	
+	<insert id = "getCoupon" parameterType="java.lang.String">
+		INSERT INTO COUPONBOX (CBCODE, ID, CSEQ, SELLERID, CBDATE)
+		VALUES (#{cbCode}, (SELECT ID FROM MEMBER WHERE ID = #{id}),
+		(SELECT CSEQ FROM COUPON WHERE CENABLE = 'Y'),
+		(SELECT SELLERID FROM SELLER WHERE SELLERID = #{sellerId}),
+		SYSDATE)
+	</insert>
+	
+	<select id="getCouponList" parameterType="java.lang.String" resultType="CouponBoxVo">
+		SELECT CBCODE,CBDATE FROM COUPONBOX WHERE ID = #{id}
+	</select>
+	
+
+</mapper>
