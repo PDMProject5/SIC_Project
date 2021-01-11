@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.sql.Product">
+
+	<select id="getProdList" resultType="ProductVo">
+		SELECT DISTINCT p2.INAME, p2.STOCK
+		FROM PRODUCT p JOIN
+		(SELECT INAME, SUM(STOCK) AS STOCK
+		FROM PRODUCT
+		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
+		GROUP BY INAME) p2
+		ON p.INAME = p2.INAME
+		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
+	</select>
+	
+</mapper>
