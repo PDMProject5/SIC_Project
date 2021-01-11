@@ -24,4 +24,47 @@ SELECT ID FROM "MEMBER"
  AND SINGOUT = 'N'
 </select>
 
+<select id="nowpwcheck" parameterType="MemberVo" resultType="java.lang.String">
+SELECT PW FROM "MEMBER"
+WHERE ID = #{id}
+AND PW = #{pw}
+</select>
+
+<update id="updatepw" parameterType="MemberVo">
+UPDATE "MEMBER" SET PW = #{pw}
+WHERE ID = #{id}
+</update>
+
+<select id="signoutuserchk" parameterType="MemberVo" resultType="java.lang.String">
+SELECT ID FROM "MEMBER"
+WHERE ID = #{id}
+AND PW = #{pw}
+</select>
+
+<update id="signoutuser" parameterType="java.lang.String">
+UPDATE "MEMBER" SET SINGOUT = 'Y', SINGOUTDAY = TO_CHAR(SYSDATE)
+WHERE ID = #{id}
+</update>
+
+<delete id="signoutusercoupon" parameterType="java.lang.String">
+DELETE FROM COUPON WHERE ID = #{id}
+</delete>
+
+<delete id="signoutusermileage" parameterType="java.lang.String">
+DELETE FROM MILEAGE WHERE ID = #{id}
+</delete>
+
+<delete id="signoutuserdeliverylist" parameterType="java.lang.String">
+DELETE FROM DELIVERYLIST WHERE ID = #{id}
+</delete>
+
+<delete id="">
+DELETE FROM ORDER WHERE ID = #{id}
+</delete>
+
+<delete id="deleteuser">
+DELETE "MEMBER"
+WHERE SINGOUT = 'Y'
+AND SINGOUTDAY = TO_CHAR(SYSDATE-730)
+</delete>
 </mapper>

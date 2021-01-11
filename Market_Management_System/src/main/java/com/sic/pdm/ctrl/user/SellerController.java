@@ -1,4 +1,4 @@
-package com.sic.pdm.model.user;
+package com.sic.pdm.ctrl.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sic.pdm.service.user.ISellerService;
+import com.sic.pdm.model.user.ISellerService;
 import com.sic.pdm.vo.user.SellerVo;
 
 @Controller
