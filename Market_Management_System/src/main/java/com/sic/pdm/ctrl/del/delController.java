@@ -102,5 +102,13 @@ public class delController {
 		return "redirect:/delList.do";
 	}
 	
-	
+	@RequestMapping(value = "/deleteDel.do", method = RequestMethod.GET)
+	public String deleteDel(String dnum,HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String id = (String)session.getAttribute("id");
+		map.put("dnum", dnum); 
+		map.put("id", id);
+		dservice.deleteDel(map);
+		return "redirect:/delList.do";
+	}
 }
