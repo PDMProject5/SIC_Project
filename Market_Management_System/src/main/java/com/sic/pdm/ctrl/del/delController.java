@@ -82,9 +82,21 @@ public class delController {
 		return json.toString();
 	}
 	
+	@RequestMapping(value = "/modify2.do", method = RequestMethod.POST)
+	public String modify2(DelVo vo, HttpSession session) {
+		logger.info("welcome modifyForm2.do : \t {}",vo);
+		String id = (String)session.getAttribute("id");
+		dservice.addrflagN(id);
+		dservice.addrflag(vo);
+		dservice.updateDel(vo);
+				
+		return "redirect:/delList.do";
+	}
+	
 	@RequestMapping(value = "/modify.do", method = RequestMethod.POST)
-	public String modify(DelVo vo) {
+	public String modify(DelVo vo, HttpSession session) {
 		logger.info("welcome modifyForm.do : \t {}",vo);
+		dservice.addrflag(vo);
 		dservice.updateDel(vo);
 		
 		return "redirect:/delList.do";

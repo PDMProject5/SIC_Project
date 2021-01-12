@@ -8,8 +8,6 @@ import com.sic.pdm.vo.del.DelVo;
 
 
 
-
-
 public interface DelIService {
 	
 
@@ -23,6 +21,9 @@ public interface DelIService {
 	
 	public DelVo getDefaultAddr(String id);
 	
-	
 	public DelVo getOneDelList(String dnum);
+	
+	public boolean addrflag(DelVo vo);
+
+	public boolean addrflagN(String id);
 }

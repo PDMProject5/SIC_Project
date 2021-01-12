@@ -38,72 +38,41 @@ var ajaxModify = function(val){
 		success : function(v){
 			console.log(v.dnum, v.id,v.dname, v.roadaddr, v.addr, v.phone, v.addrflag)
 		 html = "<div class='form-group'>";
-         html += "<input type='hidden' value='"+v.dnum+"' name='dnum'/>";
-
+         html += "<input type='hidden' id='dnum' name='dnum' value='"+v.dnum+"' />";
+         html += "<input type='hidden' id='id' name='id' value='"+v.id+"'/>";
+         html += "<input type='hidden' id='flag' name='flag' value='"+v.addrflag+"' />";
             
-         /* html += "<div class='form-group'>";
-         html += "<label for='title'>배송지명</label>";
-         html += "<input class='form-control' type='text' id='dname' name='dname' value='"+v.dname+"' required/>";
-         html += "</div>"
-            
-         html += "<div class='form-group'>";
-         html += "<label for='content'>도로명주소</label>";
-         html += "<textarea class='form-control' row='5' id='roadaddr' name='roadaddr' required>"+v.roadaddr+"</textarea>";
-         html += "</div>";   
-         
-         html += "<div class='form-group'>";
-         html += "<label for='content'>상세주소</label>";
-         html += "<textarea class='form-control' row='5' id='addr' name='addr' required>"+v.addr+"</textarea>";
-         html += "</div>";   
-         
-         html += "<div class='form-group'>";
-         html += "<label for='content'>휴대폰번호</label>";
-         html += "<span row='5' id='phone' name='phone' maxlength='3' required>";
-         html += "<input class='form-control' id='phone' name='phone' maxlength='4' required></span>";
-         
-         html += "</span>";
-         html += "</div>";   
-         
-         html += "<div class='form-group'>";
-         html += "<label for='content'>기본배송지로 설정</label>";
-         html += "<input type='checkbox' id='addrflag'>";
-         html += "</div>";  */
-         
-         
-         
-
+    
          html += "<table class='tbl_delivery_info'>";
          html += "  <tbody>";
          html += " <tr>";
-      html += "<th class='cell_title'>배송지명</th>";
-      html += "<td><input type='text' id='dname' name='dname' placeholder='배송지명' maxlength='150'>";
-      html += "</td></tr>";
-      html += "<tr><th class='cell_title'>도로명 주소</th>";
-      html += "<td><input type='text' id='roadaddr' name='roadaddr' placeholder='도로명 주소' readonly='readonly'>";
-      html += "<input type='button' onclick='sample6_execDaumPostcode()' value='주소 찾기'><br>";
-      html += "</td></tr>";				
-      html += "<tr><th>상세 주소</th>";			
-      html += "<td class='cell_title'>";  
-      html += "<input type='text' id='addr' name='addr' placeholder='상세주소'>";
-      html += "</td></tr>";
-      html += "<tr><th class='cell_title'>전화번호</th>";			
-      html += "<td>";  
-      html += "<span><input type='text' style='width: 50px;' id='phone' name='phone' maxlength='3'></span>";
-      html += "<span>&nbsp;-&nbsp;</span>";
-      html += "<span><input type='text' style='width: 60px;' id='phone' name='phone' maxlength='4'></span>";
-      html += "<span>&nbsp;-&nbsp;</span>";
-      html += "<span><input type='text' style='width: 60px;' id='phone' name='phone' maxlength='4'></span>";
-      html += "</td></tr>";      
-
-      html += "<tr><th>기본배송지로 설정</th></tr>";
-      html += "<td><input type='checkbox' id='addrflag'></td>";
-      html += "<div class='modal-footer'>";
-      html += "</tbody></table>";
-      html += "</div>";
-      html += "<input class='btn btn-success' type='button' value='수정' onclick='update()'/>";
-      html += "<button type='button' class='btn btn-default' data-dismiss='modal'>취소</button>";
-      html += "</div>";
-		    $('#frmModify').html(html);
+         html += "<th class='cell_title'>배송지명</th>";
+	     html += "<td><input type='text' id='dname' name='dname' placeholder='배송지명' maxlength='150'>";
+	     html += "</td></tr>";
+	     html += "<tr><th class='cell_title'>도로명 주소</th>";
+	     html += "<td><input type='text' id='roadaddr' name='roadaddr' placeholder='도로명 주소' readonly='readonly'>";
+	     html += "<input type='button' onclick='sample6_execDaumPostcode()' value='주소 찾기'><br>";
+	     html += "</td></tr>";				
+	     html += "<tr><th>상세 주소</th>";			
+	     html += "<td class='cell_title'>";  
+	     html += "<input type='text' id='addr' name='addr' placeholder='상세주소'>";
+	     html += "</td></tr>";
+	     html += "<tr><th class='cell_title'>전화번호</th>";			
+	     html += "<td>";  
+	     html += "<span><input type='text'  id='phone' name='phone' maxlength='11'></span>";
+	     html += "</td></tr>";      
+	
+	     html += "<tr><th>기본배송지로 설정</th></tr>";
+	     html += "<td><input type='checkbox' id='addrchk' name='addrchk'></td>";
+	     html += "<input type='hidden' id='addrflag' name='addrflag'>";
+	     html += "<div class='modal-footer'>";
+	     html += "</tbody></table>";
+	     html += "</div>";
+	      
+	     html += "<input class='btn btn-success' type='button' value='수정' onclick='update()'/>";
+	     html += "<button type='button' class='btn btn-default' data-dismiss='modal'>취소</button>";
+	     html += "</div>";
+		 $('#frmModify').html(html);
 		    
 		},
 		error: function(){
@@ -115,11 +84,46 @@ var ajaxModify = function(val){
 function update(){
 
 	var frm = document.getElementById('frmModify');
-	frm.action = './modify.do';
+	
+	
 	var dname = $('#dname').val();
-	if(dname == ''){
-		alert("배송지명은 필수입니다.");
+	var roadaddr = $('#roadaddr').val();
+	var addr = $('#addr').val();
+	var phone = $('#phone').val()
+	
+	var flagchk = $('#flag').val();
+	console.log(flagchk);
+	
+	
+	if($("input[name='addrchk']").is(":checked") == true){
+		$("input[name='addrflag']").val('Y');
 	}else{
-		frm.submit();
+		$("input[name='addrflag']").val('N');
 	}
+	
+	var addrflag = $('#addrflag').val();
+	
+	console.log(addrflag);
+	
+	if(flagchk == 'N' && addrflag=='Y'){
+		frm.action = './modify2.do';
+	}else{
+		frm.action = './modify.do';
+		
+	}
+	
+	
+	if(dname == ''|| roadaddr == '' || addr == '' || phone == ''){
+		alert("필수 값을 입력해 주세요.");
+	}
+	
+//	flagchk 가 n 일때 1) 기본 배송지 선택안함 그대로 유지  2) 기본배송지 선택  다른거 다 n 이것만 y변경
+	
+	else if(flagchk == 'Y' && addrflag == 'N' ){
+		alert("기본 배송지는 1개 존재해야 합니다.");
+	}else{
+		frm.submit();				
+	}
+	
 }
+

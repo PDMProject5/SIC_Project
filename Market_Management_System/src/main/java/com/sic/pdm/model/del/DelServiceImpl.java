@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.sic.pdm.vo.del.DelVo;
 
-
 @Service
 public class DelServiceImpl implements DelIService {
 
@@ -23,25 +22,21 @@ public class DelServiceImpl implements DelIService {
 
 	@Override
 	public boolean insertDel(DelVo vo) {
-		// TODO Auto-generated method stub
 		return dao.insertDel(vo);
 	}
 
 	@Override
 	public boolean updateDel(DelVo vo) {
-		// TODO Auto-generated method stub
 		return dao.updateDel(vo);
 	}
 
 	@Override
 	public boolean deleteDel(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return dao.deleteDel(map);
 	}
 
 	@Override
 	public DelVo getDefaultAddr(String id) {
-		// TODO Auto-generated method stub
 		return dao.getDefaultAddr(id);
 	}
 
@@ -49,7 +44,18 @@ public class DelServiceImpl implements DelIService {
 	
 	@Override
 	public DelVo getOneDelList(String dnum) {
-		// TODO Auto-generated method stub
 		return dao.getOneDelList(dnum);
+	}
+	
+	@Override
+	public boolean addrflag(DelVo vo) {
+		
+		return dao.addrflag(vo);
+	}
+	
+	@Override
+	public boolean addrflagN(String id) {
+		
+		return dao.addrflagN(id);
 	}
 }

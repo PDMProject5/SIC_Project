@@ -24,8 +24,9 @@ VALUES(DNUM_SEQ.NEXTVAL, #{dname} ,#{id}, #{roadaddr}, #{addr},#{phone})
 
 <!-- 배송지 수정 -->
 <update id="updateDel" parameterType="DelVo">
-UPDATE DELIVERYLIST SET DNAME=#{dname} ROADADDR= #{roadaddr}, ADDR=#{addr}, ADDRFLAG = #{ADDRFLAG}, PHONE=#{phone} 
-	WHERE DNUM = #{dnum} 
+UPDATE MARKET.DELIVERYLIST
+	SET ROADADDR=#{roadaddr}, ADDR=#{addr},  DNAME=#{dname} , PHONE=#{phone}
+WHERE ID=#{id} AND DNUM=#{dnum}
 </update>
 
 <!-- 배송지 삭제 -->
@@ -34,9 +35,17 @@ DELETE FROM DELIVERYLIST
 	WHERE ID = #{id} AND DNUM= #{dnum}
 </delete>
 
-<!-- 기본 배송지 조회 -->
-<select id="getDefaultAddr" parameterType="java.lang.String" resultType="DelVo">
-SELECT DNAME, ROADADDR, ADDR,PHONE FROM DELIVERYLIST WHERE ID=#{id} AND ADDRFLAG='Y'
-</select>
+<!-- 기본 배송지 변경 -->
+<update id="addrflag" parameterType="DelVo" >
+UPDATE DELIVERYLIST SET ADDRFLAG = #{addrflag} 
+	WHERE ID=#{id} AND DNUM=#{dnum}
+</update>
+
+<update id="addrflagN" parameterType="java.lang.String" >
+UPDATE DELIVERYLIST SET ADDRFLAG = 'N' 
+	WHERE ID=#{id} AND ADDRFLAG = 'Y'
+</update>
+
+	
 
 </mapper>

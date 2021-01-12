@@ -69,5 +69,15 @@ public class DelDaoImpl implements DelIDao {
 		return vo;
 	}
 	
+	@Override
+	public boolean addrflag(DelVo vo) {
+		int n = session.update(NS+"addrflag", vo);
+		return n>0?true:false;
+	}
 	
+	@Override
+	public boolean addrflagN(String id) {
+		session.update(NS+"addrflagN", id);
+		return false;
+	}
 }
