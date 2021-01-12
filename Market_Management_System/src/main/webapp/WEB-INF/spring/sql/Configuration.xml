@@ -8,6 +8,7 @@
 	<typeAlias type="com.sic.pdm.vo.coupon.CouponDetailVo" alias="CouponDetailVo"/>
 	<typeAlias type="com.sic.pdm.vo.coupon.CouponBoxVo" alias="CouponBoxVo"/>
 	<typeAlias type="com.sic.pdm.vo.product.ProductVo" alias="ProductVo"/>
+	<typeAlias type="com.sic.pdm.vo.del.DelVo" alias="DelVo"/>
 </typeAliases>
 
 <mappers>
@@ -15,5 +16,6 @@
 	<mapper resource="/sqls/Seller.xml"/>
 	<mapper resource="/sqls/Coupon.xml"/>
 	<mapper resource="/sqls/Product.xml"/>
+	<mapper resource="/sqls//DelMapper.xml"/>
 </mappers>
 </configuration>
