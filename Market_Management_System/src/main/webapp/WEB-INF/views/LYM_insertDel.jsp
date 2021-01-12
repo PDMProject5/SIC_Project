@@ -72,9 +72,7 @@
                 <tr>
 					<th>전화번호</th>			
                      <td class="cell_title">  
-                     	<input type="text" id="phone" name="phone" maxlength="3">
-                     	<input type="text" id="phone" name="phone" maxlength="4">
-                     	<input type="text" id="phone" name="phone" maxlength="4">
+                     	<input type="text" id="phone" name="phone" maxlength="11">
                     </td>
                 </tr>      
              </tbody>

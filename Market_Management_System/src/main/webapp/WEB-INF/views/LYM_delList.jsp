@@ -51,7 +51,7 @@ ${lists}
 							
 							<td>
 								<input class="btn-success btn btn-primary" type="button" value="수정" onclick="modify(${dto.dnum})">
-								<input class="btn-success btn btn-primary" type="button" value="삭제">
+								<input class="btn-success btn btn-primary" type="button" value="삭제" onclick="deleteDel(${dto.dnum})">
 							</td>
 						</tr>
 					</c:forEach>
@@ -96,7 +96,12 @@ function insertForm(){
 		}
 }
 
-
+function deleteDel(val){
+	var con = confirm("정말 삭제하시겠습니까?");
+	if(con){
+		location.href="./deleteDel.do?dnum="+val;
+	}
+}
 
 
 </script>
