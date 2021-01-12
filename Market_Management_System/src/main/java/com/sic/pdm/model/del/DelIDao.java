@@ -22,6 +22,9 @@ public interface DelIDao {
 	
 	public DelVo getDefaultAddr(String id);
 	
-
 	public DelVo getOneDelList(String dnum);
+	
+	public boolean addrflag(DelVo vo);
+	
+	public boolean addrflagN(String id);
 }

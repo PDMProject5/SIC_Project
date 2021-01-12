@@ -23,9 +23,19 @@ public class DelVo {
 		this.id = id;
 		this.roadaddr = roadaddr;
 		this.addr = addr;
-		this.addrflag = addrflag;
 		this.dname = dname;
 		this.phone = phone;
+	}
+
+
+
+
+
+	public DelVo(String dnum, String id, String addrflag) {
+		super();
+		this.dnum = dnum;
+		this.id = id;
+		this.addrflag = addrflag;
 	}
 
 
