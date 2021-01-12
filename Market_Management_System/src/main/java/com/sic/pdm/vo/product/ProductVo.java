@@ -15,15 +15,19 @@ public class ProductVo {
 	private String lifetime;
 	private String stock;
 	private String pstate;
+	private String iprice;
+	private String oprice;
 	
+	public ProductVo() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String toString() {
 		return "ProductVo [lcode=" + lcode + ", lname=" + lname + ", mcode=" + mcode + ", mname=" + mname + ", icode="
 				+ icode + ", iname=" + iname + ", pcode=" + pcode + ", sellerid=" + sellerid + ", rotnum=" + rotnum
-				+ ", pdate=" + pdate + ", lifetime=" + lifetime + ", stock=" + stock + ", pstate=" + pstate + "]";
-	}
-	
-	public ProductVo() {
+				+ ", pdate=" + pdate + ", lifetime=" + lifetime + ", stock=" + stock + ", pstate=" + pstate
+				+ ", iprice=" + iprice + ", oprice=" + oprice + "]";
 	}
 
 	public String getLcode() {
@@ -130,4 +134,20 @@ public class ProductVo {
 		this.pstate = pstate;
 	}
 
+	public String getIprice() {
+		return iprice;
+	}
+
+	public void setIprice(String iprice) {
+		this.iprice = iprice;
+	}
+
+	public String getOprice() {
+		return oprice;
+	}
+
+	public void setOprice(String oprice) {
+		this.oprice = oprice;
+	}
+	
 }

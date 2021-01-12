@@ -1,6 +1,7 @@
 package com.sic.pdm.model.product;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -25,6 +26,37 @@ public class ProductDaoImpl implements IProductDao {
 		List<ProductVo> lists = null;
 		lists = service.selectList(NS + "getProdList", sellerid);
 		return lists;
+	}
+
+	@Override
+	public List<ProductVo> getLcate() {
+		logger.info("ProductDaoImpl getLcate()");
+		List<ProductVo> lists = null;
+		lists = service.selectList(NS + "getLcate");
+		return lists;
+	}
+
+	@Override
+	public List<ProductVo> getMcate() {
+		logger.info("ProductDaoImpl getMcate()");
+		List<ProductVo> lists = null;
+		lists = service.selectList(NS + "getMcate");
+		return lists;
+	}
+
+	@Override
+	public List<ProductVo> getInven(String mcode) {
+		logger.info("ProductDaoImpl getInven()");
+		List<ProductVo> lists = null;
+		lists = service.selectList(NS + "getInven", mcode);
+		return lists;
+	}
+
+	@Override
+	public ProductVo getProdDetail(Map<String, String> map) {
+		logger.info("ProductDaoImpl getProdDetail()");
+		ProductVo vo = service.selectOne(NS + "getProdDetail", map);
+		return vo;
 	}
 
 }
