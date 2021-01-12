@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.sql.Product">
+
+	<select id="getProdList" resultType="ProductVo" parameterType="java.lang.String">
+		SELECT DISTINCT p.ICODE, p.INAME, OPRICE, jj.STOCK
+		FROM PRODUCT p JOIN (SELECT j.ICODE, IPRICE, OPRICE
+		FROM (SELECT ICODE, MAX(CDATE) CDATE
+		FROM INVENPRICE i
+		GROUP BY ICODE) j JOIN INVENPRICE i2 ON j.CDATE = i2.CDATE AND j.ICODE = i2.ICODE) i
+		ON p.ICODE = i.ICODE JOIN (SELECT INAME, SUM(STOCK) STOCK
+		FROM PRODUCT p
+		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
+		GROUP BY INAME)	jj 
+		ON p.INAME = jj.INAME
+		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
+	</select>
+	
+	<select id="getProdDetail" resultType="ProductVo" parameterType="java.lang.String">
+		SELECT p.PCODE, p.SELLERID, p.ICODE, p.ROTNUM, p.PDATE, p.LIFETIME, p.STOCK, p.INAME, j.OPRICE
+		FROM PRODUCT p JOIN (SELECT j.ICODE, IPRICE, OPRICE
+		FROM (SELECT ICODE, MAX(CDATE) CDATE
+		FROM INVENPRICE i
+		GROUP BY ICODE) j JOIN INVENPRICE i2 ON j.CDATE = i2.CDATE AND j.ICODE = i2.ICODE) j
+		ON p.ICODE = j.ICODE
+		WHERE INAME = #{iname} AND SELLERID = #{sellerid} AND PSTATE = 'C'
+	</select>
+	
+	<select id="getLcate" resultType="ProductVo">
+		SELECT LCODE, LNAME
+		FROM LCATE
+	</select>
+	
+	<select id="getMcate" resultType="ProductVo">
+		SELECT MCODE, LCODE, MNAME
+		FROM MCATE
+	</select>
+	
+	<select id="getInven" resultType="ProductVo" parameterType="java.lang.String">
+		SELECT INAME, IPRICE
+		FROM (SELECT j.ICODE, IPRICE
+		FROM (SELECT ICODE, MAX(CDATE) CDATE
+		FROM INVENPRICE i
+		GROUP BY ICODE) j JOIN INVENPRICE i2 ON j.CDATE = i2.CDATE AND j.ICODE = i2.ICODE) p
+		JOIN INVENTORY i3 ON p.ICODE = i3.ICODE
+		WHERE MCODE = #{mcode}
+	</select>
+	
+</mapper>
