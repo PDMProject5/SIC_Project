@@ -82,19 +82,19 @@ public class CouponDaoImpl implements ICouponDao {
 	}
 	
 	@Override
-	public boolean getCoupon(String id) {
+	public boolean getCoupon(Map<String, Object> map) {
 		
-		log.info("// CouponDaoImpl  getCoupon {}" + id);
+		log.info("// CouponDaoImpl  getCoupon {}" + map);
 		
-		int result = sqlSession.insert(NS+"getCoupon", id);
+		int result = sqlSession.insert(NS+"getCoupon", map);
 		
 		return (result > 0) ? true : false;
 	}
 	
 	@Override
-	public List<CouponBoxVo> getCouponList(){
+	public List<CouponVo> getCouponList(String id){
 			
-		return sqlSession.selectList(NS + "getCouponList");
+		return sqlSession.selectList(NS + "getCouponList", id);
 	}
 
 }

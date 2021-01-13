@@ -1,7 +1,5 @@
 package com.sic.pdm.vo.coupon;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CouponVo {
 	

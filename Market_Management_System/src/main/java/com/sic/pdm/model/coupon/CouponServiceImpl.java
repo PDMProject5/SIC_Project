@@ -69,17 +69,17 @@ public class CouponServiceImpl implements ICouponService {
 	}
 	
 	@Override
-	public boolean getCoupon(String id) {
+	public boolean getCoupon(Map<String, Object> map) {
 		
-		log.info("// CouponServiceImpl  getCoupon {}" + id);
+		log.info("// CouponServiceImpl  getCoupon {}" + map);
 		
-		return icDao.getCoupon(id);
+		return icDao.getCoupon(map);
 	}
 	
 	@Override
-	public List<CouponBoxVo> getCouponList(){
+	public List<CouponVo> getCouponList(String id){
 		
-		return icDao.getCouponList();
+		return icDao.getCouponList(id);
 		
 	}
 
