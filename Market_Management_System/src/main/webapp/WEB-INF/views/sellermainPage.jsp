@@ -10,5 +10,6 @@
 ${sellerid}
 <button onclick="location.href='./logout.do'">로그아웃</button>
 <button onclick="location.href='./ViewListCoupon.do'">행사 정보 관리</button>
+<button onclick="location.href='./autoOrderform.do'">자동 발주</button>
 </body>
 </html>
