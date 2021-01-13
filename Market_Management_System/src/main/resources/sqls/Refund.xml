@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.model.or.Refound_IDao">
+	
+	<!-- 환불 요청 조회 -->
+	<select id="refoundList" parameterType="java.lang.String" resultType="RefoundVo">
+		SELECT ONUM, ID ,STORE ,ODATE ,OSTATE 
+		FROM "ORDER"
+		WHERE OSTATE = 'H'
+	</select>
+	
+	<!-- 환불 요청 상세조회 -->
+	<select id="refoundDetail" parameterType="java.util.Map" resultType="RefounddetailVo">
+		SELECT r.ONUM ,O2.ID ,r.REASON ,r.ODATE 
+		FROM REFUND r 
+		INNER JOIN "ORDER" o2 ON o2.ONUM = r.ONUM 
+		WHERE ID = #{id} AND r.ONUM = #{onum}  
+	</select>
+	
+	<select id="gorefund" parameterType="java.lang.String" resultType="OrderVo">
+		SELECT ONUM, ID 
+		FROM "ORDER" o 
+		WHERE ONUM = #{onum}
+	</select>
+	
+	<!-- 환불 요청 하기-->
+	<insert id="refund" parameterType="java.util.Map">
+		INSERT INTO REFUND E (ONUM,REASON,ODATE)
+		VALUES(#{onum},#{reason},SYSDATE)
+	</insert>
+	
+<!-- 환불	요청 -->
+	<update id="refoundModify" parameterType="java.lang.String">
+	UPDATE "ORDER" 
+	SET OSTATE = 'H', ODATE = SYSDATE 
+	WHERE ONUM = #{onum}                          
+	</update>
+	
+<!-- 환불 승인 -->
+	<update id="refoundApprove" parameterType="java.lang.String">
+	UPDATE "ORDER" 
+	SET OSTATE = 'R', ODATE = SYSDATE 
+	WHERE ONUM = #{onum}                          
+	</update>
+	
+<!-- 환불 거절 -->
+	<update id="refoundRefuse" parameterType="java.lang.String" >
+	UPDATE "ORDER" 
+	SET OSTATE = 'F', ODATE = SYSDATE 
+	WHERE ONUM = #{onum}
+	</update>
+	
+</mapper>

@@ -21,18 +21,18 @@ public class OrderList_DaoImpl implements OrderList_IDao {
 	private SqlSessionTemplate sqlsession;
 
 	@Override
-	public List<OrderVo> orderList() {
+	public List<OrderVo> orderList(String id) {
 		List<OrderVo> lists = null;
 		logger.info("OrderList_DaoImpl orderList");
-		lists = sqlsession.selectList(NS+"orderList");
+		lists = sqlsession.selectList(NS+"orderList",id);
 		return lists;
 	}
 
 	@Override
-	public List<OrderdetailVo> orderDetail() {
+	public List<OrderdetailVo> orderDetail(String onum) {
 		List<OrderdetailVo> listss = null;
 		logger.info("OrderList_DaoImpl orderDetail");
-		listss = sqlsession.selectList(NS+"orderDetail");
+		listss = sqlsession.selectList(NS+"orderDetail",onum);
 		return listss;
 	}
 

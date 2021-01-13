@@ -1,10 +1,12 @@
 package com.sic.pdm.model.or;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sic.pdm.vo.or.OrderVo;
 import com.sic.pdm.vo.or.RefoundVo;
 import com.sic.pdm.vo.or.RefounddetailVo;
 
@@ -20,8 +22,13 @@ public class Refound_ServiceImpl implements Refound_IService {
 	}
 	
 	@Override
-	public RefounddetailVo refoundDetail() {
-		return iDao.refoundDetail();
+	public RefounddetailVo refoundDetail(Map<String, Object> map) {
+		return iDao.refoundDetail(map);
+	}
+	
+	@Override
+	public boolean refund(Map<String, Object> map) {
+		return iDao.refund(map);
 	}
 
 	@Override
@@ -37,6 +44,11 @@ public class Refound_ServiceImpl implements Refound_IService {
 	@Override
 	public boolean refoundRefuse(String onum) {
 		return iDao.refoundRefuse(onum);
+	}
+
+	@Override
+	public OrderVo gorefund(String onum) {
+		return iDao.gorefund(onum);
 	}
 
 	
