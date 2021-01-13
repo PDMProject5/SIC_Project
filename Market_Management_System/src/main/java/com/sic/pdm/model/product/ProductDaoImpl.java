@@ -59,4 +59,11 @@ public class ProductDaoImpl implements IProductDao {
 		return vo;
 	}
 
+	@Override
+	public boolean insertProdFood(Map<String, Object> insertMap) {
+		logger.info("ProductDaoImpl insertProdFood()");
+		int count = service.insert(NS + "insertProdFood", insertMap);
+		return count > 0 ? true : false;
+	}
+
 }
