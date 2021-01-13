@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.model.or.OrderList_IDao">
+
+	<select id="orderList" resultType="OrderVo">
+		SELECT TO_DATE(ODATE) ODATE , o.ONUM ,i.INAME ,o2.ODSTOCK ,o2.OPRICE ,o.STORE ,o.OSTATE 
+	FROM "ORDER" o 
+	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM 
+	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
+	INNER JOIN "MEMBER" m ON m.ID = o.ID 
+<!-- 	WHERE m.ID =#{id} -->
+	</select>
+	
+	<select id="orderDetail" resultType="OrderdetailVo">
+		SELECT TO_DATE(ODATE) ODATE , o.ONUM ,i.INAME ,
+	   o2.ODSTOCK ,o2.OPRICE ,o.STORE ,
+	   o.OSTATE ,m.NAME ,d.ADDR , 
+	   m.PHONE , p.PAYMENTAMT , p.DISCOUNTAMT 
+	FROM "ORDER" o 
+	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM 
+	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
+	INNER JOIN "MEMBER" m ON m.ID = o.ID 
+	INNER JOIN DELIVERYLIST d ON d.ID = o.ID 
+	INNER JOIN PAYMENT p ON p.ONUM = o.ONUM 
+<!-- 	WHERE m.ID = 'test01' AND ONUM = '2' -->
+	</select>
+	
+</mapper>
