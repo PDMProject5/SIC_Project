@@ -2,38 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sic.pdm.model.coupon.ICouponDao">
 
-	<select id="CouponList" parameterType="java.util.ArrayList" resultType="CouponVo">
-		SELECT CTHUMBIMG, CNOTIFY, CDATE FROM COUPON
+	<select id = "ViewListCoupon" resultType="CouponVo" parameterType="java.lang.String">
+		SELECT CSEQ, CTHUMBIMG, CNOTIFY, CDATE FROM COUPON
+		WHERE SELLERID = #{sellerid} AND CENABLE = 'Y'
+	</select>
+	
+	<select id = "ViewCoupon" resultType="CouponVo" parameterType="java.lang.String">
+		SELECT CSEQ, CNOTIFY, CIMG, COUPON FROM COUPON WHERE CSEQ = #{cseq}
 	</select>
 	
 	<insert id = "insertCoupon" parameterType="CouponVo">
 		INSERT INTO COUPON (CSEQ, SELLERID, COUPON, CDATE, CNOTIFY, CENABLE, CIMG, CTHUMBIMG)
-		VALUES (COUPON_SEQ.NEXTVAL, 'admin01', #{coupon}, SYSDATE,#{cNotify},'Y', #{cImg}, #{cThumbImg})
+		VALUES (COUPON_SEQ.NEXTVAL, #{sellerid}, #{coupon}, SYSDATE,#{cnotify},'Y', #{cimg}, #{cthumbimg})
 	</insert>
 	
-	<insert id = "CouponStateInsert" parameterType="java.lang.String">
+	<insert id = "InsertCouponState" parameterType="java.util.Map">
 		INSERT INTO COUPONDETAIL (CDSEQ, CSEQ, SELLERID, CDSTATE)
-		VALUES (COUPONDETAIL_SEQ.NEXTVAL, COUPON_SEQ.CURRVAL, '#{sellerId}', #{cdState})
+		VALUES (COUPONDETAIL_SEQ.NEXTVAL, COUPON_SEQ.CURRVAL, #{sellerid}, #{cdstate})
 	</insert>
 	
 	<update id = "updateCoupon" parameterType="CouponVo">
 		UPDATE COUPON SET 
-		CNOTIFY = #{cNotify},
-		CIMG = #{cImg},
-		COUPON = #{coupon},
-		WHERE CSEQ = #{cSeq}
+		CNOTIFY = #{cnotify},
+		CIMG = #{cimg},
+		CTHUMBIMG = #{cthumbimg},
+		COUPON = #{coupon}
+		WHERE CSEQ = #{cseq}
+	</update>
+	
+	<update id = "updateStateCoupon" parameterType="java.lang.String">
+		UPDATE COUPONDETAIL SET 
+		CDSTATE = #{cdstate}
+		WHERE CSEQ = #{cseq}
 	</update>
 	
 	<delete id="deleteCoupon" parameterType="CouponVo">
 		DELETE FROM COUPON
-		WHERE CSEQ = #{cSeq}
+		WHERE CSEQ = #{cseq}
 	</delete>
 	
 	<insert id = "getCoupon" parameterType="java.lang.String">
 		INSERT INTO COUPONBOX (CBCODE, ID, CSEQ, SELLERID, CBDATE)
-		VALUES (#{cbCode}, (SELECT ID FROM MEMBER WHERE ID = #{id}),
+		VALUES (#{cbcode}, (SELECT ID FROM MEMBER WHERE ID = #{id}),
 		(SELECT CSEQ FROM COUPON WHERE CENABLE = 'Y'),
-		(SELECT SELLERID FROM SELLER WHERE SELLERID = #{sellerId}),
+		(SELECT SELLERID FROM SELLER WHERE SELLERID = #{sellerid}),
 		SYSDATE)
 	</insert>
 	
