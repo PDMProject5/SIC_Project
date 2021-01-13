@@ -78,22 +78,28 @@ function makeTable(data){
 function productRegist(){
 	var ids = $("#jqGridRegist").jqGrid('getGridParam', 'selarrrow');
 	alert(ids);
-	var resultArray = new Array(ids);
+	var codeArray = new Array(ids);
+	var stockArray = new Array(ids);
 	for(var i = 0; i < ids.length; i++){
 		var rowObject = $("#jqGridRegist").getRowData(ids[i]);
 		console.log(rowObject);
+		alert(rowObject.stock);
 // 		if(i == 0){
 // 			result = rowObject.code
 // 		}else{			
 // 			result = result + "," + rowObject.code;
 // 		}
-		resultArray[i] = rowObject.code
+		codeArray[i] = rowObject.code;
+		stockArray[i] = rowObject.stock;
 	}
-		alert(resultArray);
+		alert(codeArray);
+		alert(stockArray);
 		var data = {
-				"code" : resultArray
-		}
-		alert(data);
+				"code" : codeArray,
+				"stock" : stockArray
+		};
+		console.log(data);
+		
 	$.ajax({
 		url : "./productInsert.do",
 		method : "post",
@@ -114,12 +120,15 @@ $(function(){
 	$("#jqGridRegist").jqGrid({
 		datatype: "json",
   		height : 250,
-  		colNames : [ '재고코드', '재고명', '입고가' ],
+  		colNames : [ '재고코드', '재고명', '입고가', '수량' ],
 		colModel:[
 				{name:"code",index:"code"},
             	{name:"name",index:"name"},
-            	{name:"price",index:"price"}
+            	{name:"price",index:"price"},
+            	{name:"stock",index:"stock", editable: true, editrules:{number:true}}
                ],
+        cellEdit: true,
+        cellurl: "/",
 		height: 450,
 		caption:"재고 목록?",
     	multiselect : true

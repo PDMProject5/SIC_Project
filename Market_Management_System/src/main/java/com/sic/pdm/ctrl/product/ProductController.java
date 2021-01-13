@@ -1,5 +1,6 @@
 package com.sic.pdm.ctrl.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,16 +94,31 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productInsert.do", method = RequestMethod.POST)
-	public String productInsert(@RequestParam String[] code) {
+	public String productInsert(@RequestParam String[] code, @RequestParam String[] stock) {
 		Map<String, Object> insertMap = new HashMap<String, Object>();
+		Map<String, Object> tempMap = new HashMap<String, Object>();
+		List<ProductVo> list = new ArrayList<ProductVo>();
+		ProductVo pvo = new ProductVo();
+		
+		for (int i = 0; i < stock.length; i++) {
+			pvo.setIcode(code[i]);
+			pvo.setStock(stock[i]);
+			list.add(pvo);
+		}
+//		for (String str : code) {
+//			System.out.println("코드임? = " + str);
+//			pvo.setIcode(str);
+//		}
+//		for (String str : stock) {
+//			System.out.println("숫자임? = " + str);
+//			tempMap.put("stock", str);
+//		}
+		
 		insertMap.put("sellerid", "admin01");
-		insertMap.put("productList", code);
+		insertMap.put("productList", list);
 		System.out.println(insertMap);
 		System.out.println(code);
 		pService.insertProdFood(insertMap);
-		for (String str : code) {
-			System.out.println("코드임? = " + str);
-		}
 		return "redirect:/product.do";
 	}
 	

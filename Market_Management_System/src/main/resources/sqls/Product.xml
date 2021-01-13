@@ -49,14 +49,14 @@
 	<insert id="insertProdFood" parameterType="java.util.Map">
 		INSERT INTO PRODUCT (PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME, PSTATE)
 		SELECT PRODUCT_SEQ.NEXTVAL, A.* FROM( 		
-		<foreach collection="productList" item="icode" separator="UNION ALL ">
+		<foreach collection="productList" item="item" separator="UNION ALL ">
 			SELECT #{sellerid} AS SELLERID, 
-			#{icode} AS ICODE, 
-			(SELECT LCODE FROM MCATE WHERE MCODE = (SELECT MCODE FROM INVENTORY WHERE ICODE = #{icode}))||(SELECT MCODE FROM INVENTORY WHERE ICODE = #{icode})||#{icode} AS ROTNUM,
+			#{item.icode} AS ICODE, 
+			(SELECT LCODE FROM MCATE WHERE MCODE = (SELECT MCODE FROM INVENTORY WHERE ICODE = #{item.icode}))||(SELECT MCODE FROM INVENTORY WHERE ICODE = #{item.icode})||#{item.icode} AS ROTNUM,
 			SYSDATE AS PDATE, 
 			SYSDATE+7 AS LIFETIME, 
-			10 AS STOCK, 
-			(SELECT INAME FROM INVENTORY WHERE ICODE = #{icode}) AS INAME, 
+			#{item.stock} AS STOCK, 
+			(SELECT INAME FROM INVENTORY WHERE ICODE = #{item.icode}) AS INAME, 
 			'C' AS PSTATE 
 			FROM DUAL
 		</foreach>
