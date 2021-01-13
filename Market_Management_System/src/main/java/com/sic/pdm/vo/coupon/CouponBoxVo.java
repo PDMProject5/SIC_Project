@@ -4,36 +4,36 @@ import java.util.Date;
 
 public class CouponBoxVo {
 	
-	private String cbCode;
-	private Date cbDate;
+	private String cbcode;
+	private Date cbdate;
 	
 	public CouponBoxVo() {}
 
-	public CouponBoxVo(String cbCode, Date cbDate) {
+	public CouponBoxVo(String cbcode, Date cbdate) {
 		super();
-		this.cbCode = cbCode;
-		this.cbDate = cbDate;
+		this.cbcode = cbcode;
+		this.cbdate = cbdate;
 	}
 
-	public String getCbCode() {
-		return cbCode;
+	public String getCbcode() {
+		return cbcode;
 	}
 
-	public void setCbCode(String cbCode) {
-		this.cbCode = cbCode;
+	public void setCbcode(String cbcode) {
+		this.cbcode = cbcode;
 	}
 
-	public Date getCbDate() {
-		return cbDate;
+	public Date getCbdate() {
+		return cbdate;
 	}
 
-	public void setCbDate(Date cbDate) {
-		this.cbDate = cbDate;
+	public void setCbdate(Date cbdate) {
+		this.cbdate = cbdate;
 	}
 
 	@Override
 	public String toString() {
-		return "CouponBox [cbCode=" + cbCode + ", cbDate=" + cbDate + "]";
+		return "CouponBoxVo [cbcode=" + cbcode + ", cbdate=" + cbdate + "]";
 	}
-
+	
 }

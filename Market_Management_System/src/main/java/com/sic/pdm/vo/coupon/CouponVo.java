@@ -1,47 +1,48 @@
 package com.sic.pdm.vo.coupon;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CouponVo {
 	
-	private String cSeq;
-	private String sellerId;
+	private String cseq;
+	private String sellerid;
 	private String coupon;
-	private Date cDate;
-	private String cNotify;
-	private String cEnable;
-	private String cImg;
-	private String cThumbImg;
+	private String cdate;
+	private String cnotify;
+	private String cenable;
+	private String cimg;
+	private String cthumbimg;
 	
 	public CouponVo() {}
-
-	public CouponVo(String cSeq, String sellerId, String coupon, Date cDate, String cNotify, String cEnable,
-			String cImg, String cThumbImg) {
+	
+	public CouponVo(String cseq, String sellerid, String coupon, String cdate, String cnotify, String cenable,
+			String cimg, String cthumbimg) {
 		super();
-		this.cSeq = cSeq;
-		this.sellerId = sellerId;
+		this.cseq = cseq;
+		this.sellerid = sellerid;
 		this.coupon = coupon;
-		this.cDate = cDate;
-		this.cNotify = cNotify;
-		this.cEnable = cEnable;
-		this.cImg = cImg;
-		this.cThumbImg = cThumbImg;
+		this.cdate = cdate;
+		this.cnotify = cnotify;
+		this.cenable = cenable;
+		this.cimg = cimg;
+		this.cthumbimg = cthumbimg;
 	}
 
-	public String getcSeq() {
-		return cSeq;
+	public String getCseq() {
+		return cseq;
 	}
 
-	public void setcSeq(String cSeq) {
-		this.cSeq = cSeq;
+	public void setCseq(String cseq) {
+		this.cseq = cseq;
 	}
 
-	public String getSellerId() {
-		return sellerId;
+	public String getSellerid() {
+		return sellerid;
 	}
 
-	public void setSellerId(String sellerId) {
-		this.sellerId = sellerId;
+	public void setSellerid(String sellerid) {
+		this.sellerid = sellerid;
 	}
 
 	public String getCoupon() {
@@ -52,59 +53,51 @@ public class CouponVo {
 		this.coupon = coupon;
 	}
 
-	public Date getcDate() {
-		return cDate;
+	public String getCdate() {
+		return cdate;
 	}
 
-	public void setcDate(Date cDate) {
-		this.cDate = cDate;
+	public void setCdate(String cdate) {
+		cdate.substring(0,cdate.indexOf(" "));
+		this.cdate = cdate;
 	}
 
-	public String getcNotify() {
-		return cNotify;
+	public String getCnotify() {
+		return cnotify;
 	}
 
-	public void setcNotify(String cNotify) {
-		this.cNotify = cNotify;
+	public void setCnotify(String cnotify) {
+		this.cnotify = cnotify;
 	}
 
-	public String getcEnable() {
-		return cEnable;
+	public String getCenable() {
+		return cenable;
 	}
 
-	public void setcEnable(String cEnable) {
-		this.cEnable = cEnable;
+	public void setCenable(String cenable) {
+		this.cenable = cenable;
 	}
 
-	public String getcImg() {
-		return cImg;
+	public String getCimg() {
+		return cimg;
 	}
 
-	public void setcImg(String cImg) {
-		this.cImg = cImg;
+	public void setCimg(String cimg) {
+		this.cimg = cimg;
 	}
 
-	public String getcTumbImg() {
-		return cThumbImg;
+	public String getCthumbimg() {
+		return cthumbimg;
 	}
 
-	public void setcTumbImg(String cTumbImg) {
-		this.cThumbImg = cTumbImg;
+	public void setCthumbimg(String cthumbimg) {
+		this.cthumbimg = cthumbimg;
 	}
 
 	@Override
 	public String toString() {
-		return "CouponDTO [cSeq=" + cSeq + ", sellerId=" + sellerId + ", coupon=" + coupon + ", cDate=" + cDate
-				+ ", cNotify=" + cNotify + ", cEnable=" + cEnable + ", cImg=" + cImg + ", cThumbImg=" + cThumbImg + "]";
+		return "CouponVo [cseq=" + cseq + ", sellerid=" + sellerid + ", coupon=" + coupon + ", cdate=" + cdate
+				+ ", cnotify=" + cnotify + ", cenable=" + cenable + ", cimg=" + cimg + ", cthumbimg=" + cthumbimg + "]";
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -1,40 +1,36 @@
 package com.sic.pdm.vo.coupon;
 
 public class CouponDetailVo {
-	private String cdSeq;
-	private String cdState;
+	private String cdseq;
+	private String cdstate;
 	
 	public CouponDetailVo() {}
 
-	public CouponDetailVo(String cdSeq, String cdState) {
+	public CouponDetailVo(String cdseq, String cdstate) {
 		super();
-		this.cdSeq = cdSeq;
-		this.cdState = cdState;
+		this.cdseq = cdseq;
+		this.cdstate = cdstate;
 	}
 
-	public String getCdSeq() {
-		return cdSeq;
+	public String getCdseq() {
+		return cdseq;
 	}
 
-	public void setCdSeq(String cdSeq) {
-		this.cdSeq = cdSeq;
+	public void setCdseq(String cdseq) {
+		this.cdseq = cdseq;
 	}
 
-	public String getCdState() {
-		return cdState;
+	public String getCdstate() {
+		return cdstate;
 	}
 
-	public void setCdState(String cdState) {
-		this.cdState = cdState;
+	public void setCdstate(String cdstate) {
+		this.cdstate = cdstate;
 	}
 
 	@Override
 	public String toString() {
-		return "CouponDetailDTO [cdSeq=" + cdSeq + ", cdState=" + cdState + "]";
+		return "CouponDetailVo [cdseq=" + cdseq + ", cdstate=" + cdstate + "]";
 	}
-	
-	
-	
-	
 	
 }

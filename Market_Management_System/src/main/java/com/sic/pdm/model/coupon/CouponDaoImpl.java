@@ -1,6 +1,7 @@
 package com.sic.pdm.model.coupon;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -22,42 +23,59 @@ public class CouponDaoImpl implements ICouponDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-
 	@Override
-	public List<CouponVo> CouponList() {
-		
-		
-		return sqlSession.selectList(NS + "CouponList");
+	public List<CouponVo> ViewListCoupon(String sellerid) {
+		System.out.println("// CouponDaoImpl" + sellerid);
+		return sqlSession.selectList(NS + "ViewListCoupon", sellerid);
+	}
+	
+	@Override
+	public CouponVo ViewCoupon(String cseq) {
+		System.out.println("///// ViewCoupon " + cseq);
+		return sqlSession.selectOne(NS + "ViewCoupon", cseq);
 	}
 
 	@Override
 	public boolean insertCoupon(CouponVo cDto) {
 		
-		log.info("// CouponDaoImpl  insertCoupon {}" + cDto);
+		log.info("// CouponDaoImpl  insertCoupon " + cDto);
 		
-		int result = sqlSession.insert(NS+"insertCoupon", cDto);
-		System.out.println(result);
+		int result = sqlSession.insert(NS + "insertCoupon", cDto);
 		
+		return (result > 0) ? true : false;
+	}
+	
+	@Override
+	public boolean insertCouponState(Map<String, Object> map) {
+		System.out.println("/// CouponDaoImpl insertCouponState" + map);
+		
+		int result = sqlSession.insert(NS + "InsertCouponState", map);
 		return (result > 0) ? true : false;
 	}
 
 	@Override
 	public boolean updateCoupon(CouponVo cDto) {
-		
 		log.info("// CouponDaoImpl  updateCoupon {}" + cDto);
-		
 		int result = sqlSession.update(NS+"updateCoupon", cDto);
-		System.out.println(result);
-		
 		return (result > 0) ? true : false;
 		
 	}
+	
+	@Override
+	public boolean updateCouponState(String cdstate) {
+		
+		log.info("// CouponDaoImpl  updateCouponState {}" + cdstate);
+		
+		int result = sqlSession.update(NS+"updateStateCoupon", cdstate);
+		
+		return (result > 0) ? true : false;
+	}
 
 	@Override
-	public boolean deleteCoupon(String seq) {
-		log.info("// CouponDaoImpl  deleteCoupon {}" + seq);
+	public boolean deleteCoupon(String cseq) {
+		log.info("// CouponDaoImpl  deleteCoupon {}" + cseq);
 		
-		int result = sqlSession.delete(NS+"deleteCoupon", seq);
+		int result = sqlSession.delete(NS+"deleteCoupon", cseq);
 		System.out.println(result);
 		
 		return (result > 0) ? true : false;
@@ -77,29 +95,6 @@ public class CouponDaoImpl implements ICouponDao {
 	public List<CouponBoxVo> getCouponList(){
 			
 		return sqlSession.selectList(NS + "getCouponList");
-	}
-
-//	@Override
-//	public boolean insertCouponState(Map<String, String[]> map) {
-//		System.out.println("/// CouponDaoImpl " + map);
-//		
-//		int result = sqlSession.insert(NS+"CouponStateInsert", map);
-//		return (result > 0) ? true : false;
-//	}
-	
-	@Override
-	public boolean insertCouponState(String cState) {
-		System.out.println("/// CouponDaoImpl " + cState);
-		
-		int result = sqlSession.insert(NS+"CouponStateInsert", cState);
-		return (result > 0) ? true : false;
-	}
-
-	@Override
-	public CouponVo ViewListCoupon(List<CouponVo> cList) {
-		
-		return (CouponVo)sqlSession.selectList(NS + "CouponList", cList);
-		
 	}
 
 }

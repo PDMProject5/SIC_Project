@@ -1,6 +1,7 @@
 package com.sic.pdm.model.coupon;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,14 @@ public class CouponServiceImpl implements ICouponService {
 	private ICouponDao icDao;
 
 	@Override
-	public List<CouponVo> CouponList() {
+	public List<CouponVo> ViewListCoupon(String sellerid) {
 		
-		return icDao.CouponList();
+		return icDao.ViewListCoupon(sellerid);
+	}
+	
+	@Override
+	public CouponVo ViewCoupon(String cseq) {
+		return icDao.ViewCoupon(cseq);
 	}
 
 	@Override
@@ -32,6 +38,11 @@ public class CouponServiceImpl implements ICouponService {
 		
 		return icDao.insertCoupon(cDto);
 	}
+	
+	@Override
+	public boolean insertCouponState(Map<String, Object> map) {
+		return icDao.insertCouponState(map);
+	}
 
 	@Override
 	public boolean updateCoupon(CouponVo cDto) {
@@ -40,13 +51,21 @@ public class CouponServiceImpl implements ICouponService {
 		
 		return icDao.updateCoupon(cDto);
 	}
+	
+	@Override
+	public boolean updateCouponState(String cdstate) {
+		
+		log.info("// CouponServiceImpl  updateCouponState {}" + cdstate);
+		
+		return false;
+	}
 
 	@Override
-	public boolean deleteCoupon(String seq) {
+	public boolean deleteCoupon(String cseq) {
 		
-		log.info("// CouponServiceImpl  deleteCoupon {}"+ seq);
+		log.info("// CouponServiceImpl  deleteCoupon {}"+ cseq);
 		
-		return icDao.deleteCoupon(seq);
+		return icDao.deleteCoupon(cseq);
 	}
 	
 	@Override
@@ -63,24 +82,5 @@ public class CouponServiceImpl implements ICouponService {
 		return icDao.getCouponList();
 		
 	}
-
-//	@Override
-//	public boolean insertCouponState(Map<String, String[]> map) {
-//		System.out.println("/// CouponServiceImpl " + map);
-//		return icDao.insertCouponState(map);
-//	}
-	
-	@Override
-	public boolean insertCouponState(String cState) {
-		System.out.println("/// CouponServiceImpl " + cState);
-		return icDao.insertCouponState(cState);
-	}
-
-	@Override
-	public CouponVo ViewListCoupon(List<CouponVo> cList) {
-		return icDao.ViewListCoupon(cList);
-	}
-	
-	
 
 }
