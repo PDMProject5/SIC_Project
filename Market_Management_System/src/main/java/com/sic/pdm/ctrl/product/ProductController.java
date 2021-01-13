@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,7 +23,7 @@ public class ProductController {
 	@Autowired
 	private IProductService pService;
 	
-	@RequestMapping(value = "product.do")
+	@RequestMapping(value = "/product.do")
 	public String test(Model model) {
 		List<ProductVo> lists = pService.getProdList("admin01"); 
 		model.addAttribute("list", lists);
@@ -31,7 +32,7 @@ public class ProductController {
 	
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "productTree.do")
+	@RequestMapping(value = "/productTree.do")
 	@ResponseBody
 	public JSONArray productTree() {
 		List<ProductVo> lcate = pService.getLcate();
@@ -70,6 +71,7 @@ public class ProductController {
 		
 		for (ProductVo vo : lists) {
 			jsonObject = new JSONObject();
+			jsonObject.put("code", vo.getIcode());
 			jsonObject.put("name", vo.getIname());
 			jsonObject.put("price", vo.getIprice());
 			jsonArray.add(jsonObject);
@@ -78,7 +80,7 @@ public class ProductController {
 		return jsonArray;
 	}
 	
-	@RequestMapping(value = "productDetail.do")
+	@RequestMapping(value = "/productDetail.do")
 	public String productDetail(@RequestParam String iname, Model model) {
 		System.out.println(iname);
 		ProductVo vo = null;
@@ -88,6 +90,20 @@ public class ProductController {
 		vo = pService.getProdDetail(map);
 		model.addAttribute("vo", vo);
 		return "KGH_productDetail";
+	}
+	
+	@RequestMapping(value = "/productInsert.do", method = RequestMethod.POST)
+	public String productInsert(@RequestParam String[] code) {
+		Map<String, Object> insertMap = new HashMap<String, Object>();
+		insertMap.put("sellerid", "admin01");
+		insertMap.put("productList", code);
+		System.out.println(insertMap);
+		System.out.println(code);
+		pService.insertProdFood(insertMap);
+		for (String str : code) {
+			System.out.println("코드임? = " + str);
+		}
+		return "redirect:/product.do";
 	}
 	
 }

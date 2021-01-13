@@ -54,7 +54,7 @@ function tree(){
 
 function makeTable(data){
 	
-	$("#jqGrid").jqGrid('clearGridData');
+	$("#jqGridRegist").jqGrid('clearGridData');
 	
 	var jsonData2 = $.ajax({
 		url : "./productGrid.do?mcode=" + data,
@@ -71,8 +71,36 @@ function makeTable(data){
     
     
     for(var i = 0, max = realGrid.length; i <= max; i++){
-    	$("#jqGrid").jqGrid('addRowData', i+1, realGrid[i]);
+    	$("#jqGridRegist").jqGrid('addRowData', i+1, realGrid[i]);
     }
+}
+
+function productRegist(){
+	var ids = $("#jqGridRegist").jqGrid('getGridParam', 'selarrrow');
+	alert(ids);
+	var resultArray = new Array(ids);
+	for(var i = 0; i < ids.length; i++){
+		var rowObject = $("#jqGridRegist").getRowData(ids[i]);
+		console.log(rowObject);
+// 		if(i == 0){
+// 			result = rowObject.code
+// 		}else{			
+// 			result = result + "," + rowObject.code;
+// 		}
+		resultArray[i] = rowObject.code
+	}
+		alert(resultArray);
+		var data = {
+				"code" : resultArray
+		}
+		alert(data);
+	$.ajax({
+		url : "./productInsert.do",
+		method : "post",
+		datatype : 'json',
+		traditional : true,
+		data : data
+	});
 }
 
 $(function(){
@@ -83,16 +111,18 @@ $(function(){
 		}
 	});
 	
-	$("#jqGrid").jqGrid({
-     datatype: "json",
-  	height : 250,
-  	colNames : [ '재고명', '입고가' ],
-     colModel:[
-               {name:"name",index:"name"},
-               {name:"price",index:"price"}
+	$("#jqGridRegist").jqGrid({
+		datatype: "json",
+  		height : 250,
+  		colNames : [ '재고코드', '재고명', '입고가' ],
+		colModel:[
+				{name:"code",index:"code"},
+            	{name:"name",index:"name"},
+            	{name:"price",index:"price"}
                ],
-     height: 450,
-     caption:"재고 목록?"
+		height: 450,
+		caption:"재고 목록?",
+    	multiselect : true
      });
 });
 
@@ -115,8 +145,10 @@ $(function(){
 	<br>
 	<br>
 	<div>
-		<table id="jqGrid"></table>
+		<table id="jqGridRegist"></table>
 		<div id="jqGridPager"></div>
+		
+		<button onclick="productRegist()">제품등록</button>
 	</div>
 	
 	<div>
