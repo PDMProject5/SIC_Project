@@ -1,10 +1,6 @@
 package com.sic.pdm.ctrl.coupon;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,7 +64,7 @@ public class CouponController {
 	// 쿠폰 등록
 	@RequestMapping(value = "/insertCoupon.do", method = RequestMethod.POST)
 	public String insertCoupon(CouponVo cDto,  
-			@RequestParam(value = "cdstate") String cstate, 
+			@RequestParam(value = "cdstate") String cdstate, 
 			HttpSession session, MultipartFile file) {
 		
 		String sellerid = (String) session.getAttribute("sellerid");
@@ -81,6 +76,8 @@ public class CouponController {
 			String imgUploadPath = uploadPath + File.separator + "imageUpload";
 			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 			String fileName = null;
+			System.out.println(uploadPath);
+			System.out.println(imgUploadPath);
 
 			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 				// 파일 인풋박스에 첨부된 파일이 없다면(=첨부된 파일이 이름이 없다면)
@@ -105,7 +102,7 @@ public class CouponController {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("sellerid",sellerid);
-			map.put("cstate",cstate);
+			map.put("cdstate",cdstate);
 			
 			// CouponDetail 상태 입력
 			icsvc.insertCouponState(map);
@@ -159,13 +156,6 @@ public class CouponController {
 		System.out.println("// deleteCoupon " + cseq);
 		icsvc.deleteCoupon(cseq);
 		return "redirect:/ViewListCoupon.do";
-	}
-	
-	// 사용자 쿠폰 받기
-	@RequestMapping(value = "/getCoupon.do")
-	public String getCoupon(String cseq,HttpSession session) {
-		String id= (String) session.getAttribute("id");
-		return null;
 	}
 
 }

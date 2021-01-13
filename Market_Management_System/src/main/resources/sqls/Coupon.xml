@@ -43,14 +43,14 @@
 	
 	<insert id = "getCoupon" parameterType="java.lang.String">
 		INSERT INTO COUPONBOX (CBCODE, ID, CSEQ, SELLERID, CBDATE)
-		VALUES (#{cbcode}, (SELECT ID FROM MEMBER WHERE ID = #{id}),
+		VALUES (COUPONBOX_SEQ.NEXTVAL, (SELECT ID FROM MEMBER WHERE ID = #{id}),
 		(SELECT CSEQ FROM COUPON WHERE CENABLE = 'Y'),
 		(SELECT SELLERID FROM SELLER WHERE SELLERID = #{sellerid}),
 		SYSDATE)
 	</insert>
 	
-	<select id="getCouponList" parameterType="java.lang.String" resultType="CouponBoxVo">
-		SELECT CBCODE,CBDATE FROM COUPONBOX WHERE ID = #{id}
+	<select id="getCouponList" parameterType="java.lang.String" resultType="CouponVo">
+		SELECT c2.CNOTIFY, c2.CIMG FROM COUPONBOX c, COUPON c2  WHERE c.CSEQ = c2.CSEQ AND ID = #{id} AND c2.CENABLE = 'Y'
 	</select>
 	
 

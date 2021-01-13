@@ -30,10 +30,10 @@ public interface ICouponService {
 	public boolean deleteCoupon(String cseq);
 		
 	// 사용자 쿠폰 수령
-	public boolean getCoupon(String id);
+	public boolean getCoupon(Map<String, Object> map);
 		
 	// 사용자 수령 쿠폰 조회
-	public List<CouponBoxVo> getCouponList();
+	public List<CouponVo> getCouponList(String id);
 
 	
 
