@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import com.sic.pdm.vo.user.MemberVo;
 @Controller
 public class MemberController {
 
+	
 	@Autowired
 	private API_Service phoneservice;
 	
@@ -25,7 +27,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String main() {
-		
 		return "mainPage";
 	}
 	
@@ -97,8 +98,8 @@ public class MemberController {
 	@RequestMapping(value = "/loginchk.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String loginchk(MemberVo vo) {
-		System.out.println(vo.getId());
-		System.out.println(vo.getPw());
+//		System.out.println(vo.getId());
+//		System.out.println(vo.getPw());
 		String logindata = service.loginchk(vo);
 		return logindata;
 	}
@@ -125,8 +126,8 @@ public class MemberController {
 		MemberVo vo = new MemberVo();
 		vo.setId((String)session.getAttribute("id"));
 		vo.setPw(pw);
-		System.out.println(vo.getId());
-		System.out.println(vo.getPw());
+//		System.out.println(vo.getId());
+//		System.out.println(vo.getPw());
 		String nowpwcheck = service.nowpwcheck(vo);
 		return nowpwcheck;
 	}
@@ -136,10 +137,10 @@ public class MemberController {
 		MemberVo vo = new MemberVo();
 		vo.setId((String)session.getAttribute("id"));
 		vo.setPw(modifypw);
-		System.out.println(vo.getId());
-		System.out.println(vo.getPw());
+//		System.out.println(vo.getId());
+//		System.out.println(vo.getPw());
 		boolean isc = service.updatepw(vo);
-		System.out.println(isc);
+//		System.out.println(isc);
 		return "userModified";
 	}
 	
@@ -154,8 +155,8 @@ public class MemberController {
 		MemberVo vo = new MemberVo();
 		vo.setId((String)session.getAttribute("id"));
 		vo.setPw(pw);
-		System.out.println(vo.getId());
-		System.out.println(vo.getPw());
+//		System.out.println(vo.getId());
+//		System.out.println(vo.getPw());
 		String id = service.signoutuserchk(vo);
 		return id;
 	}
@@ -168,8 +169,58 @@ public class MemberController {
 	@RequestMapping(value = "/updateuser.do", method = RequestMethod.GET)
 	public String updateuser(HttpSession session) {
 		String id = (String)session.getAttribute("id");
-		System.out.println(id);
+//		System.out.println(id);
+		boolean isc = service.signoutuser(id);
+//		System.out.println(isc);
 		session.invalidate();
 		return "signoutsuccess";
+	}
+	
+	@RequestMapping(value = "/findid.do", method = RequestMethod.GET)
+	public String findid(){
+		return "findid";
+	}
+	
+	@RequestMapping(value = "/resultid.do", method = RequestMethod.POST)
+	public String resultid(MemberVo vo, Model model){
+//		System.out.println(vo.getName());
+//		System.out.println(vo.getPhone());
+		String id = service.findid(vo);
+		System.out.println(id);
+		if(id == null || id.equals("")) {
+			model.addAttribute("nodata", "등록된 계정이 존재하지 않습니다.");
+			return "findid";
+		}else{
+			model.addAttribute("findid", id);
+			return "resultid";
+		}
+	}
+	
+	@RequestMapping(value = "/findpw.do", method = RequestMethod.GET)
+	public String findpw() {
+		return "findpw";
+	}
+	
+	@RequestMapping(value = "/resultpw.do", method = RequestMethod.POST)
+	public String resultpw(MemberVo vo, Model model){
+//		System.out.println(vo.getName());
+//		System.out.println(vo.getPhone());
+		String id = service.findpw(vo);
+//		System.out.println(id);
+		if(id == null || id.equals("")) {
+			model.addAttribute("nodata", "등록된 계정이 존재하지 않습니다.");
+			return "findpw";
+		}else{
+			model.addAttribute("findid", id);
+			return "resultpw";
+		}
+	}
+	
+	@RequestMapping(value = "/findpwform.do", method = RequestMethod.POST)
+	public String findpwform(MemberVo vo) {
+//		System.out.println(vo.getId());
+//		System.out.println(vo.getPw());
+		boolean isc = service.updatepw(vo);
+		return "succeesfindpw";
 	}
 }

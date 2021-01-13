@@ -20,4 +20,8 @@ public interface IMemberService {
 	public boolean signoutuser(String id);
 	
 	public int deleteuser();
+	
+	public String findid(MemberVo vo);
+	
+	public String findpw(MemberVo vo);
 }

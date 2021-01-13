@@ -19,6 +19,8 @@
 		}else if(modifypw==""||modifypwchk==""){
 			alert("변경하실 비밀번호를 입력해주세요");
 			return rtn;
+		}else if(nowpw == modifypw){
+			alert("현재 비밀번호와 다른 비밀번호를 입력해 주세요");
 		}else if(nowpw!=""&&modifypw!=""&&modifypwchk!=""){
 			$.ajax({
 				url:"./nowpwcheck.do",
@@ -28,12 +30,15 @@
 	    		success:function(msg){
 	    			var modifypw = document.getElementById("modifypw").value;
 	    			var modifypwchk = document.getElementById("modifypwchk").value;
+	    			var pwReg = /^[a-z]+[a-z0-9]{7,19}$/g;
 	    			if(msg==""){
 	    				alert("현재 비밀번호를 확인해 주세요");
 	    				return rtn;
 	    			}else if(modifypw!=modifypwchk){
-	    				alert("수정하실 비밀번호가 일치하지 않습니다.");
+	    				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 	    				return rtn;
+	    			}else if(!pwReg.test(modifypw)){
+	    				alert("비밀번호는 영어와 숫자 포함 8~20자 만 입력할 수 있습니다.");
 	    			}else if(msg!=""&&modifypw==modifypwchk){
 	    				alert("비밀번호가 수정됬습니다.");
 	    				rtn = true;

@@ -2,7 +2,6 @@ package com.sic.pdm.model.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sic.pdm.vo.user.MemberVo;
 
@@ -53,16 +52,31 @@ public class MemberServiceImpl implements IMemberService {
 
 	@Override
 	public boolean signoutuser(String id) {
-		boolean isc1 = dao.signoutuser(id);
-		boolean isc2 = dao.signoutusercoupon(id);
-		boolean isc3 = dao.signoutusermileage(id);
-		return false;
+		int n = dao.signoutuserrefund(id);
+		n += dao.signoutuserorder(id);
+		n += dao.signoutuserdeliverylist(id);
+		n += dao.signoutusercoupon(id);
+		n += dao.signoutusermileage(id);
+		n += dao.signoutuser(id);
+		return n>0?true:false;
 	}
 
 
 	@Override
 	public int deleteuser() {
 		return dao.deleteuser();
+	}
+
+
+	@Override
+	public String findid(MemberVo vo) {
+		return dao.findid(vo);
+	}
+
+
+	@Override
+	public String findpw(MemberVo vo) {
+		return dao.findpw(vo);
 	}
 
 	

@@ -4,11 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 조회 결과</title>
 </head>
 <body>
-<button onclick="location.href='./singUp.do'">회원가입</button>
-<button onclick="location.href='./loginForm.do'">로그인</button>
-${findid}
+<p>회원님의 아이디는 ${findid}입니다.</p>
+<button onclick="location.href='./findpw.do'">비밀번호 찾기</button>
 </body>
 </html>

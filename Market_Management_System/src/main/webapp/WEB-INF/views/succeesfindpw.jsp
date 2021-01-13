@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<button onclick="location.href='./singUp.do'">회원가입</button>
-<button onclick="location.href='./loginForm.do'">로그인</button>
-${findid}
+<h1>해당 계정의 비밀번호가 정상적으로 변경되었습니다.</h1><br>
+<button onclick="window.close()">닫기</button>
 </body>
 </html>

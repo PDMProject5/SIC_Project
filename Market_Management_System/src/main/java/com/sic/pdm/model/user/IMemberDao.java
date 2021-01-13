@@ -19,13 +19,21 @@ public interface IMemberDao {
 	
 	public String signoutuserchk(MemberVo vo);
 	
-	public boolean signoutuser(String id);
+	public int signoutuser(String id);
 	
-	public boolean signoutusercoupon(String id);
+	public int signoutusercoupon(String id);
 	
-	public boolean signoutusermileage(String id);
+	public int signoutusermileage(String id);
 	
-	public boolean signoutuserdeliverylist(String id);
+	public int signoutuserdeliverylist(String id);
+	
+	public int signoutuserrefund(String id);
+	
+	public int signoutuserorder(String id);
 	
 	public int deleteuser();
+	
+	public String findid(MemberVo vo);
+	
+	public String findpw(MemberVo vo);
 }
