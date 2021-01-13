@@ -1,6 +1,11 @@
 onload = function(){
-	document.getElementById("passwordchk").style.display = "none";
+	document.getElementById("idchk").style.display = "none";
+	document.getElementById("namechk").style.display = "none";
 	document.getElementById("passchk").style.display = "none";
+	document.getElementById("roadaddrchk").style.display = "none";
+	document.getElementById("addrchk").style.display = "none";
+	document.getElementById("phonechk").style.display = "none";
+	document.getElementById("marketingchk").style.display = "none";
 }
 
 function idchk(){
@@ -9,6 +14,7 @@ function idchk(){
 
 function singup(){
 	var id = document.getElementById("id").value;
+	var username = document.getElementById("username").value;
 	var pw = document.getElementById("pw").value;
 	var pwchk = document.getElementById("pwchk").value;
 	var roadaddr = document.getElementById("roadaddr").value;
@@ -17,9 +23,19 @@ function singup(){
 	var marketing = document.getElementById("marketing").checked;
 	var passwordchk = document.getElementById("passwordchk");
 	var pwReg = /^[a-z]+[a-z0-9]{7,19}$/g;
+	document.getElementById("idchk").style.display = "none";
+	document.getElementById("namechk").style.display = "none";
+	document.getElementById("passwordchk").style.display = "none";
+	document.getElementById("passchk").style.display = "none";
+	document.getElementById("roadaddrchk").style.display = "none";
+	document.getElementById("addrchk").style.display = "none";
+	document.getElementById("phonechk").style.display = "none";
+	document.getElementById("marketingchk").style.display = "none";
 	if(id==""){
-		alert("아이디를 입력해주세요");
-		id.focus;
+		document.getElementById("idchk").style.display = "block";
+		return false;
+	}else if(username==""){
+		document.getElementById("namechk").style.display = "block";
 		return false;
 	}else if(pw==""||pw < 8||!pwReg.test(pw)){
 		document.getElementById("passwordchk").style.display = "block";
@@ -29,18 +45,18 @@ function singup(){
 		document.getElementById("passchk").style.display = "block";
 		return false;
 	}else if(roadaddr==""){
-		alert("도로명 주소를 입력해주세요");
+		document.getElementById("roadaddrchk").style.display = "block";
 		return false;
 	}else if(addr==""){
-		alert("상세 주소를 입력해주세요");
+		document.getElementById("addrchk").style.display = "block";
 		return false;
 	}
 	else if(phone==""){
-		alert("휴대폰 인증을 해주세요");
+		document.getElementById("phonechk").style.display = "block";
 		return false;
 	}
 	else if(marketing == false){
-		alert("마케팅 정보 동의를 체크해 주세요");
+		document.getElementById("marketingchk").style.display = "block";
 		return false;
 	}else{
 		alert("회원가입이 완료되었습니다.");

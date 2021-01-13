@@ -47,7 +47,7 @@ WHERE ID = #{id}
 </update>
 
 <delete id="signoutusercoupon" parameterType="java.lang.String">
-DELETE FROM "COUPON" WHERE ID = #{id}
+DELETE FROM "COUPONBOX" WHERE ID = #{id}
 </delete>
 
 <delete id="signoutusermileage" parameterType="java.lang.String">
@@ -60,7 +60,7 @@ DELETE FROM "DELIVERYLIST" WHERE ID = #{id}
 
 <delete id="signoutuserrefund" parameterType="java.lang.String">
 DELETE FROM "REFUND"
-WHERE ONUM IN (SELECT ONUM FROM "ORDER" WHERE ID = #{id});
+WHERE ONUM IN (SELECT ONUM FROM "ORDER" WHERE ID = #{id})
 </delete>
 
 <delete id="signoutuserorder">
@@ -72,4 +72,17 @@ DELETE "MEMBER"
 WHERE SINGOUT = 'Y'
 AND SINGOUTDAY = TO_CHAR(SYSDATE-730)
 </delete>
+
+<select id="findid" parameterType="MemberVo" resultType="java.lang.String">
+SELECT ID FROM "MEMBER"
+WHERE PHONE = #{phone}
+AND NAME = #{name}
+</select>
+
+<select id="findpw" parameterType="MemberVo" resultType="java.lang.String">
+SELECT ID FROM "MEMBER"
+WHERE PHONE = #{phone}
+AND NAME = #{name}
+AND ID = #{id}
+</select>
 </mapper>

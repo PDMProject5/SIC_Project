@@ -4,32 +4,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>휴대폰 인증</title>
+<title>아이디 찾기</title>
 </head>
+<body>
 <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
 
 <body>
-<input type="text" id="inputPhoneNumber"/> <!-- 전화번호 입력칸 -->
+<form id="findid" action="./resultid.do" method="post">
+<input type="text" id="username" name="name" placeholder="이름을 입력해 주세요"><br>
+<input type="text" id="inputPhoneNumber" name="phone" placeholder="핸드폰 번호를 입력해주세요"/> <!-- 전화번호 입력칸 -->
 <input type="button" id="sendPhoneNumber" value='전송'/><br> <!-- 위의 전화번호로 인증메세지 전송버튼 -->
 <input type="text" id="inputCertifiedNumber"> <!-- 인증번호 적는칸 -->
 <input type="button" id="checkBtn" value="확인"> <!-- 인증번호 확인 버튼 -->
-<input type="button" value="사용하기" id="use" onclick="usephone()">
+</form>
 <div class="time"></div> <!-- 타이머 시간 표시 -->
+<div id="nodata" style="color: red;">${nodata}</div>
 <script>
 window.onload = function(){
 	var inputCertifiedNumber = document.getElementById("inputCertifiedNumber");
 	var checkBtn = document.getElementById("checkBtn");
 	inputCertifiedNumber.style.display = "none";
 	checkBtn.style.display = "none";
-	document.getElementById("use").style.display = "none";
 }
+var nodata = document.getElementById("nodata");
+var username = document.getElementById("username");
+var findid = document.getElementById("findid");
 var timer = null;		// 타이머
 var isRunning = false;	// 타이머 동작 확인용 변수
         $('#sendPhoneNumber').click(function(){
         	let regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
             let phoneNumber = $('#inputPhoneNumber').val();
-            if(!regExp.test(phoneNumber)){
+            nodata.style.display = "none";
+            if(username.value == ""){
+            	alert("이름을 입력해 주세요");
+            	username.focus;
+            }else if(!regExp.test(phoneNumber)){
             	alert("-를 재외한 휴대폰번호 11자리를 확인해 주세요");
+            	phoneNumber.focus;
             }else{
             inputCertifiedNumber.style.display = "block";
             checkBtn.style.display = "block";
@@ -61,8 +72,7 @@ var isRunning = false;	// 타이머 동작 확인용 변수
                     		alert('인증성공!'+'휴대폰 인증이 정상적으로 완료되었습니다.'+'success');
 							clearInterval(timer);
 			        		display.html("");
-			        		checkBtn.style.display = "none";
-			        		document.getElementById("use").style.display = "block";
+			        		findid.submit();
                         }else{
                         	if(isRunning) {
                         		// 타이머가 활성화 되어있고 인증번호가 틀렸을때
@@ -104,10 +114,6 @@ var isRunning = false;	// 타이머 동작 확인용 변수
                 }, 1000);
                      isRunning = true;
         }
-       function usephone(){
-    	   opener.document.getElementById("phone").value = document.getElementById("inputPhoneNumber").value
-    		close();
-       }
 </script>
 </body>
 </html>

@@ -57,34 +57,58 @@ public class MemberDaoImpl implements IMemberDao{
 	}
 
 	@Override
-	public boolean signoutuser(String id) {
+	public int signoutuser(String id) {
 		int n  = service.update(NS+"signoutuser", id);
-		return n>0?true:false;
+		return n;
 	}
 
 
 	@Override
-	public boolean signoutusercoupon(String id) {
+	public int signoutusercoupon(String id) {
 		int n = service.delete(NS+"signoutusercoupon", id);
-		return n>0?true:false;
+		return n;
 	}
 
 	@Override
-	public boolean signoutusermileage(String id) {
+	public int signoutusermileage(String id) {
 		int n = service.delete(NS+"signoutusermileage", id);
-		return n>0?true:false;
+		return n;
 	}
 
 	@Override
-	public boolean signoutuserdeliverylist(String id) {
+	public int signoutuserdeliverylist(String id) {
 		int n = service.delete(NS+"signoutuserdeliverylist", id);
-		return n>0?true:false;
+		return n;
 	}
 	
+	@Override
+	public int signoutuserrefund(String id) {
+		int n = service.delete(NS+"signoutuserrefund", id);
+		return n;
+	}
+	
+	@Override
+	public int signoutuserorder(String id) {
+		int n = service.delete(NS+"signoutuserorder", id);
+		return n;
+	}
+
 	@Override
 	public int deleteuser() {
 		int n = service.delete(NS+"deleteuser");
 		return n;
+	}
+
+	@Override
+	public String findid(MemberVo vo) {
+		String findid = service.selectOne(NS+"findid", vo);
+		return findid;
+	}
+
+	@Override
+	public String findpw(MemberVo vo) {
+		String findpw = service.selectOne(NS+"findpw", vo);
+		return findpw;
 	}
 	
 	

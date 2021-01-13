@@ -93,8 +93,8 @@
 </form>
 <div>
 	<button onclick="location.href='./singUp.do'">회원가입</button>
-	<button>아이디 찾기</button>
-	<button>비밀번호 찾기</button>
+	<button onclick="window.open('./findid.do','아이디 찾기','width=500px, height=500px')">아이디 찾기</button>
+	<button onclick="window.open('./findpw.do','비밀번호 찾기','width=500px, height=500px')">비밀번호 찾기</button>
 </div>
 </body>
 </html>
