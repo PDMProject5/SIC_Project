@@ -1,6 +1,7 @@
 package com.sic.pdm.model.bascket;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -42,5 +43,26 @@ public class BascketDaoImpl implements BascketIDao {
 		return lists;
 	}
 	
-
+	@Override
+	public boolean deleteBascket(List<String> onums) {
+		logger.info("deleteBascket 확인");
+		int n = session.delete(NS+"deleteBascket", onums);
+		return n>0?true:false;
+	}
+	
+	@Override
+	public boolean modifyBascket(Map<String, Object> map) {
+		logger.info("modifyBascket 확인");
+		int n = session.update(NS+"modifyBascket", map);
+		return n>0?true:false;
+	}
+	
+	@Override
+	public BascketVo getOneBascket(Map<String, Object> map) {
+		logger.info("getOneBascket 확인");
+		BascketVo vo = session.selectOne(NS+"getOneBascket", map);
+		return vo;
+	}
+	
+	
 }
