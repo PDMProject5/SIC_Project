@@ -75,6 +75,14 @@ public class ProductDaoImpl implements IProductDao {
 	}
 
 	@Override
+	public List<ProductVo> getProdMainDetail(Map<String, String> map) {
+		logger.info("ProductDaoImpl getProdMainDetail()");
+		List<ProductVo> lists = null;
+		lists = service.selectList(NS + "getProdMainDetail", map);
+		return lists;
+	}
+	
+	@Override
 	public boolean insertProd(Map<String, Object> insertMap) {
 		logger.info("ProductDaoImpl insertProd()");
 		int count = service.insert(NS+"insertProd", insertMap);

@@ -148,4 +148,30 @@ public class ProductController {
 		return jsonArray;
 	}
 	
+	@RequestMapping(value = "/productGridMainDetail.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONArray productGridMainDetail(@RequestParam String name, @RequestParam String sellerid) {
+		System.out.println(name);
+		System.out.println(sellerid);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("iname", name);
+		map.put("sellerid", sellerid);
+		List<ProductVo> lists = pService.getProdMainDetail(map);
+		
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = new JSONArray();
+		
+		for (ProductVo vo : lists) {
+			jsonObject = new JSONObject();
+			jsonObject.put("code", vo.getPcode());
+			jsonObject.put("name", vo.getIname());
+			jsonObject.put("pdate", vo.getPdate());
+			jsonObject.put("lifetime", vo.getLifetime());
+			jsonObject.put("stock", vo.getStock());
+			jsonArray.add(jsonObject);
+		}
+		
+		return jsonArray;
+	}
+	
 }

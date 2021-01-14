@@ -102,6 +102,32 @@ function makeTable(data){
     }
 }
 
+function productDetail(data){
+	
+	console.log(data);
+	$("#jqGridDetail").jqGrid('clearGridData');
+	
+	var detailText = $.ajax({
+		url : "./productGridMainDetail.do",
+		method : "post",
+		data : {"name" : data,
+			"sellerid" : "admin01"},
+		dataType : "json",
+		traditional : true,
+		async: false
+	}).responseText;
+	console.log(detailText);
+	var detailJson = JSON.parse(detailText);
+	console.log(detailJson);
+// 	realJson = JSON.parse(jsonData);
+// 	console.log(realJson);
+    
+    
+    for(var i = 0, max = detailJson.length; i <= max; i++){
+    	$("#jqGridDetail").jqGrid('addRowData', i+1, detailJson[i]);
+    }
+}
+
 function productRegist(){
 	var ids = $("#jqGridRegist").jqGrid('getGridParam', 'selarrrow');
 	alert(ids);
@@ -173,7 +199,10 @@ $(function(){
             	{name:"stock",index:"stock"}
                ],
 		height: 450,
-		caption:"재고 등록 Main"
+		caption:"재고 등록 Main",
+		onSelectRow: function(data){
+			productDetail($(this).getRowData(data).name);
+		}
      });
 	
 	$("#jqGridDetail").jqGrid({
