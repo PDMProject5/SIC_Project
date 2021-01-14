@@ -2,9 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sic.pdm.model.coupon.ICouponDao">
 
-	<select id = "viewListCoupon" resultType="CouponVo" parameterType="java.lang.String">
-		SELECT CSEQ, CTHUMBIMG, CNOTIFY, CDATE FROM COUPON
-		WHERE SELLERID = #{sellerid} AND CENABLE = 'Y'
+	<select id="storeCouponListY" resultType="CouponVo" parameterType="java.util.Map">
+     SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM (
+SELECT ROWNUM AS NO, CSEQ, CNOTIFY, CTHUMBIMG, CDATE, CENABLE, SELLERID FROM COUPON) WHERE NO BETWEEN #{rowstart} AND #{rowend} AND CENABLE ='Y' AND SELLERID = #{sellerid}
+	</select>
+	
+	<select id="storeCouponTotal" resultType="java.lang.Integer">
+		SELECT COUNT(CSEQ) FROM COUPON WHERE CENABLE = 'Y'
 	</select>
 	
 	<select id = "viewOneCoupon" resultType="CouponVo" parameterType="java.lang.String">
@@ -69,7 +73,7 @@
 	
 	<delete id = "autoGetCouponDel">
 		DELETE FROM COUPONBOX
-		WHERE CDATE = TO_CHAR(SYSDATE-7)
+		WHERE CBDATE = TO_CHAR(SYSDATE-7)
 	</delete>
 
 </mapper>

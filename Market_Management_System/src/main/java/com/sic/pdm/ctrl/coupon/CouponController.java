@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sic.pdm.model.coupon.ICouponService;
 import com.sic.pdm.util.UploadFileUtils;
 import com.sic.pdm.vo.coupon.CouponVo;
+import com.sic.pdm.vo.coupon.PageVo;
 
 
 @Controller
@@ -33,13 +34,29 @@ public class CouponController {
 
 	// 쿠폰 목록
 	@RequestMapping(value = "/viewListCoupon.do", method = RequestMethod.GET)
-	public String viewListCoupon(HttpSession session, Model model) {
+	public String viewListCoupon(
+			@RequestParam("num") int num,
+			HttpSession session, Model model) {
 		String sellerId = (String) session.getAttribute("sellerid");
 		if (sellerId == null) {
 			return "redirect:/loginForm.do";
 		} else {
-			List<CouponVo> cList = icsvc.viewListCoupon(sellerId);
-			model.addAttribute("cList", cList);
+			PageVo pvo = new PageVo();
+			
+			pvo.setNum(num);
+			pvo.setCount(icsvc.storeCouponTotal()); 
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("rowstart", pvo.getDisplayPost());
+			map.put("rowend", pvo.getPostNum());
+			map.put("sellerid", sellerId);
+			
+			List<CouponVo> cList = icsvc.storeCouponListY(map);
+			
+			model.addAttribute("cList", cList);  
+			
+			model.addAttribute("pvo", pvo);
+			model.addAttribute("select", num);
 			return "CHS_list";
 		}
 	}
@@ -72,7 +89,7 @@ public class CouponController {
 		try {
 			
 			// 이미지를 업로드하였을때 이미지를 저장하는 폴더 생성
-			String imgUploadPath = uploadPath + File.separator + "imageUpload";
+			String imgUploadPath = uploadPath + File.separator + "imgUpload";
 			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 			String fileName = null;
 			System.out.println(uploadPath);
@@ -84,9 +101,9 @@ public class CouponController {
 				fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 		
 				// gdsImg에 원본 파일 경로 + 파일명 저장
-				cDto.setCimg(File.separator + "imgeUpload" + ymdPath + File.separator + fileName);
+				cDto.setCimg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 				// gdsThumbImg에 썸네일 파일 경로 + 썸네일 파일명 저장
-				cDto.setCthumbimg(File.separator + "imgeUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+				cDto.setCthumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 				
 			} else {  // 첨부된 파일이 없으면
 				
@@ -109,7 +126,7 @@ public class CouponController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/viewListCoupon.do";
+		return "redirect:/viewListCoupon.do?num=1";
 	}
 	
 	// 쿠폰 수정
@@ -123,14 +140,14 @@ public class CouponController {
 				new File(uploadPath + req.getParameter("cimg")).delete();
 				new File(uploadPath + req.getParameter("cthumbimg")).delete();
 				
-				String imgUploadPath = uploadPath + File.separator + "imageUpload";
+				String imgUploadPath = uploadPath + File.separator + "imgUpload";
 				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 				String fileName = null;
 				
 				// gdsImg에 원본 파일 경로 + 파일명 저장
-				cDto.setCimg(File.separator + "imgeUpload" + ymdPath + File.separator + fileName);
+				cDto.setCimg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 				// gdsThumbImg에 썸네일 파일 경로 + 썸네일 파일명 저장
-				cDto.setCthumbimg(File.separator + "imgeUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+				cDto.setCthumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 				
 			} else {  // 새로운 파일이 등록되지 않았다면
 				
