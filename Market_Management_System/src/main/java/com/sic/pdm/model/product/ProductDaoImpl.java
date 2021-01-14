@@ -55,7 +55,8 @@ public class ProductDaoImpl implements IProductDao {
 	@Override
 	public ProductVo getProdDetail(Map<String, String> map) {
 		logger.info("ProductDaoImpl getProdDetail()");
-		ProductVo vo = service.selectOne(NS + "getProdDetail", map);
+		List<ProductVo> list = service.selectList(NS + "getProdDetail", map);
+		ProductVo vo = list.get(0);
 		return vo;
 	}
 
