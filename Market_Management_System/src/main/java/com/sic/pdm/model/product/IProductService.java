@@ -51,6 +51,14 @@ public interface IProductService {
 	 * @return boolean
 	 */
 	public boolean insertProdFood(Map<String, Object> insertMap);
+	
+	/**
+	 * 판매자 재고현황 Main Grid 
+	 * @author KGH 김기홍
+	 * @param sellerid
+	 * @return ProductVo(INAME, ROTNUM, OPRICE, STOCK)
+	 */
+	public List<ProductVo> getProdMain(String sellerid);
 
 	public boolean insertProd(Map<String, Object> insertFood);
 	

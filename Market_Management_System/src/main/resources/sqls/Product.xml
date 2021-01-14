@@ -78,6 +78,24 @@
 		WHERE ICODE = #{icode} AND SELLERID = #{sellerid} AND PSTATE = 'C'
 	</select>
 	
+
+	<select id="getProdMain" resultType="ProductVo" parameterType="java.lang.String">
+		SELECT DISTINCT p.INAME, p.ROTNUM, OPRICE, jj.STOCK
+		FROM PRODUCT p JOIN (SELECT j.ICODE, IPRICE, OPRICE
+		FROM (SELECT ICODE, MAX(CDATE) CDATE
+		FROM INVENPRICE i
+		GROUP BY ICODE) j JOIN INVENPRICE i2 ON j.CDATE = i2.CDATE AND j.ICODE = i2.ICODE) i
+		ON p.ICODE = i.ICODE JOIN (SELECT INAME, SUM(STOCK) STOCK
+		FROM PRODUCT p
+		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
+		GROUP BY INAME)	jj 
+		ON p.INAME = jj.INAME
+		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
+	</select>
+	
+	<select id="getProdDetail"></select>
+	
+
 	<select id="chkFood" parameterType="java.lang.String" resultType="java.lang.String">
 		SELECT LCODE FROM MCATE WHERE MCODE = (SELECT MCODE FROM INVENTORY WHERE ICODE = #{icode})
 	</select>

@@ -63,9 +63,9 @@ public class ProductController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/productGrid.do")
+	@RequestMapping(value = "/insertGrid.do")
 	@ResponseBody
-	public JSONArray productGrid(@RequestParam String mcode) {
+	public JSONArray insertGrid(@RequestParam String mcode) {
 		System.out.println(mcode);
 		List<ProductVo> lists = pService.getInven(mcode);
 		JSONObject jsonObject = null;
@@ -143,6 +143,12 @@ public class ProductController {
 		pService.insertProd(insertFood);
 		pService.insertProdFood(insertMap);
 		return "redirect:/product.do";
+	}
+	
+	@RequestMapping(value = "/productGridMain.do")
+	@ResponseBody
+	public JSONArray productGridMain() {
+		return null;
 	}
 	
 }
