@@ -60,6 +60,14 @@ public interface IProductDao {
 	 * @return ProductVo(INAME, ROTNUM, OPRICE, STOCK)
 	 */
 	public List<ProductVo> getProdMain(Map<String, String> map);
+	
+	/**
+	 * 판매자 재고현황 Main Grid Detail
+	 * @author KGH 김기홍
+	 * @param iname, sellerid
+	 * @return ProductVo(PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME)
+	 */
+	public List<ProductVo> getProdMainDetail(Map<String, String> map);
 
 	/**
 	 * 제품등록(식품 외)
