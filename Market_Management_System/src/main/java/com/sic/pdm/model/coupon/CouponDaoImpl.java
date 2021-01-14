@@ -23,8 +23,13 @@ public class CouponDaoImpl implements ICouponDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<CouponVo> viewListCoupon(String sellerid) {
-		return sqlSession.selectList(NS + "viewListCoupon", sellerid);
+	public List<CouponVo> storeCouponListY(Map<String, Object> map) {
+		return sqlSession.selectList(NS + "storeCouponListY", map);
+	}
+	
+	@Override
+	public int storeCouponTotal() {
+		return sqlSession.selectOne(NS + "storeCouponTotal");
 	}
 	
 	@Override

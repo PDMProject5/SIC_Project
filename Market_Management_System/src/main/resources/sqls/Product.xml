@@ -22,7 +22,10 @@
 		FROM (SELECT ICODE, MAX(CDATE) CDATE
 		FROM INVENPRICE i
 		GROUP BY ICODE) j JOIN INVENPRICE i2 ON j.CDATE = i2.CDATE AND j.ICODE = i2.ICODE) j
-		ON p.ICODE = j.ICODE
+		ON p.ICODE = j.ICODE JOIN (SELECT INAME, SUM(STOCK) AS STOCK
+		FROM PRODUCT
+		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
+		GROUP BY INAME) jj ON jj.INAME = p.INAME
 		WHERE INAME = #{iname} AND SELLERID = #{sellerid} AND PSTATE = 'C'
 	</select>
 	
@@ -65,11 +68,19 @@
 	
 	<insert id="insertProd" parameterType="java.util.Map">		
 		INSERT INTO PRODUCT (PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME, PSTATE)
-		VALUES
-		<foreach collection="productList" item="item" separator=",">
-			(PRODUCT_SEQ.NEXTVAL, #{sellerid}, #{item}, (SELECT LCODE FROM MCATE WHERE MCODE = (SELECT MCODE FROM INVENTORY WHERE ICODE = #{item}))||(SELECT MCODE FROM INVENTORY WHERE ICODE = #{item})||#{item},
-			SYSDATE, SYSDATE+365, 10, (SELECT INAME FROM INVENTORY WHERE ICODE = #{item}), 'C')
+		SELECT PRODUCT_SEQ.NEXTVAL, A.* FROM( 		
+		<foreach collection="productList" item="item" separator="UNION ALL ">
+			SELECT #{sellerid} AS SELLERID, 
+			#{item.icode} AS ICODE, 
+			(SELECT LCODE FROM MCATE WHERE MCODE = (SELECT MCODE FROM INVENTORY WHERE ICODE = #{item.icode}))||(SELECT MCODE FROM INVENTORY WHERE ICODE = #{item.icode})||#{item.icode} AS ROTNUM,
+			SYSDATE AS PDATE, 
+			SYSDATE+365 AS LIFETIME, 
+			#{item.stock} AS STOCK, 
+			(SELECT INAME FROM INVENTORY WHERE ICODE = #{item.icode}) AS INAME, 
+			'C' AS PSTATE 
+			FROM DUAL
 		</foreach>
+		) A
 	</insert>
 	
 	<select id="verifyFood" resultType="java.lang.String" parameterType="java.lang.String">
@@ -89,8 +100,14 @@
 		FROM PRODUCT p
 		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
 		GROUP BY INAME)	jj 
-		ON p.INAME = jj.INAME
-		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
+		ON p.INAME = jj.INAME JOIN INVENTORY i3 ON p.ICODE = i3.ICODE
+		WHERE SELLERID = #{sellerid} AND i3.MCODE = #{mcode} AND PSTATE = 'C'
+	</select>
+	
+	<select id="getProdMainDetail" parameterType="java.lang.String" resultType="ProductVo">
+		SELECT PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME
+		FROM PRODUCT p 
+		WHERE INAME = #{iname} AND SELLERID = #{sellerid} AND PSTATE = 'C'
 	</select>
 	
 
