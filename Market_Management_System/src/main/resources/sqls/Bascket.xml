@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.model.BascketIDao">
+
+
+
+<!-- 장바구니 추가 -->
+<insert id="addBascket" parameterType="BascketVo">
+INSERT INTO MARKET."ORDER"
+(ONUM, ID, STORE, ODATE, OSTATE)
+VALUES(ONUM_SEQ.NEXTVAL, #{id}, (SELECT STORE FROM SELLER s WHERE STORE=#{store}), 
+                SYSDATE, 'B')
+</insert>
+
+<insert id="addDetailBascket" parameterType="BascketVo">     
+INSERT INTO MARKET.ORDERDETAIL
+(ODNUM, ICODE, ONUM, ODSTOCK, OPRICE, STORE)
+VALUES(ODNUM_SEQ.NEXTVAL, (SELECT DISTINCT ICODE FROM INVENPRICE i2 WHERE ICODE =#{icode}), 
+	ONUM_SEQ.CURRVAL, #{odstock}, 
+(SELECT OPRICE FROM INVENPRICE i2 WHERE ICODE =#{icode} AND CDATE = (SELECT MAX(CDATE) FROM INVENPRICE i WHERE ICODE =#{icode} GROUP BY ICODE)),
+(SELECT STORE FROM SELLER s WHERE STORE=#{store}))                
+</insert>
+
+<!-- 장바구니 조회 -->
+<select id="getAllBascket" parameterType="java.lang.String" resultType="BascketVo">
+SELECT o.ONUM, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
+	FROM "ORDER" o 
+	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM
+	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
+		WHERE ID=#{id} AND OSTATE = 'B'
+</select>
+
+<!-- 장바구니 수정 -->
+<update id="modifyBascket" parameterType="java.lang.String">
+UPDATE ORDERDETAIL SET ODSTOCK=4
+WHERE ODNUM=#{odnum} AND ODSTOCK > 0
+</update>
+
+
+<!-- 장바구니 삭제 -->
+<delete id="deleteBascket" parameterType="java.util.List">
+DELETE FROM ORDERDETAIL o 
+WHERE ODNUM IN 
+	<foreach item="odnum" collection="list" open="(" separator="," close=")">
+			#{odnum}
+	</foreach>
+</delete>
+
+</mapper>

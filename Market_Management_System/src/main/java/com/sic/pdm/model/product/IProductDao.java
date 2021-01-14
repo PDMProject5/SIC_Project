@@ -43,5 +43,13 @@ public interface IProductDao {
 	 * 
 	 */
 	public ProductVo getProdDetail(Map<String, String> map);
+	
+	/**
+	 * 제품등록(식품)
+	 * 유통기한을 입고일기준 7일 후
+	 * @param insertMap(String SELLERID, String[] ICODE)
+	 * @return boolean
+	 */
+	public boolean insertProdFood(Map<String, Object> insertMap);
 
 }
