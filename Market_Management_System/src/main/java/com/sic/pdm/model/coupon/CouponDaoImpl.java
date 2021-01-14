@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sic.pdm.vo.coupon.CouponBoxVo;
 import com.sic.pdm.vo.coupon.CouponVo;
 
 
@@ -24,32 +23,24 @@ public class CouponDaoImpl implements ICouponDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<CouponVo> ViewListCoupon(String sellerid) {
-		System.out.println("// CouponDaoImpl" + sellerid);
-		return sqlSession.selectList(NS + "ViewListCoupon", sellerid);
+	public List<CouponVo> viewListCoupon(String sellerid) {
+		return sqlSession.selectList(NS + "viewListCoupon", sellerid);
 	}
 	
 	@Override
-	public CouponVo ViewCoupon(String cseq) {
-		System.out.println("///// ViewCoupon " + cseq);
-		return sqlSession.selectOne(NS + "ViewCoupon", cseq);
+	public CouponVo viewOneCoupon(String cseq) {
+		return sqlSession.selectOne(NS + "viewOneCoupon", cseq);
 	}
 
 	@Override
 	public boolean insertCoupon(CouponVo cDto) {
-		
-		log.info("// CouponDaoImpl  insertCoupon " + cDto);
-		
 		int result = sqlSession.insert(NS + "insertCoupon", cDto);
-		
 		return (result > 0) ? true : false;
 	}
 	
 	@Override
 	public boolean insertCouponState(Map<String, Object> map) {
-		System.out.println("/// CouponDaoImpl insertCouponState" + map);
-		
-		int result = sqlSession.insert(NS + "InsertCouponState", map);
+		int result = sqlSession.insert(NS + "insertCouponState", map);
 		return (result > 0) ? true : false;
 	}
 
@@ -63,38 +54,36 @@ public class CouponDaoImpl implements ICouponDao {
 	
 	@Override
 	public boolean updateCouponState(String cdstate) {
-		
-		log.info("// CouponDaoImpl  updateCouponState {}" + cdstate);
-		
 		int result = sqlSession.update(NS+"updateStateCoupon", cdstate);
-		
 		return (result > 0) ? true : false;
 	}
 
 	@Override
 	public boolean deleteCoupon(String cseq) {
-		log.info("// CouponDaoImpl  deleteCoupon {}" + cseq);
-		
 		int result = sqlSession.delete(NS+"deleteCoupon", cseq);
-		System.out.println(result);
-		
 		return (result > 0) ? true : false;
 	}
 	
 	@Override
+	public List<CouponVo> userViewListCoupon(String sellerid) {
+		return sqlSession.selectList(NS + "userViewListCoupon", sellerid);
+	}
+	
+	@Override
+	public CouponVo userViewOneCoupon(String cseq) {
+		return sqlSession.selectOne(NS + "userViewOneCoupon", cseq);
+	}
+	
+	@Override
 	public boolean getCoupon(Map<String, Object> map) {
-		
-		log.info("// CouponDaoImpl  getCoupon {}" + map);
-		
 		int result = sqlSession.insert(NS+"getCoupon", map);
-		
 		return (result > 0) ? true : false;
 	}
 	
 	@Override
 	public List<CouponVo> getCouponList(String id){
-			
 		return sqlSession.selectList(NS + "getCouponList", id);
 	}
+
 
 }
