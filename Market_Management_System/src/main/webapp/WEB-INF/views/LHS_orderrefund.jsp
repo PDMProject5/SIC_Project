@@ -29,6 +29,10 @@
 		<div>
 			<input type="submit" value="환불 요청하기">
 		</div>
+		
 	</form>
+	<div>
+		<input type="button" value="돌아가기" onclick="history.back(-1)">
+		</div>
 </body>
 </html>
