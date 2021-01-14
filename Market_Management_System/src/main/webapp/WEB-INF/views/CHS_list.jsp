@@ -8,6 +8,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<style type="text/css">
+	
+	#storeCouponList{
+		float: left;
+	}
+
+</style>
 <script type="text/javascript">
 	function goInsertCoupon() {
 		
@@ -17,25 +24,49 @@
 </script>
 </head>
 <body>
-	<table>
-		<c:forEach items="${cList}" var="cList">
-			<tr>
-				<td><a href = "./viewOneCoupon.do?cseq=${cList.cseq}"><img src = "${cList.cthumbimg}" ></a></td>
-			</tr>
-			<tr>
-				<td>${cList.cnotify}</td>
-			</tr>
-			<tr>
-				<td>
-					<fmt:parseDate var="startDate" value="${cList.cdate}" pattern="yyyy-MM-dd" />
-					<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
-					~
-					<fmt:parseDate var="endDate" value="${cList.cdate}" pattern="yyyy-MM-dd" />
-					<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
-				</td>
-			</tr>
+	<div id = "storeCouponList">
+	<c:forEach items="${cList}" var="cList">
+		<div id = "storeCouponList_1">
+			<div id = "storeCouponList_cimg">
+				<a href = "./viewOneCoupon.do?cseq=${cList.cseq}"><img src = "${cList.cthumbimg}" ></a>
+			</div>
+			<div id = "storeCouponList_cnotify">
+				${cList.cnotify}
+			</div>
+			<div id = "storeCouponList_cdate">
+				<fmt:parseDate var="startDate" value="${cList.cdate}" pattern="yyyy-MM-dd" />
+				<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
+				~
+				<fmt:parseDate var="endDate" value="${cList.cdate}" pattern="yyyy-MM-dd" />
+				<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
+			</div>
+		</div>
+	</c:forEach>
+</div>
+	<!-- 페이징 -->
+	<div id = "storePageNum">
+		<c:if test="${pvo.prev}">
+			[ <a href="./viewListCoupon.do?num=${pvo.startPageNum - 1}">이전</a> ]
+		</c:if>
+		<c:forEach begin="${pvo.startPageNum}" end="${pvo.endPageNum}" var="num">
+			<span>
+				<c:if test="${select != num}">
+					<a href="./viewListCoupon.do?num=${num}">${num}</a>
+				</c:if>
+				<c:if test="${select == num}">
+					<b>${num}</b>
+				</c:if>
+
+			</span>
 		</c:forEach>
-	</table>
-	<input type = "button" value = "쿠폰 등록" onClick = "goInsertCoupon()">
+		<c:if test="${pvo.next}">
+			<span>[ <a href="./viewListCoupon.do?num=${pvo.endPageNum + 1}">다음</a>]
+			</span>
+		</c:if>
+	</div>
+	<!-- 쿠폰등록 버튼 -->
+	<div id = "btn_insertCoupon">
+		<input type = "button" value = "쿠폰 등록" onClick = "goInsertCoupon()">
+	</div>
 </body>
 </html>

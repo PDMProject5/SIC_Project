@@ -7,8 +7,11 @@ import com.sic.pdm.vo.coupon.CouponVo;
 
 public interface ICouponDao {
 	
-	// 판매자 - 운영 매장 쿠폰 조회
-	public List<CouponVo> viewListCoupon(String sellerid);
+	// 판매자 - 운영 매장 목록
+	public List<CouponVo> storeCouponListY(Map<String, Object> map);
+		
+	// 판매자 - 총 쿠폰 갯수
+	public int storeCouponTotal();
 			
 	// 판매자 - 쿠폰 상세 조회
 	public CouponVo viewOneCoupon(String cseq);
