@@ -30,19 +30,27 @@ SELECT o.ONUM, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 		WHERE ID=#{id} AND OSTATE = 'B'
 </select>
 
+<select id="getOneBascket" parameterType="java.util.Map" resultType="BascketVo">
+SELECT o.ONUM, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
+	FROM "ORDER" o 
+	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM
+	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
+		WHERE ID=#{id} AND o.ONUM=#{onum} AND OSTATE = 'B'
+</select>
+
 <!-- 장바구니 수정 -->
-<update id="modifyBascket" parameterType="java.lang.String">
-UPDATE ORDERDETAIL SET ODSTOCK=4
-WHERE ODNUM=#{odnum} AND ODSTOCK > 0
+<update id="modifyBascket" parameterType="java.util.Map">
+UPDATE ORDERDETAIL SET ODSTOCK=#{odstock}
+WHERE ONUM=#{onum} AND ODSTOCK > 0
 </update>
 
 
 <!-- 장바구니 삭제 -->
 <delete id="deleteBascket" parameterType="java.util.List">
 DELETE FROM ORDERDETAIL o 
-WHERE ODNUM IN 
-	<foreach item="odnum" collection="list" open="(" separator="," close=")">
-			#{odnum}
+WHERE ONUM IN 
+	<foreach item="onum" collection="list" open="(" separator="," close=")">
+			#{onum}
 	</foreach>
 </delete>
 

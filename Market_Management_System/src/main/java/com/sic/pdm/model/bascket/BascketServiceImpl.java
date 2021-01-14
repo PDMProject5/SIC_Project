@@ -1,6 +1,7 @@
 package com.sic.pdm.model.bascket;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,4 +33,21 @@ public class BascketServiceImpl implements BascketIService {
 		return idao.getAllBascket(id);
 	}
 	
+	@Override
+	public boolean modifyBascket(Map<String, Object> map) {
+		
+		return idao.modifyBascket(map);
+	}
+	
+	@Override
+	public boolean deleteBascket(List<String> onums) {
+		
+		return idao.deleteBascket(onums);
+	}
+	
+	@Override
+	public BascketVo getOneBascket(Map<String, Object> map) {
+		
+		return idao.getOneBascket(map);
+	}
 }
