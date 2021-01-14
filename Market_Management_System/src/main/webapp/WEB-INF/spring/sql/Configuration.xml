@@ -15,7 +15,7 @@
 	<typeAlias type="com.sic.pdm.vo.or.RefoundVo" alias="RefoundVo"/>
 	<typeAlias type="com.sic.pdm.vo.or.RefounddetailVo" alias="RefounddetailVo"/>
 	<typeAlias type="com.sic.pdm.vo.bascket.BascketVo" alias="BascketVo"/>
-
+	<typeAlias type="com.sic.pdm.vo.mileage.MileageVo" alias="MileageVo"/>
 </typeAliases>
 
 <mappers>
@@ -29,5 +29,6 @@
 	<mapper resource="/sqls/Refund.xml"/>
 	<mapper resource="/sqls/DelMapper.xml"/>
 	<mapper resource="/sqls/Bascket.xml"/>	
+	<mapper resource="/sqls/Mileage.xml"/>
 </mappers>
 </configuration>

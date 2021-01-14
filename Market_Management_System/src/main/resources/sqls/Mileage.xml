@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.model.mileage.Mileage_IDao">
+	
+	<!-- 총 마일리지 조회 -->
+	<select id="totalMiles" parameterType="java.lang.String" resultType="MileageVo">
+		SELECT SUM(MMONEY) MMONEY 
+	FROM MILEAGE
+	WHERE ID = 'test01' AND MSTATE = 'P'
+	</select>
+	
+	<!-- 마일리지 상세조회 -->
+	<select id="detailMiles" parameterType="java.lang.String" resultType="MileageVo">
+		SELECT MSEQ ,ID ,MMONEY ,MDATE ,MSTATE 
+		FROM MILEAGE m 
+		WHERE ID = #{id}
+	</select>
+	
+	
+	<insert id="">
+		INSERT INTO MILEAGE (MSEQ,ID,MMONEY,MDATE,MSTATE)
+		VALUES(MSEQ_SEQ.NEXTVAL,'test01',(SELECT FLOOR(PAYMENTAMT *0.01) FROM PAYMENT WHERE PAYMENTNUM = 'P002'),SYSDATE, 'P');
+	</insert>
+	
+	
+</mapper>
