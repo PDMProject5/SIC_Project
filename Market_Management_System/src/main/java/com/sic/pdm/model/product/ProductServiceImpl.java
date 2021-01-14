@@ -55,19 +55,21 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public List<ProductVo> getProdMain(String sellerid) {
+	public List<ProductVo> getProdMain(Map<String, String> map) {
 		logger.info("ProductServiceImpl getProdMain()");
-		return dao.getProdMain(sellerid);
+		return dao.getProdMain(map);
 	}
 
 	@Override
 
-	public boolean insertProd(Map<String, Object> insertFood) {
-		return dao.insertProd(insertFood);
+	public boolean insertProd(Map<String, Object> insertMap) {
+		logger.info("ProductServiceImpl insertProd()");
+		return dao.insertProd(insertMap);
 	}
 	
 	@Override
 	public String chkFood(String icode) {
+		logger.info("ProductServiceImpl chkFood()");
 		return dao.chkFood(icode);
 	}
 

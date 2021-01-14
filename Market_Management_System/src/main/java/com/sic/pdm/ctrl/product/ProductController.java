@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,59 +97,55 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productInsert.do", method = RequestMethod.POST)
 	public String productInsert(@RequestParam String[] code, @RequestParam String[] stock) {
-		
-		// insertMap, tempMap == 대분류가 AA가 아닌경우
 		Map<String, Object> insertMap = new HashMap<String, Object>();
-		Map<String, Object> tempMap = new HashMap<String, Object>();
-		List<ProductVo> list = new ArrayList<ProductVo>();
+		List<ProductVo> insertList = new ArrayList<ProductVo>();
 		ProductVo pvo = new ProductVo();
 		
-		// insertFood, foodList == 대분류가 AA인 경우
-		Map<String, Object> insertFood = new HashMap<String, Object>();
-		List<ProductVo> foodList = new ArrayList<ProductVo>();
+		// 대분류 체크를 위한 String변수
+		String chkFood = pService.chkFood(code[0]);
+		// 대분류를 보여줌
+		System.out.println(chkFood);
+		
 		for (int i = 0; i < stock.length; i++) {
 			pvo.setIcode(code[i]);
 			pvo.setStock(stock[i]);
-			String chkFood = pService.chkFood(code[i]);
 			
-			// 대분류를 보여줌
-			System.out.println(chkFood);
-			
-			// 대분류가 AA인 경우
-			if(chkFood.equals("AA")) {
-				foodList.add(pvo);
-			// 대분류가 AA가 아닌경우
-			}else {
-			//
-				list.add(pvo);
-			}
-			
+			insertList.add(pvo);
 		}
-//		for (String str : code) {
-//			System.out.println("코드임? = " + str);
-//			pvo.setIcode(str);
-//		}
-//		for (String str : stock) {
-//			System.out.println("숫자임? = " + str);
-//			tempMap.put("stock", str);
-//		}
-		
 		
 		insertMap.put("sellerid", "admin01");
-		insertMap.put("productList", list);
-		insertFood.put("sellerid", "admin01");
-		insertFood.put("productList", foodList);
-		System.out.println(insertMap);
-		System.out.println(code);
-		pService.insertProd(insertFood);
-		pService.insertProdFood(insertMap);
+		insertMap.put("productList", insertList);
+
+		// 대분류가 AA인 경우(식품)
+		if (chkFood.equals("AA")) {
+			pService.insertProdFood(insertMap);
+		}else { // 대분류가 식품이 아닌 경우
+			pService.insertProd(insertMap);
+		}
 		return "redirect:/product.do";
 	}
 	
-	@RequestMapping(value = "/productGridMain.do")
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/productGridMain.do", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONArray productGridMain() {
-		return null;
+	public JSONArray productGridMain(@RequestParam String mcode, @RequestParam String sellerid) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mcode", mcode);
+		map.put("sellerid", sellerid);
+		List<ProductVo> lists = pService.getProdMain(map);
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = new JSONArray();
+		
+		for (ProductVo vo : lists) {
+			jsonObject = new JSONObject();
+			jsonObject.put("name", vo.getIname());
+			jsonObject.put("rotnum", vo.getRotnum());
+			jsonObject.put("price", vo.getOprice());
+			jsonObject.put("stock", vo.getStock());
+			jsonArray.add(jsonObject);
+		}
+		
+		return jsonArray;
 	}
 	
 }
