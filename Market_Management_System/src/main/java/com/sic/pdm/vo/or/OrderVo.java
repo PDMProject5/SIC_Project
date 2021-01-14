@@ -5,6 +5,7 @@ import java.util.Date;
 public class OrderVo {
 	private Date odate;
 	private String onum;
+	private String id;
 	private String iname;
 	private int odstock;
 	private int oprice;
@@ -15,10 +16,12 @@ public class OrderVo {
 
 	}
 
-	public OrderVo(Date odate, String onum, String iname, int odstock, int oprice, String store, String ostate) {
+	public OrderVo(Date odate, String onum, String id, String iname, int odstock, int oprice, String store,
+			String ostate) {
 		super();
 		this.odate = odate;
 		this.onum = onum;
+		this.id = id;
 		this.iname = iname;
 		this.odstock = odstock;
 		this.oprice = oprice;
@@ -28,8 +31,8 @@ public class OrderVo {
 
 	@Override
 	public String toString() {
-		return "OrderDto [odate=" + odate + ", onum=" + onum + ", iname=" + iname + ", odstock=" + odstock + ", oprice="
-				+ oprice + ", store=" + store + ", ostate=" + ostate + "]";
+		return "OrderVo [odate=" + odate + ", onum=" + onum + ", id=" + id + ", iname=" + iname + ", odstock=" + odstock
+				+ ", oprice=" + oprice + ", store=" + store + ", ostate=" + ostate + "]";
 	}
 
 	public Date getOdate() {
@@ -46,6 +49,14 @@ public class OrderVo {
 
 	public void setOnum(String onum) {
 		this.onum = onum;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getIname() {
@@ -87,6 +98,8 @@ public class OrderVo {
 	public void setOstate(String ostate) {
 		this.ostate = ostate;
 	}
+
+	
 
 	
 }

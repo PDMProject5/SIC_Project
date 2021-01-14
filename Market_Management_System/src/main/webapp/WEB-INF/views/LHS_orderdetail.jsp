@@ -53,6 +53,7 @@ div {
 				<th>휴대폰</th>
 				<th>결제 금액</th>
 				<th>할인 금액</th>
+				<th>환불 요청</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -72,6 +73,7 @@ div {
 				<td><%=oddto.getPhone() %></td>
 				<td><%=oddto.getPaymentamt() %></td>
 				<td><%=oddto.getDiscountamt() %></td>
+				<td><a href="./refundinsert.do?onum=<%=oddto.getOnum() %>">환불</a></td>
 			</tr>
 			<%
 						}

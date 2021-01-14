@@ -48,4 +48,10 @@ public class ProductServiceImpl implements IProductService {
 		return dao.getProdDetail(map);
 	}
 
+	@Override
+	public boolean insertProdFood(Map<String, Object> insertMap) {
+		logger.info("ProductServiceImpl insertProdFood()");
+		return dao.insertProdFood(insertMap);
+	}
+
 }

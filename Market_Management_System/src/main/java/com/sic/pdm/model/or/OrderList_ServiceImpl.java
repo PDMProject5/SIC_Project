@@ -15,13 +15,13 @@ public class OrderList_ServiceImpl implements OrderList_IService {
 	private OrderList_IDao iDao;
 
 	@Override
-	public List<OrderVo> orderList() {
-		return iDao.orderList();
+	public List<OrderVo> orderList(String id) {
+		return iDao.orderList(id);
 	}
 
 	@Override
-	public List<OrderdetailVo> orderDetail() {
-		return iDao.orderDetail();
+	public List<OrderdetailVo> orderDetail(String onum) {
+		return iDao.orderDetail(onum);
 	}
 
 }
