@@ -5,6 +5,7 @@ import java.util.Map;
 
 
 import com.sic.pdm.vo.autoorder.AutoOrderVo;
+import com.sic.pdm.vo.user.SellerVo;
 
 public interface IAutoOrderService {
 
@@ -29,4 +30,8 @@ public interface IAutoOrderService {
 	public boolean insertAuto(AutoOrderVo vo);
 	
 	public boolean insertAutoFood(AutoOrderVo vo);
+	
+	public List<SellerVo> sellerList();
+	
+	public List<String> zeroList(String sellerid);
 }

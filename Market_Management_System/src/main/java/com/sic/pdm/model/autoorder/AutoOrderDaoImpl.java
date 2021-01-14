@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sic.pdm.vo.autoorder.AutoOrderVo;
+import com.sic.pdm.vo.user.SellerVo;
 
 @Repository
 public class AutoOrderDaoImpl implements IAutoOrderDao {
@@ -81,6 +82,18 @@ public class AutoOrderDaoImpl implements IAutoOrderDao {
 	public String foodchk(String itemchk) {
 		String foodchk = service.selectOne(NS+"foodchk", itemchk);
 		return foodchk;
+	}
+
+	@Override
+	public List<SellerVo> sellerList() {
+		List<SellerVo> lists = service.selectList(NS+"sellerList");
+		return lists;
+	}
+
+	@Override
+	public List<String> zeroList(String sellerid) {
+		List<String> zeroList = service.selectList(NS+"zeroList", sellerid);
+		return zeroList;
 	}
 
 	

@@ -72,4 +72,17 @@ SELECT MCODE FROM INVENTORY WHERE INAME = #{iname}))||(SELECT MCODE FROM INVENTO
 TO_DATE(SYSDATE , 'YYYY/MM/DD'), TO_DATE(SYSDATE , 'YYYY/MM/DD')+365, (SELECT ORDERNUM FROM AUTOORDER WHERE SELLERID =#{sellerid}AND INAME =#{iname}), #{iname}, 'C')
 </insert>
 
+<select id="zeroList" parameterType="java.lang.String" resultType="java.lang.String">
+SELECT INAME
+FROM PRODUCT
+WHERE PSTATE = 'C'
+AND SELLERID = #{sellerid}
+GROUP BY INAME
+HAVING SUM(STOCK) = 0
+</select>
+
+<select id="sellerList" resultType="SellerVo">
+SELECT SELLERID ,STOREPHONE FROM SELLER
+</select>
+
 </mapper>
