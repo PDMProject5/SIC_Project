@@ -56,11 +56,15 @@ public class UserCouponController {
 	@RequestMapping(value = "/getCoupon.do", method = RequestMethod.GET)
 	public String getCoupon(String cseq, HttpSession session) {
 		String id= (String) session.getAttribute("id");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		map.put("cseq", cseq);
-		icsvc.getCoupon(map);
-		return "redirect:/myCouponList.do";
+		if(id == "") {
+			return "redirect:/userViewListCoupon.do";
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			map.put("cseq", cseq);
+			icsvc.getCoupon(map);
+			return "redirect:/myCouponList.do";
+		}
 	}
 
 }

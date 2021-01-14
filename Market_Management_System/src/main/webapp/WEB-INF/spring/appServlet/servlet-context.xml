@@ -37,6 +37,8 @@
 	<task:scheduled-tasks>
 	<task:scheduled ref="memberServiceImpl" method="deleteuser" cron="0 0 3 * * ?"/>
 	<task:scheduled ref="autoOrderController" method="autoOrder" cron="0/10 * * * * ?"/>
+	<task:scheduled ref="couponServiceImpl" method="deleteCoupon" cron="0 0 3 * * ?"/>
+	<task:scheduled ref="couponServiceImpl" method="autoGetCouponDel" cron="0 0 3 * * ?"/>
 	</task:scheduled-tasks>
 
 </beans>

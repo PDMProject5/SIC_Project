@@ -65,6 +65,12 @@ public class CouponDaoImpl implements ICouponDao {
 	}
 	
 	@Override
+	public boolean autoEnableChange() {
+		int result = sqlSession.update(NS + "autoEnableChange");
+		return (result > 0) ? true : false;
+	}
+	
+	@Override
 	public List<CouponVo> userViewListCoupon(String sellerid) {
 		return sqlSession.selectList(NS + "userViewListCoupon", sellerid);
 	}
@@ -83,6 +89,12 @@ public class CouponDaoImpl implements ICouponDao {
 	@Override
 	public List<CouponVo> getCouponList(String id){
 		return sqlSession.selectList(NS + "getCouponList", id);
+	}
+	
+	@Override
+	public boolean autoGetCouponDel() {
+		int result = sqlSession.delete(NS + "autoGetCouponDel");
+		return (result > 0) ? true : false;
 	}
 
 

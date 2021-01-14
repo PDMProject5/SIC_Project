@@ -55,6 +55,11 @@ public class CouponServiceImpl implements ICouponService {
 	}
 	
 	@Override
+	public boolean autoEnableChange() {
+		return icDao.autoEnableChange();
+	}
+	
+	@Override
 	public boolean getCoupon(Map<String, Object> map) {
 		return icDao.getCoupon(map);
 	}
@@ -72,6 +77,11 @@ public class CouponServiceImpl implements ICouponService {
 	@Override
 	public List<CouponVo> userViewListCoupon(String sellerid) {
 		return icDao.userViewListCoupon(sellerid);
+	}
+
+	@Override
+	public boolean autoGetCouponDel() {
+		return icDao.autoGetCouponDel();
 	}
 
 }
