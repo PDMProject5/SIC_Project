@@ -29,7 +29,7 @@ public interface IProductService {
 	public List<ProductVo> getMcate();
 	
 	/**
-	 * 선택된 중분류에 해당하는 재고 목록
+	 * 선택된 중분류에 해당하는 재고 목록 (재고등록용)
 	 * @author KGH 김기홍
 	 * @param String(mcode)
 	 * @return ProductVo(ICODE, MCODE, INAME)
@@ -55,13 +55,26 @@ public interface IProductService {
 	/**
 	 * 판매자 재고현황 Main Grid 
 	 * @author KGH 김기홍
-	 * @param sellerid
+	 * @param sellerid, mcode
 	 * @return ProductVo(INAME, ROTNUM, OPRICE, STOCK)
 	 */
-	public List<ProductVo> getProdMain(String sellerid);
+	public List<ProductVo> getProdMain(Map<String, String> map);
 
-	public boolean insertProd(Map<String, Object> insertFood);
+	/**
+	 * 제품등록(식품 외)
+	 * 유통기한을 입고일기준 365일 후
+	 * @author KGH 김기홍
+	 * @param insertMap(String SELLERID, String[] ICODE)
+	 * @return boolean
+	 */
+	public boolean insertProd(Map<String, Object> insertMap);
 	
-	
+	/**
+	 * 제품군이 식품인지 확인
+	 * @author SDH 신대한
+	 * @param icode
+	 * @return LCODE
+	 */
 	public String chkFood(String icode);
+	
 }
