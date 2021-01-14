@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sic.pdm.vo.autoorder.AutoOrderVo;
+import com.sic.pdm.vo.user.SellerVo;
 
 @Service
 public class AutoOrderServiceImpl implements IAutoOrderService {
@@ -68,6 +69,16 @@ public class AutoOrderServiceImpl implements IAutoOrderService {
 	@Override
 	public boolean insertAutoFood(AutoOrderVo vo) {
 		return dao.insertAutoFood(vo);
+	}
+
+	@Override
+	public List<SellerVo> sellerList() {
+		return dao.sellerList();
+	}
+
+	@Override
+	public List<String> zeroList(String sellerid) {
+		return dao.zeroList(sellerid);
 	}
 
 

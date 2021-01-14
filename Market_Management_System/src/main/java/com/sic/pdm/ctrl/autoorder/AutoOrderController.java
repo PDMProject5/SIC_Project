@@ -14,11 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sic.pdm.model.autoorder.IAutoOrderService;
+import com.sic.pdm.util.API_Service;
 import com.sic.pdm.vo.autoorder.AutoOrderVo;
+import com.sic.pdm.vo.user.SellerVo;
 
 @Controller
 public class AutoOrderController {
 
+	@Autowired
+	API_Service phoneservice;
+	
 	@Autowired
 	IAutoOrderService service;
 	
@@ -111,4 +116,23 @@ public class AutoOrderController {
 			}
 		}
 	}
+	
+	public void itemMessage() {
+	        List<String> items = null;
+	        String phoneNumber = "";
+	        String sellerid = "";
+	        List<SellerVo> list = service.sellerList();
+	        for(int i=0; i<list.size(); i++) {
+	        	sellerid = list.get(i).getSellerid();
+	        	phoneNumber = list.get(i).getStorephone();
+	        	items = service.zeroList(sellerid);
+//	        	System.out.println(sellerid);
+//	        	System.out.println(items);
+	        	if(items.size()!=0) {
+	        		phoneservice.noticeService(phoneNumber,items);
+	        		System.out.println("수신자 번호 : " + phoneNumber);
+	    	        System.out.println("문자 내용 : " + items);
+	        	}
+	        }
+		}
 }
