@@ -61,6 +61,7 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
+
 	public boolean insertProd(Map<String, Object> insertFood) {
 		return dao.insertProd(insertFood);
 	}

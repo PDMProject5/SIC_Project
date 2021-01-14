@@ -20,7 +20,7 @@
 	<table>
 		<c:forEach items="${cList}" var="cList">
 			<tr>
-				<td><a href = "./ViewCoupon.do?cseq=${cList.cseq}"><img src = "${cList.cthumbimg}" ></a></td>
+				<td><a href = "./viewOneCoupon.do?cseq=${cList.cseq}"><img src = "${cList.cthumbimg}" ></a></td>
 			</tr>
 			<tr>
 				<td>${cList.cnotify}</td>
@@ -30,8 +30,8 @@
 					<fmt:parseDate var="startDate" value="${cList.cdate}" pattern="yyyy-MM-dd" />
 					<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
 					~
-					<fmt:parseDate var="startDate" value="${cList.cdate}" pattern="yyyy-MM-dd" />
-					<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
+					<fmt:parseDate var="endDate" value="${cList.cdate}" pattern="yyyy-MM-dd" />
+					<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
 				</td>
 			</tr>
 		</c:forEach>

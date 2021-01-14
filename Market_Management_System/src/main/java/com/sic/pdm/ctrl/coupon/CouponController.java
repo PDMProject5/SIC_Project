@@ -32,26 +32,25 @@ public class CouponController {
 	private ICouponService icsvc;
 
 	// 쿠폰 목록
-	@RequestMapping(value = "/ViewListCoupon.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/viewListCoupon.do", method = RequestMethod.GET)
 	public String viewListCoupon(HttpSession session, Model model) {
-		System.out.println("// ViewListCoupon //");
 		String sellerId = (String) session.getAttribute("sellerid");
-		
-		List<CouponVo> cList = icsvc.ViewListCoupon(sellerId);
-		model.addAttribute("cList", cList);
-		
-		return "CHS_list";
+		if (sellerId == null) {
+			return "redirect:/loginForm.do";
+		} else {
+			List<CouponVo> cList = icsvc.viewListCoupon(sellerId);
+			model.addAttribute("cList", cList);
+			return "CHS_list";
+		}
 	}
 	
 	// 쿠폰 클릭시 이동
-	@RequestMapping(value = "/ViewCoupon.do")
-	public String viewCoupon (String cseq, Model model) {
-		System.out.println("/// ViewCoupon 들어왔니??? "+cseq);
-		CouponVo cv = icsvc.ViewCoupon(cseq);
-		System.out.println(cv);
+	@RequestMapping(value = "/viewOneCoupon.do")
+	public String viewOneCoupon (String cseq, Model model) {
+		CouponVo cv = icsvc.viewOneCoupon(cseq);
 		model.addAttribute("cv", cv);
 		
-		return "CHS_ViewCoupon";
+		return "CHS_viewOneCoupon";
 	}
 	
 	// 쿠폰 등록 페이지 이동
@@ -98,7 +97,7 @@ public class CouponController {
 				cDto.setCthumbimg(fileName);
 			}
 			
-			boolean result = icsvc.insertCoupon(cDto);
+			icsvc.insertCoupon(cDto);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("sellerid",sellerid);
@@ -110,14 +109,13 @@ public class CouponController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/ViewListCoupon.do";
+		return "redirect:/viewListCoupon.do";
 	}
 	
 	// 쿠폰 수정
 	@RequestMapping(value = "/updateCoupon.do", method = RequestMethod.POST)
 	public String updateCoupon(CouponVo cDto,
 			@RequestParam(value = "cdstate" , required = false) String cdstate, MultipartFile file, HttpServletRequest req) {
-		System.out.println("수정들어왔니?? " + cdstate);
 		try {
 			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 				
@@ -145,17 +143,16 @@ public class CouponController {
 		}
 		icsvc.updateCoupon(cDto);
 		// CouponDetail 상태 수정
-		icsvc.updateCouponState(cdstate);
+		icsvc.updateStateCoupon(cdstate);
 		
-		return "redirect:/ViewListCoupon.do";
+		return "redirect:/viewListCoupon.do";
 	}
 	
 	// 쿠폰 삭제
 	@RequestMapping(value = "/deleteCoupon.do", method = RequestMethod.GET)
 	public String deleteCoupon(String cseq) {
-		System.out.println("// deleteCoupon " + cseq);
 		icsvc.deleteCoupon(cseq);
-		return "redirect:/ViewListCoupon.do";
+		return "redirect:/viewListCoupon.do";
 	}
 
 }

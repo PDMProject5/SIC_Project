@@ -24,6 +24,7 @@ public class ProductController {
 	@Autowired
 	private IProductService pService;
 	
+	
 	@RequestMapping(value = "/product.do")
 	public String test(Model model) {
 		List<ProductVo> lists = pService.getProdList("admin01"); 

@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<c:forEach items="${ucvList}" var="ucvList">
+			<tr>
+				<td><a href = "./userViewOneCoupon.do?cseq=${ucvList.cseq}"><img src = "${ucvList.cthumbimg}" ></a></td>
+			</tr>
+			<tr>
+				<td>${ucvList.cnotify}</td>
+			</tr>
+			<tr>
+				<td>
+					<fmt:parseDate var="startDate" value="${ucvList.cdate}" pattern="yyyy-MM-dd" />
+					<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
+					~
+					<fmt:parseDate var="endDate" value="${ucvList.cdate}" pattern="yyyy-MM-dd" />
+					<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.sql.AutoOrder">
+
+<select id="autoOrderList" parameterType="java.lang.String" resultType="AutoOrderVo">
+SELECT INAME, AUTONUM, ORDERNUM
+FROM AUTOORDER
+WHERE SELLERID = #{sellerid}
+</select>
+
+<select id="autoOrderDetail" parameterType="java.lang.String" resultType="AutoOrderVo">
+SELECT INAME, AUTONUM, ORDERNUM FROM AUTOORDER
+WHERE INAME = #{iname}
+</select>
+
+<update id="updateautoOrder" parameterType="AutoOrderVo">
+UPDATE AUTOORDER SET AUTONUM = #{autonum}, ORDERNUM = #{ordernum}
+WHERE SELLERID = #{sellerid}
+AND INAME = #{iname}
+</update>
+
+<select id="searchitem" parameterType="java.lang.String" resultType="AutoOrderVo">
+SELECT INAME FROM INVENTORY WHERE INAME LIKE '%'||#{iname}||'%'
+AND NOT INAME IN(SELECT INAME FROM AUTOORDER a WHERE INAME LIKE '%'||#{iname}||'%')
+</select>
+
+<insert id="insertAutoOrder" parameterType="AutoOrderVo">
+INSERT INTO AUTOORDER(AOSEQ, SELLERID, INAME, AUTONUM, ORDERNUM, ICODE)
+VALUES(AUTOORDER_SEQ.NEXTVAL, #{sellerid}, #{iname}, #{autonum}, #{ordernum}, (SELECT ICODE FROM INVENTORY WHERE INAME=#{iname}))
+</insert>
+
+<delete id="deleteAutoOrder" parameterType="java.util.Map">
+DELETE AUTOORDER
+WHERE SELLERID = #{sellerid}
+AND INAME IN
+<foreach item="iname" collection="inames" open="(" separator="," close=")">
+	#{iname}
+</foreach>
+</delete>
+
+<select id="autoOrder" resultType="AutoOrderVo">
+SELECT INAME, AUTONUM, ORDERNUM, SELLERID, ICODE
+FROM AUTOORDER
+</select>
+
+<select id="autoOrderchk" parameterType="AutoOrderVo" resultType="AutoOrderVo">
+SELECT INAME, SELLERID, ICODE
+FROM PRODUCT
+WHERE PSTATE = 'C'
+AND SELLERID = #{sellerid}
+AND INAME = #{iname}
+GROUP BY INAME, SELLERID ,ICODE
+HAVING SUM(STOCK)<![CDATA[<]]>#{autonum}
+</select>
+
+<select id="foodchk" parameterType="java.lang.String" resultType="java.lang.String">
+SELECT LCODE FROM MCATE WHERE MCODE = (
+SELECT MCODE FROM INVENTORY WHERE INAME = #{iname})
+</select>
+
+<insert id="insertAutoFood" parameterType="AutoOrderVo">
+INSERT INTO PRODUCT (PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME, PSTATE)
+VALUES(PRODUCT_SEQ.NEXTVAL, #{sellerid}, #{icode}, (SELECT LCODE FROM MCATE WHERE MCODE = (
+SELECT MCODE FROM INVENTORY WHERE INAME = #{iname}))||(SELECT MCODE FROM INVENTORY WHERE INAME = #{iname})||#{icode},
+TO_DATE(SYSDATE , 'YYYY/MM/DD'), TO_DATE(SYSDATE , 'YYYY/MM/DD')+7, (SELECT ORDERNUM FROM AUTOORDER WHERE SELLERID =#{sellerid}AND INAME =#{iname}), #{iname}, 'C')
+</insert>
+
+<insert id="insertAuto" parameterType="AutoOrderVo">
+INSERT INTO PRODUCT (PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME, PSTATE)
+VALUES(PRODUCT_SEQ.NEXTVAL, #{sellerid}, #{icode} ,(SELECT LCODE FROM MCATE WHERE MCODE = (
+SELECT MCODE FROM INVENTORY WHERE INAME = #{iname}))||(SELECT MCODE FROM INVENTORY WHERE INAME = #{iname})||#{icode},
+TO_DATE(SYSDATE , 'YYYY/MM/DD'), TO_DATE(SYSDATE , 'YYYY/MM/DD')+365, (SELECT ORDERNUM FROM AUTOORDER WHERE SELLERID =#{sellerid}AND INAME =#{iname}), #{iname}, 'C')
+</insert>
+
+<select id="zeroList" parameterType="java.lang.String" resultType="java.lang.String">
+SELECT INAME
+FROM PRODUCT
+WHERE PSTATE = 'C'
+AND SELLERID = #{sellerid}
+GROUP BY INAME
+HAVING SUM(STOCK) = 0
+</select>
+
+<select id="sellerList" resultType="SellerVo">
+SELECT SELLERID ,STOREPHONE FROM SELLER
+</select>
+
+</mapper>
