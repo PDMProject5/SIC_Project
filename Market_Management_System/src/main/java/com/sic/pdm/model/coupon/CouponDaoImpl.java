@@ -53,7 +53,7 @@ public class CouponDaoImpl implements ICouponDao {
 	}
 	
 	@Override
-	public boolean updateCouponState(String cdstate) {
+	public boolean updateStateCoupon(String cdstate) {
 		int result = sqlSession.update(NS+"updateStateCoupon", cdstate);
 		return (result > 0) ? true : false;
 	}
@@ -61,6 +61,12 @@ public class CouponDaoImpl implements ICouponDao {
 	@Override
 	public boolean deleteCoupon(String cseq) {
 		int result = sqlSession.delete(NS+"deleteCoupon", cseq);
+		return (result > 0) ? true : false;
+	}
+	
+	@Override
+	public boolean autoEnableChange() {
+		int result = sqlSession.update(NS + "autoEnableChange");
 		return (result > 0) ? true : false;
 	}
 	
@@ -83,6 +89,12 @@ public class CouponDaoImpl implements ICouponDao {
 	@Override
 	public List<CouponVo> getCouponList(String id){
 		return sqlSession.selectList(NS + "getCouponList", id);
+	}
+	
+	@Override
+	public boolean autoGetCouponDel() {
+		int result = sqlSession.delete(NS + "autoGetCouponDel");
+		return (result > 0) ? true : false;
 	}
 
 

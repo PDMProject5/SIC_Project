@@ -45,13 +45,18 @@ public class CouponServiceImpl implements ICouponService {
 	}
 	
 	@Override
-	public boolean updateCouponState(String cdstate) {
-		return icDao.updateCouponState(cdstate);
+	public boolean updateStateCoupon(String cdstate) {
+		return icDao.updateStateCoupon(cdstate);
 	}
 
 	@Override
 	public boolean deleteCoupon(String cseq) {
 		return icDao.deleteCoupon(cseq);
+	}
+	
+	@Override
+	public boolean autoEnableChange() {
+		return icDao.autoEnableChange();
 	}
 	
 	@Override
@@ -72,6 +77,11 @@ public class CouponServiceImpl implements ICouponService {
 	@Override
 	public List<CouponVo> userViewListCoupon(String sellerid) {
 		return icDao.userViewListCoupon(sellerid);
+	}
+
+	@Override
+	public boolean autoGetCouponDel() {
+		return icDao.autoGetCouponDel();
 	}
 
 }
