@@ -50,4 +50,10 @@ public class BascketServiceImpl implements BascketIService {
 		
 		return idao.getOneBascket(map);
 	}
+	
+	@Override
+	public List<BascketVo> getOrderInfo(List<String> onums) {
+		
+		return idao.getOrderInfo(onums);
+	}
 }
