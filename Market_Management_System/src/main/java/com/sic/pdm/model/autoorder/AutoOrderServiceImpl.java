@@ -3,6 +3,7 @@ package com.sic.pdm.model.autoorder;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,32 @@ public class AutoOrderServiceImpl implements IAutoOrderService {
 	public boolean deleteAutoOrder(Map<String, Object> iname) {
 		return dao.deleteAutoOrder(iname);
 	}
+
+	@Override
+	public List<AutoOrderVo> autoOrder() {
+		return dao.autoOrder();
+	}
+
+	@Override
+	public AutoOrderVo autoOrderchk(AutoOrderVo data) {
+		return dao.autoOrderchk(data);
+	}
+
+	@Override
+	public boolean insertAuto(AutoOrderVo vo) {
+		return dao.insertAuto(vo);
+	}
+
+	@Override
+	public String foodchk(String itemchk) {
+		return dao.foodchk(itemchk);
+	}
+
+	@Override
+	public boolean insertAutoFood(AutoOrderVo vo) {
+		return dao.insertAutoFood(vo);
+	}
+
 
 
 

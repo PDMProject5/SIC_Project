@@ -3,6 +3,7 @@ package com.sic.pdm.model.autoorder;
 import java.util.List;
 import java.util.Map;
 
+
 import com.sic.pdm.vo.autoorder.AutoOrderVo;
 
 public interface IAutoOrderService {
@@ -18,4 +19,14 @@ public interface IAutoOrderService {
 	public boolean insertAutoOrder(AutoOrderVo vo);
 	
 	public boolean deleteAutoOrder(Map<String, Object> iname);
+	
+	public List<AutoOrderVo> autoOrder();
+	
+	public AutoOrderVo autoOrderchk(AutoOrderVo data);
+	
+	public String foodchk(String itemchk);
+	
+	public boolean insertAuto(AutoOrderVo vo);
+	
+	public boolean insertAutoFood(AutoOrderVo vo);
 }
