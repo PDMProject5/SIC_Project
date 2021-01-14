@@ -56,11 +56,15 @@ public class UserCouponController {
 	@RequestMapping(value = "/getCoupon.do", method = RequestMethod.GET)
 	public String getCoupon(String cseq, HttpSession session) {
 		String id= (String) session.getAttribute("id");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		map.put("cseq", cseq);
-		icsvc.getCoupon(map);
-		return "redirect:/myCouponList.do";
+		if(id == null) { // 비회원 로그인시 loginform.do 이동
+			return "redirect:/loginForm.do";
+		} else { // 세션 값이 id에 담겨져있으면 쿠폰 받기 로직 실행
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			map.put("cseq", cseq);
+			icsvc.getCoupon(map);
+			return "redirect:/myCouponList.do";
+		}
 	}
 
 }

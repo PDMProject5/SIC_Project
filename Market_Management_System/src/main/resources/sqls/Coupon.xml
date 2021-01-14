@@ -41,6 +41,12 @@
 		WHERE CSEQ = #{cseq}
 	</delete>
 	
+	<update id = "autoEnableChange">
+		UPDATE COUPON SET
+		CENABLE = 'N'
+		WHERE CENABLE = 'Y' AND CDATE = TO_CHAR(SYSDATE-30)
+	</update>
+	
 	<select id="userViewListCoupon" parameterType="java.lang.String" resultType="CouponVo">
 		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON WHERE CENABLE = 'Y' AND SELLERID = #{sellerid}
 	</select>
@@ -60,5 +66,10 @@
 	<select id = "userViewOneCoupon" resultType="CouponVo" parameterType="java.lang.String">
 		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON WHERE CSEQ = #{cseq}
 	</select>
+	
+	<delete id = "autoGetCouponDel">
+		DELETE FROM COUPONBOX
+		WHERE CDATE = TO_CHAR(SYSDATE-7)
+	</delete>
 
 </mapper>
