@@ -74,4 +74,16 @@ public class ProductDaoImpl implements IProductDao {
 		return lists;
 	}
 
+	@Override
+	public boolean insertProd(Map<String, Object> insertFood) {
+		int count = service.insert(NS+"insertProd", insertFood);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public String chkFood(String icode) {
+		String chkFood = service.selectOne(NS+"chkFood", icode);
+		return chkFood;
+	}
+
 }

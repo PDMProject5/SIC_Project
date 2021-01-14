@@ -94,4 +94,7 @@
 	
 	<select id="getProdDetail"></select>
 	
+	<select id="chkFood" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT LCODE FROM MCATE WHERE MCODE = (SELECT MCODE FROM INVENTORY WHERE ICODE = #{icode})
+	</select>
 </mapper>

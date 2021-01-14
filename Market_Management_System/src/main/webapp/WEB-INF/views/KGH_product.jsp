@@ -57,28 +57,7 @@ function makeTable(data){
 	$("#jqGridRegist").jqGrid('clearGridData');
 	
 	var jsonData2 = $.ajax({
-		url : "./insertGrid.do?mcode=" + data,
-		method : "get",
-		dataType : "json",
-		contentType : "application/json; charset=UTF-8",
-		async: false
-	}).responseText;
-	console.log(jsonData2);
-	var realGrid = JSON.parse(jsonData2);
-	console.log(realGrid);
-// 	realJson = JSON.parse(jsonData);
-// 	console.log(realJson);
-    
-    
-    for(var i = 0, max = realGrid.length; i <= max; i++){
-    	$("#jqGridRegist").jqGrid('addRowData', i+1, realGrid[i]);
-    }
-    
-    
-	$("#jqGridMain").jqGrid('clearGridData');
-	
-	var jsonData3 = $.ajax({
-		url : "./insertGrid.do?mcode=" + data,
+		url : "./productGrid.do?mcode=" + data,
 		method : "get",
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
@@ -151,38 +130,8 @@ $(function(){
         cellEdit: true,
         cellurl: "./",
 		height: 450,
-		caption:"재고 등록?",
+		caption:"재고 목록?",
     	multiselect : true
-     });
-	
-	$("#jqGridMain").jqGrid({
-		datatype: "json",
-  		height : 250,
-  		colNames : [ '제품명', 'ROTNUM', '판매가', '수량' ],
-		colModel:[
-            	{name:"name",index:"name"},
-            	{name:"rotnum",index:"rotnum"},
-            	{name:"price",index:"price"},
-            	{name:"stock",index:"stock"}
-               ],
-		height: 450,
-		caption:"재고 목록 메인"
-     });
-	
-	$("#jqGridDetail").jqGrid({
-		datatype: "json",
-  		height : 250,
-  		colNames : [ '제품코드', '제품명', '입고일', '유통기한', '수랑', '폐기처리' ],
-		colModel:[
-            	{name:"code",index:"code"},
-            	{name:"name",index:"name"},
-            	{name:"pdate",index:"pdate"},
-            	{name:"lifetime",index:"lifetime"},
-            	{name:"stock",index:"stock"},
-            	{name:"pegi",index:"pegi"}
-               ],
-		height: 450,
-		caption:"재고 목록 상세"
      });
 });
 
@@ -208,17 +157,12 @@ $(function(){
 		<table id="jqGridRegist"></table>
 		<div id="jqGridPager"></div>
 		
-		<button onclick="productRegist()">제품등록</button><br>
+		<button onclick="productRegist()">제품등록</button>
 	</div>
 	
 	<div>
-		<table id="jqGridMain"></table>
+		<table id="jqGrid2"></table>
 		<div id="jqGridPager2"></div>
-	</div>
-	
-	<div>
-		<table id="jqGridDetail"></table>
-		<div id="jqGridPager3"></div>
 	</div>
 </body>
 </html>

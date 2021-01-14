@@ -60,4 +60,14 @@ public class ProductServiceImpl implements IProductService {
 		return dao.getProdMain(sellerid);
 	}
 
+	@Override
+	public boolean insertProd(Map<String, Object> insertFood) {
+		return dao.insertProd(insertFood);
+	}
+	
+	@Override
+	public String chkFood(String icode) {
+		return dao.chkFood(icode);
+	}
+
 }

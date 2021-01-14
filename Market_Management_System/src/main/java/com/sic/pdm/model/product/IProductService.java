@@ -60,4 +60,8 @@ public interface IProductService {
 	 */
 	public List<ProductVo> getProdMain(String sellerid);
 
+	public boolean insertProd(Map<String, Object> insertFood);
+	
+	
+	public String chkFood(String icode);
 }
