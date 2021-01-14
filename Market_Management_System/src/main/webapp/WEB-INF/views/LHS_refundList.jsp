@@ -74,6 +74,8 @@ div {
 				%>
 			</tbody>
 		</table>
-		
+		<div>
+		<input type="button" value="돌아가기" onclick="history.back(-1)">
+		</div>
 </body>
 </html>
