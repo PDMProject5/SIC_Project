@@ -66,4 +66,12 @@ public class ProductDaoImpl implements IProductDao {
 		return count > 0 ? true : false;
 	}
 
+	@Override
+	public List<ProductVo> getProdMain(String sellerid) {
+		logger.info("ProductDaoImpl getProdMain()");
+		List<ProductVo> lists = null;
+		lists = service.selectList(NS + "getProdMain", sellerid);
+		return lists;
+	}
+
 }

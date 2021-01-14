@@ -21,7 +21,6 @@
 	<mapper resource="/sqls/Seller.xml"/>
 	<mapper resource="/sqls/Coupon.xml"/>
 	<mapper resource="/sqls/Product.xml"/>
-	<mapper resource="/sqls//DelMapper.xml"/>
 	<mapper resource="/sqls/Order.xml"/>
 	<mapper resource="/sqls/Refund.xml"/>
 	<mapper resource="/sqls/DelMapper.xml"/>

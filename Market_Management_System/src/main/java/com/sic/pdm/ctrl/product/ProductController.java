@@ -62,9 +62,9 @@ public class ProductController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/productGrid.do")
+	@RequestMapping(value = "/insertGrid.do")
 	@ResponseBody
-	public JSONArray productGrid(@RequestParam String mcode) {
+	public JSONArray insertGrid(@RequestParam String mcode) {
 		System.out.println(mcode);
 		List<ProductVo> lists = pService.getInven(mcode);
 		JSONObject jsonObject = null;
@@ -100,6 +100,7 @@ public class ProductController {
 		List<ProductVo> list = new ArrayList<ProductVo>();
 		ProductVo pvo = new ProductVo();
 		
+		
 		for (int i = 0; i < stock.length; i++) {
 			pvo.setIcode(code[i]);
 			pvo.setStock(stock[i]);
@@ -120,6 +121,12 @@ public class ProductController {
 		System.out.println(code);
 		pService.insertProdFood(insertMap);
 		return "redirect:/product.do";
+	}
+	
+	@RequestMapping(value = "/productGridMain.do")
+	@ResponseBody
+	public JSONArray productGridMain() {
+		return null;
 	}
 	
 }

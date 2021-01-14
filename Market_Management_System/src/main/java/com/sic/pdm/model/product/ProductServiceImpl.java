@@ -54,4 +54,10 @@ public class ProductServiceImpl implements IProductService {
 		return dao.insertProdFood(insertMap);
 	}
 
+	@Override
+	public List<ProductVo> getProdMain(String sellerid) {
+		logger.info("ProductServiceImpl getProdMain()");
+		return dao.getProdMain(sellerid);
+	}
+
 }

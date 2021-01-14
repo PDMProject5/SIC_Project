@@ -10,7 +10,8 @@ public interface IProductDao {
 	/**
 	 * 사용자 시점에서의 제품목록을 시각화해줌
 	 * @author KGH 김기홍
-	 * @return ProductVo(INAME, STOCK(SUM))
+	 * @param sellerid
+	 * @return ProductVo(INAME, STOCK(SUM), OPRICE)
 	 */
 	public List<ProductVo> getProdList(String sellerid);
 	
@@ -51,5 +52,13 @@ public interface IProductDao {
 	 * @return boolean
 	 */
 	public boolean insertProdFood(Map<String, Object> insertMap);
+	
+	/**
+	 * 판매자 재고현황 Main Grid 
+	 * @author KGH 김기홍
+	 * @param sellerid
+	 * @return ProductVo(INAME, ROTNUM, OPRICE, STOCK)
+	 */
+	public List<ProductVo> getProdMain(String sellerid);
 
 }
