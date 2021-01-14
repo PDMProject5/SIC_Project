@@ -57,7 +57,7 @@ function makeTable(data){
 	$("#jqGridRegist").jqGrid('clearGridData');
 	
 	var jsonData2 = $.ajax({
-		url : "./productGrid.do?mcode=" + data,
+		url : "./insertGrid.do?mcode=" + data,
 		method : "get",
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
@@ -72,6 +72,33 @@ function makeTable(data){
     
     for(var i = 0, max = realGrid.length; i <= max; i++){
     	$("#jqGridRegist").jqGrid('addRowData', i+1, realGrid[i]);
+    }
+    
+    
+	$("#jqGridMain").jqGrid('clearGridData');
+	var sellerid = "admin01";
+	var jsonAjaxData = {
+			"mcode" : data,
+			"sellerid" : "admin01"
+	};
+	console.log(jsonAjaxData);
+	var jsonDataMain = $.ajax({
+		url : "./productGridMain.do",
+		method : "post",
+		dataType : "json",
+		traditional : true,
+		data : jsonAjaxData,
+		async: false
+	}).responseText;
+	console.log(jsonDataMain);
+	var realGridMain = JSON.parse(jsonDataMain);
+	console.log(realGridMain);
+// 	realJson = JSON.parse(jsonData);
+// 	console.log(realJson);
+    
+    
+    for(var i = 0, max = realGridMain.length; i <= max; i++){
+    	$("#jqGridMain").jqGrid('addRowData', i+1, realGridMain[i]);
     }
 }
 
@@ -117,6 +144,7 @@ $(function(){
 		}
 	});
 	
+	// 재고 등록용 jqGrid
 	$("#jqGridRegist").jqGrid({
 		datatype: "json",
   		height : 250,
@@ -130,8 +158,38 @@ $(function(){
         cellEdit: true,
         cellurl: "./",
 		height: 450,
-		caption:"재고 목록?",
+		caption:"재고 등록?",
     	multiselect : true
+     });
+	
+	$("#jqGridMain").jqGrid({
+		datatype: "json",
+  		height : 250,
+  		colNames : [ '제품명', 'ROTNUM', '입고가', '수량' ],
+		colModel:[
+				{name:"name",index:"name"},
+				{name:"rotnum",index:"rotnum"},
+            	{name:"price",index:"price"},
+            	{name:"stock",index:"stock"}
+               ],
+		height: 450,
+		caption:"재고 등록 Main"
+     });
+	
+	$("#jqGridDetail").jqGrid({
+		datatype: "json",
+  		height : 250,
+  		colNames : [ '제품코드', '제품명', '입고일', '유통기한', '수량', '폐기처리' ],
+		colModel:[
+				{name:"code",index:"code"},
+            	{name:"name",index:"name"},
+            	{name:"pdate",index:"pdate"},
+            	{name:"lifetime",index:"lifetime"},
+            	{name:"stock",index:"stock"},
+            	{name:"dispose",index:"dispose"}
+               ],
+		height: 450,
+		caption:"재고 목록 Detail"
      });
 });
 
@@ -161,8 +219,13 @@ $(function(){
 	</div>
 	
 	<div>
-		<table id="jqGrid2"></table>
+		<table id="jqGridMain"></table>
 		<div id="jqGridPager2"></div>
+	</div>
+	
+	<div>
+		<table id="jqGridDetail"></table>
+		<div id="jqGridPager3"></div>
 	</div>
 </body>
 </html>

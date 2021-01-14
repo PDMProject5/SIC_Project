@@ -56,13 +56,24 @@ public interface IProductDao {
 	/**
 	 * 판매자 재고현황 Main Grid 
 	 * @author KGH 김기홍
-	 * @param sellerid
+	 * @param sellerid, mcode
 	 * @return ProductVo(INAME, ROTNUM, OPRICE, STOCK)
 	 */
-	public List<ProductVo> getProdMain(String sellerid);
+	public List<ProductVo> getProdMain(Map<String, String> map);
 
+	/**
+	 * 제품등록(식품 외)
+	 * 유통기한을 입고일기준 365일 후
+	 * @param insertMap(String SELLERID, String[] ICODE)
+	 * @return boolean
+	 */
+	public boolean insertProd(Map<String, Object> insertMap);
 	
-	public boolean insertProd(Map<String, Object> insertFood);
-	
+	/**
+	 * 제품군이 식품인지 확인
+	 * @param icode
+	 * @return LCODE
+	 */
 	public String chkFood(String icode);
+	
 }
