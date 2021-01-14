@@ -36,7 +36,7 @@ div {
 <body>
 	<div>
 		<h1>마일리지</h1>
-<%-- 		<h2><%=vo.getMmoney()%></h2> --%>
+		<h2>총 마일리지 : <%=vo.getMmoney()%></h2>
 	</div>
 	
 	<div>
@@ -58,6 +58,8 @@ div {
 			</tbody>
 		</table>
 	</div>
-		
+	<div>
+		<input type="button" value="돌아가기" onclick="history.back(-1)">
+	</div>
 </body>
 </html>

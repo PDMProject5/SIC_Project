@@ -64,5 +64,11 @@ public class BascketDaoImpl implements BascketIDao {
 		return vo;
 	}
 	
+	@Override
+	public List<BascketVo> getOrderInfo(List<String> onums) {
+		logger.info("getOrderInfo 확인");
+		List<BascketVo> lists = session.selectList(NS+"getOrderInfo", onums);
+		return lists;
+	}
 	
 }

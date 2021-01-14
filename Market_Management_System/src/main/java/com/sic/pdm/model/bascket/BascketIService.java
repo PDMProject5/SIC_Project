@@ -19,4 +19,6 @@ public interface BascketIService {
 	
 	public boolean deleteBascket(List<String> onums);
 	
+	public List<BascketVo> getOrderInfo(List<String> onums);
+	
 }

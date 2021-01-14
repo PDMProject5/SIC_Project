@@ -26,7 +26,6 @@ public class UserCouponController {
 	// 매장 행사 정보
 	@RequestMapping(value = "/userViewListCoupon.do")
 	public String userViewListCoupon(HttpSession session,Model model) {
-//		String sellerid = (String) session.getAttribute("sellerid");
 		String sellerid = "admin01";
 		List<CouponVo> ucvList = icsvc.userViewListCoupon(sellerid);
 		model.addAttribute("ucvList",ucvList);

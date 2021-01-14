@@ -20,8 +20,13 @@ public class CouponServiceImpl implements ICouponService {
 	private ICouponDao icDao;
 
 	@Override
-	public List<CouponVo> viewListCoupon(String sellerid) {
-		return icDao.viewListCoupon(sellerid);
+	public List<CouponVo> storeCouponListY(Map<String, Object> map) {
+		return icDao.storeCouponListY(map);
+	}
+	
+	@Override
+	public int storeCouponTotal() {
+		return icDao.storeCouponTotal();
 	}
 	
 	@Override

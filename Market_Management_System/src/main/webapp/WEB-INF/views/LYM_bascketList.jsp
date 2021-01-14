@@ -35,7 +35,7 @@
 								<input type='checkbox' id="chkVal" name='chkVal' value='${dto.onum}'>
 							</td>
 							<td>	
-								<strong><a id="iname1" href="productDetail.do?iname=${dto.iname}">${dto.iname}</a></strong><br>
+								<strong><a href="productDetail.do?iname=${dto.iname}">${dto.iname}</a></strong><br>
 								${dto.oprice} 원
 							</td>
 							<td>
@@ -213,6 +213,7 @@ function modStock(){
 
 	
 	function order(){ // onum값만 넘겨서 쿼리문 select where onum and ostate='B' 인것만 전달
+		var frm = document.getElementById("frm");
 		var chkval = document.getElementsByName('chkVal');
 		var n = 0;
 		for (var i = 0; i < chkval.length; i++) {
@@ -222,8 +223,8 @@ function modStock(){
 		}
 
 		if (n > 0) {
-			document.getElementById("frm").action = "./order.do";
-			
+			frm.action = "./order.do";
+			frm.submit();
 		} else {
 			alert("주문하실 상품을 선택해 주세요.");
 			return false;
