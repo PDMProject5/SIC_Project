@@ -37,13 +37,45 @@
 	</select>
 	
 	<select id="getInven" resultType="ProductVo" parameterType="java.lang.String">
-		SELECT INAME, IPRICE
+		SELECT p.ICODE, INAME, IPRICE
 		FROM (SELECT j.ICODE, IPRICE
 		FROM (SELECT ICODE, MAX(CDATE) CDATE
 		FROM INVENPRICE i
 		GROUP BY ICODE) j JOIN INVENPRICE i2 ON j.CDATE = i2.CDATE AND j.ICODE = i2.ICODE) p
 		JOIN INVENTORY i3 ON p.ICODE = i3.ICODE
 		WHERE MCODE = #{mcode}
+	</select>
+	
+	<insert id="insertProdFood" parameterType="java.util.Map">
+		INSERT INTO PRODUCT (PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME, PSTATE)
+		SELECT PRODUCT_SEQ.NEXTVAL, A.* FROM( 		
+		<foreach collection="productList" item="item" separator="UNION ALL ">
+			SELECT #{sellerid} AS SELLERID, 
+			#{item.icode} AS ICODE, 
+			(SELECT LCODE FROM MCATE WHERE MCODE = (SELECT MCODE FROM INVENTORY WHERE ICODE = #{item.icode}))||(SELECT MCODE FROM INVENTORY WHERE ICODE = #{item.icode})||#{item.icode} AS ROTNUM,
+			SYSDATE AS PDATE, 
+			SYSDATE+7 AS LIFETIME, 
+			#{item.stock} AS STOCK, 
+			(SELECT INAME FROM INVENTORY WHERE ICODE = #{item.icode}) AS INAME, 
+			'C' AS PSTATE 
+			FROM DUAL
+		</foreach>
+		) A
+	</insert>
+	
+	<insert id="insertProd" parameterType="java.util.Map">		
+		INSERT INTO PRODUCT (PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME, PSTATE)
+		VALUES
+		<foreach collection="productList" item="item" separator=",">
+			(PRODUCT_SEQ.NEXTVAL, #{sellerid}, #{item}, (SELECT LCODE FROM MCATE WHERE MCODE = (SELECT MCODE FROM INVENTORY WHERE ICODE = #{item}))||(SELECT MCODE FROM INVENTORY WHERE ICODE = #{item})||#{item},
+			SYSDATE, SYSDATE+365, 10, (SELECT INAME FROM INVENTORY WHERE ICODE = #{item}), 'C')
+		</foreach>
+	</insert>
+	
+	<select id="verifyFood" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT ROTNUM
+		FROM PRODUCT p 
+		WHERE ICODE = #{icode} AND SELLERID = #{sellerid} AND PSTATE = 'C'
 	</select>
 	
 </mapper>

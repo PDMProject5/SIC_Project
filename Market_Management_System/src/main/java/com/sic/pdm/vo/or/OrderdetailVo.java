@@ -5,6 +5,7 @@ import java.util.Date;
 public class OrderdetailVo {
 	private Date odate;
 	private String onum;
+	private String id;
 	private String iname;
 	private int odstock;
 	private int oprice;
@@ -15,16 +16,18 @@ public class OrderdetailVo {
 	private String phone;
 	private int paymentamt;
 	private int discountamt;
+	private String reason;
 
 	public OrderdetailVo() {
 
 	}
 
-	public OrderdetailVo(Date odate, String onum, String iname, int odstock, int oprice, String store, String ostate,
-			String name, String addr, String phone, int paymentamt, int discountamt) {
+	public OrderdetailVo(Date odate, String onum, String id, String iname, int odstock, int oprice, String store,
+			String ostate, String name, String addr, String phone, int paymentamt, int discountamt, String reason) {
 		super();
 		this.odate = odate;
 		this.onum = onum;
+		this.id = id;
 		this.iname = iname;
 		this.odstock = odstock;
 		this.oprice = oprice;
@@ -35,13 +38,15 @@ public class OrderdetailVo {
 		this.phone = phone;
 		this.paymentamt = paymentamt;
 		this.discountamt = discountamt;
+		this.reason = reason;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderdetailDto [odate=" + odate + ", onum=" + onum + ", iname=" + iname + ", odstock=" + odstock
-				+ ", oprice=" + oprice + ", store=" + store + ", ostate=" + ostate + ", name=" + name + ", addr=" + addr
-				+ ", phone=" + phone + ", paymentamt=" + paymentamt + ", discountamt=" + discountamt + "]";
+		return "OrderdetailVo [odate=" + odate + ", onum=" + onum + ", id=" + id + ", iname=" + iname + ", odstock="
+				+ odstock + ", oprice=" + oprice + ", store=" + store + ", ostate=" + ostate + ", name=" + name
+				+ ", addr=" + addr + ", phone=" + phone + ", paymentamt=" + paymentamt + ", discountamt=" + discountamt
+				+ ", reason=" + reason + "]";
 	}
 
 	public Date getOdate() {
@@ -58,6 +63,14 @@ public class OrderdetailVo {
 
 	public void setOnum(String onum) {
 		this.onum = onum;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getIname() {
@@ -139,6 +152,18 @@ public class OrderdetailVo {
 	public void setDiscountamt(int discountamt) {
 		this.discountamt = discountamt;
 	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	
+
+	
 
 	
 

@@ -7,9 +7,9 @@ import com.sic.pdm.vo.or.OrderdetailVo;
 
 public interface OrderList_IDao {
 	
-	public List<OrderVo> orderList();
+	public List<OrderVo> orderList(String id);
 	
-	public List<OrderdetailVo> orderDetail();
+	public List<OrderdetailVo> orderDetail(String onum);
 	
 	
 }
