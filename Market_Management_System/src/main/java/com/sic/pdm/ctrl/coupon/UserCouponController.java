@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sic.pdm.model.coupon.ICouponService;
 import com.sic.pdm.vo.coupon.CouponBoxVo;
@@ -21,25 +22,45 @@ public class UserCouponController {
 	@Autowired
 	private ICouponService icsvc;
 	
-	// 회원 보유 쿠폰 조회
-	@RequestMapping(value = "/myCouponList.do")
-	public String getCouponList(HttpSession session,Model model) {
-		String id = (String) session.getAttribute("id");
-		System.out.println(id);
-		List<CouponVo> cbList = icsvc.getCouponList(id);
-		model.addAttribute("cbList",cbList);
-		return "CHS_MyCouponList";
+	// 회원 시점
+	// 매장 행사 정보
+	@RequestMapping(value = "/userViewListCoupon.do")
+	public String userViewListCoupon(HttpSession session,Model model) {
+//		String sellerid = (String) session.getAttribute("sellerid");
+		String sellerid = "admin01";
+		List<CouponVo> ucvList = icsvc.userViewListCoupon(sellerid);
+		model.addAttribute("ucvList",ucvList);
+		return "CHS_userViewListCoupon";
 	}
 	
+	// 선택 쿠폰 조회
+	@RequestMapping(value = "/userViewOneCoupon.do" , method = RequestMethod.GET)
+	public String userViewOneCoupon(String cseq,Model model) {
+		System.out.println("///UserCouponController "+cseq);
+		CouponVo ucv = icsvc.userViewOneCoupon(cseq);
+		model.addAttribute("ucv",ucv);
+		return "CHS_userViewOneCoupon";
+	}
+
+	// 회원 보유 쿠폰 조회
+	@RequestMapping(value = "/myCouponList.do", method = RequestMethod.GET)
+	public String getCouponList(HttpSession session, Model model) {
+		String id = (String) session.getAttribute("id");
+		List<CouponVo> cbList = icsvc.getCouponList(id);
+		model.addAttribute("cbList",cbList);
+		return "CHS_myCouponList";
+	}
+	
+
 	// 회원 쿠폰 받기
-	@RequestMapping(value = "/getCoupon.do")
+	@RequestMapping(value = "/getCoupon.do", method = RequestMethod.GET)
 	public String getCoupon(String cseq, HttpSession session) {
 		String id= (String) session.getAttribute("id");
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("cseq", cseq);
 		map.put("id", id);
+		map.put("cseq", cseq);
 		icsvc.getCoupon(map);
-		return "redirect:/MyCouponList.do";
+		return "redirect:/myCouponList.do";
 	}
 
 }

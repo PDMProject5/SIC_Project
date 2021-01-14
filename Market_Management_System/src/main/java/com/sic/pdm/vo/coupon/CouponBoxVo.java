@@ -4,23 +4,23 @@ import java.util.Date;
 
 public class CouponBoxVo {
 	
-	private String cbcode;
+	private String cbseq;
 	private Date cbdate;
 	
 	public CouponBoxVo() {}
 
-	public CouponBoxVo(String cbcode, Date cbdate) {
+	public CouponBoxVo(String cbseq, Date cbdate) {
 		super();
-		this.cbcode = cbcode;
+		this.cbseq = cbseq;
 		this.cbdate = cbdate;
 	}
 
-	public String getCbcode() {
-		return cbcode;
+	public String getCbseq() {
+		return cbseq;
 	}
 
-	public void setCbcode(String cbcode) {
-		this.cbcode = cbcode;
+	public void setCbseq(String cbseq) {
+		this.cbseq = cbseq;
 	}
 
 	public Date getCbdate() {
@@ -33,7 +33,7 @@ public class CouponBoxVo {
 
 	@Override
 	public String toString() {
-		return "CouponBoxVo [cbcode=" + cbcode + ", cbdate=" + cbdate + "]";
+		return "CouponBoxVo [cbseq=" + cbseq + ", cbdate=" + cbdate + "]";
 	}
 	
 }
