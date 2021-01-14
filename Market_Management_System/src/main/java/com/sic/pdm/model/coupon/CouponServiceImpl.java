@@ -45,8 +45,8 @@ public class CouponServiceImpl implements ICouponService {
 	}
 	
 	@Override
-	public boolean updateCouponState(String cdstate) {
-		return icDao.updateCouponState(cdstate);
+	public boolean updateStateCoupon(String cdstate) {
+		return icDao.updateStateCoupon(cdstate);
 	}
 
 	@Override

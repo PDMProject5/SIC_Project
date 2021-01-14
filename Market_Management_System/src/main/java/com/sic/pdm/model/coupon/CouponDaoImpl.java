@@ -53,7 +53,7 @@ public class CouponDaoImpl implements ICouponDao {
 	}
 	
 	@Override
-	public boolean updateCouponState(String cdstate) {
+	public boolean updateStateCoupon(String cdstate) {
 		int result = sqlSession.update(NS+"updateStateCoupon", cdstate);
 		return (result > 0) ? true : false;
 	}

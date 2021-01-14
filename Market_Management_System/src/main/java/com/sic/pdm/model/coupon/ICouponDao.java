@@ -23,7 +23,7 @@ public interface ICouponDao {
 	public boolean updateCoupon(CouponVo cDto);
 
 	// 판매자 - 쿠폰 종류 수정
-	public boolean updateCouponState(String cdstate);
+	public boolean updateStateCoupon(String cdstate);
 					
 	// 판매자 - 쿠폰 삭제
 	public boolean deleteCoupon(String cseq);

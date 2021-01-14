@@ -35,10 +35,13 @@ public class CouponController {
 	@RequestMapping(value = "/viewListCoupon.do", method = RequestMethod.GET)
 	public String viewListCoupon(HttpSession session, Model model) {
 		String sellerId = (String) session.getAttribute("sellerid");
-		List<CouponVo> cList = icsvc.viewListCoupon(sellerId);
-		model.addAttribute("cList", cList);
-		
-		return "CHS_list";
+		if (sellerId == null) {
+			return "redirect:/loginForm.do";
+		} else {
+			List<CouponVo> cList = icsvc.viewListCoupon(sellerId);
+			model.addAttribute("cList", cList);
+			return "CHS_list";
+		}
 	}
 	
 	// 쿠폰 클릭시 이동
@@ -140,7 +143,7 @@ public class CouponController {
 		}
 		icsvc.updateCoupon(cDto);
 		// CouponDetail 상태 수정
-		icsvc.updateCouponState(cdstate);
+		icsvc.updateStateCoupon(cdstate);
 		
 		return "redirect:/viewListCoupon.do";
 	}
