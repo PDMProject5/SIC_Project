@@ -18,4 +18,14 @@ public interface IAutoOrderDao {
 	public boolean insertAutoOrder(AutoOrderVo vo);
 	
 	public boolean deleteAutoOrder(Map<String, Object> iname);
+	
+	public List<AutoOrderVo> autoOrder();
+	
+	public AutoOrderVo autoOrderchk(AutoOrderVo data);
+	
+	public String foodchk(String itemchk);
+	
+	public boolean insertAuto(AutoOrderVo vo);
+	
+	public boolean insertAutoFood(AutoOrderVo vo);
 }

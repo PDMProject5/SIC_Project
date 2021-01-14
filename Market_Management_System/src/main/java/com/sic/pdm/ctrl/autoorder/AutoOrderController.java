@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sic.pdm.model.autoorder.IAutoOrderService;
 import com.sic.pdm.vo.autoorder.AutoOrderVo;
@@ -49,7 +48,7 @@ public class AutoOrderController {
 	@RequestMapping(value = "/updateautoOrder.do", method = RequestMethod.POST)
 	public String updateautoOrder(AutoOrderVo vo, HttpSession session) {
 		vo.setSellerid((String)session.getAttribute("sellerid"));
-		boolean isc = service.updateautoOrder(vo);
+		service.updateautoOrder(vo);
 		return "redirect:/autoOrderform.do";
 	}
 	
@@ -74,9 +73,10 @@ public class AutoOrderController {
 	@RequestMapping(value = "/insertAutoOrder.do", method = RequestMethod.POST)
 	public String insertAutoOrder(AutoOrderVo vo, HttpSession session) {
 		vo.setSellerid((String)session.getAttribute("sellerid"));
-		boolean isc = service.insertAutoOrder(vo);
+		service.insertAutoOrder(vo);
 		return "redirect:/autoOrderform.do";
 	}
+	
 	@RequestMapping(value = "/autoOrderDel.do", method = RequestMethod.GET)
 	public String autoOrderDel(String itemlist, HttpSession session) {
 		System.out.println(itemlist);
@@ -84,7 +84,31 @@ public class AutoOrderController {
 		Map<String, Object> inames = new HashMap<String, Object>();
 		inames.put("inames", dellist);
 		inames.put("sellerid", (String)session.getAttribute("sellerid"));
-		boolean isc = service.deleteAutoOrder(inames);
+		service.deleteAutoOrder(inames);
 		return "redirect:/autoOrderform.do";
+	}
+	
+	
+	public void autoOrder() {
+		List<AutoOrderVo> orderList = 
+				service.autoOrder();
+		AutoOrderVo data = null;
+		AutoOrderVo vo = null;
+		for (int i = 0; i < orderList.size(); i++) {
+			data = orderList.get(i);
+			vo = service.autoOrderchk(data);
+			System.out.println(vo);
+			if(vo != null) {
+				String itemchk = vo.getIname();
+				System.out.println(itemchk);
+				String foodchk = service.foodchk(itemchk);
+				System.out.println(foodchk);
+				if(foodchk.equals("AA")) {
+					service.insertAutoFood(vo);
+				}else {
+					service.insertAuto(vo);
+				}
+			}
+		}
 	}
 }

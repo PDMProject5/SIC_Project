@@ -53,6 +53,38 @@ public class AutoOrderDaoImpl implements IAutoOrderDao {
 		return n>0?true:false;
 	}
 
+	@Override
+	public List<AutoOrderVo> autoOrder() {
+		List<AutoOrderVo> list = service.selectList(NS+"autoOrder");
+		return list;
+	}
+
+	@Override
+	public AutoOrderVo autoOrderchk(AutoOrderVo data) {
+		AutoOrderVo vo = service.selectOne(NS+"autoOrderchk", data);
+		return vo;
+	}
+
+	@Override
+	public boolean insertAuto(AutoOrderVo vo) {
+		int n = service.insert(NS+"insertAuto", vo);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean insertAutoFood(AutoOrderVo vo) {
+		int n = service.insert(NS+"insertAutoFood", vo);
+		return n>0?true:false;
+	}
+	
+	@Override
+	public String foodchk(String itemchk) {
+		String foodchk = service.selectOne(NS+"foodchk", itemchk);
+		return foodchk;
+	}
+
+	
+
 
 
 }

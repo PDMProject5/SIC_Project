@@ -37,4 +37,39 @@ AND INAME IN
 	#{iname}
 </foreach>
 </delete>
+
+<select id="autoOrder" resultType="AutoOrderVo">
+SELECT INAME, AUTONUM, ORDERNUM, SELLERID, ICODE
+FROM AUTOORDER
+</select>
+
+<select id="autoOrderchk" parameterType="AutoOrderVo" resultType="AutoOrderVo">
+SELECT INAME, SELLERID, ICODE
+FROM PRODUCT
+WHERE PSTATE = 'C'
+AND SELLERID = #{sellerid}
+AND INAME = #{iname}
+GROUP BY INAME, SELLERID ,ICODE
+HAVING SUM(STOCK)<![CDATA[<]]>#{autonum}
+</select>
+
+<select id="foodchk" parameterType="java.lang.String" resultType="java.lang.String">
+SELECT LCODE FROM MCATE WHERE MCODE = (
+SELECT MCODE FROM INVENTORY WHERE INAME = #{iname})
+</select>
+
+<insert id="insertAutoFood" parameterType="AutoOrderVo">
+INSERT INTO PRODUCT (PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME, PSTATE)
+VALUES(PRODUCT_SEQ.NEXTVAL, #{sellerid}, #{icode}, (SELECT LCODE FROM MCATE WHERE MCODE = (
+SELECT MCODE FROM INVENTORY WHERE INAME = #{iname}))||(SELECT MCODE FROM INVENTORY WHERE INAME = #{iname})||#{icode},
+TO_DATE(SYSDATE , 'YYYY/MM/DD'), TO_DATE(SYSDATE , 'YYYY/MM/DD')+7, (SELECT ORDERNUM FROM AUTOORDER WHERE SELLERID =#{sellerid}AND INAME =#{iname}), #{iname}, 'C')
+</insert>
+
+<insert id="insertAuto" parameterType="AutoOrderVo">
+INSERT INTO PRODUCT (PCODE, SELLERID, ICODE, ROTNUM, PDATE, LIFETIME, STOCK, INAME, PSTATE)
+VALUES(PRODUCT_SEQ.NEXTVAL, #{sellerid}, #{icode} ,(SELECT LCODE FROM MCATE WHERE MCODE = (
+SELECT MCODE FROM INVENTORY WHERE INAME = #{iname}))||(SELECT MCODE FROM INVENTORY WHERE INAME = #{iname})||#{icode},
+TO_DATE(SYSDATE , 'YYYY/MM/DD'), TO_DATE(SYSDATE , 'YYYY/MM/DD')+365, (SELECT ORDERNUM FROM AUTOORDER WHERE SELLERID =#{sellerid}AND INAME =#{iname}), #{iname}, 'C')
+</insert>
+
 </mapper>

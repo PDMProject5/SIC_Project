@@ -8,7 +8,8 @@
 <title>자동 발주</title>
 </head>
 <body>
-<form action="">
+<input type="hidden" id="listchk" value="${lists}">
+<form>
 	<table border="1">
 		<thead>
 		<tr>
@@ -18,14 +19,17 @@
 			<th><input type="checkbox" onclick="allchk(this.checked)" id="allcheck"></th>
 		</tr>
 		</thead>
-		<c:forEach var="orderlist" items="${lists}">
 		<tbody>
+		<c:if test="${lists eq '[]'}">
+			<td colspan="4">등록된 제품이 없습니다.</td>
+		</c:if>
+		<c:forEach var="orderlist" items="${lists}">
 		<tr>
 			<td onclick="location.href='./autoOrderDetail.do?iname=${orderlist.iname}'">${orderlist.iname}</td>
 			<td>${orderlist.autonum}</td>
 			<td>${orderlist.ordernum}</td>
 			<td>
-				<input type="checkbox" name="chkbox" value="${orderlist.iname}">
+				<input type="checkbox" name="chkbox" value="${orderlist.iname}" onclick="itemchk()">
 			</td>
 		</tr>
 		</c:forEach>
@@ -50,11 +54,32 @@
 		}
 	}
 	
+	function itemchk(){
+		var chkbox = document.getElementsByName("chkbox");
+		var allcheck = document.getElementById("allcheck");
+		var chklen = chkbox.length;
+		var cnt = 0;
+		for (var i = 0; i < chkbox.length; i++) {
+			if(chkbox[i].checked == true){
+				cnt++;
+			}else{
+				cnt--;
+			}
+		}
+		if(cnt == chklen){
+			allcheck.checked = true;
+		}else{
+			allcheck.checked = false;
+		}
+	}
+		
+	
 	function autoOrderDel(){
 		var itemlist = "";
 		var cnt = 0;
 		var chkbox = document.getElementsByName("chkbox");
 		var choice = confirm("자동발주를 삭제하시겠습니까?");
+		var listchk = document.getElementById("listchk");
 		if(choice == true){
 		for (var i = 0; i < chkbox.length; i++) {
 			if(chkbox[i].checked == true){
@@ -62,7 +87,9 @@
 				cnt ++;
 			}
 		}
-		if(cnt == 0){
+		if(listchk.value == '[]'){
+			alert("등록된 제품이 없습니다.");
+		}else if(cnt == 0){
 			alert("한개 이상의 체크박스를 선택해 주세요.");
 		}else{
 			location.href="./autoOrderDel.do?itemlist="+itemlist;
