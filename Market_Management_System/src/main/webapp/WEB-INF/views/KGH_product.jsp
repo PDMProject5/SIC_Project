@@ -128,7 +128,7 @@ $(function(){
             	{name:"stock",index:"stock", editable: true, editrules:{number:true}}
                ],
         cellEdit: true,
-        cellurl: "/",
+        cellurl: "./",
 		height: 450,
 		caption:"재고 목록?",
     	multiselect : true

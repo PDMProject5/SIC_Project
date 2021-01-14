@@ -52,4 +52,8 @@ public interface IProductDao {
 	 */
 	public boolean insertProdFood(Map<String, Object> insertMap);
 
+	
+	public boolean insertProd(Map<String, Object> insertFood);
+	
+	public String chkFood(String icode);
 }
