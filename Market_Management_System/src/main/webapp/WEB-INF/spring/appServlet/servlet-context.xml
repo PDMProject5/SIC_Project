@@ -36,6 +36,12 @@
 	<!-- 반복될 주기를 cron표현식으로 작성한다 -->
 	<task:scheduled-tasks>
 	<task:scheduled ref="memberServiceImpl" method="deleteuser" cron="0 0 3 * * ?"/>
+
+	<task:scheduled ref="autoOrderController" method="autoOrder" cron="0 0 12 * * ?"/>
+	<task:scheduled ref="couponServiceImpl" method="autoEnableChange" cron="0 0 3 * * ?"/>
+	<task:scheduled ref="couponServiceImpl" method="autoGetCouponDel" cron="0 0 3 * * ?"/>
+	<task:scheduled ref="autoOrderController" method="itemMessage" cron="0 0 12 * * ?"/>
+
 	</task:scheduled-tasks>
 
 </beans>

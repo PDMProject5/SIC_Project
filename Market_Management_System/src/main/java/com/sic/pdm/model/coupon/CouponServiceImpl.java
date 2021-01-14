@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sic.pdm.vo.coupon.CouponBoxVo;
 import com.sic.pdm.vo.coupon.CouponVo;
 
 
@@ -21,21 +20,17 @@ public class CouponServiceImpl implements ICouponService {
 	private ICouponDao icDao;
 
 	@Override
-	public List<CouponVo> ViewListCoupon(String sellerid) {
-		
-		return icDao.ViewListCoupon(sellerid);
+	public List<CouponVo> viewListCoupon(String sellerid) {
+		return icDao.viewListCoupon(sellerid);
 	}
 	
 	@Override
-	public CouponVo ViewCoupon(String cseq) {
-		return icDao.ViewCoupon(cseq);
+	public CouponVo viewOneCoupon(String cseq) {
+		return icDao.viewOneCoupon(cseq);
 	}
 
 	@Override
 	public boolean insertCoupon(CouponVo cDto) {
-		
-		log.info("// CouponServiceImpl  insertCoupon {}" + cDto);
-		
 		return icDao.insertCoupon(cDto);
 	}
 	
@@ -46,41 +41,47 @@ public class CouponServiceImpl implements ICouponService {
 
 	@Override
 	public boolean updateCoupon(CouponVo cDto) {
-		
-		log.info("// CouponServiceImpl  updateCoupon {}" + cDto);
-		
 		return icDao.updateCoupon(cDto);
 	}
 	
 	@Override
-	public boolean updateCouponState(String cdstate) {
-		
-		log.info("// CouponServiceImpl  updateCouponState {}" + cdstate);
-		
-		return false;
+	public boolean updateStateCoupon(String cdstate) {
+		return icDao.updateStateCoupon(cdstate);
 	}
 
 	@Override
 	public boolean deleteCoupon(String cseq) {
-		
-		log.info("// CouponServiceImpl  deleteCoupon {}"+ cseq);
-		
 		return icDao.deleteCoupon(cseq);
 	}
 	
 	@Override
+	public boolean autoEnableChange() {
+		return icDao.autoEnableChange();
+	}
+	
+	@Override
 	public boolean getCoupon(Map<String, Object> map) {
-		
-		log.info("// CouponServiceImpl  getCoupon {}" + map);
-		
 		return icDao.getCoupon(map);
 	}
 	
 	@Override
 	public List<CouponVo> getCouponList(String id){
-		
 		return icDao.getCouponList(id);
-		
+	}
+
+	@Override
+	public CouponVo userViewOneCoupon(String cseq) {
+		return icDao.userViewOneCoupon(cseq);
+	}
+
+	@Override
+	public List<CouponVo> userViewListCoupon(String sellerid) {
+		return icDao.userViewListCoupon(sellerid);
+	}
+
+	@Override
+	public boolean autoGetCouponDel() {
+		return icDao.autoGetCouponDel();
 	}
 
 }

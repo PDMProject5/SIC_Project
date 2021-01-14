@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sic.pdm.model.coupon.ICouponDao">
 
-	<select id = "ViewListCoupon" resultType="CouponVo" parameterType="java.lang.String">
+	<select id = "viewListCoupon" resultType="CouponVo" parameterType="java.lang.String">
 		SELECT CSEQ, CTHUMBIMG, CNOTIFY, CDATE FROM COUPON
 		WHERE SELLERID = #{sellerid} AND CENABLE = 'Y'
 	</select>
 	
-	<select id = "ViewCoupon" resultType="CouponVo" parameterType="java.lang.String">
+	<select id = "viewOneCoupon" resultType="CouponVo" parameterType="java.lang.String">
 		SELECT CSEQ, CNOTIFY, CIMG, COUPON FROM COUPON WHERE CSEQ = #{cseq}
 	</select>
 	
@@ -16,7 +16,7 @@
 		VALUES (COUPON_SEQ.NEXTVAL, #{sellerid}, #{coupon}, SYSDATE,#{cnotify},'Y', #{cimg}, #{cthumbimg})
 	</insert>
 	
-	<insert id = "InsertCouponState" parameterType="java.util.Map">
+	<insert id = "insertCouponState" parameterType="java.util.Map">
 		INSERT INTO COUPONDETAIL (CDSEQ, CSEQ, SELLERID, CDSTATE)
 		VALUES (COUPONDETAIL_SEQ.NEXTVAL, COUPON_SEQ.CURRVAL, #{sellerid}, #{cdstate})
 	</insert>
@@ -41,11 +41,21 @@
 		WHERE CSEQ = #{cseq}
 	</delete>
 	
-	<insert id = "getCoupon" parameterType="java.lang.String">
-		INSERT INTO COUPONBOX (CBCODE, ID, CSEQ, SELLERID, CBDATE)
+	<update id = "autoEnableChange">
+		UPDATE COUPON SET
+		CENABLE = 'N'
+		WHERE CENABLE = 'Y' AND CDATE = TO_CHAR(SYSDATE-30)
+	</update>
+	
+	<select id="userViewListCoupon" parameterType="java.lang.String" resultType="CouponVo">
+		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON WHERE CENABLE = 'Y' AND SELLERID = #{sellerid}
+	</select>
+	
+	<insert id = "getCoupon" parameterType="java.util.Map">
+		INSERT INTO COUPONBOX (CBSEQ, ID, CSEQ, SELLERID, CBDATE)
 		VALUES (COUPONBOX_SEQ.NEXTVAL, (SELECT ID FROM MEMBER WHERE ID = #{id}),
-		(SELECT CSEQ FROM COUPON WHERE CENABLE = 'Y'),
-		(SELECT SELLERID FROM SELLER WHERE SELLERID = #{sellerid}),
+		(SELECT CSEQ FROM COUPON WHERE CENABLE = 'Y' AND CSEQ = #{cseq}),
+		(SELECT SELLERID FROM SELLER WHERE SELLERID = 'admin01'),
 		SYSDATE)
 	</insert>
 	
@@ -53,5 +63,13 @@
 		SELECT c2.CNOTIFY, c2.CIMG FROM COUPONBOX c, COUPON c2  WHERE c.CSEQ = c2.CSEQ AND ID = #{id} AND c2.CENABLE = 'Y'
 	</select>
 	
+	<select id = "userViewOneCoupon" resultType="CouponVo" parameterType="java.lang.String">
+		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON WHERE CSEQ = #{cseq}
+	</select>
+	
+	<delete id = "autoGetCouponDel">
+		DELETE FROM COUPONBOX
+		WHERE CDATE = TO_CHAR(SYSDATE-7)
+	</delete>
 
 </mapper>

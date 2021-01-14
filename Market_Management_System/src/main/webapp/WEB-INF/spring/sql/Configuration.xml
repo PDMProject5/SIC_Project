@@ -11,6 +11,7 @@
 	<typeAlias type="com.sic.pdm.vo.del.DelVo" alias="DelVo"/>
 	<typeAlias type="com.sic.pdm.vo.or.OrderVo" alias="OrderVo"/>
 	<typeAlias type="com.sic.pdm.vo.or.OrderdetailVo" alias="OrderdetailVo"/>
+	<typeAlias type="com.sic.pdm.vo.autoorder.AutoOrderVo" alias="AutoOrderVo"/>
 	<typeAlias type="com.sic.pdm.vo.or.RefoundVo" alias="RefoundVo"/>
 	<typeAlias type="com.sic.pdm.vo.or.RefounddetailVo" alias="RefounddetailVo"/>
 	<typeAlias type="com.sic.pdm.vo.bascket.BascketVo" alias="BascketVo"/>
@@ -22,7 +23,9 @@
 	<mapper resource="/sqls/Seller.xml"/>
 	<mapper resource="/sqls/Coupon.xml"/>
 	<mapper resource="/sqls/Product.xml"/>
+	<mapper resource="/sqls/DelMapper.xml"/>
 	<mapper resource="/sqls/Order.xml"/>
+	<mapper resource="/sqls/AutoOrder.xml"/>
 	<mapper resource="/sqls/Refund.xml"/>
 	<mapper resource="/sqls/DelMapper.xml"/>
 	<mapper resource="/sqls/Bascket.xml"/>	
