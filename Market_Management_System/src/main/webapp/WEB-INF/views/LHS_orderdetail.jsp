@@ -3,6 +3,7 @@
 <%@page import="com.sic.pdm.vo.or.OrderdetailVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
     	Object obj = request.getAttribute("list");
         List<OrderdetailVo> listss = (List<OrderdetailVo>)obj;
@@ -74,11 +75,15 @@ div {
 				<td><%=oddto.getPaymentamt() %></td>
 				<td><%=oddto.getDiscountamt() %></td>
 				<td><a href="./refundinsert.do?onum=<%=oddto.getOnum() %>">환불</a></td>
+				
 			</tr>
 			<%
 						}
 				%>
 		</tbody>
 	</table>
+	<div>
+		<input type="button" value="돌아가기" onclick="history.back(-1)">
+	</div>
 </body>
 </html>

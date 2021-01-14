@@ -15,8 +15,6 @@ ${id}
 <button onclick="location.href='./userViewListCoupon.do'">가산디지털 단지점</button>
 <button onclick="location.href='./orderlist.do'">주문 목록 조회</button>
 <button onclick="location.href='./bascketList.do'">장바구니 조회</button>
-<button onclick="location.href='./orderlist.do'">주문 목록 조회</button>
-<button onclick="location.href='./bascketList.do'">장바구니 조회</button>
 <button onclick="location.href='./mileage.do'">마일리지 조회</button>
 
 </body>
