@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sic.pdm.sql.AutoOrder">
+
+<select id="autoOrderList" parameterType="java.lang.String" resultType="AutoOrderVo">
+SELECT INAME, AUTONUM, ORDERNUM
+FROM AUTOORDER
+WHERE SELLERID = #{sellerid}
+</select>
+
+<select id="autoOrderDetail" parameterType="java.lang.String" resultType="AutoOrderVo">
+SELECT INAME, AUTONUM, ORDERNUM FROM AUTOORDER
+WHERE INAME = #{iname}
+</select>
+
+<update id="updateautoOrder" parameterType="AutoOrderVo">
+UPDATE AUTOORDER SET AUTONUM = #{autonum}, ORDERNUM = #{ordernum}
+WHERE SELLERID = #{sellerid}
+AND INAME = #{iname}
+</update>
+
+<select id="searchitem" parameterType="java.lang.String" resultType="AutoOrderVo">
+SELECT INAME FROM INVENTORY WHERE INAME LIKE '%'||#{iname}||'%'
+AND NOT INAME IN(SELECT INAME FROM AUTOORDER a WHERE INAME LIKE '%'||#{iname}||'%')
+</select>
+
+<insert id="insertAutoOrder" parameterType="AutoOrderVo">
+INSERT INTO AUTOORDER(AOSEQ, SELLERID, INAME, AUTONUM, ORDERNUM, ICODE)
+VALUES(AUTOORDER_SEQ.NEXTVAL, #{sellerid}, #{iname}, #{autonum}, #{ordernum}, (SELECT ICODE FROM INVENTORY WHERE INAME=#{iname}))
+</insert>
+
+<delete id="deleteAutoOrder" parameterType="java.util.Map">
+DELETE AUTOORDER
+WHERE SELLERID = #{sellerid}
+AND INAME IN
+<foreach item="iname" collection="inames" open="(" separator="," close=")">
+	#{iname}
+</foreach>
+</delete>
+</mapper>
