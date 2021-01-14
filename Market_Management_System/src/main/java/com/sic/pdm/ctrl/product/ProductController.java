@@ -24,6 +24,7 @@ public class ProductController {
 	@Autowired
 	private IProductService pService;
 	
+	
 	@RequestMapping(value = "/product.do")
 	public String test(Model model) {
 		List<ProductVo> lists = pService.getProdList("admin01"); 
@@ -95,15 +96,33 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productInsert.do", method = RequestMethod.POST)
 	public String productInsert(@RequestParam String[] code, @RequestParam String[] stock) {
+		
+		// insertMap, tempMap == 대분류가 AA가 아닌경우
 		Map<String, Object> insertMap = new HashMap<String, Object>();
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		List<ProductVo> list = new ArrayList<ProductVo>();
 		ProductVo pvo = new ProductVo();
 		
+		// insertFood, foodList == 대분류가 AA인 경우
+		Map<String, Object> insertFood = new HashMap<String, Object>();
+		List<ProductVo> foodList = new ArrayList<ProductVo>();
 		for (int i = 0; i < stock.length; i++) {
 			pvo.setIcode(code[i]);
 			pvo.setStock(stock[i]);
-			list.add(pvo);
+			String chkFood = pService.chkFood(code[i]);
+			
+			// 대분류를 보여줌
+			System.out.println(chkFood);
+			
+			// 대분류가 AA인 경우
+			if(chkFood.equals("AA")) {
+				foodList.add(pvo);
+			// 대분류가 AA가 아닌경우
+			}else {
+			//
+				list.add(pvo);
+			}
+			
 		}
 //		for (String str : code) {
 //			System.out.println("코드임? = " + str);
@@ -114,10 +133,14 @@ public class ProductController {
 //			tempMap.put("stock", str);
 //		}
 		
+		
 		insertMap.put("sellerid", "admin01");
 		insertMap.put("productList", list);
+		insertFood.put("sellerid", "admin01");
+		insertFood.put("productList", foodList);
 		System.out.println(insertMap);
 		System.out.println(code);
+		pService.insertProd(insertFood);
 		pService.insertProdFood(insertMap);
 		return "redirect:/product.do";
 	}
