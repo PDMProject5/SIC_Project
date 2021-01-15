@@ -26,7 +26,7 @@
 		FROM PRODUCT
 		WHERE SELLERID = #{sellerid} AND PSTATE = 'C'
 		GROUP BY INAME) jj ON jj.INAME = p.INAME
-		WHERE INAME = #{iname} AND SELLERID = #{sellerid} AND PSTATE = 'C'
+		WHERE p.INAME = #{iname} AND p.SELLERID = #{sellerid} AND p.PSTATE = 'C'
 	</select>
 	
 	<select id="getLcate" resultType="ProductVo">
