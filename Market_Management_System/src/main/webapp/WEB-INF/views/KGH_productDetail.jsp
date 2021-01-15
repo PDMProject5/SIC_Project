@@ -46,9 +46,9 @@ $('#rstock').html(document.getElementById("odstock").value+" 개");
 $('#rmoney').html(oprice*document.getElementById("odstock").value+" 원");
 
 function minus(){
-	var stock = document.getElementById("odstock").value;
+	var stock = parseInt(document.getElementById("odstock").value);
 	if(stock > 1){ // 2 3 4 5
-		document.getElementById("odstock").value = parseInt(stock) -1 ;		
+		document.getElementById("odstock").value = stock -1 ;		
 	}
 	$('#rstock').html(document.getElementById("odstock").value);
 	$('#rstock').append(" 개");
@@ -59,11 +59,11 @@ function minus(){
 }
 
 function plus(){	
-	var pstock = document.getElementById("odstock").value;
-	var stock = document.getElementById("stock").value;
+	var pstock = parseInt(document.getElementById("odstock").value);
+	var stock = parseInt(document.getElementById("stock").value);
 	if(pstock < stock){
 		
-		document.getElementById("odstock").value = parseInt(pstock) + 1;
+		document.getElementById("odstock").value = pstock + 1;
 	}else if(pstock>= stock){
 		alert("해당 제품의 재고 수량이 부족합니다.");
 	}

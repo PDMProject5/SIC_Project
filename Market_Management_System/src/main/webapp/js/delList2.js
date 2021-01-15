@@ -47,19 +47,19 @@ var ajaxModify = function(val){
          html += "  <tbody>";
          html += " <tr>";
          html += "<th class='cell_title'>배송지명</th>";
-	     html += "<td><input type='text' id='dname' name='dname' placeholder='배송지명' maxlength='150'>";
+	     html += "<td><input type='text' id='dname' name='dname' value='"+v.dname+"' maxlength='150'>";
 	     html += "</td></tr>";
 	     html += "<tr><th class='cell_title'>도로명 주소</th>";
-	     html += "<td><input type='text' id='roadaddr' name='roadaddr' placeholder='도로명 주소' readonly='readonly'>";
+	     html += "<td><input type='text' id='roadaddr' name='roadaddr' value='"+v.roadaddr+"' readonly='readonly'>";
 	     html += "<input type='button' onclick='sample6_execDaumPostcode()' value='주소 찾기'><br>";
 	     html += "</td></tr>";				
 	     html += "<tr><th>상세 주소</th>";			
 	     html += "<td class='cell_title'>";  
-	     html += "<input type='text' id='addr' name='addr' placeholder='상세주소'>";
+	     html += "<input type='text' id='addr' name='addr' value='"+v.addr+"'>";
 	     html += "</td></tr>";
 	     html += "<tr><th class='cell_title'>전화번호</th>";			
 	     html += "<td>";  
-	     html += "<span><input type='text'  id='phone' name='phone' maxlength='11'></span>";
+	     html += "<span><input type='text'  id='phone' name='phone' maxlength='11' value='"+v.phone+"'></span>";
 	     html += "</td></tr>";      
 	
 	     html += "<tr><th>기본배송지로 설정</th></tr>";
@@ -112,9 +112,13 @@ function update(){
 		
 	}
 	
+	var phonechk = document.getElementById("phone").value;
+	var phonereg = /^\d{10,11}$/g;
 	
 	if(dname == ''|| roadaddr == '' || addr == '' || phone == ''){
 		alert("필수 값을 입력해 주세요.");
+	}else if(!phonereg.test(phonechk)){
+		alert("정확한 휴대폰 번호를 입력해 주세요.");
 	}
 	
 //	flagchk 가 n 일때 1) 기본 배송지 선택안함 그대로 유지  2) 기본배송지 선택  다른거 다 n 이것만 y변경

@@ -23,7 +23,7 @@ function backBtn() {
 	<tbody>
 	<c:forEach items="${cbList}" var="cbList">
 	<tr>
-		<td><img src = "${cbList.cimg}"></td>
+		<td><img src = "${pageContext.request.contextPath}${cbList.cimg}"></td>
 	</tr>
 	<tr>
 		<td>${cbList.cnotify}</td>

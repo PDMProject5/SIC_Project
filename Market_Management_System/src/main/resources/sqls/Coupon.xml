@@ -3,8 +3,8 @@
 <mapper namespace="com.sic.pdm.model.coupon.ICouponDao">
 
 	<select id="storeCouponListY" resultType="CouponVo" parameterType="java.util.Map">
-     SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM (
-SELECT ROWNUM AS NO, CSEQ, CNOTIFY, CTHUMBIMG, CDATE, CENABLE, SELLERID FROM COUPON) WHERE NO BETWEEN #{rowstart} AND #{rowend} AND CENABLE ='Y' AND SELLERID = #{sellerid}
+     SELECT CSEQ, CNOTIFY, CIMG, CDATE FROM (
+SELECT ROWNUM AS NO, CSEQ, CNOTIFY, CIMG, CDATE, CENABLE, SELLERID FROM COUPON) WHERE NO BETWEEN #{rowstart} AND #{rowend} AND CENABLE ='Y' AND SELLERID = #{sellerid}
 	</select>
 	
 	<select id="storeCouponTotal" resultType="java.lang.Integer">
@@ -52,7 +52,7 @@ SELECT ROWNUM AS NO, CSEQ, CNOTIFY, CTHUMBIMG, CDATE, CENABLE, SELLERID FROM COU
 	</update>
 	
 	<select id="userViewListCoupon" parameterType="java.lang.String" resultType="CouponVo">
-		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON WHERE CENABLE = 'Y' AND SELLERID = #{sellerid}
+		SELECT CSEQ, CNOTIFY, CIMG, CDATE FROM COUPON WHERE CENABLE = 'Y' AND SELLERID = #{sellerid}
 	</select>
 	
 	<insert id = "getCoupon" parameterType="java.util.Map">
@@ -68,7 +68,7 @@ SELECT ROWNUM AS NO, CSEQ, CNOTIFY, CTHUMBIMG, CDATE, CENABLE, SELLERID FROM COU
 	</select>
 	
 	<select id = "userViewOneCoupon" resultType="CouponVo" parameterType="java.lang.String">
-		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON WHERE CSEQ = #{cseq}
+		SELECT CSEQ, CNOTIFY, CIMG, CDATE FROM COUPON WHERE CSEQ = #{cseq}
 	</select>
 	
 	<delete id = "autoGetCouponDel">

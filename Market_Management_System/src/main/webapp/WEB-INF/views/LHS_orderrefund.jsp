@@ -9,6 +9,16 @@
  
 </head>
 <script type="text/javascript">
+	function refund(){
+		var form = document.forms[0];
+		var reason = document.getElementById("reason");
+		
+		if (reason.value == "") {
+			alert("환불 사유를 작성해주세요.");
+		}else {
+			form.submit();
+		}
+	}
 </script>
 <body>
 	<h1>환불 요청</h1>
@@ -29,7 +39,7 @@
 			</tr>
 		</table>
 		<div>
-			<input type="submit" value="환불 요청하기">
+			<input type="button" value="환불 요청하기" onclick="refund()">
 		</div>
 		
 	</form>

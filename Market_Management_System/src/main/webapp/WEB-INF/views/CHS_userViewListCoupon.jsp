@@ -12,7 +12,7 @@
 	<table>
 		<c:forEach items="${ucvList}" var="ucvList">
 			<tr>
-				<td><a href = "./userViewOneCoupon.do?cseq=${ucvList.cseq}"><img src = "${ucvList.cthumbimg}" ></a></td>
+				<td><a href = "./userViewOneCoupon.do?cseq=${ucvList.cseq}"><img src = "${pageContext.request.contextPath}${ucvList.cimg}" ></a></td>
 			</tr>
 			<tr>
 				<td>${ucvList.cnotify}</td>

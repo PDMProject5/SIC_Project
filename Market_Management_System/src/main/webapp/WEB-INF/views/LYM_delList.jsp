@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="./js/delList.js"></script>
+<script type="text/javascript" src="./js/delList2.js"></script>
 <title>배송지 목록 확인</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">

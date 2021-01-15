@@ -35,7 +35,7 @@
 				<td><input type="file" id="cImg" name="file"></td>
 			</tr>
 			<tr>
-				<td><div class="select_img"><img src="${cv.cimg}" /></div></td>
+				<td><div class="select_img"><img src="${pageContext.request.contextPath}${cv.cimg}" /></div></td>
 			</tr>
 			<tr>
 				<th>쿠폰금액</th>
