@@ -28,7 +28,7 @@
 	<c:forEach items="${cList}" var="cList">
 		<div id = "storeCouponList_1">
 			<div id = "storeCouponList_cimg">
-				<a href = "./viewOneCoupon.do?cseq=${cList.cseq}"><img src = "${cList.cthumbimg}" ></a>
+				<a href = "./viewOneCoupon.do?cseq=${cList.cseq}"><img src = "${pageContext.request.contextPath}${cList.cthumbimg}" ></a>
 			</div>
 			<div id = "storeCouponList_cnotify">
 				${cList.cnotify}
