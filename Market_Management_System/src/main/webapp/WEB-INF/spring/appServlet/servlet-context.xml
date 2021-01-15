@@ -17,7 +17,7 @@
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	<mvc:resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
+	<mvc:resources mapping="/imgUpload/**" location="/resources/imgUpload/2021/01/15/" />
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>
@@ -33,7 +33,7 @@
  
  	<!--  파일업로드 디렉토리 설정 -->
   	<bean id="uploadPath" class="java.lang.String">
-    	<constructor-arg value="C:\CHS_Project\Workspace\Git\SIC_Project\Market_Management_System\src\main\webapp\resources"/>
+    	<constructor-arg value="C:\Users\hs\git\SIC_Project\Market_Management_System\src\main\webapp\resources"/>
   	</bean>
 
 	<task:annotation-driven scheduler="scheduler"/>

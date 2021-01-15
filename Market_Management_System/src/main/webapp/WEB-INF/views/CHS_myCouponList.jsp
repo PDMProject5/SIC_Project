@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+function backBtn() {
+	history.back();
+}
+</script>
 </head>
 <body>
 <table>
@@ -25,6 +31,6 @@
 	</c:forEach>
 	</tbody>
 </table>
-<input type="button" value = "확인">
+<input type="button" value = "확인" onclick="backBtn()">
 </body>
 </html>
