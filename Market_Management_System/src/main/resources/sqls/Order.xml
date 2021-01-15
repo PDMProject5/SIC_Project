@@ -8,7 +8,7 @@
 	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM 
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
 	INNER JOIN "MEMBER" m ON m.ID = o.ID 
-	WHERE m.ID =#{id}
+	WHERE m.ID =#{id}  AND o.OSTATE IN ('P','H','F','D','R')
 	</select>
 	
 	<select id="orderDetail" parameterType="java.lang.String" resultType="OrderdetailVo">
