@@ -8,8 +8,8 @@ VALUES(#{id}, #{pw}, #{name}, #{roadaddr}, #{addr}, #{phone})
 </insert>
 
 <insert id="userdeliverylist" parameterType="MemberVo">
-INSERT INTO MARKET.DELIVERYLIST(DNUM,ID,ROADADDR, ADDR, ADDRFLAG, DNAME)
-VALUES(DNUM_SEQ.NEXTVAL,#{id},#{roadaddr},#{addr},'Y', #{id})
+INSERT INTO MARKET.DELIVERYLIST(DNUM,ID,ROADADDR, ADDR, ADDRFLAG, DNAME,PHONE)
+VALUES(DNUM_SEQ.NEXTVAL,#{id},#{roadaddr},#{addr},'Y', #{id}, #{phone})
 </insert>
 
 <select id="idchk" parameterType="java.lang.String" resultType="java.lang.String">

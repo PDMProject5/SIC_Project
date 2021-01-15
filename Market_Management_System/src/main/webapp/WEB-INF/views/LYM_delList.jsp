@@ -63,6 +63,7 @@ ${lists}
 </div>
 <div>
 	<input class="btn-info btn btn-primary" type="button" value="등록하기" onclick="insertForm()">
+	<input class="btn-success btn btn-primary" type="button" value="뒤로가기" onclick="back()">
 </div>
 
 <div id="modify" class="modal fade" role="dialog">
@@ -103,7 +104,9 @@ function deleteDel(val){
 	}
 }
 
-
+function back(){
+	history.back(-1);
+}
 </script>
 
 </html>

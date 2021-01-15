@@ -28,7 +28,7 @@ p{
 	</div>
 	<div>
 		<input type="password" id="pw" name="pw" placeholder="Password">
-		<p style="color: red" id="passwordchk">비밀번호는 영어와 숫자 포함 8~20자 만 입력할 수 있습니다.</p>
+		<p style="color: red" id="passwordchk">비밀번호는 영어 또는 숫자8~20자리만 입력할 수 있습니다.</p>
 	</div>
 	<div>
 		<input type="password" id="pwchk" name="pwchk" placeholder="PasswordCheck">

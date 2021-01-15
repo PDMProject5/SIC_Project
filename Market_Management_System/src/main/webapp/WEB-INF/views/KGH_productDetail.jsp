@@ -29,7 +29,8 @@
 				<input type="button" value="+" onclick="plus()">
 			</div>
 			<div id="result">
-				<span>제품명 : ${vo.iname}</span>
+				<span>제품명 : ${vo.iname}</span><br>
+				<span>총 수량 개수 : </span>
 				<span id="rstock" class="rstock"> 개</span><br>
 				<span>총 제품금액 : </span> 
 				<span id="rmoney"></span>

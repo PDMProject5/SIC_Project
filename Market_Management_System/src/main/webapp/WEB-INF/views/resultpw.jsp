@@ -8,18 +8,18 @@
 </head>
 <body>
 <script type="text/javascript">
-function pwchk(){
-	var pw = document.getElementById("password").value;
-	var passwordchk = document.getElementById("passwordchk").value;
+function passchk(){
+	var pw = document.getElementById("pw");
+	var passwordchk = document.getElementById("passwordchk");
 	var pwReg = /^[a-z]+[a-z0-9]{7,19}$/g;
 	var rtn = false;
-	if(pw==""||passwordchk==""){
+	if(pw.value==""||passwordchk.value==""){
 		alert("변경하실 비밀번호를 입력해주세요");
 		return rtn;
-	}else if(!pwReg.test(pw)){
+	}else if(!pwReg.test(pw.value)){
 		alert("비밀번호는 영어와 숫자 포함 8~20자 만 입력할 수 있습니다.");
 		return rtn;
-	}else if(pw!=passwordchk){
+	}else if(pw.value!=passwordchk.value){
 		alert("비밀번호가 일치하지 않습니다.");
 		return rtn;
 	}else{
@@ -28,7 +28,7 @@ function pwchk(){
 	return rtn;
 }
 </script>
-<form action="./findpwform.do" method="post" onsubmit="return pwchk()">
+<form action="./findpwform.do" method="post" onsubmit="return passchk()">
 <input type="hidden" value="${findid}" name="id">
 <table>
 	<tr>

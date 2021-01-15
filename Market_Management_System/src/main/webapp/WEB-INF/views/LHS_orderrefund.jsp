@@ -8,6 +8,8 @@
 <title>Insert title here</title>
  
 </head>
+<script type="text/javascript">
+</script>
 <body>
 	<h1>환불 요청</h1>
 	<form action="./refund.do" method="post">

@@ -90,11 +90,14 @@ function insertDel(){
 		var roadaddr = document.getElementById("roadaddr");
 		var addr = document.getElementById("addr");
 		var phone = document.getElementById("phone");
-		
+		var phonechk = document.getElementById("phone").value;
+		var phonereg = /^\d{10,11}$/;
 		
 		if (dname.value == "" || roadaddr.value == "" || addr.value == "" || phone.value == "") {
 			alert("필수 값을 입력해 주세요");
-		} else {
+		}else if(!phonereg.test(phonechk)){
+			alert("정확한 휴대폰 번호를 입력해주세요.");
+		}else {
 			form.submit();
 		}
 }
