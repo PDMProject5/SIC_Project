@@ -8,9 +8,10 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-function backBtn() {
-	history.back();
-}
+	function backBtn() {
+		history.back();
+	}
+	
 </script>
 </head>
 <body>
@@ -23,7 +24,7 @@ function backBtn() {
 	<tbody>
 	<c:forEach items="${cbList}" var="cbList">
 	<tr>
-		<td><img src = "${pageContext.request.contextPath}${cbList.cimg}"></td>
+		<td><img src = "${pageContext.request.contextPath}${cbList.cthumbimg}"></td>
 	</tr>
 	<tr>
 		<td>${cbList.cnotify}</td>
@@ -31,6 +32,6 @@ function backBtn() {
 	</c:forEach>
 	</tbody>
 </table>
-<input type="button" value = "확인" onclick="backBtn()">
+<input type="button" value = "뒤로가기" onclick="backBtn()">
 </body>
 </html>

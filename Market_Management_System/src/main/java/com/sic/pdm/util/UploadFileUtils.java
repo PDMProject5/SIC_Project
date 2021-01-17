@@ -12,7 +12,7 @@ import net.coobird.thumbnailator.Thumbnails;
 public class UploadFileUtils {
 		
 	static final int THUMB_WIDTH = 300;  // 썸네일의 가로 크기
-	static final int THUMB_HEIGHT = 300;  // 썸네일의 세로 크기
+	static final int THUMB_HEIGHT = 350;  // 썸네일의 세로 크기
 	
 	public static String fileUpload(String uploadPath,
 									String fileName, 
@@ -32,7 +32,7 @@ public class UploadFileUtils {
 		File image = new File(imgPath + File.separator + newFileName);
 
 		// 원본 파일과 같은 경로의 하위에 "s" 폴더를 생성하여 썸네일을 저장
-		File thumbnail = new File(imgPath + File.separator + "s" + File.separator + thumbFileName);
+		File thumbnail = new File(uploadPath + File.separator + "s" + File.separator + thumbFileName);
 
 		if (image.exists()) {
 			
@@ -61,10 +61,12 @@ public class UploadFileUtils {
 		String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
 
 		// 원본 이미지가 저장될 경로 생성
+		// EX)  지정절대경로,       연        ,     월        ,    일
 		makeDir(uploadPath, yearPath, monthPath, datePath);
 		
 		// 썸네일 이미지가 저장될 경로 생성
-		makeDir(uploadPath, yearPath, monthPath, datePath + "\\s");
+		// EX)    지정절대경로     , \\s
+		makeDir(uploadPath, "\\s");
 
 		return datePath;
 	}
@@ -72,7 +74,9 @@ public class UploadFileUtils {
 	private static void makeDir(String uploadPath, String... paths) {
 
 		// 폴더가 존재하는지 확인. 폴더가 존재하면 그대로 종료
-		if (new File(paths[paths.length - 1]).exists()) { return; }
+		if (new File(paths[paths.length - 1]).exists()) { 
+			return; 
+		}
 
 		// 폴더가 존재하지 않다면, 폴더를 생성
 		for (String path : paths) {
