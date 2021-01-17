@@ -20,7 +20,8 @@ function cpchk(){
 		<input type="button" value="할인 쿠폰" onclick="cpchk()">
 		<hr>
 		<h2>마일리지 적용</h2>
-		<input type="text" id="">
+		<input type="text" id="mileage" name="mileage">
+		<input type="button" value="전체 적용">
 	</div>
 </body>
 </html>
