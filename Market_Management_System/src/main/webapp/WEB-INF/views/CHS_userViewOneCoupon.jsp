@@ -35,7 +35,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td><img src="${ucv.cthumbimg}" /></td>
+			<td><img src="${pageContext.request.contextPath}${ucv.cimg}" /></td>
 		</tr>
 		<tr>
 			<td>

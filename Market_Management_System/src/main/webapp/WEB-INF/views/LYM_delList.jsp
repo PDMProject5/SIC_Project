@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="./js/delList.js"></script>
+<script type="text/javascript" src="./js/delList2.js"></script>
 <title>배송지 목록 확인</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -63,6 +63,7 @@ ${lists}
 </div>
 <div>
 	<input class="btn-info btn btn-primary" type="button" value="등록하기" onclick="insertForm()">
+	<input class="btn-success btn btn-primary" type="button" value="뒤로가기" onclick="back()">
 </div>
 
 <div id="modify" class="modal fade" role="dialog">
@@ -103,7 +104,9 @@ function deleteDel(val){
 	}
 }
 
-
+function back(){
+	history.back(-1);
+}
 </script>
 
 </html>

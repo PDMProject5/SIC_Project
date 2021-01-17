@@ -52,7 +52,7 @@ function useid(){
 	<div>
 	<input type="text" id="id" name="id" placeholder="ID">
 	<input type="button" value="중복 확인" onclick="duplicate()">
-	<p id="log"><span style="color: red;">&#42;</span>아이디는6~20자리의 영어와 숫자조합만 가능합니다.</p>
+	<p id="log"><span style="color: red;">&#42;</span>아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.</p>
 	</div>
 	<div>
 	<input type="button" value="사용하기" id="use" onclick="useid()">

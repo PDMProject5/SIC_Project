@@ -26,7 +26,7 @@ window.onload = function(){
 var timer = null;		// 타이머
 var isRunning = false;	// 타이머 동작 확인용 변수
         $('#sendPhoneNumber').click(function(){
-        	let regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+        	let regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{4}-?[0-9]{4}$/;
             let phoneNumber = $('#inputPhoneNumber').val();
             if(!regExp.test(phoneNumber)){
             	alert("-를 재외한 휴대폰번호 11자리를 확인해 주세요");

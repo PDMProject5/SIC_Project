@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="getProdDetail" resultType="ProductVo" parameterType="java.lang.String">
-		SELECT p.PCODE, p.SELLERID, p.ICODE, p.ROTNUM, p.PDATE, p.LIFETIME, p.STOCK, p.INAME, j.OPRICE
+		SELECT p.PCODE, p.SELLERID, p.ICODE, p.ROTNUM, p.PDATE, p.LIFETIME, jj.STOCK, p.INAME, j.OPRICE
 		FROM PRODUCT p JOIN (SELECT j.ICODE, IPRICE, OPRICE
 		FROM (SELECT ICODE, MAX(CDATE) CDATE
 		FROM INVENPRICE i

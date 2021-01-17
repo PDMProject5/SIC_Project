@@ -101,9 +101,9 @@ public class CouponController {
 				fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 		
 				// gdsImg에 원본 파일 경로 + 파일명 저장
-				cDto.setCimg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+				cDto.setCimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 				// gdsThumbImg에 썸네일 파일 경로 + 썸네일 파일명 저장
-				cDto.setCthumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+				cDto.setCthumbimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 				
 			} else {  // 첨부된 파일이 없으면
 				
@@ -145,9 +145,9 @@ public class CouponController {
 				String fileName = null;
 				
 				// gdsImg에 원본 파일 경로 + 파일명 저장
-				cDto.setCimg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+				cDto.setCimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 				// gdsThumbImg에 썸네일 파일 경로 + 썸네일 파일명 저장
-				cDto.setCthumbimg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+				cDto.setCthumbimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 				
 			} else {  // 새로운 파일이 등록되지 않았다면
 				
