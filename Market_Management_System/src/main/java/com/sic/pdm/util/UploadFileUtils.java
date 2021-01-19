@@ -11,8 +11,8 @@ import net.coobird.thumbnailator.Thumbnails;
 
 public class UploadFileUtils {
 		
-	static final int THUMB_WIDTH = 300;  // 썸네일의 가로 크기
-	static final int THUMB_HEIGHT = 350;  // 썸네일의 세로 크기
+	static final int THUMB_WIDTH = 150;  // 썸네일의 가로 크기
+	static final int THUMB_HEIGHT = 150;  // 썸네일의 세로 크기
 	
 	public static String fileUpload(String uploadPath,
 									String fileName, 
