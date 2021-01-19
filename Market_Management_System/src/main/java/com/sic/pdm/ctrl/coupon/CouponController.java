@@ -9,8 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sic.pdm.model.coupon.ICouponService;
 import com.sic.pdm.util.UploadFileUtils;
 import com.sic.pdm.vo.coupon.CouponVo;
-import com.sic.pdm.vo.coupon.PageVo;
 
 
 @Controller
@@ -37,28 +34,16 @@ public class CouponController {
 	// 쿠폰 목록
 	@RequestMapping(value = "/viewListCoupon.do", method = RequestMethod.GET)
 	public String viewListCoupon(
-			@RequestParam("num") int num,
 			HttpSession session, Model model) {
 		String sellerId = (String) session.getAttribute("sellerid");
 		if (sellerId == null) {
 			return "redirect:/loginForm.do";
 		} else {
-			PageVo pvo = new PageVo();
 			
-			pvo.setNum(num);
-			pvo.setCount(icsvc.storeCouponTotal()); 
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("rowstart", pvo.getDisplayPost());
-			map.put("rowend", pvo.getPostNum());
-			map.put("sellerid", sellerId);
-			
-			List<CouponVo> cList = icsvc.storeCouponListY(map);
+			List<CouponVo> cList = icsvc.storeCouponListY(sellerId);
 			
 			model.addAttribute("cList", cList);  
 			
-			model.addAttribute("pvo", pvo);
-			model.addAttribute("select", num);
 			return "CHS_list";
 		}
 	}
@@ -130,7 +115,7 @@ public class CouponController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/viewListCoupon.do?num=1";
+		return "redirect:/viewListCoupon.do";
 	}
 	
 	// 쿠폰 수정
@@ -138,15 +123,13 @@ public class CouponController {
 	public String updateCoupon(CouponVo cDto,
 			@RequestParam(value = "cdstate" , required = false) String cdstate, MultipartFile file, HttpServletRequest req) {
 		try {
+			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			String fileName = null;
+			
 			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 				
-				// 파일 인풋박스에 첨부된 파일이 없다면(=첨부된 파일이 이름이 없다면)
-				new File(uploadPath + req.getParameter("cimg")).delete();
-				new File(uploadPath + req.getParameter("cthumbimg")).delete();
-				
-				String imgUploadPath = uploadPath + File.separator + "imgUpload";
-				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-				String fileName = null;
+				fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 				
 				// gdsImg에 원본 파일 경로 + 파일명 저장
 				cDto.setCimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + fileName);
@@ -172,6 +155,7 @@ public class CouponController {
 	// 쿠폰 삭제
 	@RequestMapping(value = "/deleteCoupon.do", method = RequestMethod.GET)
 	public String deleteCoupon(String cseq) {
+		icsvc.deleteCouponDetail(cseq);
 		icsvc.deleteCoupon(cseq);
 		return "redirect:/viewListCoupon.do";
 	}

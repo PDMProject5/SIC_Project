@@ -14,56 +14,125 @@
 		history.back();
 
 	}
-	
+
 	function insertCoupon() {
 		
-		alert("쿠폰등록");
-
 		var cnotify = document.getElementById("cnotify");
 		var coupon = document.getElementById("coupon");
+		var cdstate = $('#cdstate');
 		var fileext = document.getElementById("cImg").value;
 		fileext = fileext.slice(fileext.indexOf(".")+1).toLowerCase();
 		var maxSize = 2*1024*1024; // 2MB
-		var regexp = /^[1-9]*$/;
+		var regexp = /^([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-9][0-9][0-9][0-9][0-9])$/; // 차감금액
+		var perexp = /^([1-9]|[1-9][0-9])$/; // 1~99 할인율
 		var frm = document.getElementById("frm");
 		
 		if( cnotify.value == "undefined" || cnotify.value == null || cnotify.value == "") {
 			alert("쿠폰 내용을 입력해 주세요.");
 			cnotify.focus();
 			return false;
-		}else if (fileext == ""){
+		} 
+		if (fileext == "") {
 			alert ("파일을 첨부하여 주세요.");
 			return false;
-		} else if (fileext !="jpg" && fileext !="png") {
-			alert("이미지 파일(jpg ,png)만 등록 가능합니다.");
-			return false;
-		} else if ($('#cImg').val() != ""){
-			var size = document.getElementById("cImg").files[0].size;
-				if( size > maxSize) {
-					alert("첨부파일은 2MB 이내로 등록 가능합니다.");
-					return false;
-				}
-// 		} else if (coupon.value == ""){
-// 			alert("쿠폰 금액을 입력하여 주세요.");
-// 			coupon.focus();
-// 			return false;
-// 		} else if (!regexp.test(coupon)) {
-// 			alert ("쿠폰 금액의 첫자리는 1부터 입력이 가능합니다.");
-// 			coupon.focus();
-// 			return false;
-// 		}
-		else {
-			alert("쿠폰이 등록되었습니다.");
-			frm.submit();
 		}
+		if (fileext !="jpg" && fileext !="png") {
+			alert("이미지 파일(jpg, png)만 등록 가능합니다.");
+			return false;
+		}
+		if ($('#cImg').val() != "") {
+			var size = document.getElementById("cImg").files[0].size;
+			if( size > maxSize) {
+				alert("첨부파일은 2MB 이내로 등록 가능합니다.");
+				return false;
+			}
+		} 
+		if($(':radio[name="cdstate"]:checked').length < 1){
+		    alert('쿠폰 종류를 선택해주세요');                        
+		    cdstate.focus();
+		    return false;
+		} 
+		if ($(':radio[name="cdstate"]:checked').val() == "A"){
+			if(!regexp.test(coupon.value)){
+				alert ("차감 금액은  1 ~ 10000원까지 입력이 가능합니다.");
+				return false;
+			}
+		} 
+		if ($(':radio[name="cdstate"]:checked').val() == "B"){
+			if(!perexp.test(coupon.value)){
+				alert ("할인율은 첫자리는 1부터 99까지 입력이 가능합니다.");
+				return false;
+			}
+		}
+			frm.submit();
+			alert("쿠폰이 성공적으로 등록되었습니다.");
+			return true;
+	}
+		
+		
+		
+		
+// 		if( cnotify.value == "undefined" || cnotify.value == null || cnotify.value == "") {
+// 			alert("쿠폰 내용을 입력해 주세요.");
+// 			cnotify.focus();
+// 			return false;
+// 		} else if (fileext == "") {
+// 			alert ("파일을 첨부하여 주세요.");
+// 			return false;
+// 		} else if (fileext !="jpg" && fileext !="png") {
+// 			alert("이미지 파일(jpg, png)만 등록 가능합니다.");
+// 			return false;
+// 		} else if ($('#cImg').val() != "") {
+// 			var size = document.getElementById("cImg").files[0].size;
+// 			if( size > maxSize) {
+// 				alert("첨부파일은 2MB 이내로 등록 가능합니다.");
+// 				return false;
+// 			}
+// 		} else if($(':radio[name="cdstate"]:checked').length < 1){
+// 		    alert('쿠폰 종류를 선택해주세요');                        
+// 		    cdstate.focus();
+// 		    return false;
+// 		} else if ($(':radio[name="cdstate"]:checked').val() == "A"){
+// 			if(!regexp.test(coupon.value)){
+// 				alert ("차감 금액은  1 ~ 10000원까지 입력이 가능합니다.");
+// 				return false;
+// 			}
+// 		} else if ($(':radio[name="cdstate"]:checked').val() == "B"){
+// 			if(!perexp.test(coupon.value)){
+// 				alert ("할인율은 첫자리는 1부터 99까지 입력이 가능합니다.");
+// 				return false;
+// 			}
+// 		} else {
+// 			alert("들어왔냐");
+// 			frm.submit();
+// 			alert("쿠폰이 성공적으로 등록되었습니다.");
+// 			return true;
+// 		}
+// 	}
+	
+	// 화면 로드시 divWon, divPer 숨김
+	onload = function(){
+		document.getElementById("divWon").style.display = "none";
+		document.getElementById("divPer").style.display = "none";
+	}
+	
+	// cdstate 라디오 버튼 선택시 값에 따라 보여주는  div가 다름.
+	function setDisplay(){
+	    if($(':radio[name="cdstate"]:checked').val() == "A"){
+	    	$('#divWon').show();
+	        $('#divPer').hide();
+	    }
+	    if ($(':radio[name="cdstate"]:checked').val() == "B"){
+	    	$('#divWon').hide();
+	        $('#divPer').show();
+	    }
 	}
 
 </script>
 </head>
 <body>
 	<div id="insertCouponForm">
-		<form id = "frm" enctype="multipart/form-data" method="post"
-			action="./insertCoupon.do">
+		<form id = "frm" enctype="multipart/form-data" method="post" action="./insertCoupon.do">
 			<table>
 				<tr>
 					<th>쿠폰내용</th>
@@ -81,16 +150,23 @@
 					</td>
 				</tr>
 				<tr>
-					<th>쿠폰금액</th>
-					<td><input type="text" id="coupon" name="coupon" min="1"></td>
+					<th>쿠폰종류</th>
+					<td><input type="radio" name="cdstate" id="cdstate" value="A" onchange="setDisplay()"><label for="r1">차감금액</label></td>
+ 					<td><input type="radio" name="cdstate" id="cdstate" value="B" onchange="setDisplay()"><label for="r2">할인율</label></td>
 				</tr>
 				<tr>
-					<th>쿠폰종류</th>
-					<td><input type="radio" id="cdstate" name="cdstate" value="A">차감금액</td>
-					<td><input type="radio" id="cdstate" name="cdstate" value="B">할인율</td>
+					<th>설정금액</th>
+					<td>
+						<input type="text" id="coupon" name="coupon" min="1">
+					<td>
+					<td>
+						<div id="divWon">원</div>
+						<div id="divPer">%</div>
+					</td>
 				</tr>
 				<tr>
 					<td><input type="button" id = "btn_submit" value="전송" onclick = "insertCoupon()"></td>
+					<td><input type="reset" id = "btn_reset" value="재작성" ></td>
 					<td><input type="button" id ="btn_back" value="뒤로가기" onclick = "backBtn()"></td>
 				</tr>
 			</table>

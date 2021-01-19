@@ -23,8 +23,8 @@ public class CouponDaoImpl implements ICouponDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<CouponVo> storeCouponListY(Map<String, Object> map) {
-		return sqlSession.selectList(NS + "storeCouponListY", map);
+	public List<CouponVo> storeCouponListY(String sellerid) {
+		return sqlSession.selectList(NS + "storeCouponListY", sellerid);
 	}
 	
 	@Override
@@ -66,6 +66,12 @@ public class CouponDaoImpl implements ICouponDao {
 	@Override
 	public boolean deleteCoupon(String cseq) {
 		int result = sqlSession.delete(NS+"deleteCoupon", cseq);
+		return (result > 0) ? true : false;
+	}
+	
+	@Override
+	public boolean deleteCouponDetail(String cseq) {
+		int result = sqlSession.delete(NS+"deleteCouponDetail", cseq);
 		return (result > 0) ? true : false;
 	}
 	

@@ -8,7 +8,7 @@ import com.sic.pdm.vo.coupon.CouponVo;
 public interface ICouponDao {
 	
 	// 판매자 - 운영 매장 목록
-	public List<CouponVo> storeCouponListY(Map<String, Object> map);
+	public List<CouponVo> storeCouponListY(String sellerid);
 		
 	// 판매자 - 총 쿠폰 갯수
 	public int storeCouponTotal();
@@ -30,6 +30,8 @@ public interface ICouponDao {
 					
 	// 판매자 - 쿠폰 삭제
 	public boolean deleteCoupon(String cseq);
+	
+	public boolean deleteCouponDetail(String cseq);
 	
 	// 판매자 - 등록 후 30 경과시 쿠폰 지급 가능상태 변경
 	public boolean autoEnableChange();
