@@ -44,6 +44,8 @@ public class delController {
 		model.addAttribute("lists",lists);
 		logger.info("list값 확인 \t {}",lists);
 		
+		DelVo vo = dservice.getdefaultAddr(id);
+		model.addAttribute("dvo", vo);
 		return "LYM_delList";
 	}
 	

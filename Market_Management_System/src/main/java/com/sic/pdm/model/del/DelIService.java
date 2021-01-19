@@ -26,4 +26,7 @@ public interface DelIService {
 	public boolean addrflag(DelVo vo);
 
 	public boolean addrflagN(String id);
+	
+	public DelVo getdefaultAddr(String id);
+
 }

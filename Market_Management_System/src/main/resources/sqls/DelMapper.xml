@@ -47,6 +47,11 @@ UPDATE DELIVERYLIST SET ADDRFLAG = 'N'
 	WHERE ID=#{id} AND ADDRFLAG = 'Y'
 </update>
 
-	
+<!-- 기본 배송지 불러오기 -->	
+<select id="getdefaultAddr" parameterType="java.lang.String" resultType="DelVo">
+SELECT DNUM,DNAME,ID,ROADADDR ,ADDR,PHONE,ADDRFLAG 
+	FROM DELIVERYLIST d 
+	WHERE ID=#{id} AND ADDRFLAG= 'Y'
+</select>
 
 </mapper>
