@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sic.pdm.model.bascket.BascketIService;
+import com.sic.pdm.model.mileage.Mileage_IService;
 import com.sic.pdm.model.product.IProductService;
 import com.sic.pdm.vo.bascket.BascketVo;
 import com.sic.pdm.vo.del.DelVo;
+import com.sic.pdm.vo.mileage.MileageVo;
 import com.sic.pdm.vo.product.ProductVo;
 
 
@@ -35,6 +37,9 @@ public class BascketController {
 	
 	@Autowired
 	private IProductService pservice;
+	
+	@Autowired
+	private Mileage_IService mservice;
 	
 	@RequestMapping(value = "/bascketList.do", method=RequestMethod.GET)
 	public String bascketList(Model model,HttpSession session) {
@@ -112,12 +117,15 @@ public class BascketController {
 	}
 	
 	
-	@RequestMapping(value="/order.do" , method = {RequestMethod.POST,RequestMethod.GET})
-	public String Order(@RequestParam List<String> chkVal, Model model) {
+	@RequestMapping(value="/order.do" , method = RequestMethod.POST)
+	public String Order(@RequestParam List<String> chkVal, Model model, HttpSession session) {
 		System.out.println(chkVal);
+		String id = (String)session.getAttribute("id");
+		MileageVo mil = mservice.totalMiles(id);
 		List<BascketVo> list = bservice.getOrderInfo(chkVal);
 		System.out.println(list);
 		model.addAttribute("list", list);
+		model.addAttribute("mil",mil);
 		return "LYM_orderPage";
 	}
 	

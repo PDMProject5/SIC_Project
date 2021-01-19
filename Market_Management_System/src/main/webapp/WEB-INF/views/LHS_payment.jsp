@@ -1,5 +1,10 @@
+<%@page import="com.sic.pdm.vo.mileage.MileageVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    MileageVo vo = (MileageVo)request.getAttribute("list");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +14,10 @@
 <script type="text/javascript">
 function cpchk(){
 	window.open("./cpchk.do","할인쿠폰","width=500px, height=500px");
+}
+
+function mileagechk(){
+	location.href="/mileagechk.do";
 }
 </script>
 <body>
@@ -20,8 +29,8 @@ function cpchk(){
 		<input type="button" value="할인 쿠폰" onclick="cpchk()">
 		<hr>
 		<h2>마일리지 적용</h2>
-		<input type="text" id="mileage" name="mileage">
-		<input type="button" value="전체 적용">
+		<input type="text" id="mileage" name="mileage"><%=vo.getMmoney() %>
+		<input type="button" value="전체 적용" onclick="mileagechk()">
 	</div>
 </body>
 </html>
