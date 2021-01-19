@@ -13,11 +13,14 @@ onload = function(){
 }
 function duplicate(){
 	var id = document.getElementById("id").value;
-	var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+	var idReg = /^(?=.*^[a-zA-Z])(?=.*[0-9]).{5,20}$/;
 	if(id == ""){
 		alert("아이디를 입력해 주세요");
 	}else if(!idReg.test(id)) {
         alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+        $('#log').css({'display':'block', 'color':'black'});
+        $('#log').html("<span style='color: red;'>&#42;</span>아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+        document.getElementById("use").style.display = "none";
     }else{
     	$.ajax({
     		url:"./duplicate.do",
@@ -28,10 +31,13 @@ function duplicate(){
     			if(msg == ""){
     				$('#log').html('사용가능한 아이디 입니다.');
 					$('#log').css('color','green');
+					document.getElementById("log").style.display = "block";
 					document.getElementById("use").style.display = "block";
 				}else if(msg != ""){
+					document.getElementById("log").style.display = "block";
 					$('#log').html('사용불가능한 아이디 입니다.');
 					$('#log').css('color','red');
+					document.getElementById("use").style.display = "none";
 				}
     		},
     			

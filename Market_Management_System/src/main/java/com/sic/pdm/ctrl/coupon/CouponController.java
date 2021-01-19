@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,23 +89,25 @@ public class CouponController {
 		cDto.setSellerid(sellerid);
 		
 		try {
-			
-			// 이미지를 업로드하였을때 이미지를 저장하는 폴더 생성
+			// 이미지를 업로드하였을때 이미지 저장 위치
+			// EX)                            +        \       +  imgUpload     
 			String imgUploadPath = uploadPath + File.separator + "imgUpload";
 			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 			String fileName = null;
-			System.out.println(uploadPath);
-			System.out.println(imgUploadPath);
 
 			if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 				// 파일 인풋박스에 첨부된 파일이 없다면(=첨부된 파일이 이름이 없다면)
 				
 				fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 		
-				// gdsImg에 원본 파일 경로 + 파일명 저장
+				// DB COUPON 테이블의 cimg에 원본 파일 경로 + 원본 파일명 저장
+				// EX)             \        +  resources  +        \       +  imgUpload  + 폴더(년>월>일) +    \       +  임의의 문자      
 				cDto.setCimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 				// gdsThumbImg에 썸네일 파일 경로 + 썸네일 파일명 저장
-				cDto.setCthumbimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+				
+				// DB COUPON 테이블의 cthumbimg 컬럼에 썸네일 파일 경로 + 썸네일 파일명 저장
+				// EX)                   \       + resources   +        \       +  imgUpload  +       \        +  s  +    \           +  s_  + 
+				cDto.setCthumbimg(File.separator + "resources" + File.separator + "imgUpload" + File.separator + "s" + File.separator + "s_" + fileName);
 				
 			} else {  // 첨부된 파일이 없으면
 				
@@ -147,7 +151,7 @@ public class CouponController {
 				// gdsImg에 원본 파일 경로 + 파일명 저장
 				cDto.setCimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 				// gdsThumbImg에 썸네일 파일 경로 + 썸네일 파일명 저장
-				cDto.setCthumbimg(File.separator + "resources" + File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+				cDto.setCthumbimg(File.separator + "resources" + File.separator + "imgUpload" + File.separator + "s" + File.separator + "s_" + fileName);
 				
 			} else {  // 새로운 파일이 등록되지 않았다면
 				

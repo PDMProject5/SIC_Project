@@ -11,11 +11,14 @@ public class CouponVo {
 	private String cenable;
 	private String cimg;
 	private String cthumbimg;
+	private String clastdate;
 	
 	public CouponVo() {}
 	
+	
+
 	public CouponVo(String cseq, String sellerid, String coupon, String cdate, String cnotify, String cenable,
-			String cimg, String cthumbimg) {
+			String cimg, String cthumbimg, String clastdate) {
 		super();
 		this.cseq = cseq;
 		this.sellerid = sellerid;
@@ -25,6 +28,7 @@ public class CouponVo {
 		this.cenable = cenable;
 		this.cimg = cimg;
 		this.cthumbimg = cthumbimg;
+		this.clastdate = clastdate;
 	}
 
 	public String getCseq() {
@@ -58,6 +62,10 @@ public class CouponVo {
 	public void setCdate(String cdate) {
 		cdate.substring(0,cdate.indexOf(" "));
 		this.cdate = cdate;
+	}
+	
+	public String getClastdate() {
+		return clastdate;
 	}
 
 	public String getCnotify() {
