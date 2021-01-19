@@ -22,7 +22,7 @@ function singup(){
 	var phone = document.getElementById("phone").value;
 	var marketing = document.getElementById("marketing").checked;
 	var passwordchk = document.getElementById("passwordchk");
-	var pwReg = /^[a-z0-9]{7,19}$/g;
+	var pwReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,20}$/;
 	document.getElementById("idchk").style.display = "none";
 	document.getElementById("namechk").style.display = "none";
 	document.getElementById("passwordchk").style.display = "none";
@@ -37,9 +37,8 @@ function singup(){
 	}else if(username==""){
 		document.getElementById("namechk").style.display = "block";
 		return false;
-	}else if(pw==""||pw < 8||!pwReg.test(pw)){
+	}else if(pw==""||!pwReg.test(pw)){
 		document.getElementById("passwordchk").style.display = "block";
-		pw.focus;
 		return false;
 	}else if(pw != pwchk){
 		document.getElementById("passchk").style.display = "block";

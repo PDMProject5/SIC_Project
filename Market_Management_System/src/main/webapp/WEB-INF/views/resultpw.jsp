@@ -11,7 +11,7 @@
 function passchk(){
 	var pw = document.getElementById("pw");
 	var passwordchk = document.getElementById("passwordchk");
-	var pwReg = /^[a-z]+[a-z0-9]{7,19}$/g;
+	var pwReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,20}$/;
 	var rtn = false;
 	if(pw.value==""||passwordchk.value==""){
 		alert("변경하실 비밀번호를 입력해주세요");
@@ -34,13 +34,13 @@ function passchk(){
 	<tr>
 		<th>비밀번호</th>
 		<td>
-			<input type="password" id="pw" name="pw" placeholder="새 비밀번호를 입력해주세요">
+			<input type="password" id="pw" name="pw" placeholder="새 비밀번호를 입력해주세요" maxlength="20">
 		</td>
 	</tr>
 	<tr>
 		<th>비밀번호 확인</th>
 		<td>
-			<input type="password" id="passwordchk" name="passwordchk" placeholder="비밀번호 확인">
+			<input type="password" id="passwordchk" name="passwordchk" placeholder="비밀번호 확인" maxlength="20">
 		</td>
 	</tr>
 </table>

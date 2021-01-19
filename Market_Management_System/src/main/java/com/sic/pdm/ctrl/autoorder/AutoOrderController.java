@@ -35,19 +35,28 @@ public class AutoOrderController {
 	@RequestMapping(value = "/autoOrderform.do", method = RequestMethod.GET)
 	public String autoOrderform(Model model, HttpSession session) {
 		String sellerid = (String)session.getAttribute("sellerid");
-		System.out.println(sellerid);
-		List<AutoOrderVo> lists = service.autoOrderList(sellerid);
-		System.out.println(lists.size());
-		model.addAttribute("lists", lists);
-		return "autoOrderForm";
+		if(sellerid == null) {
+			return "sessionexpiration";
+		}else {
+			System.out.println(sellerid);
+			List<AutoOrderVo> lists = service.autoOrderList(sellerid);
+			System.out.println(lists.size());
+			model.addAttribute("lists", lists);
+			return "autoOrderForm";
+		}
 	}
 	
 	@RequestMapping(value = "/autoOrderDetail.do", method = RequestMethod.GET)
-	public String autoOrderDetail(String iname, Model model) {
-		System.out.println(iname);
-		AutoOrderVo vo = service.autoOrderDetail(iname);
-		model.addAttribute("detaillist", vo);
-		return "autoOrderDetail";
+	public String autoOrderDetail(String iname, Model model, HttpSession session) {
+		String sellerid = (String)session.getAttribute("sellerid");
+		if(sellerid == null) {
+			return "sessionexpiration";
+		}else {
+			System.out.println(iname);
+			AutoOrderVo vo = service.autoOrderDetail(iname);
+			model.addAttribute("detaillist", vo);
+			return "autoOrderDetail";
+		}
 	}
 	
 	@RequestMapping(value = "/updateautoOrder.do", method = RequestMethod.POST)
@@ -58,8 +67,13 @@ public class AutoOrderController {
 	}
 	
 	@RequestMapping(value = "/searchitemform.do", method = RequestMethod.GET)
-	public String searchitemform() {
-		return "searchitemform";
+	public String searchitemform(HttpSession session) {
+		String sellerid = (String)session.getAttribute("sellerid");
+		if(sellerid == null) {
+			return "sessionexpiration";
+		}else {
+			return "searchitemform";
+		}
 	}
 	
 	@RequestMapping(value = "/searchitem.do", method = RequestMethod.POST)
@@ -70,27 +84,41 @@ public class AutoOrderController {
 	}
 	
 	@RequestMapping(value = "/insertAutoOrderForm.do")
-	public String insertAutoOrderForm(String iname, Model model) {
+	public String insertAutoOrderForm(String iname, Model model, HttpSession session) {
+		String sellerid = (String)session.getAttribute("sellerid");
+		if(sellerid == null) {
+			return "sessionexpiration";
+		}else{
 		model.addAttribute("iname", iname);
 		return "insertAutoOder";
+		}
 	}
 	
 	@RequestMapping(value = "/insertAutoOrder.do", method = RequestMethod.POST)
 	public String insertAutoOrder(AutoOrderVo vo, HttpSession session) {
 		vo.setSellerid((String)session.getAttribute("sellerid"));
-		service.insertAutoOrder(vo);
-		return "redirect:/autoOrderform.do";
+		if(vo.getSellerid() == null) {
+			return "sessionexpiration";
+		}else {
+			service.insertAutoOrder(vo);
+			return "redirect:/autoOrderform.do";
+		}
 	}
 	
 	@RequestMapping(value = "/autoOrderDel.do", method = RequestMethod.GET)
 	public String autoOrderDel(String itemlist, HttpSession session) {
-		System.out.println(itemlist);
-		String[] dellist = itemlist.split(",");
-		Map<String, Object> inames = new HashMap<String, Object>();
-		inames.put("inames", dellist);
-		inames.put("sellerid", (String)session.getAttribute("sellerid"));
-		service.deleteAutoOrder(inames);
-		return "redirect:/autoOrderform.do";
+		String sellerid = (String)session.getAttribute("sellerid");
+		if(sellerid == null) {
+			return "sessionexpiration";
+		}else{
+			System.out.println(itemlist);
+			String[] dellist = itemlist.split(",");
+			Map<String, Object> inames = new HashMap<String, Object>();
+			inames.put("inames", dellist);
+			inames.put("sellerid", sellerid);
+			service.deleteAutoOrder(inames);
+			return "redirect:/autoOrderform.do";
+		}
 	}
 	
 	
