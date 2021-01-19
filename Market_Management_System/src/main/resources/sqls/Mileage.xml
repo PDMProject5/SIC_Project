@@ -6,7 +6,7 @@
 	<select id="totalMiles" parameterType="java.lang.String" resultType="MileageVo">
 		SELECT SUM(MMONEY) MMONEY 
 	FROM MILEAGE
-	WHERE ID = 'test01' AND MSTATE = 'P'
+	WHERE ID = #{id} AND MSTATE = 'P'
 	</select>
 	
 	<!-- 마일리지 상세조회 -->
@@ -17,10 +17,10 @@
 	</select>
 	
 	
-	<insert id="">
-		INSERT INTO MILEAGE (MSEQ,ID,MMONEY,MDATE,MSTATE)
-		VALUES(MSEQ_SEQ.NEXTVAL,'test01',(SELECT FLOOR(PAYMENTAMT *0.01) FROM PAYMENT WHERE PAYMENTNUM = 'P002'),SYSDATE, 'P');
-	</insert>
+<!-- 	<insert id=""> -->
+<!-- 		INSERT INTO MILEAGE (MSEQ,ID,MMONEY,MDATE,MSTATE) -->
+<!-- 		VALUES(MSEQ_SEQ.NEXTVAL,'test01',(SELECT FLOOR(PAYMENTAMT *0.01) FROM PAYMENT WHERE PAYMENTNUM = 'P002'),SYSDATE, 'P'); -->
+<!-- 	</insert> -->
 	
 	
 </mapper>

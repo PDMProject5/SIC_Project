@@ -1,3 +1,4 @@
+<%@page import="com.sic.pdm.vo.mileage.MileageVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
@@ -11,6 +12,15 @@
 <meta charset="UTF-8">
 <title>주문/결제 페이지</title>
 </head>
+<script type="text/javascript">
+	function cpchk(){
+		window.open("./coupon.do","쿠폰 사용","width=500px, height=500px");
+	}
+
+	function miles(){
+		opener.document.getElementById("mileage").value = document.getElementById("mileage").value
+	}
+</script>
 <body>
 <div id="container">
 
@@ -61,7 +71,21 @@
 	<input type="checkbox" id="" onclick="">
 </div>
 <div>
-	<input class="btn-success btn btn-primary" type="button" value="결제하기" onclick="">
+	<h2>결제</h2>
+	<hr>
+	<strong style="margin: 24px; ">쿠폰 적용 </strong>
+		<input type="text" id="coupon" name="coupon" readonly >
+		<input type="button" value="할인 쿠폰" onclick="cpchk()">
+	<br>
+	<strong style="margin: 10px; text-align: center;">마일리지 적용 </strong>
+		<input type="text" id="mileages" name="mileages">
+		<input type="button" value="전체 적용" id="apply" onclick="miles()">
+		<p id="mileage">총 마일리지 금액 : ${mil.mmoney}</p>
+	<br>
+</div>
+
+<div>
+	<input class="btn-success btn btn-primary" type="button" value="결제하기" onclick="payment()">
 </div>
 </form>
 </div>

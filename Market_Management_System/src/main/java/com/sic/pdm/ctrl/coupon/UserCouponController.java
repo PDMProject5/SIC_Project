@@ -65,5 +65,13 @@ public class UserCouponController {
 			return "redirect:/myCouponList.do";
 		}
 	}
+	
+	@RequestMapping(value = "/coupon.do", method = RequestMethod.GET)
+	public String coupon(Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		List<CouponVo> cbList = icsvc.getCouponList(id);
+		model.addAttribute("cbList",cbList);
+		return "LHS_coupon";
+	}
 
 }

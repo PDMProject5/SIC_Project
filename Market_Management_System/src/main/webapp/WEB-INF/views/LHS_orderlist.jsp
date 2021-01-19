@@ -59,7 +59,7 @@ div {
 					if (lists == null || lists.size() == 0) {
 				%>
 					<tr>
-						<th>주문내역이 없습니다.</th>
+						<th colspan="8">주문내역이 없습니다.</th>
 					</tr>
 					<%
 						}

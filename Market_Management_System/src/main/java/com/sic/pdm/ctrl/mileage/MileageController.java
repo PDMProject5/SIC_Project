@@ -27,10 +27,11 @@ public class MileageController {
 		System.out.println(list);
 		System.out.println(lists);
 		
-		model.addAttribute("list",list);
+		model.addAttribute("mil",list);
 		model.addAttribute("lists",lists);
 		
 		return "LHS_mileage";
 	}
+	
 
 }
