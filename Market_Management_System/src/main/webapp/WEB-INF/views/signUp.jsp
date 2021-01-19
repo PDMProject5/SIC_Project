@@ -27,11 +27,11 @@ p{
 		<p style="color: red" id="namechk">이름을 입력해 주세요</p>
 	</div>
 	<div>
-		<input type="password" id="pw" name="pw" placeholder="Password">
-		<p style="color: red" id="passwordchk">비밀번호는 영어 또는 숫자8~20자리만 입력할 수 있습니다.</p>
+		<input type="password" id="pw" name="pw" placeholder="Password" maxlength="20">
+		<p style="color: red" id="passwordchk">비밀번호는 영어와 숫자를 조합한8~20자리만 입력할 수 있습니다.</p>
 	</div>
 	<div>
-		<input type="password" id="pwchk" name="pwchk" placeholder="PasswordCheck">
+		<input type="password" id="pwchk" name="pwchk" placeholder="PasswordCheck" maxlength="20">
 		<p style="color: red;" id="passchk">비밀번호가 일치하지 않습니다.</p>
 	</div>
 	<div>
