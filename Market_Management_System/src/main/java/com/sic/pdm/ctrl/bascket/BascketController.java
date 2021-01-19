@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sic.pdm.model.bascket.BascketIService;
+import com.sic.pdm.model.del.DelIService;
 import com.sic.pdm.model.mileage.Mileage_IService;
 import com.sic.pdm.model.product.IProductService;
 import com.sic.pdm.vo.bascket.BascketVo;
@@ -37,6 +38,9 @@ public class BascketController {
 	
 	@Autowired
 	private IProductService pservice;
+	
+	@Autowired
+	private DelIService dservice;
 	
 	@Autowired
 	private Mileage_IService mservice;
@@ -130,7 +134,34 @@ public class BascketController {
 		System.out.println(list);
 		model.addAttribute("list", list);
 		model.addAttribute("mil",mil);
+		DelVo vo = dservice.getdefaultAddr(id);
+		model.addAttribute("vo", vo);
 		return "LYM_orderPage";
 	}
 	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/selectOne.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8;")
+	@ResponseBody
+	public String selectOne(String dnum, Model model) {
+		DelVo dvo = dservice.getOneDelList(dnum);
+		System.out.println("번호확인"+dnum);
+
+		JSONObject json = new JSONObject();
+		json.put("dnum", dvo.getDnum());
+		json.put("dname", dvo.getDname());
+		json.put("roadaddr", dvo.getRoadaddr());
+		json.put("addr", dvo.getAddr());
+		json.put("phone", dvo.getPhone());
+		
+		System.out.println(json.toString());
+		return json.toString();
+	}
+	
+	@RequestMapping(value="/modalSel.do", method=RequestMethod.GET)
+	public String selModal(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		List<DelVo> lists = dservice.getDelList(id);
+		model.addAttribute("del", lists);
+		return "LYM_delModal";
+	}
 }

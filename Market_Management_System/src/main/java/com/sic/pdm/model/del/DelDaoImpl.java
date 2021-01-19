@@ -80,4 +80,10 @@ public class DelDaoImpl implements DelIDao {
 		session.update(NS+"addrflagN", id);
 		return false;
 	}
+	
+	@Override
+	public DelVo getdefaultAddr(String id) {
+		DelVo vo = session.selectOne(NS+"getdefaultAddr", id);
+		return vo;
+	}
 }
