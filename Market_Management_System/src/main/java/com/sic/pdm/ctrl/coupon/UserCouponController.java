@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sic.pdm.model.coupon.ICouponService;
+import com.sic.pdm.model.user.ISellerService;
 import com.sic.pdm.vo.coupon.CouponBoxVo;
 import com.sic.pdm.vo.coupon.CouponVo;
+import com.sic.pdm.vo.user.SellerVo;
 
 @Controller
 public class UserCouponController {
@@ -22,12 +24,17 @@ public class UserCouponController {
 	@Autowired
 	private ICouponService icsvc;
 	
+	@Autowired
+	private ISellerService selService;
+	
 	// 회원 시점
 	// 매장 행사 정보
 	@RequestMapping(value = "/userViewListCoupon.do")
-	public String userViewListCoupon(HttpSession session,Model model) {
-		String sellerid = "admin01";
+	public String userViewListCoupon(String sellerid,Model model,HttpSession session) {
 		List<CouponVo> ucvList = icsvc.userViewListCoupon(sellerid);
+		session.setAttribute("sellerid", sellerid);
+		SellerVo vo = selService.sellerOne(sellerid);
+		model.addAttribute("sell",vo);
 		model.addAttribute("ucvList",ucvList);
 		return "CHS_userViewListCoupon";
 	}

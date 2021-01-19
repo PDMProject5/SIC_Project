@@ -1,5 +1,6 @@
 package com.sic.pdm.ctrl.user;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sic.pdm.model.user.IMemberService;
+import com.sic.pdm.model.user.ISellerService;
 import com.sic.pdm.util.API_Service;
 import com.sic.pdm.vo.user.MemberVo;
+import com.sic.pdm.vo.user.SellerVo;
 
 @Controller
 public class MemberController {
@@ -26,9 +29,14 @@ public class MemberController {
 	@Autowired
 	private IMemberService service;
 	
+	@Autowired
+	private ISellerService selService;
+	
 	// 서버가 처음 돌았을 때 mainPage로 갈 수 있게 해주는 메소드
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public String main() {
+	public String main(Model model) {
+		List<SellerVo> lists = selService.sellerList();
+		model.addAttribute("seller", lists);
 		return "mainPage";
 	}
 	
@@ -110,7 +118,7 @@ public class MemberController {
 				return "sellermainPage";
 			}else{
 				session.setAttribute("id", id);
-				return "usermainPage";
+				return "redirect:/main.do";
 			}
 		}
 	}
@@ -129,7 +137,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("id");
 		session.setAttribute("sessionchk", "로그인실패");
-		return "mainPage";
+		return "redirect:/main.do";
 	}
 	
 	
