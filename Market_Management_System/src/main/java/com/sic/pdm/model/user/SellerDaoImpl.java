@@ -1,5 +1,7 @@
 package com.sic.pdm.model.user;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,15 @@ public class SellerDaoImpl implements ISellerDao {
 		return sellerData;
 	}
 
-	
+	@Override
+	public List<SellerVo> sellerList() {
+		List<SellerVo> lists = service.selectList(NS+"sellerList");
+		return lists;
+	}
 
+	@Override
+	public SellerVo sellerOne(String sellerid) {
+		SellerVo vo = service.selectOne(NS+"sellerOne", sellerid);
+		return vo;
+	}
 }

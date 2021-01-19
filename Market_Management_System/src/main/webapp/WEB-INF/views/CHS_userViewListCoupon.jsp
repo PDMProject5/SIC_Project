@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="./header.jsp" %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -29,4 +30,5 @@
 		</c:forEach>
 	</table>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>
