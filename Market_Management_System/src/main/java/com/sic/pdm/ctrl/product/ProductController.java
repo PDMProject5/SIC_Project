@@ -27,8 +27,8 @@ public class ProductController {
 	
 	
 	@RequestMapping(value = "/product.do")
-	public String test(Model model) {
-		List<ProductVo> lists = pService.getProdList("admin01"); 
+	public String test(String sellerid,Model model) {
+		List<ProductVo> lists = pService.getProdList(sellerid); 
 		model.addAttribute("list", lists);
 		return "KGH_product";
 	}

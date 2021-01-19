@@ -20,8 +20,8 @@ public class CouponServiceImpl implements ICouponService {
 	private ICouponDao icDao;
 
 	@Override
-	public List<CouponVo> storeCouponListY(Map<String, Object> map) {
-		return icDao.storeCouponListY(map);
+	public List<CouponVo> storeCouponListY(String sellerid) {
+		return icDao.storeCouponListY(sellerid);
 	}
 	
 	@Override
@@ -60,6 +60,11 @@ public class CouponServiceImpl implements ICouponService {
 	}
 	
 	@Override
+	public boolean deleteCouponDetail(String cseq) {
+		return icDao.deleteCouponDetail(cseq);
+	}
+	
+	@Override
 	public boolean autoEnableChange() {
 		return icDao.autoEnableChange();
 	}
@@ -88,5 +93,6 @@ public class CouponServiceImpl implements ICouponService {
 	public boolean autoGetCouponDel() {
 		return icDao.autoGetCouponDel();
 	}
+
 
 }

@@ -21,7 +21,6 @@
 <h2><a>${id}님 환영합니다.</a></h2>
 
 
-${lists}
 	<div id="container">
 	<form action="#" method="post" id="frm" name="frm" onsubmit="return chkbox();">
 		<div class="panel-group" id="accordion">
@@ -52,10 +51,10 @@ ${lists}
 							<td>
 								<input class="btn-success btn btn-primary" type="button" value="수정" onclick="modify(${dto.dnum})">
 								<input class="btn-success btn btn-primary" type="button" value="삭제" onclick="deleteDel(${dto.dnum})">
+								<input type="hidden" id="dvo" value="${dvo.dnum}">
 							</td>
 						</tr>
 					</c:forEach>
-						
 				</tbody>		
 			</table>
 		</div>
@@ -63,7 +62,7 @@ ${lists}
 </div>
 <div>
 	<input class="btn-info btn btn-primary" type="button" value="등록하기" onclick="insertForm()">
-	<input class="btn-success btn btn-primary" type="button" value="뒤로가기" onclick="back()">
+	<input class="btn-success btn btn-primary" type="button" value="뒤로가기" onclick="location.href='javascript:history.back()'">
 </div>
 
 <div id="modify" class="modal fade" role="dialog">
@@ -98,15 +97,20 @@ function insertForm(){
 }
 
 function deleteDel(val){
+	var dvo = document.getElementById("dvo").value;
 	var con = confirm("정말 삭제하시겠습니까?");
+	console.log(dvo);
 	if(con){
-		location.href="./deleteDel.do?dnum="+val;
+		if(dvo == val){
+			alert("기본 배송지는 삭제할 수 없습니다.");
+			return false;
+		}else{
+			location.href="./deleteDel.do?dnum="+val;
+			alert("삭제되었습니다.");
+		}
 	}
 }
 
-function back(){
-	history.back(-1);
-}
 </script>
 
 </html>

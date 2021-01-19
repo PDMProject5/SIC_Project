@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+<%@ include file="./header.jsp" %>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -46,4 +47,5 @@
 		</tr>
 	</table>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

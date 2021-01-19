@@ -18,6 +18,8 @@
 <div id="container">
 	<form action="#" method="post" id="frm" name="frm" onsubmit="return chkbox();">
 		<div class="panel-group" id="accordion">
+<%-- 			<input type="hidden" id="piname" value="${plists.icode}"> --%>
+<%-- 			<input type="hidden" id="pstock"  value="${plists.stock}"> --%>
 			<table id="del" class="table table-bordered">
 				<thead>	
 					
@@ -35,18 +37,18 @@
 								<input type='checkbox' id="chkVal" name='chkVal' value='${dto.onum}'>
 							</td>
 							<td>	
-								<strong><a href="productDetail.do?iname=${dto.iname}">${dto.iname}</a></strong><br>
+								<strong><a  href="productDetail.do?iname=${dto.iname}">${dto.iname}</a></strong><br>
 								${dto.oprice} 원
 							</td>
 							<td>
-								${dto.odstock}&nbsp;개&nbsp;
+								<a >${dto.odstock}</a>&nbsp;개&nbsp;
 								<input type="button" value="변경" onclick="modifyStock(${dto.onum})">
 							</td>
 							<td>
 								<span id="price">
 								<c:set var="odto" value="${dto.odstock}"/>
 								<c:set var="rdto" value="${dto.oprice*odto}"/>
-								<c:out value="${rdto}"/> 
+								<c:out  value="${rdto}"/> 
 								</span>
 								<span>원</span>
 							</td>
@@ -65,7 +67,7 @@
 				<div>
 					<h2>
 					<span>총 주문 금액:</span>
-					<span id=""><c:out value="${sum}"/> </span>원
+					<span id="oprice"><c:out value="${sum}"/> </span>원
 					</h2>
 				</div>
 				
@@ -83,7 +85,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">배송지 수정</h4>
+					<h4 class="modal-title">수량 변경</h4>
 				</div>
 				<div class="modal-body">
 					<form action="#" class="form-margin" method="post" id="StoUpdate"></form>
@@ -97,6 +99,18 @@
 
 </body>
 <script type="text/javascript">
+
+// $(document).ready(function(){
+// 	var chkval = document.getElementsByName('chkVal');
+	
+// 	for (var i = 0; i < chkval.length; i++) {
+// 		if (chkval[i].checked) {
+// 			alert('<c:out  value="${rdto}"/>' );
+// 		}
+// 	}
+// })
+	
+	
 
 function modifyStock(val){
 	ajaxModify(val);
@@ -135,7 +149,7 @@ var ajaxModify = function(val){
 		html += "</table>";
 		html += "</div>";
 		html += "<div class='modal-footer'>";
-		html += "	<button type='button' class='btn btn-default' data-dismiss='modal' onclick='modStock()'' >확인</button>";
+		html += "	<button type='button' class='btn btn-default' data-dismiss='modal' onclick='modStock()'>확인</button>";
 		html += "	<button type='button' class='btn btn-default' data-dismiss='modal'>취소</button>";
 		html += "</div>";						
        
@@ -216,6 +230,12 @@ function modStock(){
 		var frm = document.getElementById("frm");
 		var chkval = document.getElementsByName('chkVal');
 		var n = 0;
+		
+// 		var piname = document.getElementById("piname").value;
+// 		var pstock = document.getElementById("pstock").value;
+// 		var iname = document.getElementById("iname").value;
+	
+		
 		for (var i = 0; i < chkval.length; i++) {
 			if (chkval[i].checked) {
 				n++;

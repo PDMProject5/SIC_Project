@@ -24,6 +24,9 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
+
+
+
 function modify(val){
 	ajaxModify(val);
 	$('#modify').modal();

@@ -58,4 +58,11 @@ public class DelServiceImpl implements DelIService {
 		
 		return dao.addrflagN(id);
 	}
+	
+	@Override
+	public DelVo getdefaultAddr(String dnum) {
+		
+		return dao.getdefaultAddr(dnum);
+	}
+	
 }
