@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="./css/ui.jqgrid.css" />
 </head>
+<%@ include file="./header.jsp" %>
 <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -234,7 +235,8 @@ $(function(){
 			</tr>
 		</c:forEach>
 	</table>
-	<br>
+	
+	<c:if test="${sellerid}">
 	카테고리 트리형식(재고등록 및 판매자 재고현황 볼때)
 	<button onclick="tree()">보기</button>
 	<div id="jsTree"></div>
@@ -256,5 +258,7 @@ $(function(){
 		<table id="jqGridDetail"></table>
 		<div id="jqGridPager3"></div>
 	</div>
+	</c:if>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

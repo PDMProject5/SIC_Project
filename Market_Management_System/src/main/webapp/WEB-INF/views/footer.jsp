@@ -13,6 +13,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    margin: 0 auto;
 }
 #footer {
     color: #9b9b9b;
@@ -21,6 +22,7 @@
     border-bottom: 1px solid #363636;
 }
 footer {
+	margin: 0 auto;
     display: block;
 }
 

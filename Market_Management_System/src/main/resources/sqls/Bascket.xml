@@ -23,7 +23,7 @@ VALUES(ODNUM_SEQ.NEXTVAL, (SELECT DISTINCT ICODE FROM INVENPRICE i2 WHERE ICODE 
 
 <!-- 장바구니 조회 -->
 <select id="getAllBascket" parameterType="java.util.Map" resultType="BascketVo">
-SELECT o.ONUM, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
+SELECT o.ONUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 	FROM "ORDER" o 
 	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
@@ -31,7 +31,7 @@ SELECT o.ONUM, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 </select>
 
 <select id="getOneBascket" parameterType="java.util.Map" resultType="BascketVo">
-SELECT o.ONUM, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
+SELECT o.ONUM,i.ICODE ,i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 	FROM "ORDER" o 
 	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
@@ -39,7 +39,7 @@ SELECT o.ONUM, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 </select>
 
 <select id="getOrderInfo" parameterType="java.util.List" resultType="BascketVo">
-SELECT o.ONUM, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
+SELECT o.ONUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 	FROM "ORDER" o 
 	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
