@@ -19,5 +19,9 @@ public interface BascketIDao {
 	
 	public boolean deleteBascket(List<String> onums);
 	
+	public boolean deleteBascketOne(String onum);
+	
 	public List<BascketVo> getOrderInfo(List<String> onums);
+	
+	public BascketVo checkBascket(Map<String, Object> map);
 }
