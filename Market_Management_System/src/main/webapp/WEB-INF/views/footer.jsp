@@ -37,7 +37,7 @@ body {
     color: #000;
 }
 
-p{
+.copyright{
 	
 	text-align: center;
 	font-size: 20px;

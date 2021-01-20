@@ -48,6 +48,7 @@
 	        }).open();
 	    }
 </script>
+<%@ include file="./header.jsp" %>
 <body>
 <div id="container">
 
@@ -159,13 +160,14 @@
 		</tbody>
 	</table>
 </div>
-
+<br>
 <div>
 	<input class="btn-success btn btn-primary" type="button" value="결제하기" id="check_module">
 </div>
 
 
 </body>
+<%@ include file="./footer.jsp" %>
 <script type="text/javascript">
 
 
@@ -248,26 +250,8 @@ $("#check_module").click(function () {
     var IMP = window.IMP; // 생략해도 괜찮습니다.
     IMP.init('imp60827137'); // 'imp60827137' 대신 부여받은 "가맹점 식별코드"를 사용
     IMP.request_pay({ // param
-        pg: 'kakao', // 카카오
-        /*
-        'kakao':카카오페이,
-        html5_inicis':이니시스(웹표준결제)
-        'nice':나이스페이
-        'jtnet':제이티넷
-        'uplus':LG유플러스
-        'danal':다날
-        'payco':페이코
-        'syrup':시럽페이
-        'paypal':페이팔
-        */
-        pay_method: 'card',
-        /*
-        'samsung':삼성페이,
-        'card':신용카드,
-        'trans':실시간계좌이체,
-        'vbank':가상계좌,
-        'phone':휴대폰소액결제
-        */
+        pg: 'kakao', // 카카오 
+        pay_method: 'card',    
         merchant_uid: 'merchant_' + new Date().getTime(), // 주문번호(merchant_uid) 생성하기
         //IMP.request_pay를 호출하기 전에 여러분의 서버에 주문 정보를 전달(데이터베이스에 주문정보 INSERT)하고 서버가 생성한 주문 번호를 param의 merchant_uid속성에 지정
         name: 'CU',
@@ -291,25 +275,7 @@ $("#check_module").click(function () {
             msg += '에러내용 : ' + rsp.error_msg;
         }
         alert(msg);
-        /*
-           function (rsp) { // callback
-            if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-              // jQuery로 HTTP 요청
-              jQuery.ajax({
-                  url: "https://www.myservice.com/payments/complete", // 가맹점 서버
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  data: {
-                      imp_uid: rsp.imp_uid,
-                      merchant_uid: rsp.merchant_uid
-                  }
-              }).done(function (data) {
-                // 가맹점 서버 결제 API 성공시 로직
-              })
-            } else {
-              alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-            }
-        */
+        
     });
 });
 

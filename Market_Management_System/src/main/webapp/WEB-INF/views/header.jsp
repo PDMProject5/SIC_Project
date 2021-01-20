@@ -46,6 +46,7 @@
       	<c:if test="${not empty sell}">
     		<li>
     			<a href="./product.do?sellerid=${sell.sellerid}">MENU</a>
+    			<a href="./bascketList.do?store=${sell.store}" class="w3-bar-item w3-button">장바구니 조회</a>
     		</li>
     	</c:if>
       	<li>
@@ -60,8 +61,7 @@
   			<a href="./userModified.do" class="w3-bar-item w3-button">회원 정보 수정</a>
   			<a href="./myCouponList.do" class="w3-bar-item w3-button">쿠폰 내역 조회</a>
  			<a href="./delList.do" class="w3-bar-item w3-button">배송지 목록 조회</a>
- 			<a href="./product.do" class="w3-bar-item w3-button">제품 목록</a>
- 			<a href="./bascketList.do" class="w3-bar-item w3-button">장바구니 조회</a>
+ 			
  			<a href="./mileage.do" class="w3-bar-item w3-button">마일리지 조회</a>
  			
  			

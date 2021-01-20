@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sic.pdm.model.product.IProductService;
+import com.sic.pdm.model.user.ISellerService;
 import com.sic.pdm.vo.product.ProductVo;
+import com.sic.pdm.vo.user.SellerVo;
 
 @Controller
 public class ProductController {
@@ -25,6 +29,8 @@ public class ProductController {
 	@Autowired
 	private IProductService pService;
 	
+	@Autowired 
+	private ISellerService selService;
 	
 	@RequestMapping(value = "/product.do")
 	public String test(String sellerid,Model model) {
@@ -84,12 +90,15 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productDetail.do")
-	public String productDetail(@RequestParam String iname, Model model) {
+	public String productDetail(@RequestParam String iname, Model model, HttpSession session) {
 		System.out.println(iname);
 		ProductVo vo = null;
+		String store = (String)session.getAttribute("store");
+		SellerVo svo = selService.sellerOne(store);
+		String sellerid= svo.getSellerid();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("iname", iname);
-		map.put("sellerid", "admin01");
+		map.put("sellerid", sellerid);
 		vo = pService.getProdDetail(map);
 		model.addAttribute("vo", vo);
 		return "KGH_productDetail";

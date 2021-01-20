@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 <script type="text/javascript">
 	function insertAutoOrder(){
@@ -55,4 +56,5 @@
 	<button onclick="insertAutoOrder()">등록하기</button>
 	<button onclick="location.href='javascript:history.back();'">뒤로가기</button>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

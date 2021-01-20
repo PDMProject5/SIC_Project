@@ -15,10 +15,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-
+<%@ include file="./header.jsp" %>
 <body>
 
-<h2><a>${id}님 환영합니다.</a></h2>
 
 
 	<div id="container">
@@ -62,7 +61,6 @@
 </div>
 <div>
 	<input class="btn-info btn btn-primary" type="button" value="등록하기" onclick="insertForm()">
-	<input class="btn-success btn btn-primary" type="button" value="뒤로가기" onclick="location.href='javascript:history.back()'">
 </div>
 
 <div id="modify" class="modal fade" role="dialog">
@@ -84,6 +82,7 @@
 	</div>
 
 </body>
+<%@ include file="./footer.jsp" %>
 <script type="text/javascript">
     
 function insertForm(){
