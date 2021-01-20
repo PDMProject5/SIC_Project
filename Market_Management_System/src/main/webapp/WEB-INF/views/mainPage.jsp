@@ -36,7 +36,7 @@ th{
 	</thead>
 		<c:forEach var="vo" items="${seller}">
 		<tr>
-			<td><a href="./userViewListCoupon.do?sellerid=${vo.sellerid}">${vo.store}</a></td>
+			<td><a href="./userViewListCoupon.do?store=${vo.store}">${vo.store}</a></td>
 			<td>${vo.storephone}</td>
 		</tr>
 		</c:forEach>

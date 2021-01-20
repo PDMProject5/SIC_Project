@@ -31,6 +31,7 @@ public interface ICouponService {
 	// 판매자 - 쿠폰 삭제
 	public boolean deleteCoupon(String cseq);
 	
+	// 판매자 - 쿠폰 종류 삭제
 	public boolean deleteCouponDetail(String cseq);
 		
 	// 판매자 - 등록 후 30 경과시 쿠폰 지급 가능상태 변경
@@ -44,6 +45,9 @@ public interface ICouponService {
 			
 	// 회원 - 쿠폰 수령
 	public boolean getCoupon(Map<String, Object> map);
+	
+	// 회원 - 쿠폰 수령시 판매자 아이디 체크
+	public String getSellerId(String cseq);
 	
 	// 회원 - 중복쿠폰 확인
 	public String couponChk (Map<String, Object> map);

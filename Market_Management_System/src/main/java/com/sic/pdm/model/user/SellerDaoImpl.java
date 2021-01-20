@@ -29,8 +29,8 @@ public class SellerDaoImpl implements ISellerDao {
 	}
 
 	@Override
-	public SellerVo sellerOne(String sellerid) {
-		SellerVo vo = service.selectOne(NS+"sellerOne", sellerid);
+	public SellerVo sellerOne(String store) {
+		SellerVo vo = service.selectOne(NS+"sellerOne", store);
 		return vo;
 	}
 }

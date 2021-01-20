@@ -31,20 +31,24 @@ public class UserCouponController {
 	
 	// 회원 시점
 	// 매장 행사 정보
-	@RequestMapping(value = "/userViewListCoupon.do")
-	public String userViewListCoupon(String sellerid,Model model,HttpSession session) {
-		List<CouponVo> ucvList = icsvc.userViewListCoupon(sellerid);
-		session.setAttribute("sellerid", sellerid);
-		SellerVo vo = selService.sellerOne(sellerid);
-		model.addAttribute("sell",vo);
-		model.addAttribute("ucvList",ucvList);
-		return "CHS_userViewListCoupon";
+	@RequestMapping(value = "/userViewListCoupon.do", method = RequestMethod.GET)
+	public String userViewListCoupon(String store, Model model,HttpSession session) {
+		if (store.equals("")) {
+			return "CHS_noStore";
+		} else {
+			SellerVo vo = selService.sellerOne(store);
+			String sellerid = vo.getSellerid();
+			session.setAttribute("sellerid", sellerid);
+			List<CouponVo> ucvList = icsvc.userViewListCoupon(sellerid);
+			model.addAttribute("sell",vo);
+			model.addAttribute("ucvList",ucvList);
+			return "CHS_userViewListCoupon";
+		}
 	}
 	
 	// 선택 쿠폰 조회
 	@RequestMapping(value = "/userViewOneCoupon.do" , method = RequestMethod.GET)
 	public String userViewOneCoupon(String cseq,Model model) {
-		System.out.println("///UserCouponController "+cseq);
 		CouponVo ucv = icsvc.userViewOneCoupon(cseq);
 		model.addAttribute("ucv",ucv);
 		return "CHS_userViewOneCoupon";
@@ -63,6 +67,7 @@ public class UserCouponController {
 	// 회원 쿠폰 받기
 	@RequestMapping(value = "/getCoupon.do", method = RequestMethod.GET)
 	public String getCoupon(String cseq, HttpSession session) {
+		String cvo = icsvc.getSellerId(cseq);
 		String id= (String) session.getAttribute("id");
 		if(id == null) { // 비회원 로그인시 loginform.do 이동
 			return "redirect:/loginForm.do";
@@ -70,25 +75,29 @@ public class UserCouponController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("id", id);
 			map.put("cseq", cseq);
+			map.put("sellerid", cvo);
 			icsvc.getCoupon(map);
 			return "redirect:/myCouponList.do";
 		}
 	}
 	
 	// 회원 쿠폰 중복 수령 불가능
-    @RequestMapping(value = "/getCouponChk.do", method = RequestMethod.POST)
-    @ResponseBody
-    public String getCouponChk(String cseq, HttpSession session) {
-        String id= (String) session.getAttribute("id");
-        System.out.println("세션 아이디>>>"+ id);
-        System.out.println("들어온 cseq>>>"+ cseq);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("id", id);
-        map.put("cseq", cseq);
-        String couponChk = icsvc.couponChk(map);
-        System.out.println(" >>>>>"+couponChk);
-        return couponChk;
-    }
+	@RequestMapping(value = "/getCouponChk.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String getCouponChk(String cseq, HttpSession session) {
+		String couponChk = null;
+		String id= (String) session.getAttribute("id");
+		if(id == null) { //비회원 쿠폰 수령할려고 할때 loginform.do 이동
+			couponChk = "loginFail";
+			return couponChk;
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			map.put("cseq", cseq);
+			couponChk = icsvc.couponChk(map);
+			return couponChk;
+		}
+	}
 	
 	// -------------- 혜수 -------------- //
 	@RequestMapping(value = "/coupon.do", method = RequestMethod.GET)

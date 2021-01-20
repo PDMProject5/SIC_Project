@@ -13,7 +13,7 @@ SELECT SELLERID, STORE, STOREPHONE , BEACONMAJOR FROM SELLER s
 
 <select id="sellerOne" parameterType="java.lang.String" resultType="SellerVo">
 SELECT SELLERID, STORE, STOREPHONE , BEACONMAJOR FROM SELLER s 
-WHERE SELLERID = #{sellerid}
+WHERE STORE = #{store}
 </select>
 
 </mapper>
