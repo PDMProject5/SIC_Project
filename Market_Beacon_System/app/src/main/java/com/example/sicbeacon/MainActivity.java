@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity{
         webView = findViewById(R.id.wb_Store);
 
         if (major == 113) {
-            webView.loadUrl("http://"+Storeip+":8099/Market_Management_System/userViewListCoupon.do");
+            webView.loadUrl("http://"+Storeip+":8099/Market_Management_System/userViewListCoupon.do?store=가산디지털단지점");
             webView.setWebChromeClient(new WebChromeClient(){
                 public void onPageFinished(WebView view, String url){
                     webView.loadUrl("javascript:getCouponBtn('"+cseq+"')"); //
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity{
             webView.getSettings().setLoadsImagesAutomatically(true);
 
         } else if (major == 114) {
-            webView.loadUrl("http://www.naver.com");
+            webView.loadUrl("http://"+Storeip+":8099/Market_Management_System/userViewListCoupon.do?store=구로디지털단지점");
             webView.setWebChromeClient(new WebChromeClient());
             webView.setWebViewClient(new WebViewClientClass());
             webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
