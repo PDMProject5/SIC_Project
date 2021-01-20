@@ -27,7 +27,7 @@ window.onload = function(){
         	let regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{4}-?[0-9]{4}$/;
             let phoneNumber = $('#inputPhoneNumber').val();
             if(!regExp.test(phoneNumber)){
-            	alert("-를 재외한 휴대폰번호 11자리를 확인해 주세요");
+            	alert("-를 제외한 올바른 휴대폰 번호를 입력해주세요");
             }else{
             inputCertifiedNumber.style.display = "block";
             checkBtn.style.display = "block";

@@ -13,13 +13,14 @@ onload = function(){
 }
 function duplicate(){
 	var id = document.getElementById("id").value;
-	var idReg = /^(?=.*^[a-zA-Z])(?=.*[0-9]).{5,20}$/;
+	var idReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{5,19}$/;
+	var regExp = /\s/g;
 	if(id == ""){
 		alert("아이디를 입력해 주세요");
-	}else if(!idReg.test(id)) {
-        alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+	}else if(!idReg.test(id) || regExp.test(id)){
+        alert("아이디는 영문자로 시작하는 6~20자 영문자와 숫자를 조합해야 합니다.");
         $('#log').css({'display':'block', 'color':'black'});
-        $('#log').html("<span style='color: red;'>&#42;</span>아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+        $('#log').html("<span style='color: red;'>&#42;</span>아이디는 영문자로 시작하는 6~20자 영문자와 숫자를 조합해야 합니다.");
         document.getElementById("use").style.display = "none";
     }else{
     	$.ajax({
@@ -58,7 +59,7 @@ function useid(){
 	<div>
 	<input type="text" id="id" name="id" placeholder="ID">
 	<input type="button" value="중복 확인" onclick="duplicate()">
-	<p id="log"><span style="color: red;">&#42;</span>아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.</p>
+	<p id="log"><span style="color: red;">&#42;</span>아이디는 영문자로 시작하는 6~20자 영문자와 숫자를 조합해야 합니다.</p>
 	</div>
 	<div>
 	<input type="button" value="사용하기" id="use" onclick="useid()">
