@@ -93,5 +93,9 @@
 		DELETE FROM COUPONBOX
 		WHERE CBDATE = TO_CHAR(SYSDATE-7)
 	</delete>
+	
+	
+	
+	
 
 </mapper>

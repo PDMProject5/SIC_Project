@@ -79,8 +79,11 @@ public class BascketController {
 		String id = (String)session.getAttribute("id");
 		vo.setId(id);
 		String sellerid = (String)session.getAttribute("sellerid");
+		System.out.println(sellerid);
 		SellerVo svo = selService.sellerOne(sellerid);
+		System.out.println(svo.getStore());
 		vo.setStore(svo.getStore());
+		System.out.println(vo);
 		
 		
 		bservice.addBascket(vo);
