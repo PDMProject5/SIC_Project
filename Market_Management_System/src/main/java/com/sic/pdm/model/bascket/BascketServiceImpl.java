@@ -28,9 +28,9 @@ public class BascketServiceImpl implements BascketIService {
 	}
 
 	@Override
-	public List<BascketVo> getAllBascket(String id) {
+	public List<BascketVo> getAllBascket(Map<String, Object> map) {
 		
-		return idao.getAllBascket(id);
+		return idao.getAllBascket(map);
 	}
 	
 	@Override

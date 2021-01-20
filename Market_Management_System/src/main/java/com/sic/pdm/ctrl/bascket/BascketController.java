@@ -22,10 +22,12 @@ import com.sic.pdm.model.bascket.BascketIService;
 import com.sic.pdm.model.del.DelIService;
 import com.sic.pdm.model.mileage.Mileage_IService;
 import com.sic.pdm.model.product.IProductService;
+import com.sic.pdm.model.user.ISellerService;
 import com.sic.pdm.vo.bascket.BascketVo;
 import com.sic.pdm.vo.del.DelVo;
 import com.sic.pdm.vo.mileage.MileageVo;
 import com.sic.pdm.vo.product.ProductVo;
+import com.sic.pdm.vo.user.SellerVo;
 
 
 @Controller
@@ -45,13 +47,23 @@ public class BascketController {
 	@Autowired
 	private Mileage_IService mservice;
 	
+	@Autowired
+	private ISellerService selService;
+	
 	@RequestMapping(value = "/bascketList.do", method=RequestMethod.GET)
 	public String bascketList(Model model,HttpSession session) {
 		String id = (String)session.getAttribute("id");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		
+		String sellerid = (String)session.getAttribute("sellerid");
+		SellerVo svo = selService.sellerOne(sellerid);
+		String store = svo.getStore();
+		map.put("store", store);
 		if(id == null) {
 			return "sessionexpiration";
 		}else {
-		List<BascketVo> lists = bservice.getAllBascket(id);
+		List<BascketVo> lists = bservice.getAllBascket(map);
 		model.addAttribute("lists", lists);
 		logger.info("리스트 값: "+lists);
 
@@ -63,11 +75,12 @@ public class BascketController {
 	}
 	
 	@RequestMapping(value = "/insertBascket.do", method=RequestMethod.POST)
-	public String insertBascket(BascketVo vo, HttpSession session) {
+	public String insertBascket(BascketVo vo, HttpSession session,Model model) {
 		String id = (String)session.getAttribute("id");
 		vo.setId(id);
-		String store = "가산디지털단지점";
-		vo.setStore(store);
+		String sellerid = (String)session.getAttribute("sellerid");
+		SellerVo svo = selService.sellerOne(sellerid);
+		vo.setStore(svo.getStore());
 		
 		
 		bservice.addBascket(vo);

@@ -11,7 +11,7 @@ public interface BascketIDao {
 	
 	public boolean addDetailBascket(BascketVo vo);
 	
-	public List<BascketVo> getAllBascket(String id);
+	public List<BascketVo> getAllBascket(Map<String, Object> map);
 	
 	public BascketVo getOneBascket(Map<String, Object> map);
 	
