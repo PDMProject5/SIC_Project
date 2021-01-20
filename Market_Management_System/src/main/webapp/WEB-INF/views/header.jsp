@@ -22,7 +22,9 @@
   </script>
 <style type="text/css">
 
-
+#li_Home {
+	text-align: center;
+}
 </style>  
   
 </head>
@@ -38,71 +40,65 @@
      
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      
       <ul class="nav navbar-nav navbar-right">
        <!-- 로그인을 하지 않은 상태에서 판매지점을 선택했을때 -->
       <c:choose>
       	<c:when test="${not empty id}">
-      	<c:if test="${not empty sell}">
-    		<li>
-    			<a href="./product.do?sellerid=${sell.sellerid}">MENU</a>
-    			<a href="./bascketList.do?store=${sell.store}" class="w3-bar-item w3-button">장바구니 조회</a>
-    		</li>
-    	</c:if>
-      	<li>
-      		<a href='#'>${id}님 환영합니다.</a>
-      	</li>
-    	<li>
-    		<a href="./logout.do">로그아웃</a>
-    	</li>
-    	<li>
+      		<li>
+      			<a href = "./main.do">메인 페이지 이동</a>
+      		</li>
+      		<c:if test = "${not empty sell.sellerid}">
+      		<li>
+      			<a href = "./product.do?sellerid=${sell.sellerid}">메뉴</a>
+      		</li>
+      		<li>
+      			<a href = "./bascketList.do?store=${sell.store}">장바구니</a>
+      		</li>
+      		</c:if>
+	      	<li>
+	      		<a href='#'>${id}님 환영합니다.</a>
+	      	</li>
+	    	<li>
+	    		<a href="./logout.do">로그아웃</a>
+	    	</li>
+	    	<li>
     		<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
   			<button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
   			<a href="./userModified.do" class="w3-bar-item w3-button">회원 정보 수정</a>
+  			<a href="./mileage.do" class="w3-bar-item w3-button">마일리지 내역 조회</a>
   			<a href="./myCouponList.do" class="w3-bar-item w3-button">쿠폰 내역 조회</a>
- 			<a href="./delList.do" class="w3-bar-item w3-button">배송지 목록 조회</a>
- 			
- 			<a href="./mileage.do" class="w3-bar-item w3-button">마일리지 조회</a>
- 			
- 			
- 			
- 			
+ 			<a href="./orderlist.do" class="w3-bar-item w3-button">주문내역  조회</a>
 			</div>
 			<div style="color: gray;">
   				<button onclick="openRightMenu()" style="background-color: #101010; margin-top: 10px; border-color: black;">MyPage</button>
 			</div>
 		</li>
-    	
-      </c:when>
-      
-      
-       <c:when test="${not empty sell}">
-      	<li>
-    		<a href="./product.do?sellerid=${sell.sellerid}">MENU</a>
-    	</li>
-    	<li>
-      		<a href='./loginForm.do'>로그인</a>
-      	</li>
-    	<li>
-    		<a href="./singUp.do">회원가입</a>
-    	</li>
-      </c:when>
-      
-      
-      
-      	<c:when test="${empty id}">
-      	<li>
-      		<a href='./loginForm.do'>로그인</a>
-      	</li>
-    	<li>
-    		<a href="./singUp.do">회원가입</a>
-    	</li>
-      </c:when>
-      
-      
-      
-      	
-     
+    	</c:when>
+    	<c:when test="${not empty sellerid}">
+    		<li>
+      			<a href = "./viewListCoupon.do">메인 페이지 이동</a>
+      		</li>
+    		<li>
+      			<a href = "./product.do?sellerid=${sellerid}">MENU</a>
+      		</li>
+	    	<li>
+	      		<a href='#'>${sellerid}님 환영합니다.</a>
+	      	</li>
+	    	<li>
+	    		<a href="./logout.do">로그아웃</a>
+	    	</li>
+      	</c:when>
+      	<c:otherwise>
+      		<li>
+      			<a href = "./main.do">메인 페이지 이동</a>
+      		</li>
+      		<li>
+      			<a href='./loginForm.do'>로그인</a>
+      		</li>
+    		<li>
+    			<a href="./singUp.do">회원가입</a>
+    		</li>		
+      	</c:otherwise>
       </c:choose>
       </ul>
     </div>

@@ -69,7 +69,6 @@ public class CouponController {
 	public String insertCoupon(CouponVo cDto,  
 			@RequestParam(value = "cdstate") String cdstate, 
 			HttpSession session, MultipartFile file) {
-		
 		String sellerid = (String) session.getAttribute("sellerid");
 		cDto.setSellerid(sellerid);
 		

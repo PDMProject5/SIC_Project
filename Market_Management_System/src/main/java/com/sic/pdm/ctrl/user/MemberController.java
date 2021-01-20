@@ -135,6 +135,7 @@ public class MemberController {
 	// 로그아웃 버튼을 누르면 동작되는 메소드
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
+		session.removeAttribute("sellerid");
 		session.removeAttribute("id");
 		session.setAttribute("sessionchk", "로그인실패");
 		return "redirect:/main.do";

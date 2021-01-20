@@ -23,7 +23,7 @@ VALUES(ODNUM_SEQ.NEXTVAL, (SELECT DISTINCT ICODE FROM INVENPRICE i2 WHERE ICODE 
 
 <!-- 장바구니 조회 -->
 <select id="getAllBascket" parameterType="java.util.Map" resultType="BascketVo">
-SELECT o.ONUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
+SELECT o.ONUM,o2.ODNUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 	FROM "ORDER" o 
 	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
@@ -31,21 +31,21 @@ SELECT o.ONUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 </select>
 
 <select id="getOneBascket" parameterType="java.util.Map" resultType="BascketVo">
-SELECT o.ONUM,i.ICODE ,i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
+SELECT o.ONUM,o2.ODNUM,i.ICODE ,i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 	FROM "ORDER" o 
 	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
-		WHERE ID=#{id} AND o.ONUM=#{onum} AND OSTATE = 'B'
+		WHERE ID=#{id} AND o2.ODNUM=#{odnum} AND OSTATE = 'B'
 </select>
 
 <select id="getOrderInfo" parameterType="java.util.List" resultType="BascketVo">
-SELECT o.ONUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
+SELECT o.ONUM, o2.ODNUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 	FROM "ORDER" o 
 	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
-		WHERE OSTATE = 'B' AND O.ONUM IN 
-	<foreach item="onum" collection="list" open="(" separator="," close=")">
-			#{onum}
+		WHERE OSTATE = 'B' AND o2.ODNUM IN 
+	<foreach item="odnum" collection="list" open="(" separator="," close=")">
+			#{odnum}
 	</foreach>
 
 </select>
@@ -53,17 +53,28 @@ SELECT o.ONUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 <!-- 장바구니 수정 -->
 <update id="modifyBascket" parameterType="java.util.Map">
 UPDATE ORDERDETAIL SET ODSTOCK=#{odstock}
-WHERE ONUM=#{onum} AND ODSTOCK > 0
+WHERE ODNUM=#{odnum} AND ODSTOCK > 0
 </update>
 
 
 <!-- 장바구니 삭제 -->
 <delete id="deleteBascket" parameterType="java.util.List">
 DELETE FROM ORDERDETAIL o 
-WHERE ONUM IN 
-	<foreach item="onum" collection="list" open="(" separator="," close=")">
-			#{onum}
+WHERE ODNUM IN 
+	<foreach item="odnum" collection="list" open="(" separator="," close=")">
+			#{odnum}
 	</foreach>
 </delete>
+<delete id="deleteBascketOne" parameterType="java.lang.String">
+DELETE FROM ORDERDETAIL o 
+WHERE ONUM = #{onum} 
+</delete>
+
+<select id="checkBascket" parameterType="java.util.Map" resultType="BascketVo">
+SELECT ID,o.ONUM, o.STORE,o.OSTATE
+	FROM "ORDER" o 
+		WHERE ID=#{id} AND o.STORE=#{store} AND OSTATE = 'B'
+</select>
+
 
 </mapper>

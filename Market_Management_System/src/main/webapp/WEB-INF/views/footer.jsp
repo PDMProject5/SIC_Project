@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 #footer {
-    height: 80px;
+	height: 10%;
     width: 100%;
-    position: absolute;
+    position: absolute; 
     bottom: 0;
     left: 0;
     right: 0;
@@ -21,10 +21,10 @@
     background: #101010;
     border-bottom: 1px solid #363636;
 }
-footer {
-	margin: 0 auto;
-    display: block;
-}
+ footer { 
+ 	margin: 0 auto; 
+     display: block; 
+ } 
 
 
 body {
@@ -47,7 +47,11 @@ body {
 </head>
 <body>
 <footer id="footer">
-        <p class="copyright"><span>Product Data Mangement ©PDM © &amp; ™ Lucasfilm Ltd.</span></p>
+        <p class="copyright"><span>
+        Product Data Mangement ©PDM © &amp; ™ Lucasfilm Ltd.<br/>
+        Kim Ki Hong /Sin dae Han / Lee Yong Min / Lee Hye Su / Choi Hong Sik <br/>
+        Made By 2021.01
+        </span></p>
     </footer>
 </body>
 </html>

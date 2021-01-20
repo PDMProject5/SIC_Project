@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#storeCouponList{
+		float: left;
+		text-align: center;
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 <script type="text/javascript">
 
@@ -48,7 +54,6 @@
 							<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" />
 					</td>
 				</tr>
-
 				</c:forEach>
 				</tbody>
 				</table>
