@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-</head>
+<%@ include file="./header.jsp" %>
 <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	function login(){
@@ -72,7 +72,7 @@
 			<td>
 				<input type="text" name="id" id="id" placeholder="ID">
 			</td>
-			<td colspan="2">
+			<td rowspan="3">
 				<input type="submit" value="로그인">
 			</td>
 		</tr>
@@ -96,5 +96,6 @@
 	<button onclick="window.open('./findid.do','아이디 찾기','width=500px, height=500px')">아이디 찾기</button>
 	<button onclick="window.open('./findpw.do','비밀번호 찾기','width=500px, height=500px')">비밀번호 찾기</button>
 </div>
+<%@ include file="./footer.jsp" %>
 </body>
 </html>

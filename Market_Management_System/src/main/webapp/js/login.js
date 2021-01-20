@@ -1,6 +1,7 @@
 onload = function(){
 	document.getElementById("idchk").style.display = "none";
 	document.getElementById("namechk").style.display = "none";
+	document.getElementById("passwordchk").style.display = "none";
 	document.getElementById("passchk").style.display = "none";
 	document.getElementById("roadaddrchk").style.display = "none";
 	document.getElementById("addrchk").style.display = "none";
@@ -23,6 +24,7 @@ function singup(){
 	var marketing = document.getElementById("marketing").checked;
 	var passwordchk = document.getElementById("passwordchk");
 	var pwReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,20}$/;
+	var regExp = /\s/g;
 	document.getElementById("idchk").style.display = "none";
 	document.getElementById("namechk").style.display = "none";
 	document.getElementById("passwordchk").style.display = "none";
@@ -37,7 +39,7 @@ function singup(){
 	}else if(username==""){
 		document.getElementById("namechk").style.display = "block";
 		return false;
-	}else if(pw==""||!pwReg.test(pw)){
+	}else if(pw==""||!pwReg.test(pw)||regExp.test(pw)){
 		document.getElementById("passwordchk").style.display = "block";
 		return false;
 	}else if(pw != pwchk){
