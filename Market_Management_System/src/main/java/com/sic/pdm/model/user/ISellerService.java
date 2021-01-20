@@ -10,5 +10,5 @@ public interface ISellerService {
 	
 	public List<SellerVo> sellerList();
 	
-	public SellerVo sellerOne(String sellerid);
+	public SellerVo sellerOne(String store);
 }

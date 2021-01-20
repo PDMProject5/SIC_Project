@@ -83,6 +83,11 @@ public class CouponServiceImpl implements ICouponService {
     public String couponChk(Map<String, Object> map) {
         return icDao.couponChk(map);
     }
+	
+	@Override
+	public String getSellerId(String cseq) {
+		return icDao.getSellerId(cseq);
+	}
 
 	@Override
 	public CouponVo userViewOneCoupon(String cseq) {
