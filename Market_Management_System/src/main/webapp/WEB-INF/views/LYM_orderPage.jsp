@@ -140,7 +140,7 @@
 		<input type="text" id="mileages" name="mileages">
 		<input type="button" value="전체 적용" id="apply" onclick="miles()">
 		<p id="mileage">총 마일리지 금액 : ${mil.mmoney}</p>
-	<br>
+	
 </div>
 
 <div>
