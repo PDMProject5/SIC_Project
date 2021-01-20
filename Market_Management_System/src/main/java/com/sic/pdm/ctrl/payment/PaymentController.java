@@ -14,17 +14,17 @@ import com.sic.pdm.vo.payment.PaymentVo;
 @Controller
 public class PaymentController {
 	
-	@Autowired
-	private Payment_IService iService;
-	
-	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
-	public String orderDetailpull(PaymentVo pvo, HttpSession session) {
-		
-		
-		
-		return "redirect:/.do";
-	}
-	
+//	@Autowired
+//	private Payment_IService iService;
+//	
+//	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
+//	public String orderDetailpull(PaymentVo pvo, HttpSession session) {
+//		
+//		
+//		
+//		return "redirect:/.do";
+//	}
+//	
 	
 
 }
