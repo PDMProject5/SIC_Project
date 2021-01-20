@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%@ include file="./header.jsp" %>
 <script type="text/javascript">
 	function updateautoOrder(){
 		var autonum = document.getElementById("autonum");
@@ -54,4 +55,5 @@
 	<button onclick="updateautoOrder()">자동 발주 수정</button>
 	<button onclick="location.href='./autoOrderform.do'">뒤로가기</button>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

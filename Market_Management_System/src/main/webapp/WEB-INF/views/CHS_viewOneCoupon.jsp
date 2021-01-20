@@ -94,6 +94,7 @@
 	
 </script>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 	<form id = "frm" enctype="multipart/form-data" method="post" action = "./updateCoupon.do">
 		<input type="hidden" id = "cseq" name = "cseq" value="${cv.cseq}">
@@ -157,4 +158,5 @@
 		</script>
 	</form>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

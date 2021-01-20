@@ -11,13 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-			<!-- Modal content-->
-<!-- 			<div id="modal" class="modal-content"> -->
-<!-- 				<div class="modal-header"> -->
-<!-- 					<button type="button" class="close" data-dismiss="modal">&times;</button> -->
-<!-- 					<h4 class="modal-title">배송지 목록</h4> -->
-<!-- 				</div> -->
-<!-- 				<div class="modal-body"> -->
+
 					<form action="#" class="form-margin" method="post" id="delSelect">
 						<table id="del" class="table table-bordered">
 				<thead>	
@@ -52,7 +46,7 @@
 				</tbody>		
 			</table>
 					</form>
-<!-- 				</div> -->
+
 			<div>
 				<input type="button" onclick="closeSel()" value="닫기">
 				<input type="hidden" id="dname2">

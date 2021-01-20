@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>자동 발주</title>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 <input type="hidden" id="listchk" value="${lists}">
 <form>
@@ -98,4 +99,5 @@
 }
 </script>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

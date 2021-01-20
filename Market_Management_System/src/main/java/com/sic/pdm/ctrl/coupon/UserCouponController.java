@@ -38,7 +38,8 @@ public class UserCouponController {
 		} else {
 			SellerVo vo = selService.sellerOne(store);
 			String sellerid = vo.getSellerid();
-			session.setAttribute("sellerid", sellerid);
+			String store2 = vo.getStore();
+			session.setAttribute("store", store2);
 			List<CouponVo> ucvList = icsvc.userViewListCoupon(sellerid);
 			model.addAttribute("sell",vo);
 			model.addAttribute("ucvList",ucvList);
@@ -103,7 +104,7 @@ public class UserCouponController {
 	@RequestMapping(value = "/coupon.do", method = RequestMethod.GET)
 	public String coupon(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		List<CouponVo> cList = icsvc.coupon(id);
+		List<CouponVo> cList = icsvc.getCouponList(id);
 		model.addAttribute("cList",cList);
 		return "LHS_coupon";
 	}

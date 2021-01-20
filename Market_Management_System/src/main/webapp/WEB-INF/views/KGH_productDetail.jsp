@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>제품 상세정보</title>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 	<!-- form태그로 남겨둘테니 이따 가져갈 데이터 있으면 참고해서 가져가주세요! 화면 꾸미는건 나중에 -->
 	<button onclick="location.href='javascript:history.back()'">뒤로가기</button>
@@ -38,7 +39,7 @@
 				<input type="submit" value="장바구니 담기"/>
 	</form>
 </body>
-
+<%@ include file="./footer.jsp" %>
 <script type="text/javascript">
 var stock = document.getElementById("odstock").value;
 var oprice = document.getElementById("oprice").value;

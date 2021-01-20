@@ -23,7 +23,7 @@
                     <fmt:parseDate var="startDate" value="${ucvList.cdate}" pattern="yyyy-MM-dd" />
                     <fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
                     ~
-                    <fmt:parseDate var="endDate" value="${ucvList.cdate}" pattern="yyyy-MM-dd" />
+                    <fmt:parseDate var="endDate" value="${ucvList.clastdate}" pattern="yyyy-MM-dd" />
                     <fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
                 </td>
             </tr>
