@@ -63,7 +63,7 @@ public class PopupActivity extends Activity implements BeaconConsumer{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.popup_activity);
 
-//        // TODO: 비콘 매니저 생성
+        // TODO: 비콘 매니저 생성
         beaconManager = BeaconManager.getInstanceForApplication(this);
 
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
@@ -87,10 +87,10 @@ public class PopupActivity extends Activity implements BeaconConsumer{
 
 
             // 비콘의 아이디와 거리를 측정하여 textView에 넣는다.
-            for(final Beacon beacon : beaconList){
+            for(final Beacon beacon : beaconList) {
                 int major = beacon.getId2().toInt(); //beacon major
-                    if (major == 113){
-                        String StoreName = "가산디지털점";
+                if (major == 113) {
+                    String StoreName = "가산디지털점";
 
                     List<String> data = new ArrayList<>();
                     data.add(StoreName);
@@ -99,23 +99,17 @@ public class PopupActivity extends Activity implements BeaconConsumer{
                     listView = findViewById(R.id.StorelistView);
                     listView.setAdapter(adapter);
 
-                    }
-
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("major", beacon.getId2().toInt());
                         startActivity(intent);//다음 액티비티로 이동
 
-//                            String major = beacon.getId2().toString();
-//                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.naver.com"));
-//                            startActivity(intent);
-
-                        } // end onItemClick
-                    }); // end setOnItemClickListener
-
+                    } // end onItemClick
+                }); // end setOnItemClickListener
+            }
             } // end For
         } // end handleMessage
     } // end CustomHandler
