@@ -22,13 +22,16 @@
 <!-- 	WHERE ID = #{id} AND MSTATE = 'P' -->
 <!-- 	</select> -->
 	
-	
-	
-	
 	<update id="mileagerefund" parameterType="MileageVo">
 		UPDATE MILEAGE 
-		SET MMONEY = (SELECT PAYMENTAMT FROM PAYMENT WHERE PAYMENTNUM = 'P006'), MSTATE = 'R', MDATE = SYSDATE 
+		SET MMONEY = (SELECT PAYMENTAMT FROM PAYMENT WHERE PAYMENTNUM = #{paymentnum}), MSTATE = 'R', MDATE = SYSDATE 
 		WHERE MSEQ = #{mseq};
 	</update>
+	
+	
+	<insert id="useMileage" parameterType="MileageVo">
+		INSERT INTO MILEAGE ( MSEQ,ID,MMONEY,MDATE,MSTATE)
+		VALUES(MSEQ_SEQ.NEXTVAL,#{id},#{mmoney},SYSDATE,'M')
+	</insert>
 	
 </mapper>

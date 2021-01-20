@@ -11,7 +11,7 @@
 	</insert>
 	
 	<update id="orderdel" parameterType="PaymentVo">
-	UPDATE "ORDER" SET ODATE = SYSDATE , ROADADDR = #{roadaddr},  ADDR = #{addr}, DELIVERYSELECT = 'Y', OSTATE ='P' WHERE ONUM =#{onum};
+	UPDATE "ORDER" SET ODATE = SYSDATE , ROADADDR = #{roadaddr},  ADDR = #{addr}, DELIVERYSELECT = 'Y', OSTATE ='D' WHERE ONUM =#{onum};
 	</update>
 	
 	<update id="orderdel2" parameterType="java.lang.String">

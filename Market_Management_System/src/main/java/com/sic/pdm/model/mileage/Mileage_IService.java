@@ -9,5 +9,9 @@ public interface Mileage_IService {
 	public MileageVo totalMiles(String id);
 	
 	public List<MileageVo> detailMiles(String id);
+	
+	public boolean mileagerefund(MileageVo mvo);
+	
+	public boolean useMileage(MileageVo mvo);
 
 }
