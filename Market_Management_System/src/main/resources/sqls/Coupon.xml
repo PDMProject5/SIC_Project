@@ -66,13 +66,17 @@
 		INSERT INTO COUPONBOX (CBSEQ, ID, CSEQ, SELLERID, CBDATE)
 		VALUES (COUPONBOX_SEQ.NEXTVAL, (SELECT ID FROM MEMBER WHERE ID = #{id}),
 		(SELECT CSEQ FROM COUPON WHERE CENABLE = 'Y' AND CSEQ = #{cseq}),
-		(SELECT SELLERID FROM SELLER WHERE SELLERID = 'admin01'),
+		(SELECT SELLERID FROM SELLER WHERE SELLERID = #{sellerid}),
 		SYSDATE)
 	</insert>
 	
 	<select id="couponChk" parameterType="java.util.Map" resultType="java.lang.String">
-        SELECT CSEQ FROM COUPONBOX WHERE CSEQ = #{cseq} AND ID = #{id}
-    </select>
+		SELECT CSEQ FROM COUPONBOX WHERE CSEQ = #{cseq} AND ID = #{id}
+	</select>
+	
+	<select id = "getSellerId" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT SELLERID FROM COUPON WHERE CSEQ = #{cseq}
+	</select>
 	
 	<select id="getCouponList" parameterType="java.lang.String" resultType="CouponVo">
 		SELECT c2.CNOTIFY, c2.CTHUMBIMG FROM COUPONBOX c, COUPON c2  
@@ -82,23 +86,12 @@
 	</select>
 	
 	<select id = "userViewOneCoupon" resultType="CouponVo" parameterType="java.lang.String">
-		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE, COUPON FROM COUPON WHERE CSEQ = #{cseq}
+		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON WHERE CSEQ = #{cseq}
 	</select>
 	
 	<delete id = "autoGetCouponDel">
 		DELETE FROM COUPONBOX
 		WHERE CBDATE = TO_CHAR(SYSDATE-7)
 	</delete>
-	
-	<select id="coupon" resultType="CouponVo" parameterType="java.lang.String">
-		SELECT c2.CNOTIFY, c.CBSEQ, c2.CSEQ , c2.COUPON FROM COUPONBOX c, COUPON c2  
-		WHERE c.CSEQ = c2.CSEQ 
-		AND ID = #{id} 
-		AND c2.CENABLE = 'Y'
-	</select>
-	
-<!-- 	<delete id=""> -->
-<!-- 		DELETE FROM COUPONBOX c WHERE c.CSEQ = #{cseq} AND c.ID = #{id} -->
-<!-- 	</delete> -->
 
 </mapper>

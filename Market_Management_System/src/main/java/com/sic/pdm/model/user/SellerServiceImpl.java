@@ -24,9 +24,9 @@ public class SellerServiceImpl implements ISellerService {
 	}
 
 	@Override
-	public SellerVo sellerOne(String sellerid) {
+	public SellerVo sellerOne(String store) {
 		
-		return dao.sellerOne(sellerid);
+		return dao.sellerOne(store);
 	}
 
 }

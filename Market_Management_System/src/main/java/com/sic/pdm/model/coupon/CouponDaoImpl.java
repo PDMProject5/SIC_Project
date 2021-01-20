@@ -104,6 +104,11 @@ public class CouponDaoImpl implements ICouponDao {
     }
 	
 	@Override
+	public String getSellerId(String cseq) {
+		return sqlSession.selectOne(NS + "getSellerId" , cseq);
+	}
+	
+	@Override
 	public List<CouponVo> getCouponList(String id){
 		return sqlSession.selectList(NS + "getCouponList", id);
 	}

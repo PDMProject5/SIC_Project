@@ -14,23 +14,26 @@
 	}
 	
 	function getCouponBtn(cseq) {
-        $.ajax({
-            url:"./getCouponChk.do",
-            type:"post",
-            data:"cseq="+cseq,
-            async: true,
-            success:function(msg){
-                if(msg == ""){
-                    location.href = "./getCoupon.do?cseq="+cseq;
-                } else {
-                    alert("중복된 쿠폰입니다");
-                }
-            },
-            error:function(request,status,error){
-                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-               }
-        });
-    }
+		$.ajax({
+			url:"./getCouponChk.do",
+			type:"post",
+			data:"cseq="+cseq,
+			async: true,
+			success:function(msg){
+				if(msg == ""){
+					location.href = "./getCoupon.do?cseq="+cseq;
+				} else if(msg == "loginFail"){
+					alert ("쿠폰은 로그인 된 회원만 수령 가능합니다.");
+					location.href = "./loginForm.do"
+				} else {
+					alert("중복된 쿠폰입니다");
+				}
+			},
+			error:function(request,status,error){
+		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+		       }
+		});
+	}
 
 </script>
 </head>
@@ -44,7 +47,7 @@
 			<td>쿠폰 지급 기간</td>
 			<td>
 			<fmt:parseDate var="startDate" value="${ucv.cdate}" pattern="yyyy-MM-dd" />
-			<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/> 2020-01-01
+			<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
 			~
 			<fmt:parseDate var="endDate" value="${ucv.cdate}" pattern="yyyy-MM-dd" />
 			<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
