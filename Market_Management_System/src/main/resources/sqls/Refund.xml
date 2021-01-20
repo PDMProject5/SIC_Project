@@ -50,4 +50,6 @@
 	WHERE ONUM = #{onum}
 	</update>
 	
+	
+	
 </mapper>

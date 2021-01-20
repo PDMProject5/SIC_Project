@@ -23,10 +23,12 @@
 <!-- 	</select> -->
 	
 	
-<!-- 	<insert id=""> -->
-<!-- 		INSERT INTO MILEAGE (MSEQ,ID,MMONEY,MDATE,MSTATE) -->
-<!-- 		VALUES(MSEQ_SEQ.NEXTVAL,'test01',(SELECT FLOOR(PAYMENTAMT *0.01) FROM PAYMENT WHERE PAYMENTNUM = 'P002'),SYSDATE, 'P'); -->
-<!-- 	</insert> -->
 	
+	
+	<update id="mileagerefund" parameterType="MileageVo">
+		UPDATE MILEAGE 
+		SET MMONEY = (SELECT PAYMENTAMT FROM PAYMENT WHERE PAYMENTNUM = 'P006'), MSTATE = 'R', MDATE = SYSDATE 
+		WHERE MSEQ = #{mseq};
+	</update>
 	
 </mapper>

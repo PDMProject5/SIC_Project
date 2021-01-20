@@ -83,8 +83,7 @@ public class BascketController {
 		String id = (String)session.getAttribute("id");
 		vo.setId(id);
 		String store = (String)session.getAttribute("store");
-		vo.setStore(store);
-		
+		vo.setStore(store);		
 		
 		bservice.addBascket(vo);
 		bservice.addDetailBascket(vo);
