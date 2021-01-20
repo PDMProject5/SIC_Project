@@ -47,10 +47,10 @@
 			<td>쿠폰 지급 기간</td>
 			<td>
 			<fmt:parseDate var="startDate" value="${ucv.cdate}" pattern="yyyy-MM-dd" />
-			<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
-			~
-			<fmt:parseDate var="endDate" value="${ucv.cdate}" pattern="yyyy-MM-dd" />
-			<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
+            ~
+            <fmt:parseDate var="endDate" value="${ucv.clastdate}" pattern="yyyy-MM-dd" />
+            <fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
 			</td>
 		</tr>
 		<tr>

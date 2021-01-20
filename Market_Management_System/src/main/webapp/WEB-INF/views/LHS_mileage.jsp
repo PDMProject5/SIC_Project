@@ -33,6 +33,7 @@ div {
 
 </style>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 	<div>
 		<h1>마일리지</h1>
@@ -92,4 +93,5 @@ div {
 		<input type="button" value="돌아가기" onclick="history.back(-1)">
 	</div>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

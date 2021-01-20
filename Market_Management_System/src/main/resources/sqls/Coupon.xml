@@ -57,9 +57,9 @@
 	</update>
 	
 	<select id="userViewListCoupon" parameterType="java.lang.String" resultType="CouponVo">
-		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON 
+		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE, CDATE+30 AS CLASTDATE FROM COUPON 
 		WHERE CENABLE = 'Y' 
-		AND SELLERID = #{sellerid}
+		AND SELLERID = #{sellerid} ORDER BY CLASTDATE DESC
 	</select>
 	
 	<insert id = "getCoupon" parameterType="java.util.Map">
@@ -79,14 +79,14 @@
 	</select>
 	
 	<select id="getCouponList" parameterType="java.lang.String" resultType="CouponVo">
-		SELECT c2.CNOTIFY, c2.CTHUMBIMG FROM COUPONBOX c, COUPON c2  
+		SELECT c.CSEQ, c2.COUPON, c2.CNOTIFY, c2.CTHUMBIMG FROM COUPONBOX c, COUPON c2  
 		WHERE c.CSEQ = c2.CSEQ 
 		AND ID = #{id} 
 		AND c2.CENABLE = 'Y'
 	</select>
 	
 	<select id = "userViewOneCoupon" resultType="CouponVo" parameterType="java.lang.String">
-		SELECT CSEQ, CNOTIFY, CTHUMBIMG, CDATE FROM COUPON WHERE CSEQ = #{cseq}
+		SELECT CSEQ, COUPON,CNOTIFY, CTHUMBIMG, CDATE, CDATE+30 AS CLASTDATE FROM COUPON WHERE CSEQ = #{cseq} ORDER BY CLASTDATE DESC
 	</select>
 	
 	<delete id = "autoGetCouponDel">
@@ -95,7 +95,4 @@
 	</delete>
 	
 	
-	
-	
-
 </mapper>

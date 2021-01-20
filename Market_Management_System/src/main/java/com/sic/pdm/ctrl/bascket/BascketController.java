@@ -52,13 +52,17 @@ public class BascketController {
 	
 	@RequestMapping(value = "/bascketList.do", method=RequestMethod.GET)
 	public String bascketList(Model model,HttpSession session) {
+		String store = (String)session.getAttribute("store");
 		String id = (String)session.getAttribute("id");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		
 		String sellerid = (String)session.getAttribute("sellerid");
-		SellerVo svo = selService.sellerOne(sellerid);
-		String store = svo.getStore();
+		System.out.println("판매자"+sellerid);
+//		SellerVo svo = selService.sellerOne(sellerid);
+//		System.out.println("판매자정보"+svo);
+//		String store = svo.getStore();
+		System.out.println("지점명"+store);
 		map.put("store", store);
 		if(id == null) {
 			return "sessionexpiration";
@@ -78,13 +82,8 @@ public class BascketController {
 	public String insertBascket(BascketVo vo, HttpSession session,Model model) {
 		String id = (String)session.getAttribute("id");
 		vo.setId(id);
-		String sellerid = (String)session.getAttribute("sellerid");
-		System.out.println(sellerid);
-		SellerVo svo = selService.sellerOne(sellerid);
-		System.out.println(svo.getStore());
-		vo.setStore(svo.getStore());
-		System.out.println(vo);
-		
+		String store = (String)session.getAttribute("store");
+		vo.setStore(store);		
 		
 		bservice.addBascket(vo);
 		bservice.addDetailBascket(vo);

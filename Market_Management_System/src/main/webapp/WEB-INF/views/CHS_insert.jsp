@@ -130,6 +130,7 @@
 
 </script>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 	<div id="insertCouponForm">
 		<form id = "frm" enctype="multipart/form-data" method="post" action="./insertCoupon.do">
@@ -187,4 +188,5 @@
 		</form>
 	</div>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

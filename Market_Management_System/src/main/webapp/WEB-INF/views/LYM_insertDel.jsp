@@ -41,6 +41,7 @@
 
 
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 <h1>배송지 등록</h1>
 <div id="container">
@@ -82,6 +83,7 @@
 	</form>
 </div>
 </body>
+<%@ include file="./footer.jsp" %>
 <script type="text/javascript">
 function insertDel(){
 	

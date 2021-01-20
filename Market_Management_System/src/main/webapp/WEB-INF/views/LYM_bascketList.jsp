@@ -10,6 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <head>
+<%@ include file="./header.jsp" %>
 <meta charset="UTF-8">
 <title>장바구니</title>
 </head>
@@ -98,6 +99,7 @@
 
 
 </body>
+<%@ include file="./footer.jsp" %>
 <script type="text/javascript">
 
 // $(document).ready(function(){
