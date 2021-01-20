@@ -32,10 +32,11 @@
 					</tr>
 				</thead>
 				<tbody>
+					
 					<c:forEach var="dto" items="${lists}" varStatus="vs">		
 						<tr>
 							<td>
-								<input type='checkbox' id="chkVal" name='chkVal' value='${dto.onum}'>
+								<input type='checkbox' id="chkVal" name='chkVal' value='${dto.odnum}'>
 							</td>
 							<td>	
 								<strong><a  href="productDetail.do?iname=${dto.iname}">${dto.iname}</a></strong><br>
@@ -43,7 +44,7 @@
 							</td>
 							<td>
 								<a >${dto.odstock}</a>&nbsp;개&nbsp;
-								<input type="button" value="변경" onclick="modifyStock(${dto.onum})">
+								<input type="button" value="변경" onclick="modifyStock(${dto.odnum})">
 							</td>
 							<td>
 								<span id="price">
@@ -54,13 +55,17 @@
 								<span>원</span>
 							</td>
 						</tr>
-							<c:if test="${dto.onum ne null}"> <!-- 체크박스 체크된것만 --> 
+							<c:if test="${dto.odnum ne null}"> <!-- 체크박스 체크된것만 --> 
 								<c:set var="sum" value="${sum+rdto}"/> 							
 							</c:if>
 					</c:forEach>						
-								
-				</tbody>		
+							
+				</tbody>
+							
 			</table>
+				<c:if test="${empty lists}">
+						<h3>장바구니에 담긴 제품이 없습니다..</h3>
+					</c:if>	
 				<div>
 					<input type="submit" value="선택 삭제">
 				</div>
@@ -123,12 +128,12 @@ var ajaxModify = function(val){
 	$.ajax({
 		url : './modifyStock.do',
 		method : 'post',
-		data:"onum="+val,
+		data:"odnum="+val,
 		dataType : 'json',
 		success : function(v){
 			console.log(v.onum, v.iname, v.oprice);
 		 html = "<div class='form-group'>";
-         html += "<input type='hidden' id='onum' name='onum' value='"+v.onum+"' />";
+         html += "<input type='hidden' id='odnum' name='odnum' value='"+v.odnum+"' />";
          html += "<input type='hidden' id='iname' name='iname' value='"+v.iname+"'/>";
          html += "<input type='hidden' id='oprice' name='oprice' value='"+v.oprice+"' />";
             
@@ -166,8 +171,8 @@ var ajaxModify = function(val){
 
 function modStock(){
 	var odstock = document.getElementById("odstock").value;
-	var onum = document.getElementById("onum").value;
-	console.log(odstock,onum);
+	var odnum = document.getElementById("odnum").value;
+	console.log(odstock,odnum);
 	var frm = document.getElementById("StoUpdate");
 	frm.action = "./StoUpdate.do";
 	frm.submit();
@@ -227,7 +232,17 @@ function modStock(){
 				return false;
 			}
 
-		} else {
+		}else if(n == chkval.length){
+			var con = confirm("선택한 제품을 삭제하시겠습니까?");
+			if(con){
+				
+			document.getElementById("frm").action = "./multiDel2.do";
+			}else{
+				return false;
+			}
+		} 
+		
+		else {
 			alert("삭제할 제품을 선택해 주세요.");
 			return false;
 		}

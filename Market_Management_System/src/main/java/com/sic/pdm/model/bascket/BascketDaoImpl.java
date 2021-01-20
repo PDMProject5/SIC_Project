@@ -71,4 +71,16 @@ public class BascketDaoImpl implements BascketIDao {
 		return lists;
 	}
 	
+	@Override
+	public BascketVo checkBascket(Map<String, Object> map) {
+		logger.info("checkBascket");
+		BascketVo vo = session.selectOne(NS+"checkBascket", map);
+		return vo;
+	}
+	
+	@Override
+	public boolean deleteBascketOne(String onum) {
+		int n = session.delete(NS+"deleteBascketOne", onum);
+		return n>0?true:false;
+	}
 }

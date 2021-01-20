@@ -57,11 +57,10 @@ public class BascketController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		
-		String sellerid = (String)session.getAttribute("sellerid");
+		SellerVo svo = selService.sellerOne(store);
+		String sellerid = svo.getSellerid();
 		System.out.println("판매자"+sellerid);
-//		SellerVo svo = selService.sellerOne(sellerid);
-//		System.out.println("판매자정보"+svo);
-//		String store = svo.getStore();
+
 		System.out.println("지점명"+store);
 		map.put("store", store);
 		if(id == null) {
@@ -84,9 +83,31 @@ public class BascketController {
 		vo.setId(id);
 		String store = (String)session.getAttribute("store");
 		vo.setStore(store);		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("store", store);
+		System.out.println(id);
+		System.out.println(store);
 		
-		bservice.addBascket(vo);
-		bservice.addDetailBascket(vo);
+		if(bservice.checkBascket(map) == null ) {
+			bservice.addBascket(vo);
+			bservice.addDetailBascket(vo);
+		}else {
+			BascketVo bvo = bservice.checkBascket(map);
+			System.out.println(bvo);
+			// 장바구니 페이지에 값이 없으면 addbascket 그 외엔 addDetaill
+			String state = bvo.getOstate();
+			String chkStore = bvo.getStore();
+			System.out.println("state값"+state);
+			System.out.println("chkstore값"+chkStore);
+						
+			if(state.equalsIgnoreCase("B") && chkStore.equalsIgnoreCase(store)) {
+				bservice.addDetailBascket(vo);
+				
+			}
+			
+		}
+		
 
 		return "redirect:/bascketList.do";
 	}
@@ -100,21 +121,37 @@ public class BascketController {
 		return "redirect:/bascketList.do";
 	}
 	
+	@RequestMapping(value = "/multiDel2.do", method=RequestMethod.POST)
+	public String multiDel2(@RequestParam(value = "chkVal", required = true) List<String> chkVal, HttpSession session) {
+		logger.info("welcome multiDel2.do : \t {}",chkVal);
+		String store = (String)session.getAttribute("store");
+		String id = (String)session.getAttribute("id");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("store", store);
+		map.put("id", id);
+		BascketVo bvo = (BascketVo)bservice.getAllBascket(map);
+		String onum = bvo.getOnum();
+		bservice.deleteBascket(chkVal);
+		boolean isc = bservice.deleteBascketOne(onum);
+		System.out.println("삭제 확인"+isc);
+		return "redirect:/bascketList.do";
+	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/modifyStock.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8;")
 	@ResponseBody
-	public String modifyForm(String onum, HttpSession session) {
+	public String modifyForm(String odnum, HttpSession session) {
 		
 		String id = (String)session.getAttribute("id");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("onum", onum);
+		map.put("odnum", odnum);
 		map.put("id", id);
 		BascketVo bvo = bservice.getOneBascket(map);
-		System.out.println("onum값확인"+onum);
+		System.out.println("odnum값확인"+odnum);
 		JSONObject json = new JSONObject();
-		json.put("onum", bvo.getOnum());
+		json.put("odnum", bvo.getOdnum());
 		json.put("id", bvo.getId());
 		json.put("iname", bvo.getIname());
 		json.put("oprice", bvo.getOprice());
@@ -130,9 +167,9 @@ public class BascketController {
 		map.put("odstock", odstock);
 		System.out.println("odstock값"+odstock);
 		
-		String onum = vo.getOnum();
-		map.put("onum", onum);
-		System.out.println("onum값"+onum);
+		String odnum = vo.getOdnum();
+		map.put("odnum", odnum);
+		System.out.println("odnum값"+odnum);
 		
 		bservice.modifyBascket(map);
 		
