@@ -81,12 +81,12 @@
 </table>
 </form>
 </div>
-<!-- <div> -->
-<!-- 	<h2> -->
-<!-- 	<span>총 주문 금액:</span> -->
-<%-- 	<span><c:out value="${sum}"/> </span>원 --%>
-<!-- 	</h2> -->
-<!-- </div> -->
+<div>
+	<h2>
+	<span>총 주문 금액:</span>
+	<span><c:out value="${sum}"/> </span>원
+	</h2>
+</div>
 <div>
 	<h2>배송여부</h2>
 </div>
@@ -138,9 +138,23 @@
 	<br>
 	<strong style="margin: 10px; text-align: center;">마일리지 적용 </strong>
 		<input type="text" id="mileages" name="mileages">
-		<input type="button" value="전체 적용" id="apply" onclick="miles()">
-		<p id="mileage">총 마일리지 금액 : ${mil.mmoney}</p>
+		<input type="button" value="전체 적용" id="apply" onclick="miles(${mil.id})">
+		<p id="mileage">보유 마일리지 금액 : ${mil.mmoney}</p>
 	
+</div>
+<div>
+	<h2>
+	<span>총 결제 금액:</span>
+	<span><c:out value="${sum}"/> </span>원
+	</h2>
+	<table>
+		<tbody>
+			<tr>
+				<th>할인금액 : </th>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
 <div>
@@ -204,7 +218,25 @@ function selectOne(){
 	window.open("./modalSel.do","배송지 목록","width=500px, height=700px");
 }
 
+function miles(val){
+	ajaxmiles(val);
+}
 
+var ajaxmiles = function(val){
+	$.ajax({
+		url : './mileageaply.do',
+		method : 'post',
+		data : "id="+val,
+		success : function(m){
+			console.log(m)
+			document.getElementById("mileages").value = m;
+			
+		},
+		error : function(){
+			alert("에러");
+		}
+	});
+}
 </script>
 
 

@@ -12,13 +12,12 @@ public class CouponVo {
 	private String cimg;
 	private String cthumbimg;
 	private String clastdate;
+	private String cbseq;
 	
 	public CouponVo() {}
-	
-	
 
 	public CouponVo(String cseq, String sellerid, String coupon, String cdate, String cnotify, String cenable,
-			String cimg, String cthumbimg, String clastdate) {
+			String cimg, String cthumbimg, String clastdate, String cbseq) {
 		super();
 		this.cseq = cseq;
 		this.sellerid = sellerid;
@@ -29,6 +28,14 @@ public class CouponVo {
 		this.cimg = cimg;
 		this.cthumbimg = cthumbimg;
 		this.clastdate = clastdate;
+		this.cbseq = cbseq;
+	}
+
+	@Override
+	public String toString() {
+		return "CouponVo [cseq=" + cseq + ", sellerid=" + sellerid + ", coupon=" + coupon + ", cdate=" + cdate
+				+ ", cnotify=" + cnotify + ", cenable=" + cenable + ", cimg=" + cimg + ", cthumbimg=" + cthumbimg
+				+ ", clastdate=" + clastdate + ", cbseq=" + cbseq + "]";
 	}
 
 	public String getCseq() {
@@ -60,12 +67,7 @@ public class CouponVo {
 	}
 
 	public void setCdate(String cdate) {
-		cdate.substring(0,cdate.indexOf(" "));
 		this.cdate = cdate;
-	}
-	
-	public String getClastdate() {
-		return clastdate;
 	}
 
 	public String getCnotify() {
@@ -100,10 +102,25 @@ public class CouponVo {
 		this.cthumbimg = cthumbimg;
 	}
 
-	@Override
-	public String toString() {
-		return "CouponVo [cseq=" + cseq + ", sellerid=" + sellerid + ", coupon=" + coupon + ", cdate=" + cdate
-				+ ", cnotify=" + cnotify + ", cenable=" + cenable + ", cimg=" + cimg + ", cthumbimg=" + cthumbimg + "]";
+	public String getClastdate() {
+		return clastdate;
 	}
 
+	public void setClastdate(String clastdate) {
+		this.clastdate = clastdate;
+	}
+
+	public String getCbseq() {
+		return cbseq;
+	}
+
+	public void setCbseq(String cbseq) {
+		this.cbseq = cbseq;
+	}
+	
+	
+	
+	
+
+	
 }

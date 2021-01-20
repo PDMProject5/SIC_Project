@@ -14,8 +14,23 @@
 	}
 	
 	function getCouponBtn(cseq) {
-		location.href = "./getCoupon.do?cseq="+cseq;
-	}
+        $.ajax({
+            url:"./getCouponChk.do",
+            type:"post",
+            data:"cseq="+cseq,
+            async: true,
+            success:function(msg){
+                if(msg == ""){
+                    location.href = "./getCoupon.do?cseq="+cseq;
+                } else {
+                    alert("중복된 쿠폰입니다");
+                }
+            },
+            error:function(request,status,error){
+                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+               }
+        });
+    }
 
 </script>
 </head>
@@ -36,7 +51,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td><img src="${pageContext.request.contextPath}${ucv.cimg}" /></td>
+			<td><img src="${pageContext.request.contextPath}${ucv.cthumbimg}" /></td>
 		</tr>
 		<tr>
 			<td>
