@@ -217,11 +217,18 @@ function modStock(){
 				n++;
 			}
 		}
-
+		
 		if (n > 0) {
+			var con = confirm("선택한 제품을 삭제하시겠습니까?");
+			if(con){
+				
 			document.getElementById("frm").action = "./multiDel.do";
+			}else{
+				return false;
+			}
 
 		} else {
+			alert("삭제할 제품을 선택해 주세요.");
 			return false;
 		}
 
