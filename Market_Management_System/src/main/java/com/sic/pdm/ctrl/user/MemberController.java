@@ -115,7 +115,7 @@ public class MemberController {
 			response.setHeader("Expires", "0");
 			if(judgment.trim().equals("seller")) {
 				session.setAttribute("sellerid", id);
-				return "sellermainPage";
+				return "redirect:/viewListCoupon.do";
 			}else{
 				session.setAttribute("id", id);
 				return "redirect:/main.do";

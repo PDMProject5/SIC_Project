@@ -30,12 +30,38 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       
       <ul class="nav navbar-nav navbar-right">
+       <!-- 로그인을 하지 않은 상태에서 판매지점을 선택했을때 -->
       <c:choose>
+      	<c:when test="${not empty id}">
+      	<c:if test="${not empty sell}">
+    		<li>
+    			<a href="./product.do?sellerid=${sell.sellerid}">MENU</a>
+    		</li>
+    	</c:if>
+      	<li>
+      		<a href='#'>${id}님 환영합니다.</a>
+      	</li>
+    	<li>
+    		<a href="./logout.do">로그아웃</a>
+    	</li>
+    	
+      </c:when>
+      
+      
        <c:when test="${not empty sell}">
       	<li>
     		<a href="./product.do?sellerid=${sell.sellerid}">MENU</a>
     	</li>
+    	<li>
+      		<a href='./loginForm.do'>로그인</a>
+      	</li>
+    	<li>
+    		<a href="./singUp.do">회원가입</a>
+    	</li>
       </c:when>
+      
+      
+      
       	<c:when test="${empty id}">
       	<li>
       		<a href='./loginForm.do'>로그인</a>
@@ -44,15 +70,10 @@
     		<a href="./singUp.do">회원가입</a>
     	</li>
       </c:when>
-      <c:when test="${not empty id}">
-      	<li>
-      		<a href='#'>${id}님 환영합니다.</a>
-      	</li>
-    	<li>
-    		<a href="./logout.do">로그아웃</a>
-    	</li>
-      </c:when>
       
+      
+      
+      	
      
       </c:choose>
       </ul>

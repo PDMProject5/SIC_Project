@@ -14,6 +14,7 @@
 	
 </script>
 </head>
+<%@ include file="header.jsp" %>
 <body>
 <table>
 	<thead>
@@ -34,4 +35,5 @@
 </table>
 <input type="button" value = "뒤로가기" onclick="backBtn()">
 </body>
+<%@ include file="footer.jsp" %>
 </html>

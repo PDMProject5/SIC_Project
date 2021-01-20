@@ -21,6 +21,7 @@
 	}
 </script>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 	<div id="storeCouponList">
 		<div>
@@ -47,21 +48,7 @@
 							<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" />
 					</td>
 				</tr>
-<!-- 					<div id="storeCouponList_1"> -->
-<!-- 						<div id="storeCouponList_cimg"> -->
-<%-- 							<a href="./viewOneCoupon.do?cseq=${cList.cseq}"><img src="${pageContext.request.contextPath}${cList.cthumbimg}"></a> --%>
-<!-- 						</div> -->
-<!-- 						<div id="storeCouponList_cnotify"> -->
-<%-- 						${cList.cnotify} --%>
-<!-- 						</div> -->
-<!-- 						<div id="storeCouponList_cdate"> -->
-<%-- 							<fmt:parseDate var="startDate" value="${cList.cdate}" pattern="yyyy-MM-dd" /> --%>
-<%-- 							<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd" /> --%>
-<!-- 							~ -->
-<%-- 							<fmt:parseDate var="endDate" value="${cList.clastdate}" pattern="yyyy-MM-dd" /> --%>
-<%-- 							<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" /> --%>
-<!-- 						</div> -->
-<!-- 					</div> -->
+
 				</c:forEach>
 				</tbody>
 				</table>
@@ -80,4 +67,5 @@
 		</div>
 	</div>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>
