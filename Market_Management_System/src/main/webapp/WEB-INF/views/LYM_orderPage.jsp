@@ -50,9 +50,9 @@
 </script>
 <%@ include file="./header.jsp" %>
 <body>
+<form action="./payment.do" method="post" id="check_module">
 <div id="container">
 
-<form action="#" method="post">
 <table class="table table-bordered">
 	<thead>
 	<tr>
@@ -83,7 +83,7 @@
 		
 	</tbody>
 </table>
-</form>
+
 </div>
 <div>
 	<h2>
@@ -94,6 +94,7 @@
 <div>
 	<h2>배송여부</h2>
 </div>
+
 <div style="width:200px;">
   <input type="radio" name="radio" id="r2" value="0" checked><label for="r2">배송 X</label>
   <input type="radio" name="radio" id="r1" value="1" ><label for="r1">배송</label>
@@ -159,13 +160,14 @@
 			</tr>
 		</tbody>
 	</table>
+
 </div>
+
 <br>
 <div>
-	<input class="btn-success btn btn-primary" type="button" value="결제하기" id="check_module">
+	<input class="btn-success btn btn-primary" type="submit" value="결제하기" >
 </div>
-
-
+	</form>
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
@@ -258,7 +260,7 @@ $("#check_module").click(function () {
         amount: ${sum},
         <%--             buyer_email: '<%=vo.getEmail()%>', --%>
         buyer_name: '${vo.id}',
-       	buyer_tel: ${vo.phone},
+       	buyer_tel: '${vo.phone}',
 <%--             buyer_addr: '<%=vo.getAddress()%>', --%>
         buyer_postcode: '123-456'
 //         m_redirect_url: 'https://admin.iamport.kr/payments/complete'

@@ -23,4 +23,14 @@ public class Mileage_ServiceImpl implements Mileage_IService {
 		return iDao.detailMiles(id);
 	}
 
+	@Override
+	public boolean mileagerefund(MileageVo mvo) {
+		return iDao.mileagerefund(mvo);
+	}
+
+	@Override
+	public boolean useMileage(MileageVo mvo) {
+		return iDao.useMileage(mvo);
+	}
+
 }

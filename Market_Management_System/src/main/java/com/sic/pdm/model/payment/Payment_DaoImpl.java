@@ -4,11 +4,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.sic.pdm.vo.coupon.CouponVo;
 import com.sic.pdm.vo.mileage.MileageVo;
 import com.sic.pdm.vo.payment.PaymentVo;
 
+@Repository
 public class Payment_DaoImpl implements Payment_IDao {
 	
 	private final String NS = "com.sic.pdm.model.payment.Payment_IDao.";

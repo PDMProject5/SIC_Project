@@ -33,4 +33,18 @@ public class Mileage_DaoImpl implements Mileage_IDao {
 		return lists;
 	}
 
+	@Override
+	public boolean mileagerefund(MileageVo mvo) {
+		logger.info("Mileage_DaoImpl mileagerefund");
+		int n = sqlsession.update(NS+"mileagerefund",mvo);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean useMileage(MileageVo mvo) {
+		logger.info("Mileage_DaoImpl useMileage");
+		int n = sqlsession.insert(NS+"useMileage",mvo);
+		return n>0?true:false;
+	}
+
 }
