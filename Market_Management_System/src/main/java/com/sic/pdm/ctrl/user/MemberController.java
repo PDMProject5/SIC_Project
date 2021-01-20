@@ -97,7 +97,7 @@ public class MemberController {
 		System.out.println(vo.getAddr());
 		
 		boolean isc = service.singup(vo);
-			return "mainPage";
+			return "redirect:/main.do";
 	}
 	
 	// loginchk()에서 로그인 정보가 있다면 그 정보를 가져와서 로그인을 하고 세션에 로그인 아이디를 담아서 로그인 페이지로 이동시켜주는 메소드

@@ -37,9 +37,9 @@ public class BascketDaoImpl implements BascketIDao {
 	}
 	
 	@Override
-	public List<BascketVo> getAllBascket(String id) {
+	public List<BascketVo> getAllBascket(Map<String, Object> map) {
 		logger.info("getAllBascket 확인");
-		List<BascketVo> lists = session.selectList(NS+"getAllBascket",id);
+		List<BascketVo> lists = session.selectList(NS+"getAllBascket",map);
 		return lists;
 	}
 	
