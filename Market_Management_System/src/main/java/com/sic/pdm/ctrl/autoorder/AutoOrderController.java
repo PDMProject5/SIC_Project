@@ -67,11 +67,13 @@ public class AutoOrderController {
 	}
 	
 	@RequestMapping(value = "/searchitemform.do", method = RequestMethod.GET)
-	public String searchitemform(HttpSession session) {
+	public String searchitemform(HttpSession session, Model model) {
 		String sellerid = (String)session.getAttribute("sellerid");
 		if(sellerid == null) {
 			return "sessionexpiration";
 		}else {
+			List<String> lists = service.itemlist();
+			model.addAttribute("lists", lists);
 			return "searchitemform";
 		}
 	}

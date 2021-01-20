@@ -53,6 +53,6 @@
 	</table>
 </form>
 	<button onclick="insertAutoOrder()">등록하기</button>
-	<button onclick="location.href='./searchitemform.do'">뒤로가기</button>
+	<button onclick="location.href='javascript:history.back();'">뒤로가기</button>
 </body>
 </html>

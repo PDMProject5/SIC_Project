@@ -34,4 +34,6 @@ public interface IAutoOrderService {
 	public List<SellerVo> sellerList();
 	
 	public List<String> zeroList(String sellerid);
+	
+	public List<String> itemlist();
 }

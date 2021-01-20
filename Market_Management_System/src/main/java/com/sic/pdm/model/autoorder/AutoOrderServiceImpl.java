@@ -81,6 +81,11 @@ public class AutoOrderServiceImpl implements IAutoOrderService {
 		return dao.zeroList(sellerid);
 	}
 
+	@Override
+	public List<String> itemlist() {
+		return dao.itemlist();
+	}
+
 
 
 
