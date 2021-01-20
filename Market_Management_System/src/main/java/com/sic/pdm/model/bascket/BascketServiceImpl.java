@@ -56,4 +56,17 @@ public class BascketServiceImpl implements BascketIService {
 		
 		return idao.getOrderInfo(onums);
 	}
+	
+	@Override
+	public BascketVo checkBascket(Map<String, Object> map) {
+		
+		return idao.checkBascket(map);
+	}
+	
+	@Override
+	public boolean deleteBascketOne(String onum) {
+		
+		return idao.deleteBascketOne(onum);
+	}
+	
 }

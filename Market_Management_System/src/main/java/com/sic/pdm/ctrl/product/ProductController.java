@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sic.pdm.model.product.IProductService;
 import com.sic.pdm.model.user.ISellerService;
+import com.sic.pdm.vo.del.DelVo;
 import com.sic.pdm.vo.product.ProductVo;
 import com.sic.pdm.vo.user.SellerVo;
 
@@ -33,9 +34,14 @@ public class ProductController {
 	private ISellerService selService;
 	
 	@RequestMapping(value = "/product.do")
-	public String test(String sellerid,Model model) {
+	public String test(Model model,HttpSession session) {
+		String store = (String)session.getAttribute("store");
+		SellerVo svo = selService.sellerOne(store);
+		String sellerid = svo.getSellerid();
+
 		List<ProductVo> lists = pService.getProdList(sellerid); 
 		model.addAttribute("list", lists);
+		
 		return "KGH_product";
 	}
 	
