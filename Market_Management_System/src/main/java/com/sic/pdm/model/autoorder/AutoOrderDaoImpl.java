@@ -96,6 +96,12 @@ public class AutoOrderDaoImpl implements IAutoOrderDao {
 		return zeroList;
 	}
 
+	@Override
+	public List<String> itemlist() {
+		List<String> lists = service.selectList(NS+"itemlist");
+		return lists;
+	}
+
 	
 
 

@@ -8,8 +8,18 @@
 <meta charset="UTF-8">
 <title>로그인 정보 탑 메뉴</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  function openRightMenu() {
+	  document.getElementById("rightMenu").style.display = "block";
+	}
+
+	function closeRightMenu() {
+	  document.getElementById("rightMenu").style.display = "none";
+	}
+  </script>
 <style type="text/css">
 
 
@@ -44,6 +54,24 @@
     	<li>
     		<a href="./logout.do">로그아웃</a>
     	</li>
+    	<li>
+    		<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
+  			<button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+  			<a href="./userModified.do" class="w3-bar-item w3-button">회원 정보 수정</a>
+  			<a href="./myCouponList.do" class="w3-bar-item w3-button">쿠폰 내역 조회</a>
+ 			<a href="./delList.do" class="w3-bar-item w3-button">배송지 목록 조회</a>
+ 			<a href="./product.do" class="w3-bar-item w3-button">제품 목록</a>
+ 			<a href="./bascketList.do" class="w3-bar-item w3-button">장바구니 조회</a>
+ 			<a href="./mileage.do" class="w3-bar-item w3-button">마일리지 조회</a>
+ 			
+ 			
+ 			
+ 			
+			</div>
+			<div style="color: gray;">
+  				<button onclick="openRightMenu()" style="background-color: #101010; margin-top: 10px; border-color: black;">MyPage</button>
+			</div>
+		</li>
     	
       </c:when>
       

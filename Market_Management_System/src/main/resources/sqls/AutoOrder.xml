@@ -85,4 +85,9 @@ HAVING SUM(STOCK) = 0
 SELECT SELLERID ,STOREPHONE FROM SELLER
 </select>
 
+<select id="itemlist" resultType="java.lang.String">
+SELECT INAME FROM INVENTORY
+WHERE NOT INAME IN(SELECT INAME FROM AUTOORDER a)
+</select>
+
 </mapper>
