@@ -6,11 +6,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sic.pdm.model.coupon.ICouponService;
 import com.sic.pdm.model.user.ISellerService;
@@ -73,12 +75,44 @@ public class UserCouponController {
 		}
 	}
 	
+	// 회원 쿠폰 중복 수령 불가능
+    @RequestMapping(value = "/getCouponChk.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String getCouponChk(String cseq, HttpSession session) {
+        String id= (String) session.getAttribute("id");
+        System.out.println("세션 아이디>>>"+ id);
+        System.out.println("들어온 cseq>>>"+ cseq);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id", id);
+        map.put("cseq", cseq);
+        String couponChk = icsvc.couponChk(map);
+        System.out.println(" >>>>>"+couponChk);
+        return couponChk;
+    }
+	
+	// -------------- 혜수 -------------- //
 	@RequestMapping(value = "/coupon.do", method = RequestMethod.GET)
 	public String coupon(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		List<CouponVo> cbList = icsvc.getCouponList(id);
-		model.addAttribute("cbList",cbList);
+		List<CouponVo> cList = icsvc.coupon(id);
+		model.addAttribute("cList",cList);
 		return "LHS_coupon";
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/couponSelect.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8;")
+	@ResponseBody
+	public String couponSelect(String cseq, Model model) {
+		CouponVo cvo = icsvc.userViewOneCoupon(cseq);
+		System.out.println("쿠폰번호 확인" + cseq);
+		
+		JSONObject json = new JSONObject();
+		json.put("cseq", cvo.getCseq());
+		json.put("coupon", cvo.getCoupon());
+		
+		System.out.println(json.toString());
+		
+		return json.toString();
 	}
 
 }

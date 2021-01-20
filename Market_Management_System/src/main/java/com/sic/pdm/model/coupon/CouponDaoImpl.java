@@ -98,6 +98,12 @@ public class CouponDaoImpl implements ICouponDao {
 	}
 	
 	@Override
+    public String couponChk(Map<String, Object> map) {
+        String chkcp = sqlSession.selectOne(NS + "couponChk", map);
+        return chkcp;
+    }
+	
+	@Override
 	public List<CouponVo> getCouponList(String id){
 		return sqlSession.selectList(NS + "getCouponList", id);
 	}
@@ -106,6 +112,11 @@ public class CouponDaoImpl implements ICouponDao {
 	public boolean autoGetCouponDel() {
 		int result = sqlSession.delete(NS + "autoGetCouponDel");
 		return (result > 0) ? true : false;
+	}
+
+	@Override
+	public List<CouponVo> coupon(String id) {
+		return sqlSession.selectList(NS + "coupon", id);
 	}
 
 

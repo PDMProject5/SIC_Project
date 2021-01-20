@@ -78,6 +78,11 @@ public class CouponServiceImpl implements ICouponService {
 	public List<CouponVo> getCouponList(String id){
 		return icDao.getCouponList(id);
 	}
+	
+	@Override
+    public String couponChk(Map<String, Object> map) {
+        return icDao.couponChk(map);
+    }
 
 	@Override
 	public CouponVo userViewOneCoupon(String cseq) {
@@ -92,6 +97,11 @@ public class CouponServiceImpl implements ICouponService {
 	@Override
 	public boolean autoGetCouponDel() {
 		return icDao.autoGetCouponDel();
+	}
+
+	@Override
+	public List<CouponVo> coupon(String id) {
+		return icDao.coupon(id);
 	}
 
 
