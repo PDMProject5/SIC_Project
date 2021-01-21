@@ -47,7 +47,6 @@ SELECT o.ONUM, o2.ODNUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 	<foreach item="odnum" collection="list" open="(" separator="," close=")">
 			#{odnum}
 	</foreach>
-
 </select>
 
 <!-- 장바구니 수정 -->

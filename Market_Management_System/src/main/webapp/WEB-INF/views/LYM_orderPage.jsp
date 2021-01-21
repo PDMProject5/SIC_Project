@@ -50,7 +50,7 @@
 </script>
 <%@ include file="./header.jsp" %>
 <body>
-<form action="./payment.do" method="post" id="check_module">
+<form action="./payment.do" method="post" id="">
 <div id="container">
 
 <table class="table table-bordered">
@@ -165,7 +165,7 @@
 
 <br>
 <div>
-	<input class="btn-success btn btn-primary" type="submit" value="결제하기" >
+	<input class="btn-success btn btn-primary" type="button" id="check_module" value="결제하기" >
 </div>
 	</form>
 </body>

@@ -24,4 +24,20 @@ public class OrderList_ServiceImpl implements OrderList_IService {
 		return iDao.orderDetail(onum);
 	}
 
+	@Override
+	public int getPrice(List<String> odnum) {
+		return iDao.getPrice(odnum);
+	}
+	
+	@Override
+	public int getCPrice(String cseq) {
+		// TODO Auto-generated method stub
+		return iDao.getCPrice(cseq);
+	}
+	
+	@Override
+	public int getMPrice(String id) {
+		return iDao.getMPrice(id);
+	}
+	
 }
