@@ -64,7 +64,7 @@ div {
 					%>
 			<tr>
 				<td><%=oddto.getOdate() %></td>
-				<td><%=oddto.getOnum() %></td>
+				<td><%=oddto.getOdnum() %></td>
 				<td><%=oddto.getIname() %></td>
 				<td><%=oddto.getOdstock() %></td>
 				<td><%=oddto.getOprice() %></td>

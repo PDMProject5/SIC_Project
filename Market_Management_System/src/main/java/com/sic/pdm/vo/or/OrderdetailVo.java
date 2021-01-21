@@ -17,13 +17,15 @@ public class OrderdetailVo {
 	private int paymentamt;
 	private int discountamt;
 	private String reason;
+	private String odnum;
 
 	public OrderdetailVo() {
 
 	}
 
 	public OrderdetailVo(Date odate, String onum, String id, String iname, int odstock, int oprice, String store,
-			String ostate, String name, String addr, String phone, int paymentamt, int discountamt, String reason) {
+			String ostate, String name, String addr, String phone, int paymentamt, int discountamt, String reason,
+			String odnum) {
 		super();
 		this.odate = odate;
 		this.onum = onum;
@@ -39,6 +41,7 @@ public class OrderdetailVo {
 		this.paymentamt = paymentamt;
 		this.discountamt = discountamt;
 		this.reason = reason;
+		this.odnum = odnum;
 	}
 
 	@Override
@@ -46,7 +49,7 @@ public class OrderdetailVo {
 		return "OrderdetailVo [odate=" + odate + ", onum=" + onum + ", id=" + id + ", iname=" + iname + ", odstock="
 				+ odstock + ", oprice=" + oprice + ", store=" + store + ", ostate=" + ostate + ", name=" + name
 				+ ", addr=" + addr + ", phone=" + phone + ", paymentamt=" + paymentamt + ", discountamt=" + discountamt
-				+ ", reason=" + reason + "]";
+				+ ", reason=" + reason + ", odnum=" + odnum + "]";
 	}
 
 	public Date getOdate() {
@@ -161,10 +164,15 @@ public class OrderdetailVo {
 		this.reason = reason;
 	}
 
-	
+	public String getOdnum() {
+		return odnum;
+	}
 
+	public void setOdnum(String odnum) {
+		this.odnum = odnum;
+	}
 	
-
+	
 	
 
 }
