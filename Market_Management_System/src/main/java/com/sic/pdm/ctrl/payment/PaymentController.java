@@ -4,11 +4,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sic.pdm.model.mileage.Mileage_IService;
+import com.sic.pdm.model.or.OrderList_IService;
 import com.sic.pdm.model.payment.Payment_IService;
 import com.sic.pdm.vo.coupon.CouponVo;
 import com.sic.pdm.vo.mileage.MileageVo;
@@ -23,9 +25,10 @@ public class PaymentController {
 	@Autowired
 	private Mileage_IService Mservice;
 	
+	@Autowired
+	private OrderList_IService Oservice;
 	
-	
-	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/paymentsuccess.do", method = RequestMethod.GET)
 	public String orderDetailpull(PaymentVo pvo, MileageVo mvo, CouponVo cvo, HttpSession session, String onum,
 			@RequestParam (value = "radio") String radio) {
 		System.out.println("어디니");
@@ -48,6 +51,12 @@ public class PaymentController {
 		return "redirect:/orderdetail.do";
 	}
 	
-	
+	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
+	public String payment(@RequestParam (value = "price") String price, Model model) {
+		System.out.println(price);
+		model.addAttribute("price",price);
+		
+		return "LHS_payment";
+	}
 
 }

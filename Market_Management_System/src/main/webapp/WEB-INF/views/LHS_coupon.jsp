@@ -58,8 +58,17 @@ div {
 </body>
 <script type="text/javascript">
 function couponSelect(val){
+	var price = window.opener.document.getElementById("price").innerHTML 
+	if(price == 0){
+		alert("쿠폰을 적용할 수 없습니다.");
+		window.close();
+	}else{
+		
 	ajaxSel(val);
+	}
+	
 }
+
 
 var ajaxSel = function(val){
 	$.ajax({
@@ -70,6 +79,12 @@ var ajaxSel = function(val){
 		success : function(c){
 			console.log(c.cseq, c.coupon)
 			window.opener.document.getElementById("coupon").value = c.coupon;
+			var a = window.opener.document.getElementById("price").innerHTML;
+			
+				var result = a - c.coupon;
+
+// 			alert(result)
+			window.opener.document.getElementById("price").innerHTML = result;
 			window.close();
 		},
 		error : function(){
