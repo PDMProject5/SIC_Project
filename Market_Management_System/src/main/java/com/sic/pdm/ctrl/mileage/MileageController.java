@@ -23,7 +23,7 @@ public class MileageController {
 	@RequestMapping(value = "/mileage.do", method = RequestMethod.GET)
 	public String Mileage(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		
+		System.out.println(id);
 		MileageVo list = iService.totalMiles(id);
 		List<MileageVo> lists = iService.detailMiles(id);
 		System.out.println(list);

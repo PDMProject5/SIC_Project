@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="orderDetail" parameterType="java.lang.String" resultType="OrderdetailVo">
-		SELECT TO_DATE(ODATE) ODATE , o.ONUM ,i.INAME ,
+		SELECT TO_DATE(ODATE) ODATE , o2.ODNUM ,i.INAME ,
 	   o2.ODSTOCK ,o2.OPRICE ,o.STORE ,
 	   o.OSTATE ,m.NAME ,o.ADDR , 
 	   m.PHONE , p.PAYMENTAMT , p.DISCOUNTAMT 
