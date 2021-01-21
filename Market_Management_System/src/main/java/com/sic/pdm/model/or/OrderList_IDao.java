@@ -11,5 +11,10 @@ public interface OrderList_IDao {
 	
 	public List<OrderdetailVo> orderDetail(String onum);
 	
+	public int getPrice(List<String> odnum);
+	
+	public int getMPrice(String id);
+	
+	public int getCPrice(String cseq);
 	
 }

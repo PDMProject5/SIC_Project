@@ -36,4 +36,22 @@ public class OrderList_DaoImpl implements OrderList_IDao {
 		return listss;
 	}
 
+	@Override
+	public int getPrice(List<String> odnum) {
+		int n = sqlsession.selectOne(NS+"getPrice", odnum);
+		return n;
+	}
+	
+	@Override
+	public int getMPrice(String id) {
+		int n = sqlsession.selectOne(NS+"getMPrice", id);
+		return n;
+	}
+	
+	@Override
+	public int getCPrice(String cseq) {
+		int n = sqlsession.selectOne(NS+"getCPrice", cseq);
+		return n;
+	}
+	
 }
