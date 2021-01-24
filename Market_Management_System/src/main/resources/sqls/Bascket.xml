@@ -30,6 +30,12 @@ SELECT o.ONUM,o2.ODNUM,i.ICODE, i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 		WHERE ID=#{id} AND o.STORE=#{store} AND OSTATE = 'B'
 </select>
 
+<select id="getOrder" parameterType="java.util.Map" resultType="BascketVo">
+SELECT o.ONUM,o.ID, o.STORE
+    FROM "ORDER" o 
+        WHERE ID=#{id} AND o.STORE=#{store} AND OSTATE = 'B'
+</select>
+
 <select id="getOneBascket" parameterType="java.util.Map" resultType="BascketVo">
 SELECT o.ONUM,o2.ODNUM,i.ICODE ,i.INAME ,o2.ODSTOCK,o2.OPRICE ,o.STORE
 	FROM "ORDER" o 

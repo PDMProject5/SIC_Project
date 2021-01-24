@@ -24,4 +24,6 @@ public interface BascketIDao {
 	public List<BascketVo> getOrderInfo(List<String> onums);
 	
 	public BascketVo checkBascket(Map<String, Object> map);
+	
+	public BascketVo getOrder(Map<String, Object> map);
 }

@@ -7,24 +7,29 @@
 		(ODNUM, ICODE, ONUM, ODSTOCK, OPRICE, STORE)
 		VALUES(ODNUM_SEQ.NEXTVAL, (SELECT DISTINCT ICODE FROM INVENPRICE i2 WHERE ICODE =#{icode}), (SELECT ONUM FROM "ORDER" o  WHERE ONUM =#{onum}), #{odstock}, 
 		(SELECT OPRICE FROM INVENPRICE i2 WHERE ICODE =#{icode} AND CDATE = (SELECT MAX(CDATE) FROM INVENPRICE i WHERE ICODE = #{icode} GROUP BY ICODE)),
-		(SELECT STORE FROM SELLER s WHERE STORE=#{store}));
+		(SELECT STORE FROM SELLER s WHERE STORE=#{store}))
 	</insert>
 	
 	<update id="orderdel" parameterType="PaymentVo">
-	UPDATE "ORDER" SET ODATE = SYSDATE , ROADADDR = #{roadaddr},  ADDR = #{addr}, DELIVERYSELECT = 'Y', OSTATE ='D' WHERE ONUM =#{onum};
+	UPDATE "ORDER" SET ODATE = SYSDATE , ROADADDR = #{roadaddr},  ADDR = #{addr}, DELIVERYSELECT = 'Y', OSTATE ='D' WHERE ONUM =#{onum}
 	</update>
 	
 	<update id="orderdel2" parameterType="java.lang.String">
-	UPDATE "ORDER" SET ODATE = SYSDATE , OSTATE ='P' WHERE ONUM =#{onum};
+	UPDATE "ORDER" SET ODATE = SYSDATE , OSTATE ='P' WHERE ONUM =#{onum}
 	</update>
 	
 	<delete id="delCoupon" parameterType="CouponVo">
-		DELETE FROM COUPONBOX c WHERE c.CSEQ =#{cseq} AND c.ID = #{id};
+		DELETE FROM COUPONBOX c WHERE c.CSEQ =#{cseq} AND c.ID = #{id}
 	</delete>
 	
 	<insert id="mileage" parameterType="MileageVo">
 		INSERT INTO MILEAGE (MSEQ,ID,MMONEY,MDATE,MSTATE)
-		VALUES(MSEQ_SEQ.NEXTVAL,#{id},(SELECT FLOOR(PAYMENTAMT *0.01) FROM PAYMENT WHERE PAYMENTNUM = #{paymentnum}),SYSDATE, 'P');
+		VALUES(MSEQ_SEQ.NEXTVAL,#{id},(SELECT FLOOR(PAYMENTAMT *0.01) FROM PAYMENT WHERE PAYMENTNUM = #{paymentnum}),SYSDATE, 'P')
+	</insert>
+	
+	<insert id="payment" parameterType="PaymentVo">
+		INSERT INTO PAYMENT (PAYMENTNUM,ONUM,SALEAMT,DISCOUNTAMT,PAYMENTAMT,PAYMENTDATE)
+		VALUES(PAYMENTNUM_SEQ.NEXTVAL,#{onum},#{saleamt},#{discountamt},#{paymentamt},SYSDATE)
 	</insert>
 	
 	

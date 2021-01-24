@@ -13,11 +13,12 @@ public class CouponVo {
 	private String cthumbimg;
 	private String clastdate;
 	private String cbseq;
+	private String id;
 	
 	public CouponVo() {}
 
 	public CouponVo(String cseq, String sellerid, String coupon, String cdate, String cnotify, String cenable,
-			String cimg, String cthumbimg, String clastdate, String cbseq) {
+			String cimg, String cthumbimg, String clastdate, String cbseq, String id) {
 		super();
 		this.cseq = cseq;
 		this.sellerid = sellerid;
@@ -29,13 +30,14 @@ public class CouponVo {
 		this.cthumbimg = cthumbimg;
 		this.clastdate = clastdate;
 		this.cbseq = cbseq;
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
 		return "CouponVo [cseq=" + cseq + ", sellerid=" + sellerid + ", coupon=" + coupon + ", cdate=" + cdate
 				+ ", cnotify=" + cnotify + ", cenable=" + cenable + ", cimg=" + cimg + ", cthumbimg=" + cthumbimg
-				+ ", clastdate=" + clastdate + ", cbseq=" + cbseq + "]";
+				+ ", clastdate=" + clastdate + ", cbseq=" + cbseq + ", id=" + id + "]";
 	}
 
 	public String getCseq() {
@@ -117,6 +119,16 @@ public class CouponVo {
 	public void setCbseq(String cbseq) {
 		this.cbseq = cbseq;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
 	
 	
 	
