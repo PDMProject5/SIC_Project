@@ -46,7 +46,7 @@ div {
 								else{
 									
 					%>
-		<h2>총 마일리지 : <%=vo.getMmoney()%></h2>
+		<h2>보유 마일리지 : <%=vo.getMmoney()%></h2>
 		<%
 						}
 				%>

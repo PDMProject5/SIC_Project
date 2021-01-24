@@ -3,6 +3,7 @@ package com.sic.pdm.model.payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sic.pdm.vo.bascket.BascketVo;
 import com.sic.pdm.vo.coupon.CouponVo;
 import com.sic.pdm.vo.mileage.MileageVo;
 import com.sic.pdm.vo.payment.PaymentVo;
@@ -36,6 +37,16 @@ public class Payment_ServiceImpl implements Payment_IService {
 	@Override
 	public boolean mileage(MileageVo mvo) {
 		return iDao.mileage(mvo);
+	}
+
+	@Override
+	public boolean payment(PaymentVo pvo) {
+		return iDao.payment(pvo);
+	}
+
+	@Override
+	public BascketVo orderonum(String onum) {
+		return iDao.orderonum(onum);
 	}
 
 }

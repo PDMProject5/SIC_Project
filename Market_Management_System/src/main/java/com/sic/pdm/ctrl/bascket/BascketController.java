@@ -178,16 +178,24 @@ public class BascketController {
 	
 	
 	@RequestMapping(value="/order.do" , method = RequestMethod.POST)
-	public String Order(@RequestParam List<String> chkVal, Model model, HttpSession session) {
+	public String Order(@RequestParam List<String> chkVal,Model model, HttpSession session) {
 		System.out.println(chkVal);
 		String id = (String)session.getAttribute("id");
-		MileageVo mil = mservice.totalMiles(id);
 		List<BascketVo> list = bservice.getOrderInfo(chkVal);
 		System.out.println(list);
 		model.addAttribute("list", list);
-		model.addAttribute("mil",mil);
 		DelVo vo = dservice.getdefaultAddr(id);
 		model.addAttribute("vo", vo);
+		
+		String store = (String)session.getAttribute("store");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id", id);
+        map.put("store", store);
+        BascketVo bvo = bservice.getOrder(map);
+        System.out.println("오더페이지에 전달되는 값"+bvo);
+        System.out.println(bvo.getOnum());
+        model.addAttribute("bvo", bvo);
+		
 		return "LYM_orderPage";
 	}
 	

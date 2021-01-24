@@ -1,10 +1,7 @@
 <%@page import="com.sic.pdm.vo.mileage.MileageVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <%
-    MileageVo vo = (MileageVo)request.getAttribute("list");
-    %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,15 +27,18 @@ function cpchk(){
 
 </script>
 <body>
+<form action="#" id="frm" method="post">
 	<div>
 	<h2>결제</h2>
 	<hr>
 	<strong style="margin: 24px; ">쿠폰 적용 </strong>
 		<input type="text" id="coupon" name="coupon" readonly >
+		<input type="hidden" id="cseq" name="cseq">
 		<input type="button" value="할인 쿠폰" onclick="cpchk()">
 	<br>
 	<strong style="margin: 10px; text-align: center;">마일리지 적용 </strong>
-		<input type="text" id="mileages" name="mileages" onkeyup="key(this)">
+		<input type="text" id="mileages" name="mileages">
+		<input type="hidden" id="id" name="id">
 		<input type="button" value="전체 적용" id="apply" onclick="miles(${mil.id})">
 		<p id="mileage">보유 마일리지 금액 : ${mil.mmoney}</p>
 	
@@ -46,12 +46,13 @@ function cpchk(){
 <div>
 	<h2>
 	<span >총 결제 금액 : <span id="price">${price}</span></span>
+<%-- 	<input type="hidden" name="saleamt" value="${price}"> --%>
 	</h2>
 	<table>
 		<tbody>
 			<tr>
-				<th>할인금액 : </th>
-				<td></td>
+				<th>할인금액  : <span id="distotal">${distotal}</span></th>
+<%-- 				<td><input type="hidden" name="discountamt" value="${distotal}"> </td> --%>
 			</tr>
 		</tbody>
 	</table>
@@ -62,12 +63,27 @@ function cpchk(){
 <div>
 	<input class="btn-success btn btn-primary" type="button" id="check_module" value="결제하기" >
 </div>
+</form>
 </body>
 <script type="text/javascript">
 
+$(document).ready(function(){
+	$('#mileages').keyup(function(){
+		$.ajax({
+			type:"POST",
+			url:"./milchk.do",
+			data:"mileages="+$(this).val(),
+		});
+	});
+});
 
 function miles(val){
-	ajaxmiles(val);
+	var price = document.getElementById("price").innerHTML;
+	if(price == 0){
+		alert("마일리지를 적용할 수 없습니다.");
+	}else{
+		ajaxmiles(val);
+	}
 }
 
 var ajaxmiles = function(val){
@@ -79,12 +95,22 @@ var ajaxmiles = function(val){
 // 			console.log(m)
 			document.getElementById("mileages").value = m;
 			var mm = document.getElementById("price").innerHTML;
+			var miles = document.getElementById("distotal").innerHTML;
+			
 			if(mm < m){
 			document.getElementById("price").innerHTML=0;
+			document.getElementById("distotal").innerHTML=0;
 			document.getElementById("mileages").value=mm;
+			
+			
 			}else{
+				document.getElementById("id").value = m.id; 
 				document.getElementById("price").innerHTML = mm-m;
+				document.getElementById("distotal").innerHTML = +miles+m;
+				
 			}
+			
+			
 			
 		},
 		error : function(){
@@ -95,8 +121,14 @@ var ajaxmiles = function(val){
 
 
 $("#check_module").click(function () {
-	var p = $('#price').text()
+	var p = $('#price').text();
+	var frm = document.getElementById("frm");
 	console.log(p)
+	if(p==0){
+		alert("결제가 완료되었습니다.");
+		frm.action = "./orderupdate.do";
+        frm.submit();
+	}
     var IMP = window.IMP; // 생략해도 괜찮습니다.
     IMP.init('imp60827137'); // 'imp60827137' 대신 부여받은 "가맹점 식별코드"를 사용
     IMP.request_pay({ // param
@@ -106,10 +138,8 @@ $("#check_module").click(function () {
         //IMP.request_pay를 호출하기 전에 여러분의 서버에 주문 정보를 전달(데이터베이스에 주문정보 INSERT)하고 서버가 생성한 주문 번호를 param의 merchant_uid속성에 지정
         name: 'CU',
         amount: p,
-        <%--             buyer_email: '<%=vo.getEmail()%>', --%>
         buyer_name: '${vo.id}',
        	buyer_tel: '${vo.phone}',
-<%--             buyer_addr: '<%=vo.getAddress()%>', --%>
         buyer_postcode: '123-456'
 //         m_redirect_url: 'https://admin.iamport.kr/payments/complete'
     }, function (rsp) { // callback
@@ -120,10 +150,12 @@ $("#check_module").click(function () {
             msg += '상점 거래ID : ' + rsp.merchant_uid;          // 결제 성공 시 로직,
             msg += '결제 금액 : ' + rsp.paid_amount;
             msg += '카드 승인번호 : ' + rsp.apply_num;
-            location.href = "./payment.do";
+            frm.action = "./orderupdate.do";
+            frm.submit();
         } else {
             var msg = '결제에 실패하였습니다.';                      // 결제 실패 시 로직,
             msg += '에러내용 : ' + rsp.error_msg;
+            
         }
         alert(msg);
         

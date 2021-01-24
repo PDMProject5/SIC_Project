@@ -39,5 +39,10 @@ public class OrderList_ServiceImpl implements OrderList_IService {
 	public int getMPrice(String id) {
 		return iDao.getMPrice(id);
 	}
+
+	@Override
+	public boolean mmoney(String id) {
+		return iDao.mmoney(id);
+	}
 	
 }

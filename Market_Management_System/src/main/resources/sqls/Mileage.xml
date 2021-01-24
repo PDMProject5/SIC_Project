@@ -4,9 +4,10 @@
 	
 	<!-- 총 마일리지 조회 -->
 	<select id="totalMiles" parameterType="java.lang.String" resultType="MileageVo">
-		SELECT SUM(MMONEY) MMONEY 
-	FROM MILEAGE
-	WHERE ID = #{id} AND MSTATE = 'P'
+		SELECT DISTINCT 
+			(SELECT SUM(MMONEY) MMONEY FROM MILEAGE WHERE ID = #{id} AND MSTATE = 'P') - 
+			(SELECT SUM(MMONEY) MMONEY FROM MILEAGE WHERE ID = #{id} AND MSTATE = 'M') MMONEY 
+				FROM MILEAGE m
 	</select>
 	
 	<!-- 마일리지 상세조회 -->

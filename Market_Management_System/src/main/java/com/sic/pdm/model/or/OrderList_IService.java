@@ -17,4 +17,6 @@ public interface OrderList_IService {
 	
 	public int getCPrice(String cseq);
 	
+	public boolean mmoney(String id);
+	
 }

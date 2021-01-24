@@ -20,7 +20,7 @@
 		INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM 
 		INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
 		INNER JOIN "MEMBER" m ON m.ID = o.ID 
-		INNER JOIN PAYMENT p ON p.ONUM = o.ONUM 
+		LEFT JOIN PAYMENT p ON p.ONUM = o.ONUM 
 		WHERE o.ONUM = #{onum}
 	</select>
 	
@@ -46,6 +46,14 @@
 		SELECT COUPON 
 			FROM COUPON 
 			WHERE CSEQ = #{cseq}
+	</select>
+	
+	
+	<select id="mmoney" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT DISTINCT 
+			(SELECT SUM(MMONEY) MMONEY FROM MILEAGE WHERE ID = #{id} AND MSTATE = 'P') - 
+			(SELECT SUM(MMONEY) MMONEY FROM MILEAGE WHERE ID = #{id} AND MSTATE = 'M') MMONEY 
+				FROM MILEAGE m
 	</select>
 	
 </mapper>

@@ -68,5 +68,10 @@ public class BascketServiceImpl implements BascketIService {
 		
 		return idao.deleteBascketOne(onum);
 	}
+
+	@Override
+	public BascketVo getOrder(Map<String, Object> map) {
+		return idao.getOrder(map);
+	}
 	
 }

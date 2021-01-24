@@ -83,4 +83,11 @@ public class BascketDaoImpl implements BascketIDao {
 		int n = session.delete(NS+"deleteBascketOne", onum);
 		return n>0?true:false;
 	}
+
+	@Override
+	public BascketVo getOrder(Map<String, Object> map) {
+		logger.info("getOrder");
+		BascketVo vo = session.selectOne(NS+"getOrder", map);
+		return vo;
+	}
 }

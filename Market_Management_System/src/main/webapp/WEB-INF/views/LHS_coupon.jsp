@@ -80,11 +80,14 @@ var ajaxSel = function(val){
 			console.log(c.cseq, c.coupon)
 			window.opener.document.getElementById("coupon").value = c.coupon;
 			var a = window.opener.document.getElementById("price").innerHTML;
-			
+			var b = window.opener.document.getElementById("distotal").innerHTML;
 				var result = a - c.coupon;
+				var results = b + c.coupon;
 
 // 			alert(result)
+			window.opener.document.getElementById("cseq").value = c.cseq;
 			window.opener.document.getElementById("price").innerHTML = result;
+			window.opener.document.getElementById("distotal").innerHTML = results;
 			window.close();
 		},
 		error : function(){
