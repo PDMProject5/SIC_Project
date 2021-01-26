@@ -44,7 +44,7 @@ public class PaymentController {
 	// 주문페이지에서 결제페이지로 이동
 	
 	@RequestMapping(value = "/payment.do", method = RequestMethod.POST)
-    public String payment(Model model, BascketVo bvo,DelVo delvo, HttpSession session) {
+    public String payment(Model model, BascketVo bvo, DelVo delvo, HttpSession session) {
         System.out.println("배송지명:"+delvo.getDname());
 		System.out.println(bvo.getOdnum());
         System.out.println(bvo.getOnum());
@@ -63,6 +63,7 @@ public class PaymentController {
         model.addAttribute("mil",mil);
 
         model.addAttribute("delvo",delvo);
+         
         return "LHS_payment";
     }
 	
@@ -86,6 +87,8 @@ public class PaymentController {
 		System.out.println(onum);
 		pvo.setOnum(onum);
 		System.out.println(pvo.getAddr());
+		
+		// 배송지 여부 판단 후 주문에 배송 업데이트
 		if(pvo.getRoadaddr() == "") {
 			Pservice.orderdel2(onum);
 			
@@ -93,14 +96,13 @@ public class PaymentController {
 			Pservice.orderdel(pvo);
 		}
 		
+		System.out.println("총가격"+pvo.getPaymentamt());
+		System.out.println("쿠폰값"+cvo.getCoupon());
+		System.out.println("마일리지 값"+mvo.getMmoney());
+		
 		
 		System.out.println("주문 업데이트 성공"+onum);
 		
-		pvo.setOnum(onum);
-		System.out.println(pvo);
-		System.out.println(pvo.getSaleamt());
-		System.out.println(pvo.getDiscountamt());
-		System.out.println(pvo.getPaymentamt());
 		
 		
 		boolean isc = Pservice.payment(pvo);

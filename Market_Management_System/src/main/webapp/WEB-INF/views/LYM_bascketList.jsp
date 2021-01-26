@@ -19,7 +19,6 @@
 <div id="container">
 	<form action="#" method="post" id="frm" name="frm" onsubmit="return chkbox();">
 		<div class="panel-group" id="accordion">
-
 			<table id="del" class="table table-bordered">
 				<thead>	
 					<c:if test="${not empty lists}" >

@@ -34,13 +34,17 @@ public class ProductController {
 	private ISellerService selService;
 	
 	@RequestMapping(value = "/product.do")
-	public String test(Model model,HttpSession session,String sellerid) {
-		
+	public String test(Model model,HttpSession session) {
+		String store = (String)session.getAttribute("store");
+		SellerVo svo = selService.sellerOne(store);
+		String sellerid = svo.getSellerid();
 		System.out.println("판매자 아이디"+sellerid);
+		
+		
+		
 
 		List<ProductVo> lists = pService.getProdList(sellerid); 
 		model.addAttribute("list", lists);
-		
 		return "KGH_product";
 	}
 	
