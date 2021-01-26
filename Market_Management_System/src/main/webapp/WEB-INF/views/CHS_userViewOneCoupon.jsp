@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link type="text/css" rel="stylesheet" href="./css/sweetalert.css">
+<script type="text/javascript" src="./js/sweetalert.min.js"></script>
 <script type="text/javascript">
 
 	function backBtn() {
@@ -23,14 +25,14 @@
 				if(msg == ""){
 					location.href = "./getCoupon.do?cseq="+cseq;
 				} else if(msg == "loginFail"){
-					alert ("쿠폰은 로그인 된 회원만 수령 가능합니다.");
+					swal ("쿠폰은 로그인 된 회원만 수령 가능합니다.");
 					location.href = "./loginForm.do"
 				} else {
-					alert("중복된 쿠폰입니다");
+					swal ("중복된 쿠폰입니다");
 				}
 			},
 			error:function(request,status,error){
-		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+		        swal("쿠폰 수령 에러", "관리자에게 문의하세요"); // 실패 시 처리
 		       }
 		});
 	}

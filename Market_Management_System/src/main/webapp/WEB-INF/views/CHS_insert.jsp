@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link type="text/css" rel="stylesheet" href="./css/sweetalert.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
 <script type="text/javascript">
@@ -28,88 +29,47 @@
 		var frm = document.getElementById("frm");
 		
 		if( cnotify.value == "undefined" || cnotify.value == null || cnotify.value == "") {
-			alert("쿠폰 내용을 입력해 주세요.");
+ 			swal("쿠폰 내용을 입력해 주세요.");
 			cnotify.focus();
 			return false;
 		} 
 		if (fileext == "") {
-			alert ("파일을 첨부하여 주세요.");
+			swal("파일을 첨부하여 주세요.");
 			return false;
 		}
 		if (fileext !="jpg" && fileext !="png") {
-			alert("이미지 파일(jpg, png)만 등록 가능합니다.");
+			swal("정해진 확장자가 아닙니다.","이미지 파일(jpg, png)만 등록 가능합니다.");
 			return false;
 		}
 		if ($('#cImg').val() != "") {
 			var size = document.getElementById("cImg").files[0].size;
 			if( size > maxSize) {
-				alert("첨부파일은 2MB 이내로 등록 가능합니다.");
+				swal("첨부파일은 2MB 이내로 등록 가능합니다.");
 				return false;
 			}
 		} 
 		if($(':radio[name="cdstate"]:checked').length < 1){
-		    alert('쿠폰 종류를 선택해주세요');                        
+		    swal('쿠폰 종류를 선택해주세요');                        
 		    cdstate.focus();
 		    return false;
 		} 
 		if ($(':radio[name="cdstate"]:checked').val() == "A"){
 			if(!regexp.test(coupon.value)){
-				alert ("차감 금액은  1 ~ 10000원까지 입력이 가능합니다.");
+				swal ("1~10000까지 입력이 가능합니다.");
 				return false;
 			}
 		} 
 		if ($(':radio[name="cdstate"]:checked').val() == "B"){
 			if(!perexp.test(coupon.value)){
-				alert ("할인율은 첫자리는 1부터 99까지 입력이 가능합니다.");
+				swal ("1부터 99까지 입력이 가능합니다.");
 				return false;
 			}
 		}
 			frm.submit();
-			alert("쿠폰이 성공적으로 등록되었습니다.");
+			swal("쿠폰이 성공적으로 등록되었습니다.");
 			return true;
 	}
 		
-		
-		
-		
-// 		if( cnotify.value == "undefined" || cnotify.value == null || cnotify.value == "") {
-// 			alert("쿠폰 내용을 입력해 주세요.");
-// 			cnotify.focus();
-// 			return false;
-// 		} else if (fileext == "") {
-// 			alert ("파일을 첨부하여 주세요.");
-// 			return false;
-// 		} else if (fileext !="jpg" && fileext !="png") {
-// 			alert("이미지 파일(jpg, png)만 등록 가능합니다.");
-// 			return false;
-// 		} else if ($('#cImg').val() != "") {
-// 			var size = document.getElementById("cImg").files[0].size;
-// 			if( size > maxSize) {
-// 				alert("첨부파일은 2MB 이내로 등록 가능합니다.");
-// 				return false;
-// 			}
-// 		} else if($(':radio[name="cdstate"]:checked').length < 1){
-// 		    alert('쿠폰 종류를 선택해주세요');                        
-// 		    cdstate.focus();
-// 		    return false;
-// 		} else if ($(':radio[name="cdstate"]:checked').val() == "A"){
-// 			if(!regexp.test(coupon.value)){
-// 				alert ("차감 금액은  1 ~ 10000원까지 입력이 가능합니다.");
-// 				return false;
-// 			}
-// 		} else if ($(':radio[name="cdstate"]:checked').val() == "B"){
-// 			if(!perexp.test(coupon.value)){
-// 				alert ("할인율은 첫자리는 1부터 99까지 입력이 가능합니다.");
-// 				return false;
-// 			}
-// 		} else {
-// 			alert("들어왔냐");
-// 			frm.submit();
-// 			alert("쿠폰이 성공적으로 등록되었습니다.");
-// 			return true;
-// 		}
-// 	}
-	
 	// 화면 로드시 divWon, divPer 숨김
 	onload = function(){
 		document.getElementById("divWon").style.display = "none";
