@@ -101,6 +101,8 @@ public class PaymentController {
 		System.out.println("마일리지 값"+mvo.getMmoney());
 		
 		
+		
+		
 		System.out.println("주문 업데이트 성공"+onum);
 		
 		
@@ -112,13 +114,16 @@ public class PaymentController {
 		System.out.println(cvo.getId());
 		cvo.setId(id);
 		boolean sc = Pservice.delCoupon(cvo);
-		System.out.println("쿠폰 삭제" + sc);
+		System.out.println("사용한 쿠폰 삭제" + sc);
 		
 		System.out.println(mvo.getId());
 		System.out.println(mvo.getMmoney());
 		mvo.setId(id);
 		boolean msc = Mservice.useMileage(mvo);
-		System.out.println("마일리지 사용"+msc);
+		System.out.println("사용한 마일리지"+msc);
+		
+//		boolean mmsc = Pservice.mileage(mvo);
+//		System.out.println("적립된 마일리지"+mmsc);
 		
 		
 		

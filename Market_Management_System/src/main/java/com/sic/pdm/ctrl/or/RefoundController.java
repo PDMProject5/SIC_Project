@@ -98,8 +98,8 @@ public class RefoundController {
 		System.out.println(onum);
 		boolean isc = iService.refoundApprove(onum);
 		System.out.println("환불 요청 승인 완료" +isc);
-		boolean msc = mService.mileagerefund(mvo);
-		System.out.println("환불금액 마일리지로 반환 완료" + msc);
+//		boolean msc = mService.mileagerefund(mvo);
+//		System.out.println("환불금액 마일리지로 반환 완료" + msc);
 		
 		return "redirect:/refoundList.do";
 	}

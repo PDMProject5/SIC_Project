@@ -5,14 +5,108 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <head>
 <%@ include file="./header.jsp" %>
 <meta charset="UTF-8">
 <title>장바구니</title>
+<style type="text/css">
+		table{
+		margin: auto; 
+ 	text-align: center; 
+	margin-top:10px; 
+/* 	border-top:5px solid beige;  */
+	margin-bottom: 10px;
+	}
+	#th{
+	background-color : beige;
+	text-align:center; 
+	color:#8A6F24; 
+	height: 70px;
+	width: 200px;
+	
+/* 	background-color: beige; */
+/* 	text-align: center; */
+/* 	height: 70px; */
+/* 	width: 100px; */
+}
+	td{
+		border-bottom:1px solid #dadada; 
+	text-align:center; 
+	color:#2f231c; 
+	height: 50px;
+	width: 300px;
+	}
+	#result {
+		text-align: center;
+		margin: auto;
+	}
+	.counter{
+		text-align: center;
+		margin-bottom: 10px;
+	}
+	.cart {
+	text-align: center;
+	color: beige;
+	background-color: #8A6F24;
+	border: 2px solid #8A6F24;
+	padding: 15px 15px;
+	border-radius: 8px;
+	transition-duration: 0.4s;
+ 	 cursor: pointer;
+	}
+	.button1 {
+ 	 background-color: #8A6F24; 
+ 	 color: beige; 
+ 	 border: 2px solid #8A6F24;
+	}
+	.button1:hover {
+  	background-color: beige;
+  	color: #8A6F24;
+	}
+	.back{
+	text-align: center;
+	color: #8A6F24;
+	background-color: beige;
+	border: 2px solid #8A6F24;
+	padding: 15px 30px;
+	border-radius: 8px;
+	transition-duration: 0.4s;
+ 	 cursor: pointer;
+	}
+	.button2 {
+ 	 background-color: beige; 
+ 	 color: #8A6F24; 
+ 	 border: 2px solid #8A6F24;
+	}
+	.button2:hover {
+  	background-color: #8A6F24;
+  	color: beige;
+	}
+	
+	#odstock{
+	text-align: center;
+	}
+	.btnminus{
+		border: 2px solid #8A6F24;
+		padding: 4px 9px;
+		background-color:beige;
+		color: #8A6F24;
+		border-radius: 8px;
+	}
+	.btnplus{
+		border: 2px solid #8A6F24;
+		padding: 4px 8px;
+		background-color:beige;
+		color: #8A6F24;
+		border-radius: 8px;
+	}
+	.button{
+		margin: 10px 10px;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 <h1>장바구니</h1>

@@ -13,13 +13,35 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.table_order{
-	border: 1px solid black;
-	padding: 5px;
-	margin: auto;
-	text-align: center;
+table{
+/*  	border: 1px solid black;  */
+/*  	padding: 50px;  */
+ 	margin: auto; 
+ 	text-align: center; 
+	margin-top:10px; 
+/* 	border-top:5px solid beige;  */
+	margin-bottom: 50px;
 }
 
+#th{
+	background-color : beige;
+	text-align:center; 
+	color:#8A6F24; 
+	height: 70px;
+	width: 160px;
+	
+/* 	background-color: beige; */
+/* 	text-align: center; */
+/* 	height: 70px; */
+/* 	width: 100px; */
+}
+td{
+	border-bottom:1px solid #dadada; 
+	text-align:center; 
+	color:#2f231c; 
+	height: 50px;
+	
+}
 a {
 	text-decoration: none;
 	font-weight: bold;
@@ -29,6 +51,7 @@ div {
 	text-align:center;
 	margin: auto;
 	padding: 10px;
+}padding: 10px;
 }
 
 </style>
@@ -38,15 +61,15 @@ div {
 	<div>
 		<h1>환불 요청 목록 조회</h1>
 	</div>
-		<table id="table_order">
+		<table>
 			<thead>
 				<tr>
-					<th>주문번호</th>
-					<th>아이디</th>
-					<th>지점명</th>
-					<th>날짜</th>
-					<th>상태</th>
-					<th>환불 상세</th>
+					<th id="th">주문번호</th>
+					<th id="th">아이디</th>
+					<th id="th">지점명</th>
+					<th id="th">날짜</th>
+					<th id="th">상태</th>
+					<th id="th">환불 상세</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,7 +77,7 @@ div {
 					if (lists == null || lists.size() == 0) {
 				%>
 					<tr>
-						<th colspan="6">환불요청 내역이 없습니다.</th>
+						<td colspan="6">환불요청 내역이 없습니다.</td>
 					</tr>
 					<%
 						}

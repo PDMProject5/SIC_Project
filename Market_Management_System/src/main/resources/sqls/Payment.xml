@@ -22,9 +22,10 @@
 		DELETE FROM COUPONBOX c WHERE c.CSEQ =#{cseq} AND c.ID = #{id}
 	</delete>
 	
+	<!-- 마일리지 적립 -->
 	<insert id="mileage" parameterType="MileageVo">
 		INSERT INTO MILEAGE (MSEQ,ID,MMONEY,MDATE,MSTATE)
-		VALUES(MSEQ_SEQ.NEXTVAL,#{id},(SELECT FLOOR(PAYMENTAMT *0.01) FROM PAYMENT WHERE PAYMENTNUM = #{paymentnum}),SYSDATE, 'P')
+		VALUES(MSEQ_SEQ.NEXTVAL,#{id},(SELECT FLOOR(#{paymentamt} * 0.01) FROM PAYMENT WHERE PAYMENTNUM = #{paymentnum}),SYSDATE, 'P')
 	</insert>
 	
 	<insert id="payment" parameterType="PaymentVo">

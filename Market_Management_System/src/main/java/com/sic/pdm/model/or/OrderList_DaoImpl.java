@@ -59,5 +59,10 @@ public class OrderList_DaoImpl implements OrderList_IDao {
 		int n = sqlsession.selectOne(NS+"mmoney", id);
 		return n>0?true:false;
 	}
+
+	@Override
+	public OrderVo oVo(String onum) {
+		return sqlsession.selectOne(NS+"oVo",onum);
+	}
 	
 }

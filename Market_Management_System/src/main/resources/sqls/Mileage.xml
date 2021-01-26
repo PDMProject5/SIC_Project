@@ -15,6 +15,7 @@
 		SELECT MSEQ ,ID ,MMONEY ,MDATE ,MSTATE 
 		FROM MILEAGE m 
 		WHERE ID = #{id}
+		ORDER BY MSEQ DESC
 	</select>
 	
 <!-- 	<select id="totalMiles" parameterType="java.lang.String" resultType="java.lang.String"> -->
@@ -30,7 +31,7 @@
 		WHERE MSEQ = #{mseq}
 	</update>
 	
-	
+	<!-- 사용한 마일리지 -->
 	<insert id="useMileage" parameterType="MileageVo">
 		INSERT INTO MILEAGE ( MSEQ,ID,MMONEY,MDATE,MSTATE)
 		VALUES(MSEQ_SEQ.NEXTVAL,#{id},#{mmoney},SYSDATE,'M')

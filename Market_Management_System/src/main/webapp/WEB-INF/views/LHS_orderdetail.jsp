@@ -17,18 +17,21 @@
 
 table{
 /*  	border: 1px solid black;  */
-/* 	padding: 5px; */
+ 	padding: 50px; 
  	margin: auto; 
  	text-align: center; 
 	margin-top:10px; 
 /* 	border-top:5px solid beige;  */
 	border-spacing:0;
+	margin-bottom: 50px;
 }
 
 #th{
 	background-color : beige;
 	text-align:center; 
-	color:#2f231c; 
+	color:#8A6F24; 
+	height: 70px;
+	
 /* 	background-color: beige; */
 /* 	text-align: center; */
 /* 	height: 70px; */
@@ -39,6 +42,7 @@ td{
 	text-align:center; 
 	color:#2f231c; 
 	font-size:13px;
+	
 }
 tbody{
 	margin: 50px;
@@ -66,20 +70,8 @@ div {
 	<table>
 		<thead>
 			<tr>
-				<th id="th" width="8%">주문날짜</th>
-				<th id="th" style="">주문 상세번호</th>
-				<th id="th">주문번호</th>
-				<th id="th">제품명</th>
-				<th id="th">수량</th>
-				<th id="th">가격</th>
-				<th id="th">지점</th>
-				<th id="th">상태</th>
-				<th id="th">이름</th>
-				<th id="th">주소</th>
-				<th id="th">휴대폰</th>
-				<th id="th">결제 금액</th>
-				<th id="th">할인 금액</th>
-				<th id="th">환불 요청</th>
+				
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -87,24 +79,55 @@ div {
 						for(OrderdetailVo oddto : listss){
 					%>
 			<tr>
-				<td><%=oddto.getOdate() %></td>
-				<td><%=oddto.getOdnum() %></td>
-				<td><%=oddto.getOnum() %>
-				<td><%=oddto.getIname() %></td>
-				<td><%=oddto.getOdstock() %></td>
-				<td><%=oddto.getOprice() %></td>
-				<td><%=oddto.getStore() %></td>
-				<td><%=oddto.getOstate() %></td>
-				<td><%=oddto.getName() %></td>
-				<td><%=oddto.getAddr() %></td>
-				<td><%=oddto.getPhone() %></td>
-				<td><%=oddto.getPaymentamt() %></td>
-				<td><%=oddto.getDiscountamt() %></td>
-				<td><a href="./refundinsert.do?onum=<%=oddto.getOnum() %>">환불</a></td>
-				
+				<th id="th" style="width: 100px;">주문날짜</th>
+				<td style="width: 500px;" colspan="5"><%=oddto.getOdate() %></td>
 			</tr>
-			<%
+			<tr>
+				<td><input type="hidden" value="<%=oddto.getOnum() %>"></td>
+				</tr>
+				<%
+						for(OrderdetailVo oddtoo : listss){
+					%>
+			<tr>
+				<th id="th" width="100px">제품명</th>
+				<td width="150px"><%=oddtoo.getIname() %></td>
+				<th id="th" width="100px">수량</th>
+				<td width="150px"><%=oddtoo.getOdstock() %></td>
+				<th id="th" width="100px">가격</th>
+				<td width="150px"><%=oddtoo.getOprice() %></td>
+				</tr>
+				<%
 						}
+				%>
+			<tr>
+				<th id="th">지점</th>
+				<td colspan="5"><%=oddto.getStore() %></td>
+				</tr>
+			<tr>
+				<th id="th">상태</th>
+				<td><%=oddto.getOstate() %></td>
+				<th id="th">이름</th>
+				<td><%=oddto.getName() %></td>
+				<th id="th">휴대폰</th>
+				<td><%=oddto.getPhone() %></td>
+				</tr>
+			<tr>
+				<th id="th">주소</th>
+				<td colspan="5"><%=oddto.getAddr() %></td>
+			</tr>
+			<tr>
+				<th id="th">결제 금액</th>
+				<td colspan="2"><%=oddto.getPaymentamt() %></td>
+				<th id="th">할인 금액</th>
+				<td colspan="2"><%=oddto.getDiscountamt() %></td>
+			</tr>
+
+			<tr>
+				<th id="th">환불 요청</th>
+				<td colspan="5"><a href="./refundinsert.do?onum=<%=oddto.getOnum() %>">환불 요청하기</a></td>
+			</tr>
+							<%
+					}
 				%>
 		</tbody>
 	</table>

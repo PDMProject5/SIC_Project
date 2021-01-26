@@ -9,6 +9,7 @@
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
 	INNER JOIN "MEMBER" m ON m.ID = o.ID 
 	WHERE m.ID =#{id}  AND o.OSTATE IN ('P','H','F','D','R')
+	ORDER BY o.ODATE DESC
 	</select>
 	
 	<select id="orderDetail" parameterType="java.lang.String" resultType="OrderdetailVo">
@@ -22,6 +23,17 @@
 		INNER JOIN "MEMBER" m ON m.ID = o.ID 
 		LEFT JOIN PAYMENT p ON p.ONUM = o.ONUM 
 		WHERE o.ONUM = #{onum}
+		ORDER BY o.ODATE DESC
+	</select>
+	
+	<select id="oVo" parameterType="java.lang.String" resultType="OrderVo">
+		SELECT ODATE , o.ONUM ,i.INAME ,o2.ODSTOCK ,o2.OPRICE ,o.STORE ,o.OSTATE , o.ROADADDR , o.ADDR ,m.PHONE 
+	FROM "ORDER" o 
+	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM 
+	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
+	INNER JOIN "MEMBER" m ON m.ID = o.ID 
+	WHERE m.ID ='test01'  AND o.OSTATE IN ('P','H','F','D','R')
+	ORDER BY o.ODATE DESC
 	</select>
 	
 	<select id="getPrice" parameterType="java.util.List" resultType="java.lang.Integer">

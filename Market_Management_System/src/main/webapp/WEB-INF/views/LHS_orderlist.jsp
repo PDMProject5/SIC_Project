@@ -15,13 +15,35 @@
 <meta charset="UTF-8">
 <title>주문 목록 조회</title>
 <style type="text/css">
-table, th, td{
-	border: 1px solid black;
-	padding: 5px;
-	margin: auto;
-	text-align: center;
+table{
+/*  	border: 1px solid black;  */
+/*  	padding: 50px;  */
+ 	margin: auto; 
+ 	text-align: center; 
+	margin-top:10px; 
+/* 	border-top:5px solid beige;  */
+	margin-bottom: 50px;
 }
 
+#th{
+	background-color : beige;
+	text-align:center; 
+	color:#8A6F24; 
+	height: 70px;
+	width: 100px;
+	
+/* 	background-color: beige; */
+/* 	text-align: center; */
+/* 	height: 70px; */
+/* 	width: 100px; */
+}
+td{
+	border-bottom:1px solid #dadada; 
+	text-align:center; 
+	color:#2f231c; 
+	height: 50px;
+	
+}
 a {
 	text-decoration: none;
 	font-weight: bold;
@@ -44,23 +66,23 @@ div {
 		<table>
 			<thead>
 				<tr>
-					<th>주문 날짜</th>
-					<th>주문 번호</th>
-					<th>제품명</th>
-					<th>수량</th>
-					<th>가격</th>
-					<th>지점명</th>
-					<th>주문 상태</th>
-					<th>주문 상제</th>
+					<th id="th">주문 날짜</th>
+					<th id="th">주문 번호</th>
+					<th id="th">제품명</th>
+					<th id="th">수량</th>
+					<th id="th">가격</th>
+					<th id="th">지점명</th>
+					<th id="th">주문 상태</th>
+					<th id="th">주문 상제</th>
 				</tr>
 			</thead>
 		
 			<tbody>
 				<%
-					if (lists == null || lists.size() == 0) {
+					if (lists == null || lists.size() == 0 ) {
 				%>
 					<tr>
-						<th colspan="8">주문내역이 없습니다.</th>
+						<td colspan="8">주문내역이 없습니다.</td>
 					</tr>
 					<%
 						}
@@ -75,6 +97,7 @@ div {
 					<td><%=odto.getOprice()%></td>
 					<td><%=odto.getStore() %></td>
 					<td><%=odto.getOstate() %></td>
+					
 					<td><a href="./orderdetail.do?onum=<%=odto.getOnum()%>">주문 상세</a></td>
 				</tr>
 				<%
