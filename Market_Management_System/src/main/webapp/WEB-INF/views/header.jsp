@@ -25,7 +25,6 @@
 #li_Home {
 	text-align: center;
 }
-
 </style>  
   
 </head>
@@ -49,12 +48,12 @@
       			<a href = "./main.do">메인 페이지 이동</a>
       		</li>
       		<c:if test = "${not empty sell.sellerid}">
-      		<li>
-      			<a href = "./product.do?sellerid=${sell.sellerid}">메뉴</a>
-      		</li>
-      		<li>
-      			<a href = "./bascketList.do?store=${sell.store}">장바구니</a>
-      		</li>
+      			<li>
+      				<a href = "./product.do?sellerid=${sell.sellerid}">메뉴</a>
+      			</li>
+      			<li>
+      				<a href = "./bascketList.do?store=${sell.store}">장바구니</a>
+      			</li>
       		</c:if>
 	      	<li>
 	      		<a href='#'>${id}님 환영합니다.</a>
@@ -89,10 +88,10 @@
 	    	<li>
 	    		<a href="./logout.do">로그아웃</a>
 	    	</li>
-	    	<li>
+			<li>
     		<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
   			<button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
-  			<a href="./viewListCoupon.do?num=1" class="w3-bar-item w3-button">행사정보 관리</a>
+  			<a href="./viewListCoupon.do" class="w3-bar-item w3-button">행사정보 관리</a>
   			<a href="./autoOrderform.do" class="w3-bar-item w3-button">자동발주</a>
   			<a href="./refoundList.do" class="w3-bar-item w3-button">환불 요청 내역 조회</a>
 			</div>

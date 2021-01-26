@@ -7,28 +7,19 @@
 <title>Insert title here</title>
 <style type="text/css">
 #footer {
-	height: 10%;
-    width: 100%;
-    position: absolute; 
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
+ 	height: 80px; 
+     width: 100%; 
+     position: fixed;
+     bottom: 0; 
+     left: 0; 
+     color: #9b9b9b;
+     font-size: 12px;
+     background: #101010;
+     border-bottom: 1px solid #363636;
 }
-#footer {
-    color: #9b9b9b;
-    font-size: 12px;
-    background: #101010;
-    border-bottom: 1px solid #363636;
-}
- footer { 
- 	margin: 0 auto; 
-     display: block; 
- } 
 
 
 body {
-    /* overflow-x: hidden; */
     background: #fff;
     line-height: 1;
     letter-spacing: -.5px;

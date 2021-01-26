@@ -12,8 +12,8 @@
 #container{
 	margin: 0 auto;
 	text-align: center;
-	width: 700px;
-	height: 900px;
+	width: 100%;
+	height: 100%;
 }
 
 th{
