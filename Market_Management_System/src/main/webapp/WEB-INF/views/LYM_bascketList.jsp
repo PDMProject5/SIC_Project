@@ -19,17 +19,17 @@
 <div id="container">
 	<form action="#" method="post" id="frm" name="frm" onsubmit="return chkbox();">
 		<div class="panel-group" id="accordion">
-<%-- 			<input type="hidden" id="piname" value="${plists.icode}"> --%>
-<%-- 			<input type="hidden" id="pstock"  value="${plists.stock}"> --%>
+
 			<table id="del" class="table table-bordered">
 				<thead>	
-					
+					<c:if test="${not empty lists}" >
 					<tr>
 						<th><input type="checkbox" id="allchk" onclick="checkAll(this.checked)" checked></th>
 						<th>제품정보</th>
 						<th>수량</th>
 						<th>제품금액</th>
 					</tr>
+					</c:if>
 				</thead>
 				<tbody>
 					
@@ -65,21 +65,24 @@
 			</table>
 				<c:if test="${empty lists}">
 						<h3>장바구니에 담긴 제품이 없습니다..</h3>
-					</c:if>	
+				</c:if>	
+				<c:if test="${not empty lists}" >
 				<div>
 					<input type="submit" value="선택 삭제">
 				</div>
-				
+					
 				<div>
 					<h2>
 					<span>총 주문 금액:</span>
 					<span id="oprice"><c:out value="${sum}"/></span>원
 					</h2>
 				</div>
-				
+				</c:if>
 				<div>
 					<input class="btn-success btn btn-primary" type="button" value="쇼핑 계속하기" onclick="shopping()">
+					<c:if test="${not empty lists}" >
 					<input class="btn-success btn btn-primary" type="button" value="주문하기" onclick="order()">
+					</c:if>
 				</div>
 		</div>
 	</form>

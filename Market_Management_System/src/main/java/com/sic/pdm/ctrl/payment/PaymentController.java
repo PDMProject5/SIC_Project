@@ -43,10 +43,9 @@ public class PaymentController {
 		
 	// 주문페이지에서 결제페이지로 이동
 	
-	@RequestMapping(value = "/payment.do", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = "/payment.do", method = RequestMethod.POST)
     public String payment(Model model, BascketVo bvo,DelVo delvo, HttpSession session) {
         System.out.println("배송지명:"+delvo.getDname());
-        System.out.println("배송지명:"+delvo.getAddr());
 		System.out.println(bvo.getOdnum());
         System.out.println(bvo.getOnum());
         String odnum = bvo.getOdnum();
@@ -85,7 +84,16 @@ public class PaymentController {
         String onum = bvo.getOnum();
         
 		System.out.println(onum);
-		Pservice.orderdel2(onum);
+		pvo.setOnum(onum);
+		System.out.println(pvo.getAddr());
+		if(pvo.getRoadaddr() == "") {
+			Pservice.orderdel2(onum);
+			
+		}else {
+			Pservice.orderdel(pvo);
+		}
+		
+		
 		System.out.println("주문 업데이트 성공"+onum);
 		
 		pvo.setOnum(onum);

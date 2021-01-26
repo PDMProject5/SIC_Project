@@ -28,7 +28,8 @@ function cpchk(){
 </script>
 <body>
 <form action="#" id="frm" method="post">
-	<input id="dname" type="hidden" value="${delvo}">
+	<input id="roadaddr" name="roadaddr" type="hidden" value="${delvo.roadaddr}">
+	<input id="addr" name="addr" type="hidden" value="${delvo.addr}">
 	<div>
 	<h2>결제</h2>
 	<hr>
@@ -67,8 +68,10 @@ function cpchk(){
 </form>
 </body>
 <script type="text/javascript">
-var dname = document.getElementById("dname").value;
-console.log(dname);
+var roadaddr = document.getElementById("roadaddr").value;
+var addr = document.getElementById("addr").value;
+console.log(roadaddr);
+console.log(addr);
 
 $(document).ready(function(){
 	$('#mileages').keyup(function(){
