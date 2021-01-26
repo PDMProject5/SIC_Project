@@ -5,6 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="./header.jsp" %>
+<style type="text/css">
+#container{
+	width: 450px;
+	margin: 0 auto;
+	text-align: center;
+}
+th{
+	text-align: left;
+}
+input[type="password"]{
+	width: 100%;
+	border-radius: 8px;
+}
+table{
+	width: 70%;
+	margin: 30px auto;
+	text-align: center;
+}
+th,td{
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+</style>
 </head>
 <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -30,7 +54,7 @@
 	    		success:function(msg){
 	    			var modifypw = document.getElementById("modifypw").value;
 	    			var modifypwchk = document.getElementById("modifypwchk").value;
-	    			var pwReg = /^[a-z]+[a-z0-9]{7,19}$/g;
+	    			var pwReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,20}$/;
 	    			var regExp = /\s/g;
 	    			if(msg==""){
 	    				alert("현재 비밀번호를 확인해 주세요");
@@ -54,28 +78,32 @@
 	}
 </script>
 <body>
+<div id="container">
+<h1 style="color: #FFCA9B; margin-bottom: 100px;">비밀번호 변경</h1>
 <form action="./modifypw.do" method="post" onsubmit="return pwchk()">
 	<table>
 		<tr>
-			<td>현재 비밀번호</td>
+			<th>현재 비밀번호</th>
 			<td>
 				<input type="password" id="nowpw" name="nowpw">
 			</td>
 		</tr>
 		<tr>
-			<td>새 비밀번호</td>
+			<th>새 비밀번호</th>
 			<td>
 				<input type="password" id="modifypw" name="modifypw">
 			</td>
 		</tr>
 		<tr>
-			<td>새 비밀번호 확인</td>
+			<th>새 비밀번호 확인</th>
 			<td>
 				<input type="password" id="modifypwchk" name="modifypwchk">
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="변경하기">
+	<input class="btn btn-warning" type="submit" value="변경하기">
 </form>
+</div>
+<%@ include file="./footer.jsp" %>
 </body>
 </html>

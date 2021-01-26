@@ -5,9 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#container{
+	width: 750px;
+	text-align: center;
+	margin: 0 auto;
+}
+table{
+	width: 60%;
+	margin: 100px auto;
+	text-align: center;
+}
+input[type="number"]{
+	width: 100%;
+}
+.btn{
+	margin-top: 100px;
+}
+</style>
 </head>
 <%@ include file="./header.jsp" %>
-<body>
 <script type="text/javascript">
 	function insertAutoOrder(){
 		var autonum = document.getElementById("autonum");
@@ -28,19 +45,20 @@
 	}
 </script>
 <body>
+<div id="container">
 <form id="frm" action="./insertAutoOrder.do" method="post">
 	<input type="hidden" name="iname" value="${iname}">
 	<table border="1">
 		<thead>
 		<tr>
-			<th>제품명</th>
-			<th>설정 개수</th>
-			<th>입고 개수</th>
+			<td style="font-weight: bold; background-color:#F4B4B4; height: 30px;">제품명</td>
+			<td style="font-weight: bold; background-color:#F4B4B4;">설정 개수</td>
+			<td style="font-weight: bold; background-color:#F4B4B4;">입고 개수</td>
 		</tr>
 		</thead>
 		<tbody>
 		<tr>
-			<td>
+			<td style="width: 100px;">
 				${iname}
 			</td>
 			<td>
@@ -53,8 +71,9 @@
 		</tbody>
 	</table>
 </form>
-	<button onclick="insertAutoOrder()">등록하기</button>
-	<button onclick="location.href='javascript:history.back();'">뒤로가기</button>
+	<button class="btn" onclick="insertAutoOrder()">등록하기</button>
+	<button class="btn" style="margin-left: 100px;" onclick="location.href='javascript:history.back();'">뒤로가기</button>
+</div>
 </body>
 <%@ include file="./footer.jsp" %>
 </html>
