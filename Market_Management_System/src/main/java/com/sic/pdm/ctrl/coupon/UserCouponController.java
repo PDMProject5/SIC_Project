@@ -60,6 +60,7 @@ public class UserCouponController {
 	public String getCouponList(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
 		List<CouponVo> cbList = icsvc.getCouponList(id);
+		model.addAttribute("id",id);
 		model.addAttribute("cbList",cbList);
 		return "CHS_myCouponList";
 	}

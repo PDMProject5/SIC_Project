@@ -5,59 +5,83 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#container{
+		width: 750px;
+		height: 750px;
+		margin: 0 auto;
+	}
+	#frm{
+	height: 600px;
+	}
+	table{
+		width: 60%;
+		margin: 30px auto;
+		text-align: center;
+	}
+	tr{
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	th,td{
+		height: 50px;
+		
+	}
+	input[type="text"]{
+		width: 80%;
+		border-radius: 8px;
+	}
+	
+	input[type="button"]{
+		width: 90%;
+		height: 100%;
+	}
+	.select_img{
+		text-align: center;
+	}
+	img {
+		width: 300px;
+		height: 300px;
+	}
+	#btn_update{
+		color: #8A6F24;
+		background-color: beige;
+		height: 50px;
+		width: 100px;
+	}
+	#btn_delete{
+		color: #8A6F24;
+		background-color: beige;
+		height: 50px;
+		width: 100px;
+	}
+	#btn_back{
+		color: #8A6F24;
+		background-color: beige;
+		height: 50px;
+		width: 100px;
+	}
+</style>
 <link type="text/css" rel="stylesheet" href="./css/sweetalert.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
 <script type="text/javascript">
 
-// 	function deleteCoupon(cseq) {
-// 		var chk = confirm("쿠폰을 삭제 하시겠습니까?");
-// 		if (chk) {
-// 			location.href='./deleteCoupon.do?cseq='+cseq;
-// 		}
-// 	}
-
-// 	$('#btn_delete').click(function deleteCoupon(cseq){
-// 		  swal({
-// 		  title: 'Are you sure?',
-// 		  text: "It will permanently deleted !",
-// 		  type: 'warning',
-// 		  showCancelButton: true,
-// 		  confirmButtonColor: '#3085d6',
-// 		  cancelButtonColor: '#d33',
-// 		  confirmButtonText: 'Yes, delete it!'
-// 		}).then(function () {
-// 		  swal(
-// 		    'Deleted!',
-// 		    'Your file has been deleted.',
-// 		    'success'
-		    
-// 		  );
-// 		})
-		  
-// 	})
-
 	function deleteCoupon(cseq) {
-	alert(cseq);
-		  swal({
-			  title: 'Are you sure?',
-			  text: "It will permanently deleted !",
-			  type: 'warning',
+		swal({
+			  title: "쿠폰 삭제",
+			  text: "쿠폰을 삭제하면 복구가 불가능 합니다.",
+			  type: "warning",
 			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Yes, delete it!'
-			}).then=>(function (){
+			  confirmButtonClass: "취소",
+			  confirmButtonText: "삭제",
+			  closeOnConfirm: false
+			},
+			function(cseq){
 				location.href='./deleteCoupon.do?cseq='+cseq;
-				swal(
-			    'Deleted!',
-			    'Your file has been deleted.',
-			    'success'
-			    
-			  );
-			})
+			});
+		
 	}
-	
 	
 	function updateCoupon() {
 		
@@ -139,67 +163,71 @@
 </head>
 <%@ include file="./header.jsp" %>
 <body>
-	<form id = "frm" enctype="multipart/form-data" method="post" action = "./updateCoupon.do">
-		<input type="hidden" id = "cseq" name = "cseq" value="${cv.cseq}">
-		<table>
-				<tr>
-					<th>쿠폰내용</th>
-					<td><input type="text" id="cnotify" name="cnotify" value = "${cv.cnotify}"></td>
-				</tr>
-				<tr>
-					<th>파일업로드</th>
-					<td>
-					<input type="file" id="cImg" name="file">
-					<input type="hidden" id="cthumbimg" value = "${cv.cthumbimg}">
+	<div id="container">
+		<form id = "frm" enctype="multipart/form-data" method="post" action = "./updateCoupon.do">
+			<input type="hidden" id = "cseq" name = "cseq" value="${cv.cseq}">
+			<table>
+					<tr>
+						<th>쿠폰내용</th>
+						<td><input type="text" id="cnotify" name="cnotify" value = "${cv.cnotify}"></td>
+					</tr>
+					<tr>
+						<th>파일업로드</th>
+						<td>
+						<input type="file" id="cImg" name="file">
+						<input type="hidden" id="cthumbimg" value = "${cv.cthumbimg}">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<div class="select_img">
+								<img src="${pageContext.request.contextPath}${cv.cthumbimg}" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>쿠폰종류</th>
+						<td>
+							<input type="radio" name="cdstate" id="cdstate" value="A" onchange="setDisplay()"><label for="r1">차감금액</label>
+	 						<input type="radio" name="cdstate" id="cdstate" value="B" onchange="setDisplay()"><label for="r2">할인율</label>
+	 					</td>
+					</tr>
+					<tr>
+						<th>설정금액</th>
+						<td><input type="text" id="coupon" name="coupon" min="1" value = "${cv.coupon}"></td>
+						<td>
+							<div id="divWon"><h3>원</h3></div>
+							<div id="divPer"><h3>%</h3></div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<input type = "button" id = "btn_update" value = "수정" onclick = "updateCoupon()">
 					</td>
-				</tr>
-				<tr>
 					<td>
-						<div class="select_img">
-							<img src="${pageContext.request.contextPath}${cv.cthumbimg}" />
-						</div>
+						<input type = "button" id = "btn_delete" value = "삭제" onclick = "deleteCoupon(${cv.cseq})">
 					</td>
-				</tr>
-				<tr>
-					<th>쿠폰종류</th>
-					<td><input type="radio" name="cdstate" id="cdstate" value="A" onchange="setDisplay()"><label for="r1">차감금액</label></td>
- 					<td><input type="radio" name="cdstate" id="cdstate" value="B" onchange="setDisplay()"><label for="r2">할인율</label></td>
-				</tr>
-				<tr>
-					<th>설정금액</th>
-					<td><input type="text" id="coupon" name="coupon" min="1" value = "${cv.coupon}">원</td>
 					<td>
-						<div id="divWon">원</div>
-						<div id="divPer">%</div>
+						<input type = "button" id = "btn_back" value = "뒤로가기" onclick = "backBtn()">
 					</td>
-				</tr>
-				<tr>
-					<td>
-					<input type = "button" id = "btn_update" value = "수정" onclick = "updateCoupon()">
-				</td>
-				<td>
-					<input type = "button" id = "btn_delete" value = "삭제" onclick = "deleteCoupon(${cv.cseq})">
-				</td>
-				<td>
-					<input type = "button" id = "btn_back" value = "뒤로가기" onclick = "backBtn()">
-				</td>
-				</tr>
-		</table>
-		<script>
-		// 	파일 첨부시 이미지 미리보기
-	$("#cImg").change(
-		function() {
-			if (this.files && this.files[0]) {
-				var reader = new FileReader;
-				reader.onload = function(data) {
-					$(".select_img img").attr("src", data.target.result)
-							.width(500);
-				}
-				reader.readAsDataURL(this.files[0]);
-			}
-		});
-		</script>
-	</form>
+					</tr>
+			</table>
+			<script>
+					// 	파일 첨부시 이미지 미리보기
+				$("#cImg").change(
+					function() {
+						if (this.files && this.files[0]) {
+							var reader = new FileReader;
+							reader.onload = function(data) {
+								$(".select_img img").attr("src", data.target.result)
+										.width(300).height(300);
+							}
+							reader.readAsDataURL(this.files[0]);
+						}
+					});
+			</script>
+		</form>
+	</div>
 </body>
 <%@ include file="./footer.jsp" %>
 </html>
