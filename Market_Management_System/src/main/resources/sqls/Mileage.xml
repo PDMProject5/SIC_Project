@@ -23,10 +23,11 @@
 <!-- 	WHERE ID = #{id} AND MSTATE = 'P' -->
 <!-- 	</select> -->
 	
+	<!-- 환불금액 반환 -->
 	<update id="mileagerefund" parameterType="MileageVo">
 		UPDATE MILEAGE 
 		SET MMONEY = (SELECT PAYMENTAMT FROM PAYMENT WHERE PAYMENTNUM = #{paymentnum}), MSTATE = 'R', MDATE = SYSDATE 
-		WHERE MSEQ = #{mseq};
+		WHERE MSEQ = #{mseq}
 	</update>
 	
 	

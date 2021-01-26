@@ -19,24 +19,24 @@
 <div id="container">
 	<form action="#" method="post" id="frm" name="frm" onsubmit="return chkbox();">
 		<div class="panel-group" id="accordion">
-<%-- 			<input type="hidden" id="piname" value="${plists.icode}"> --%>
-<%-- 			<input type="hidden" id="pstock"  value="${plists.stock}"> --%>
+
 			<table id="del" class="table table-bordered">
 				<thead>	
-					
+					<c:if test="${not empty lists}" >
 					<tr>
-						<th><input type="checkbox" id="allchk" onclick="checkAll(this.checked)"></th>
+						<th><input type="checkbox" id="allchk" onclick="checkAll(this.checked)" checked></th>
 						<th>제품정보</th>
 						<th>수량</th>
 						<th>제품금액</th>
 					</tr>
+					</c:if>
 				</thead>
 				<tbody>
 					
 					<c:forEach var="dto" items="${lists}" varStatus="vs">		
 						<tr>
 							<td>
-								<input type='checkbox' id="chkVal" name='chkVal' value='${dto.odnum}'>
+								<input type='checkbox' id="chkVal" name='chkVal' value='${dto.odnum}' checked>
 							</td>
 							<td>	
 								<strong><a  href="productDetail.do?iname=${dto.iname}">${dto.iname}</a></strong><br>
@@ -47,9 +47,9 @@
 								<input type="button" value="변경" onclick="modifyStock(${dto.odnum})">
 							</td>
 							<td>
-								<span id="price">
 								<c:set var="odto" value="${dto.odstock}"/>
 								<c:set var="rdto" value="${dto.oprice*odto}"/>
+								<span id="price" class="price">
 								<c:out  value="${rdto}"/> 
 								</span>
 								<span>원</span>
@@ -65,21 +65,24 @@
 			</table>
 				<c:if test="${empty lists}">
 						<h3>장바구니에 담긴 제품이 없습니다..</h3>
-					</c:if>	
+				</c:if>	
+				<c:if test="${not empty lists}" >
 				<div>
 					<input type="submit" value="선택 삭제">
 				</div>
-				
+					
 				<div>
 					<h2>
 					<span>총 주문 금액:</span>
-					<span id="oprice"><c:out value="${sum}"/> </span>원
+					<span id="oprice"><c:out value="${sum}"/></span>원
 					</h2>
 				</div>
-				
+				</c:if>
 				<div>
 					<input class="btn-success btn btn-primary" type="button" value="쇼핑 계속하기" onclick="shopping()">
+					<c:if test="${not empty lists}" >
 					<input class="btn-success btn btn-primary" type="button" value="주문하기" onclick="order()">
+					</c:if>
 				</div>
 		</div>
 	</form>
@@ -106,18 +109,28 @@
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
+	
+function sum(){
+	var chkval = document.getElementsByName('chkVal');
+	var n = 0;
+	var sum = 0;
 
-// $(document).ready(function(){
-// 	var chkval = document.getElementsByName('chkVal');
+	// 체크박스를 클릭했을때 일어나는 기능이어야해
+		// chkva.length 체크박스 개수만큼 돌아감 ex)length가 2라면 두번돌아감
+		for (var i = 0; i < chkval.length; i++) {
+			
+			// [0] true라면  n =4050 sum [1] true => 4050+1500 =6550   4050+6550 => 11100나옴 
+			if (chkval[i].checked == true) {
+				n+= Number($(".price").eq(i).text());
 	
-// 	for (var i = 0; i < chkval.length; i++) {
-// 		if (chkval[i].checked) {
-// 			alert('<c:out  value="${rdto}"/>' );
-// 		}
-// 	}
-// })
+			}
+				
+		}
 	
-	
+			sum= n;
+			$("#oprice").html(sum);		
+
+}
 
 function modifyStock(val){
 	ajaxModify(val);
@@ -186,6 +199,7 @@ function modStock(){
 		var chkval = document.getElementsByName('chkVal');
 		for (var i = 0; i < chkval.length; i++) {
 			chkval[i].checked = bool;
+			sum();
 		}
 	}
 
@@ -195,8 +209,10 @@ function modStock(){
 		chs[i].onclick = function() {
 			if (chs.length == chsConfirm()) {
 				allCheck.checked = true;
+				sum();
 			} else {
 				allCheck.checked = false;
+				sum();
 			}
 			
 			
@@ -214,14 +230,19 @@ function modStock(){
 		return cnt;
 	}
 
+
+	
 	function chkbox() {
 		var chkval = document.getElementsByName('chkVal');
 		var n = 0;
+		
 		for (var i = 0; i < chkval.length; i++) {
 			if (chkval[i].checked) {
 				n++;
+				sum();
 			}
 		}
+		
 		
 		if (n > 0) {
 			var con = confirm("선택한 제품을 삭제하시겠습니까?");
@@ -232,6 +253,9 @@ function modStock(){
 				return false;
 			}
 
+		}else if(n == 0){
+				alert("제품이 존재하지 않습니다.");
+				return false;
 		}else if(n == chkval.length){
 			var con = confirm("선택한 제품을 삭제하시겠습니까?");
 			if(con){
@@ -255,10 +279,6 @@ function modStock(){
 		var chkval = document.getElementsByName('chkVal');
 		var n = 0;
 		
-// 		var piname = document.getElementById("piname").value;
-// 		var pstock = document.getElementById("pstock").value;
-// 		var iname = document.getElementById("iname").value;
-	
 		
 		for (var i = 0; i < chkval.length; i++) {
 			if (chkval[i].checked) {

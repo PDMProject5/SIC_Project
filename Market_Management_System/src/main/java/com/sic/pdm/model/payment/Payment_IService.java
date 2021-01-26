@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.sic.pdm.vo.bascket.BascketVo;
 import com.sic.pdm.vo.coupon.CouponVo;
+import com.sic.pdm.vo.del.DelVo;
 import com.sic.pdm.vo.mileage.MileageVo;
 import com.sic.pdm.vo.payment.PaymentVo;
 
