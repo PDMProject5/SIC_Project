@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +43,11 @@ public class PaymentController {
 		
 	// 주문페이지에서 결제페이지로 이동
 	
-	@RequestMapping(value = "/payment.do", method = RequestMethod.POST)
-    public String payment(Model model, DelVo dvo, BascketVo bvo, HttpSession session) {
-        System.out.println(dvo);
-        System.out.println(bvo.getOdnum());
+	@RequestMapping(value = "/payment.do", method = {RequestMethod.POST,RequestMethod.GET})
+    public String payment(Model model, BascketVo bvo,DelVo delvo, HttpSession session) {
+        System.out.println("배송지명:"+delvo.getDname());
+        System.out.println("배송지명:"+delvo.getAddr());
+		System.out.println(bvo.getOdnum());
         System.out.println(bvo.getOnum());
         String odnum = bvo.getOdnum();
 
@@ -61,9 +63,11 @@ public class PaymentController {
         MileageVo mil = Mservice.totalMiles(id);
         model.addAttribute("mil",mil);
 
+        model.addAttribute("delvo",delvo);
         return "LHS_payment";
     }
 	
+
 	 //결제 완료 후 order테이블 상태업데이트
 	@RequestMapping(value = "/orderupdate.do", method = RequestMethod.POST)
 	public String updateorder(Model model, HttpSession session, PaymentVo pvo, CouponVo cvo, MileageVo mvo) {
@@ -115,7 +119,7 @@ public class PaymentController {
 	
 	// 주문 업데이트 성공 후 결제 내역 insert
 	@RequestMapping(value = "/paymentinsert.do", method = RequestMethod.POST)
-	public String paymentinsert(PaymentVo pvo,HttpSession session ) {
+	public String paymentinsert(PaymentVo pvo,HttpSession session) {
 		String paymentnum = (String)session.getAttribute("paymentnum");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -148,5 +152,6 @@ public class PaymentController {
 		boolean isc = Oservice.mmoney(id);
 		return isc?"true":"false";
 	}
+	
 
 }

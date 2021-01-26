@@ -240,6 +240,7 @@ function modStock(){
 			}
 		}
 		
+		
 		if (n > 0) {
 			var con = confirm("선택한 제품을 삭제하시겠습니까?");
 			if(con){
@@ -249,6 +250,9 @@ function modStock(){
 				return false;
 			}
 
+		}else if(n == 0){
+				alert("제품이 존재하지 않습니다.");
+				return false;
 		}else if(n == chkval.length){
 			var con = confirm("선택한 제품을 삭제하시겠습니까?");
 			if(con){

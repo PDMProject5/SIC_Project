@@ -28,6 +28,7 @@ function cpchk(){
 </script>
 <body>
 <form action="#" id="frm" method="post">
+	<input id="dname" type="hidden" value="${delvo}">
 	<div>
 	<h2>결제</h2>
 	<hr>
@@ -66,6 +67,8 @@ function cpchk(){
 </form>
 </body>
 <script type="text/javascript">
+var dname = document.getElementById("dname").value;
+console.log(dname);
 
 $(document).ready(function(){
 	$('#mileages').keyup(function(){

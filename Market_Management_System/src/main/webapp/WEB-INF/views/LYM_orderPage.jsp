@@ -85,7 +85,7 @@
    <span id="total"><c:out value="${sum}"/> </span>원
    </h2>
 </div>
-   </form>
+   
 <div>
    <h2>배송여부</h2>
 </div>
@@ -104,19 +104,20 @@
     <div id="defaultaddr">
         <strong class="cell_title">배송지명 : </strong>   
         <input type="text" id="dname" name="dname" value="${vo.dname}" maxlength="150" readonly><br>       
-     
          <strong>도로명 주소 : </strong>
          <input type="text" id="roadaddr" name="roadaddr" value="${vo.roadaddr}" readonly><br>
+		
       <strong>상세 주소 : </strong>         
          <input type="text" id="addr" name="addr" value="${vo.addr}" readonly><br>
      
       <strong>전화번호 : </strong>         
         <input type="text" id="phone" name="phone" maxlength="11" value="${vo.phone}" readonly><br>
    </div>
+</form>
 
     <div id="newaddr">
         <strong class="cell_title">배송지명 : </strong>   
-        <input type="text" id="dname2" name="dname2" maxlength="150"><br>       
+        <input type="text" id="dname2" name="dname" maxlength="150"><br>       
      
          <strong>도로명 주소 : </strong>
          <input type="text" id="roadaddr2" name="roadaddr" readonly="readonly">
@@ -132,7 +133,6 @@
       <input type="button" value="다음으로 " onclick="payment()">
    </div>
 
-
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
@@ -142,19 +142,35 @@ function payment(){
    var price = $("#total").text();
    console.log(price);
    var frm = document.getElementById("frm");
-   if($("input[name=raddr]:checked").val() == "1"){
-         
-//       location.href = "./payment.do?price="+price;
+   	  del();
       frm.action = "./payment.do";
       frm.submit();
+      
+}
 
-         
-   }
-   
-   var dname = $("#dname").val();
-   console.log(dname);
-   
-//    location.href = "./payment.do?price="+price;
+function del(){
+	if($("input[name=radio]:checked").val() == "0"){
+		document.getElementById("dname").value = "";
+		document.getElementById("roadaddr").value = "";
+		document.getElementById("addr").value = "";
+		document.getElementById("phone").value = "";
+		
+	}
+	
+	if($("input[name=raddr]:checked").val() == "2"){
+		var dname = document.getElementById("dname2").value;
+		var roadaddr = document.getElementById("roadaddr2").value;
+		var addr = document.getElementById("addr2").value;
+		var phone = document.getElementById("phone2").value;
+		console.log(dname);
+		console.log(roadaddr);
+		
+		document.getElementById("dname").value = dname;
+		document.getElementById("roadaddr").value = roadaddr;
+		document.getElementById("addr").value = addr;
+		document.getElementById("phone").value = phone;
+			  	
+	}
 }
 
 
