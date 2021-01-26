@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>검색 결과</title>
+<%@ include file="./header.jsp" %>
 </head>
 <script type="text/javascript">
 window.onload = function(){
@@ -33,7 +34,7 @@ function renamechk(){
 <form action="./searchitem.do" method="post" onsubmit="return renamechk()">
 <input type="hidden" id="inamechk" value="${searchlist}">
 <input type="text" id="iname" name="iname">
-<input type="submit" value="검색">
+<input class="btn" type="submit" value="검색">
 </form>
 <table border="1">
 	<c:forEach var="itemlist" items="${searchlist}">
@@ -45,6 +46,7 @@ function renamechk(){
 	</c:forEach>
 </table>
 <p id="ptag" style="color: red; margin-bottom: 0px; margin-top: 0px;"></p>
-<button onclick="location.href='./autoOrderform.do'">뒤로가기</button>
+<button class="btn" onclick="location.href='./autoOrderform.do'">뒤로가기</button>
+<%@ include file="./footer.jsp" %>
 </body>
 </html>

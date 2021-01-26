@@ -24,57 +24,149 @@ form{
 	overflow-y: scroll;
 	background-color: #fff;
 }
+label {
+	text-align: left;
+}
+#container{
+	width: 750px;
+	text-align: center;
+	margin: 0 auto;
+}
+table{
+	width: 60%;
+	margin: 30px auto;
+	text-align: center;
+}
+input[type="text"]{
+	width: 100%;
+	border-radius: 8px;
+}
+input[type="password"]{
+	width: 100%;
+	border-radius: 8px;
+}
+input[type="button"]{
+	width: 90%;
+	height: 100%;
+}
+th,td{
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+p{
+	text-align: left;
+}
 </style>
 </head>
 <script type="text/javascript" src="./js/login.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
+<div id="container">
 <form action="./newSingup.do" method="post" onsubmit="return singup()">
 	<h1>회원가입</h1>
-	<div>
-		<label>아이디</label>
-		<input type="text" id="id" name="id" placeholder="ID" readonly="readonly">
-		<input type="button" value="중복확인" onclick="idchk()">
-		<p style="color: red" id="idchk">아이디를 입력해 주세요</p>
-	</div>
-	<div>
-		<label>이름</label>
-		<input type="text" name="name" id="username" placeholder="Name">
-		<p style="color: red" id="namechk">이름을 입력해 주세요</p>
-	</div>
-	<div>
-		<label>비밀번호</label>
-		<input type="password" id="pw" name="pw" placeholder="Password" maxlength="20">
-		<p style="color: red" id="passwordchk">비밀번호는 영어와 숫자를 조합한8~20자리만 입력할 수 있습니다.</p>
-	</div>
-	<div>
-		<label>비밀번호 확인</label>
-		<input type="password" id="pwchk" name="pwchk" placeholder="PasswordCheck" maxlength="20">
-		<p style="color: red;" id="passchk">비밀번호가 일치하지 않습니다.</p>
-	</div>
-	<div>
-		<label>주소</label>
-		<input type="text" id="roadaddr" name="roadaddr"  placeholder="주소" readonly="readonly">
-		<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
-		<p style="color: red;" id="roadaddrchk">도로명 주소를 입력해 주세요</p>
-		<label>상세 주소</label>
-		<input type="text" id="addr" name="addr" placeholder="상세주소">
-		<p style="color: red;" id="addrchk">상세 주소를 입력해 주세요</p>
-	</div>
-	<div>
-		<label>휴대폰 번호</label>
-		<input type="text" id="phone" name="phone" placeholder="Phone" readonly="readonly">
-		<input type="button" value="휴대폰 인증" onclick="phonechk()">
-		<p style="color: red;" id="phonechk">휴대폰 번호를 입력해 주세요</p>
-	</div>
-	<div>
-		<input type="checkbox" id="marketing" name="marketing">
-			<label for="marketing">
-				개인정보 및 마케팅 수신 동의
-			</label>
-		<p style="color: red;" id="marketingchk">개인정보 및 마케팅 수신 동의 체크박스를 체크해주세요</p>
-	</div>
-	<div class="usm-join-box">
+	<table>
+		<tr>
+			<th>아이디</th>
+			<td>
+				<input type="text" id="id" name="id" placeholder="ID" readonly="readonly">
+			</td>
+			<td>
+				<input class="btn btn-warning" type="button" value="중복확인" onclick="idchk()">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<p style="color: red;"id="idchk">아이디를 입력해 주세요</p>
+			</td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td colspan="2">
+				<input type="text" name="name" id="username" placeholder="Name" style="width: 100%">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<p style="color: red" id="namechk">이름을 입력해 주세요</p>
+			</td>
+		</tr>
+		<tr>
+			<th>비밀번호</th>
+			<td colspan="2">
+				<input type="password" id="pw" name="pw" placeholder="Password" maxlength="20">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<p style="color: red" id="passwordchk">비밀번호는 영어와 숫자를 조합한8~20자리만 입력할 수 있습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>비밀번호 확인</th>
+			<td colspan="2">
+				<input type="password" id="pwchk" name="pwchk" placeholder="PasswordCheck" maxlength="20">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<p style="color: red;" id="passchk">비밀번호가 일치하지 않습니다.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td>
+				<input type="text" id="roadaddr" name="roadaddr"  placeholder="주소" readonly="readonly">
+			</td>
+			<td>
+				<input class="btn btn-warning" type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<p style="color: red;" id="roadaddrchk">도로명 주소를 입력해 주세요</p>
+			</td>
+		</tr>
+		<tr>
+			<th>상세 주소</th>
+			<td colspan="2">
+				<input type="text" id="addr" name="addr" placeholder="상세주소">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<p style="color: red;" id="addrchk">상세 주소를 입력해 주세요</p>
+			</td>
+		</tr>
+		<tr>
+			<th>휴대폰 번호</th>
+			<td>
+				<input type="text" id="phone" name="phone" placeholder="Phone" readonly="readonly">
+			</td>
+			<td>
+				<input class="btn btn-warning" type="button" value="휴대폰 인증" onclick="phonechk()">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<p style="color: red;" id="phonechk">휴대폰 번호를 입력해 주세요</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align: left;">
+			<input type="checkbox" id="marketing" name="marketing">
+				<label for="marketing">
+					개인정보 및 마케팅 수신 동의
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="1">
+				<p style="color: red;" id="marketingchk">개인정보 및 마케팅 수신 동의 체크박스를 체크해주세요</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<div class="usm-join-box">
 					<dl>
 						<dt>
 							<strong>개인정보보호법 제15조(개인정보의 수집·이용)에 의거 홈페이지 회원가입을 위한
@@ -116,11 +208,13 @@ form{
 							있으며 입력된 항목은 동의를 한 것으로 간주 합니다.)</dd>
 					</dl>
 				</div>
-	<div>
-		<input type="button" value="뒤로가기" onclick="main()">
-		<input type="submit" value="회원가입">
-	</div>
+			</td>
+		</tr>
+	</table>
+		<input class="btn btn-warning" style="width: 150px; margin-right: 50px;" type="button" value="뒤로가기" onclick="main()">
+		<input class="btn btn-warning" style="width: 150px;" type="submit" value="회원가입">
 </form>
+</div>
 <%@ include file="./footer.jsp" %>
 </body>
 </html>
