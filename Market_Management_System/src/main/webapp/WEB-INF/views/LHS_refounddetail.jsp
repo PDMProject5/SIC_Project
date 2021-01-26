@@ -12,13 +12,36 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-table, th, td{
-	border: 1px solid black;
-	padding: 5px;
-	margin: auto;
-	text-align: center;
+ 	table{
+/*  	border: 1px solid black;  */
+/*  	padding: 50px;  */
+ 	margin: auto; 
+ 	text-align: center; 
+	margin-top:10px; 
+/* 	border-top:5px solid beige;  */
+	margin-bottom: 50px;
 }
 
+#th{
+	background-color : beige;
+	text-align:center; 
+	color:#8A6F24; 
+	height: 70px;
+	width: 200px;
+	
+/* 	background-color: beige; */
+/* 	text-align: center; */
+/* 	height: 70px; */
+/* 	width: 100px; */
+}
+td{
+	border-bottom:1px solid #dadada; 
+	text-align:center; 
+	color:#2f231c; 
+	height: 50px;
+	width: 500px;
+	
+}
 a {
 	text-decoration: none;
 	font-weight: bold;
@@ -37,20 +60,22 @@ div {
 		<h1>환불요청 상세</h1>
 	</div>
 		<table>
-			<thead>
-				<tr>
-					<th>주문번호</th>
-					<th>아이디</th>
-					<th>환불 사유</th>
-					<th>날짜</th>
-				</tr>
-			</thead>
 			<tbody>
 				<tr>
+					<th id="th">주문번호</th>
 					<td><%=rvo.getOnum() %></td>
+				</tr>
+				<tr>
+					<th id="th">아이디</th>
 					<td><%=rvo.getId() %></td>
-					<td><%=rvo.getReason()%></td>
+				</tr>
+				<tr>
+					<th id="th">날짜</th>
 					<td><%=rvo.getOdate() %></td>
+				</tr>
+				<tr>
+					<th id="th">환불 사유</th>
+					<td><%=rvo.getReason()%></td>
 				</tr>
 			</tbody>
 		</table>

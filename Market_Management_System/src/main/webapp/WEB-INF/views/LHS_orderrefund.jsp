@@ -6,7 +6,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- 
+ <style type="text/css">
+ 	table{
+/*  	border: 1px solid black;  */
+/*  	padding: 50px;  */
+ 	margin: auto; 
+ 	text-align: center; 
+	margin-top:10px; 
+/* 	border-top:5px solid beige;  */
+	margin-bottom: 50px;
+}
+
+#th{
+	background-color : beige;
+	text-align:center; 
+	color:#8A6F24; 
+	height: 70px;
+	width: 100px;
+	
+/* 	background-color: beige; */
+/* 	text-align: center; */
+/* 	height: 70px; */
+/* 	width: 100px; */
+}
+td{
+	border-bottom:1px solid #dadada; 
+	text-align:center; 
+	color:#2f231c; 
+	height: 50px;
+	width: 500px;
+	
+}
+a {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
+div {
+	text-align:center;
+	margin: auto;
+	padding: 10px;
+}
+ </style>
 </head>
 <script type="text/javascript">
 	function refund(){
@@ -21,21 +62,21 @@
 	}
 </script>
 <body>
-	<h1>환불 요청</h1>
+	<h1 align="center">환불 요청</h1>
 	<form action="./refund.do" method="post">
 	<input type="hidden" id="onum" name="onum" value="${vo.onum}">
 		<table>
 			<tr>
-				<th>아이디</th>
+				<th id="th">아이디</th>
 				<td>${vo.id}</td>
 			</tr>
 			<tr>
-				<th>주문 번호</th>
+				<th id="th">주문 번호</th>
 				<td>${vo.onum}</td>
 			</tr>
 			<tr>
-				<th>환불 사유</th>
-				<td><textarea rows="10" id="reason" name="reason"></textarea></td>
+				<th id="th">환불 사유</th>
+				<td><textarea rows="10" cols="80" id="reason" name="reason"></textarea></td>
 			</tr>
 		</table>
 		<div>

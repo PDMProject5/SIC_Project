@@ -19,7 +19,7 @@
 }
 
 
-body {
+#body {
     background: #fff;
     line-height: 1;
     letter-spacing: -.5px;
@@ -36,7 +36,7 @@ body {
 
 </style>
 </head>
-<body>
+<body id="body">
 <footer id="footer">
         <p class="copyright"><span>
         Product Data Mangement ©PDM © &amp; ™ Lucasfilm Ltd.<br/>

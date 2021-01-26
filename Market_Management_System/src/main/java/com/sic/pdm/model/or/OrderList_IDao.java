@@ -19,4 +19,6 @@ public interface OrderList_IDao {
 	
 	public boolean mmoney(String id);
 	
+	public OrderVo oVo(String onum);
+	
 }

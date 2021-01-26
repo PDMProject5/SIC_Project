@@ -37,9 +37,11 @@ public class OrderListController {
 		System.out.println(onum);
 //		OrderVo vo = (OrderVo) iService.orderDetail(onum);
 		List<OrderdetailVo> list = iService.orderDetail(onum);
+//		OrderVo vo = iService.oVo(onum);
 		System.out.println(list);
 		
 		model.addAttribute("list", list);
+//		model.addAttribute("vo",vo);
 //		model.addAttribute("vo",vo);
 		
 		return "LHS_orderdetail";

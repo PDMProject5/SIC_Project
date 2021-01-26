@@ -44,5 +44,10 @@ public class OrderList_ServiceImpl implements OrderList_IService {
 	public boolean mmoney(String id) {
 		return iDao.mmoney(id);
 	}
+
+	@Override
+	public OrderVo oVo(String onum) {
+		return iDao.oVo(onum);
+	}
 	
 }
