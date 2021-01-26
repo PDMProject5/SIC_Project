@@ -5,15 +5,32 @@
 <head>
 <meta charset="UTF-8">
 <title>휴대폰 인증</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+#container{
+	width: 450px;
+	margin: 0 auto;
+}
+input[type="text"]{
+	border-radius: 8px;
+}
+p{
+	text-align:left;
+	font-size: small;
+}
+</style>
 </head>
 <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
 
 <body>
-<input type="text" id="inputPhoneNumber" maxlength="11"/> <!-- 전화번호 입력칸 -->
-<input type="button" id="sendPhoneNumber" value='전송'/><br> <!-- 위의 전화번호로 인증메세지 전송버튼 -->
+<h3 style="text-align: center;">휴대폰 인증</h3>
+<div id="container">
+<input type="text" id="inputPhoneNumber" maxlength="11" placeholder="휴대폰 번호를 입력해 주세요."/> <!-- 전화번호 입력칸 -->
+<input class="btn btn-warning" type="button" id="sendPhoneNumber" value='전송'/><br> <!-- 위의 전화번호로 인증메세지 전송버튼 -->
 <input type="text" id="inputCertifiedNumber"> <!-- 인증번호 적는칸 -->
-<input type="button" id="checkBtn" value="확인"> <!-- 인증번호 확인 버튼 -->
-<input type="button" value="사용하기" id="use" onclick="usephone()">
+<input class="btn btn-warning" type="button" id="checkBtn" value="확인"> <!-- 인증번호 확인 버튼 -->
+<input class="btn btn-success" type="button" value="사용하기" id="use" onclick="usephone()">
+</div>
 <script>
 window.onload = function(){
 	var inputCertifiedNumber = document.getElementById("inputCertifiedNumber");

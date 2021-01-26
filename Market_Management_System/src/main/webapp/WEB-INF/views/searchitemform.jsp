@@ -6,6 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>자동 발주 제품 검색</title>
+<%@ include file="./header.jsp" %>
+<style type="text/css">
+#container{
+	width: 750px;
+	text-align: center;
+	margin: 30px auto;
+}
+table{
+	width: 60%;
+	margin: 25px auto;
+	text-align: center;
+}
+input[type="text"]{
+	width: 390px;
+	height: 30px;
+}
+input[type="submit"]{
+	height: 30px;
+}
+</style>
 </head>
 <script type="text/javascript">
 function inamechk(){
@@ -22,19 +42,22 @@ function inamechk(){
 }
 </script>
 <body>
+<div id="container">
 <form action="./searchitem.do" method="post" onsubmit="return inamechk()">
 <input type="text" id="iname" name="iname">
-<input type="submit" value="검색">
+<input class="btn" type="submit" value="검색">
 </form>
 <table border="1">
 	<c:forEach var="itemlist" items="${lists}">
 		<tr>
-			<td onclick="location.href='./insertAutoOrderForm.do?iname=${itemlist}'">
+			<td height="30px;" onclick="location.href='./insertAutoOrderForm.do?iname=${itemlist}'">
 				${itemlist}
 			</td>
 		</tr>
 	</c:forEach>
 </table>
-<button onclick="location.href='./autoOrderform.do'">뒤로가기</button>
+<button class="btn" onclick="location.href='./autoOrderform.do'">뒤로가기</button>
+</div>
+<%@ include file="./footer.jsp" %>
 </body>
 </html>

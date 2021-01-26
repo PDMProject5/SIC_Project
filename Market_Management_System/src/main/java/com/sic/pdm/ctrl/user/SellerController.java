@@ -1,5 +1,7 @@
 package com.sic.pdm.ctrl.user;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,4 +24,17 @@ public class SellerController {
 		return logindata;
 	}
 	
-}
+	@RequestMapping(value = "/sellermainPage.do", method = RequestMethod.GET)
+	public String sellermainPage(HttpSession session) {
+		String sellerid = (String)session.getAttribute("sellerid");
+		if(sellerid == null) {
+			return "sessionexpiration";
+		}
+		return "sellermainPage";
+		}
+	}
+	
+	
+
+		
+

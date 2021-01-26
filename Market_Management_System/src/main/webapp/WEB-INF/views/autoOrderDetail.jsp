@@ -5,6 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#container{
+	width: 750px;
+	text-align: center;
+	margin: 0 auto;
+}
+table{
+	width: 60%;
+	margin: 100px auto;
+	text-align: center;
+}
+input[type="number"]{
+	width: 100%;
+}
+.btn{
+	margin-top: 100px;
+}
+</style>
 </head>
 <%@ include file="./header.jsp" %>
 <script type="text/javascript">
@@ -27,19 +45,20 @@
 	}
 </script>
 <body>
+<div id="container">
 <form id="frm" action="./updateautoOrder.do" method="post">
 	<input type="hidden" name="iname" value="${detaillist.iname}">
 	<table border="1">
 		<thead>
 		<tr>
-			<th>제품명</th>
-			<th>설정 개수</th>
-			<th>입고 개수</th>
+			<td style="font-weight: bold; background-color:#F4B4B4; height: 30px;">제품명</td>
+			<td style="font-weight: bold; background-color:#F4B4B4;">설정 개수</td>
+			<td style="font-weight: bold; background-color:#F4B4B4;">입고 개수</td>
 		</tr>
 		</thead>
 		<tbody>
 		<tr>
-			<td>
+			<td style="width: 100px;">
 				${detaillist.iname}
 			</td>
 			<td>
@@ -52,8 +71,9 @@
 		</tbody>
 	</table>
 </form>
-	<button onclick="updateautoOrder()">자동 발주 수정</button>
-	<button onclick="location.href='./autoOrderform.do'">뒤로가기</button>
+	<button class="btn" style="margin-right: 100px;" onclick="updateautoOrder()">자동 발주 수정</button>
+	<button class="btn" onclick="location.href='./autoOrderform.do'">뒤로가기</button>
+</div>
 </body>
 <%@ include file="./footer.jsp" %>
 </html>

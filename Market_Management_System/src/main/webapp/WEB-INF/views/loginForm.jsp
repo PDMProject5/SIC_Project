@@ -5,6 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<style type="text/css">
+#container{
+	width: 700px;
+	text-align: center;
+	margin: 0 auto;
+}
+table{
+	width: 60%;
+	margin: 200px auto;
+	text-align: center;
+}
+input[type="text"]{
+	width: 100%;
+	border-radius: 8px;
+}
+input[type="password"]{
+	width: 100%;
+	border-radius: 8px;
+}
+</style>
 <%@ include file="./header.jsp" %>
 <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -65,9 +85,10 @@
 	}
 </script>
 <body>
+	<div id="container">
 			<form action="./login.do" method="post" onsubmit="return login()">
 				<input type="hidden" id="judgment" name="judgment">
-				<table border="1">
+				<table>
 					<tr>
 						<td>
 							<label>아이디</label>
@@ -76,7 +97,7 @@
 							<input type="text" name="id" id="id" placeholder="ID">
 						</td>
 						<td rowspan="3">
-							<input type="submit" value="로그인">
+							<input class="btn btn-warning" type="submit" value="로그인" style="height: 80px; width: 100%;">
 						</td>
 					</tr>
 					<tr>
@@ -84,11 +105,11 @@
 							<label>비밀번호</label>
 						</td>
 						<td>
-							<input type="password" name="pw" id="pw" placeholder="Password">
+							<input type="password" name="pw" id="pw" placeholder="Password" >
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td colspan="2" style="text-align: left;">
 							<input type="checkbox" id="sellerlogin" name="sellerlogin">
 								<label for="sellerlogin">
 								판매자 로그인
@@ -98,10 +119,11 @@
 				</table>
 			</form>
 			<div>
-				<button onclick="location.href='./singUp.do'">회원가입</button>
-				<button onclick="window.open('./findid.do','아이디 찾기','width=500px, height=500px')">아이디 찾기</button>
-				<button onclick="window.open('./findpw.do','비밀번호 찾기','width=500px, height=500px')">비밀번호 찾기</button>
+				<button class="btn btn-warning" onclick="location.href='./singUp.do'" style="margin-right: 15px;">회원가입</button>
+				<button class="btn btn-warning" onclick="window.open('./findid.do','아이디 찾기','width=500px, height=500px')" style="margin-right: 15px;">아이디 찾기</button>
+				<button class="btn btn-warning" onclick="window.open('./findpw.do','비밀번호 찾기','width=500px, height=500px')" style="margin-right: 15px;">비밀번호 찾기</button>
 			</div>
+		</div>	
 <%@ include file="./footer.jsp" %>
 </body>
 </html>
