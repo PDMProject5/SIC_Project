@@ -34,15 +34,20 @@ public class ProductController {
 	private ISellerService selService;
 	
 	@RequestMapping(value = "/product.do")
-	public String test(Model model,HttpSession session) {
-		String store = (String)session.getAttribute("store");
-		SellerVo svo = selService.sellerOne(store);
-		String sellerid = svo.getSellerid();
+	public String test(Model model,HttpSession session,String sellerid) {
+		
+		System.out.println("판매자 아이디"+sellerid);
 
 		List<ProductVo> lists = pService.getProdList(sellerid); 
 		model.addAttribute("list", lists);
 		
 		return "KGH_product";
+	}
+	
+	@RequestMapping(value="/sellerProd.do")
+	public String sellerProd(String sellerid) {
+		
+		return "seller_prod";
 	}
 	
 	
@@ -111,7 +116,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productInsert.do", method = RequestMethod.POST)
-	public String productInsert(@RequestParam String[] code, @RequestParam String[] stock) {
+	public String productInsert(@RequestParam String[] code, @RequestParam String[] stock, HttpSession session) {
 		Map<String, Object> insertMap = new HashMap<String, Object>();
 		List<ProductVo> insertList = new ArrayList<ProductVo>();
 		ProductVo pvo = new ProductVo();
@@ -128,7 +133,8 @@ public class ProductController {
 			insertList.add(pvo);
 		}
 		
-		insertMap.put("sellerid", "admin01");
+		String sellerid = (String)session.getAttribute("sellerid");
+		insertMap.put("sellerid", sellerid);
 		insertMap.put("productList", insertList);
 
 		// 대분류가 AA인 경우(식품)
