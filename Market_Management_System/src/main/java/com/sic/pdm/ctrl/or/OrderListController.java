@@ -33,13 +33,14 @@ public class OrderListController {
 	}
 	
 	@RequestMapping(value = "/orderdetail.do", method = RequestMethod.GET)
-	public String orderDetail(Model model, String onum) {
+	public String orderDetail(Model model, String onum, HttpSession session) {
 		System.out.println(onum);
-		
+//		OrderVo vo = (OrderVo) iService.orderDetail(onum);
 		List<OrderdetailVo> list = iService.orderDetail(onum);
 		System.out.println(list);
 		
 		model.addAttribute("list", list);
+//		model.addAttribute("vo",vo);
 		
 		return "LHS_orderdetail";
 	}

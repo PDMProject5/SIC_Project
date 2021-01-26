@@ -3,7 +3,7 @@
 <mapper namespace="com.sic.pdm.model.or.OrderList_IDao">
 
 	<select id="orderList" parameterType="java.lang.String" resultType="OrderVo">
-		SELECT TO_DATE(ODATE) ODATE , o.ONUM ,i.INAME ,o2.ODSTOCK ,o2.OPRICE ,o.STORE ,o.OSTATE 
+		SELECT ODATE , o.ONUM ,i.INAME ,o2.ODSTOCK ,o2.OPRICE ,o.STORE ,o.OSTATE 
 	FROM "ORDER" o 
 	INNER JOIN ORDERDETAIL o2 ON o2.ONUM = o.ONUM 
 	INNER JOIN INVENTORY i ON i.ICODE = o2.ICODE 
@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="orderDetail" parameterType="java.lang.String" resultType="OrderdetailVo">
-		SELECT TO_DATE(ODATE) ODATE , o2.ODNUM ,i.INAME ,
+		SELECT ODATE , o2.ODNUM ,i.INAME, o.ONUM,
 	   o2.ODSTOCK ,o2.OPRICE ,o.STORE ,
 	   o.OSTATE ,m.NAME ,o.ADDR , 
 	   m.PHONE , p.PAYMENTAMT , p.DISCOUNTAMT 
