@@ -9,12 +9,131 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="./css/ui.jqgrid.css" />
-</head>
+<style type="text/css">
+
+.pop_table {
+    width: 80%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+    border-bottom:5px solid #000;
+    color:#000;
+    margin: 0 auto;
+}
+ 
+.pop_table caption{
+    height: 60px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 52px;
+    border-bottom: 5px solid;
+    -webkit-border-radius: 8px 8px 0 0;
+    -moz-border-radius: 8px 8px 0 0;
+    border-radius: 8px 8px 0 0;
+    background: #F94E5B;
+    color: black;
+}
+ 
+.pop_table caption:before {
+    content: '';
+    display: block;
+    height: 8px;
+    -webkit-border-radius: 8px 8px 0 0;
+    -moz-border-radius: 8px 8px 0 0;
+    border-radius: 8px 8px 0 0;
+    background-color: #000;
+}
+ 
+.pop_table th {
+    padding: 15px;
+    border: none;
+    border-bottom: 2px solid #FFF;
+    background: #FEB337;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+ 
+.pop_table td {
+    padding: 15px;
+    border: none;
+    border-bottom: 2px solid #000;
+    text-align: left;
+    vertical-align: baseline;
+}
+ 
+.pop_table tr:last-child th,
+.pop_table tr:last-child td {
+    border-bottom: none;
+}
+
+.list{
+	text-align: center;
+}
+</style>
 <%@ include file="./header.jsp" %>
 <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="./js/grid.locale-kr.js"></script>
+</head>
+
+<body>
+	<c:if test="${not empty id}">
+	<div id="container" class="item">
+	
+	
+			<table class="pop_table">
+				<caption>제품목록</caption>
+				<thead>
+				<tr>
+					<th scope="row">제품명</th> 
+					<th>제품가격</th> 
+					<th>남은 제품 수</th> 
+				</tr>
+				</thead>
+				<tbody class="list">
+		<c:forEach var="vo" items="${list}" varStatus="vs">
+					<tr>
+						<td><a href="./productDetail.do?iname=${vo.iname}">${vo.iname}</a></td>
+						<td>${vo.oprice} 원</td>
+						<td>${vo.stock} 개</td>
+					</tr>
+		</c:forEach>
+				</tbody>
+			</table>
+		
+			
+	</div>
+	</c:if>
+<c:if test="${not empty sellerid}">	
+<input id="sellerid" type="hidden" value="${sellerid}">
+<button onclick="tree()">보기</button>
+	<div id="jsTree"></div>
+	<br>
+	<br>
+	<div>
+		<table id="jqGridRegist"></table>
+		<div id="jqGridPager"></div>
+		
+		<button onclick="productRegist()">제품등록</button>
+	</div>
+	
+	<div>
+		<table id="jqGridMain"></table>
+		<div id="jqGridPager2"></div>
+	</div>
+	
+	<div>
+		<table id="jqGridDetail"></table>
+		<div id="jqGridPager3"></div>
+	</div>
+</c:if>	
+	
+	
+</body>
+<%@ include file="./footer.jsp" %>
 <script type="text/javascript">
     jQuery.browser = {};
     (function () {
@@ -77,10 +196,10 @@ function makeTable(data){
     
     
 	$("#jqGridMain").jqGrid('clearGridData');
-	var sellerid = "admin01";
+	var sellerid = document.getElementById("sellerid").value;
 	var jsonAjaxData = {
 			"mcode" : data,
-			"sellerid" : "admin01"
+			"sellerid" : sellerid
 	};
 	console.log(jsonAjaxData);
 	var jsonDataMain = $.ajax({
@@ -107,12 +226,13 @@ function productDetail(data){
 	
 	console.log(data);
 	$("#jqGridDetail").jqGrid('clearGridData');
+	var sellerid = document.getElementById("sellerid").value;
 	
 	var detailText = $.ajax({
 		url : "./productGridMainDetail.do",
 		method : "post",
 		data : {"name" : data,
-			"sellerid" : "admin01"},
+			"sellerid" : sellerid},
 		dataType : "json",
 		traditional : true,
 		async: false
@@ -137,7 +257,7 @@ function productRegist(){
 	for(var i = 0; i < ids.length; i++){
 		var rowObject = $("#jqGridRegist").getRowData(ids[i]);
 		console.log(rowObject);
-		alert(rowObject.stock);
+// 		alert(rowObject.stock);
 // 		if(i == 0){
 // 			result = rowObject.code
 // 		}else{			
@@ -146,8 +266,8 @@ function productRegist(){
 		codeArray[i] = rowObject.code;
 		stockArray[i] = rowObject.stock;
 	}
-		alert(codeArray);
-		alert(stockArray);
+// 		alert(codeArray);
+// 		alert(stockArray);
 		var data = {
 				"code" : codeArray,
 				"stock" : stockArray
@@ -224,41 +344,4 @@ $(function(){
 });
 
 </script>
-<body>
-	사용자가 제품 볼때 제품명, 가격, 수량총합 보여줌 <br>
-	<table>
-		<c:forEach var="vo" items="${list}" varStatus="vs">
-			<tr>
-				<td>
-				제품명 : <a href="./productDetail.do?iname=${vo.iname}">${vo.iname}</a>, 제품가격 : ${vo.oprice}, 제품수량: ${vo.stock}
-				</td>	
-			</tr>
-		</c:forEach>
-	</table>
-	
-	<c:if test="${sellerid}">
-	카테고리 트리형식(재고등록 및 판매자 재고현황 볼때)
-	<button onclick="tree()">보기</button>
-	<div id="jsTree"></div>
-	<br>
-	<br>
-	<div>
-		<table id="jqGridRegist"></table>
-		<div id="jqGridPager"></div>
-		
-		<button onclick="productRegist()">제품등록</button>
-	</div>
-	
-	<div>
-		<table id="jqGridMain"></table>
-		<div id="jqGridPager2"></div>
-	</div>
-	
-	<div>
-		<table id="jqGridDetail"></table>
-		<div id="jqGridPager3"></div>
-	</div>
-	</c:if>
-</body>
-<%@ include file="./footer.jsp" %>
 </html>

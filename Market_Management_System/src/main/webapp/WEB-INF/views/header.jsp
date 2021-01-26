@@ -80,7 +80,7 @@
       			<a href = "./viewListCoupon.do">메인 페이지 이동</a>
       		</li>
     		<li>
-      			<a href = "./product.do?sellerid=${sellerid}">MENU</a>
+      			<a href = "./product.do?sellerid=${sellerid}">재고 목록</a>
       		</li>
 	    	<li>
 	      		<a href='#'>${sellerid}님 환영합니다.</a>
