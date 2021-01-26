@@ -11,65 +11,111 @@
 <link rel="stylesheet" type="text/css" href="./css/ui.jqgrid.css" />
 <style type="text/css">
 
-.pop_table {
-    width: 80%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: none;
-    border-bottom:5px solid #000;
-    color:#000;
-    margin: 0 auto;
-}
+/* .pop_table { */
+/*     width: 80%; */
+/*     border-collapse: separate; */
+/*     border-spacing: 0; */
+/*     border: none; */
+/*     border-bottom:5px solid #000; */
+/*     color:#000; */
+/*     margin: 0 auto; */
+/* } */
  
-.pop_table caption{
-    height: 60px;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-align: center;
-    line-height: 52px;
-    border-bottom: 5px solid;
-    -webkit-border-radius: 8px 8px 0 0;
-    -moz-border-radius: 8px 8px 0 0;
-    border-radius: 8px 8px 0 0;
-    background: #F94E5B;
-    color: black;
-}
+/* .pop_table caption{ */
+/*     height: 60px; */
+/*     font-size: 1.2em; */
+/*     font-weight: bold; */
+/*     text-align: center; */
+/*     line-height: 52px; */
+/*     border-bottom: 5px solid; */
+/*     -webkit-border-radius: 8px 8px 0 0; */
+/*     -moz-border-radius: 8px 8px 0 0; */
+/*     border-radius: 8px 8px 0 0; */
+/*     background: #F94E5B; */
+/*     color: black; */
+/* } */
  
-.pop_table caption:before {
-    content: '';
-    display: block;
-    height: 8px;
-    -webkit-border-radius: 8px 8px 0 0;
-    -moz-border-radius: 8px 8px 0 0;
-    border-radius: 8px 8px 0 0;
-    background-color: #000;
-}
+/* .pop_table caption:before { */
+/*     content: ''; */
+/*     display: block; */
+/*     height: 8px; */
+/*     -webkit-border-radius: 8px 8px 0 0; */
+/*     -moz-border-radius: 8px 8px 0 0; */
+/*     border-radius: 8px 8px 0 0; */
+/*     background-color: #000; */
+/* } */
  
-.pop_table th {
-    padding: 15px;
-    border: none;
-    border-bottom: 2px solid #FFF;
-    background: #FEB337;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
-}
+/* .pop_table th { */
+/*     padding: 15px; */
+/*     border: none; */
+/*     border-bottom: 2px solid #FFF; */
+/*     background: #FEB337; */
+/*     font-weight: bold; */
+/*     text-align: center; */
+/*     vertical-align: middle; */
+/* } */
  
-.pop_table td {
-    padding: 15px;
-    border: none;
-    border-bottom: 2px solid #000;
-    text-align: left;
-    vertical-align: baseline;
-}
+/* .pop_table td { */
+/*     padding: 15px; */
+/*     border: none; */
+/*     border-bottom: 2px solid #000; */
+/*     text-align: left; */
+/*     vertical-align: baseline; */
+/* } */
  
-.pop_table tr:last-child th,
-.pop_table tr:last-child td {
-    border-bottom: none;
+/* .pop_table tr:last-child th, */
+/* .pop_table tr:last-child td { */
+/*     border-bottom: none; */
+/* } */
+
+/* .list{ */
+/* 	text-align: center; */
+/* } */
+
+	table{
+/*  	border: 1px solid black;  */
+/*  	padding: 50px;  */
+ 	margin: auto; 
+ 	text-align: center; 
+	margin-top:10px; 
+/* 	border-top:5px solid beige;  */
+	margin-bottom: 50px;
 }
 
-.list{
+#th{
+	background-color : beige;
+	text-align:center; 
+	color:#8A6F24; 
+	height: 70px;
+	width: 400px;
+	
+/* 	background-color: beige; */
+/* 	text-align: center; */
+/* 	height: 70px; */
+/* 	width: 100px; */
+}
+td{
+	border-bottom:1px solid #dadada; 
+	text-align:center; 
+	color:#2f231c; 
+	height: 50px;
+	width: 400px;
+	
+}
+a {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
+div {
+	text-align:center;
+	margin: auto;
+	padding: 10px;
+}
+.pop_table caption {
+	border-radius: 8px 8px 0 0;
 	text-align: center;
+	font-size: 30px;
 }
 </style>
 <%@ include file="./header.jsp" %>
@@ -88,9 +134,9 @@
 				<caption>제품목록</caption>
 				<thead>
 				<tr>
-					<th scope="row">제품명</th> 
-					<th>제품가격</th> 
-					<th>남은 제품 수</th> 
+					<th id="th" scope="row">제품명</th> 
+					<th id="th">제품가격</th> 
+					<th id="th">남은 제품 수</th> 
 				</tr>
 				</thead>
 				<tbody class="list">
