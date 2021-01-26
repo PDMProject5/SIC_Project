@@ -23,7 +23,7 @@ function singup(){
 	var phone = document.getElementById("phone").value;
 	var marketing = document.getElementById("marketing").checked;
 	var passwordchk = document.getElementById("passwordchk");
-	var pwReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,20}$/;
+	var pwReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,20}$/;
 	var regExp = /\s/g;
 	document.getElementById("idchk").style.display = "none";
 	document.getElementById("namechk").style.display = "none";

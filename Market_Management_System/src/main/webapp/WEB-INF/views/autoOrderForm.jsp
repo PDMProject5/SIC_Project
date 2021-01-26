@@ -6,18 +6,34 @@
 <head>
 <meta charset="UTF-8">
 <title>자동 발주</title>
+<style type="text/css">
+#container{
+	width: 750px;
+	text-align: center;
+	margin: 0 auto;
+}
+table{
+	width: 60%;
+	margin: 100px auto;
+	text-align: center;
+}
+td{
+	height: 30px;
+}
+</style>
 </head>
 <%@ include file="./header.jsp" %>
 <body>
+<div id="container">
 <input type="hidden" id="listchk" value="${lists}">
 <form>
 	<table border="1">
 		<thead>
 		<tr>
-			<th>제품명</th>
-			<th>설정 개수</th>
-			<th>입고 개수</th>
-			<th><input type="checkbox" onclick="allchk(this.checked)" id="allcheck"></th>
+			<td style="font-weight: bold; background-color:#F4B4B4;">제품명</td>
+			<td style="font-weight: bold; background-color:#F4B4B4;">설정 개수</td>
+			<td style="font-weight: bold; background-color:#F4B4B4;">입고 개수</td>
+			<td style="background-color:#F4B4B4;"><input type="checkbox" onclick="allchk(this.checked)" id="allcheck"></td>
 		</tr>
 		</thead>
 		<tbody>
@@ -37,9 +53,9 @@
 		</tbody>
 	</table>
 </form>
-	<button onclick="location.href='./searchitemform.do'">자동 발주 등록</button>
-	<button onclick="autoOrderDel()">자동 발주 삭제</button>
-	<button onclick="location.href='./sellermain.do'">뒤로가기</button>
+	<button class="btn" onclick="location.href='./searchitemform.do'">자동 발주 등록</button>
+	<button style="margin-left: 50px; margin-right: 50px;" class="btn" onclick="autoOrderDel()">자동 발주 삭제</button>
+	<button class="btn" onclick="location.href='./sellermain.do'">뒤로가기</button>
 <script type="text/javascript">
 
 	function allchk(chk){
@@ -91,13 +107,14 @@
 		if(listchk.value == '[]'){
 			alert("등록된 제품이 없습니다.");
 		}else if(cnt == 0){
-			alert("한개 이상의 체크박스를 선택해 주세요.");
+			alert("삭제할 제품을 선택해 주세요.");
 		}else{
 			location.href="./autoOrderDel.do?itemlist="+itemlist;
 		}
 	}
 }
 </script>
+</div>
 </body>
 <%@ include file="./footer.jsp" %>
 </html>
