@@ -40,7 +40,7 @@ function cpchk(){
 		<input type="button" value="할인 쿠폰" onclick="cpchk()">
 	<br>
 	<strong style="margin: 10px; text-align: center;">마일리지 적용 </strong>
-		<input type="text" id="mileages" name="mileages">
+		<input type="text" id="mmoney" name="mileages" onkeyup="keymoney()">
 		<input type="hidden" id="id" name="id">
 		<input type="button" value="전체 적용" id="apply" onclick="miles(${mil.id})">
 		<p id="mileage">보유 마일리지 금액 : ${mil.mmoney}</p>
@@ -75,6 +75,12 @@ var addr = document.getElementById("addr").value;
 console.log(roadaddr);
 console.log(addr);
 
+var money = $("#mmoney").val();
+
+function keymoney(){
+	console.log(money);
+}
+
 $(document).ready(function(){
 	$('#mileages').keyup(function(){
 		$.ajax({
@@ -84,6 +90,12 @@ $(document).ready(function(){
 		});
 	});
 });
+
+function sum(){
+	var price = Number($("#price").text());
+	console.log(price);
+
+}
 
 function miles(val){
 	var price = document.getElementById("price").innerHTML;
@@ -101,14 +113,14 @@ var ajaxmiles = function(val){
 		data : "id="+val,
 		success : function(m){
 // 			console.log(m)
-			document.getElementById("mileages").value = m;
+			document.getElementById("mmoney").value = m;
 			var mm = document.getElementById("price").innerHTML;
 			var miles = document.getElementById("distotal").innerHTML;
 			
 			if(mm < m){
 			document.getElementById("price").innerHTML=0;
 			document.getElementById("distotal").innerHTML=0;
-			document.getElementById("mileages").value=mm;
+			document.getElementById("mmoney").value=mm;
 			
 			
 			}else{
