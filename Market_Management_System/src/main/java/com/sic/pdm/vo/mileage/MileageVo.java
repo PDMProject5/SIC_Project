@@ -9,24 +9,26 @@ public class MileageVo {
 	private int mmoney;
 	private Date mdate;
 	private String mstate;
+	private int paymentnum;
 
 	public MileageVo() {
 		
 	}
 
-	public MileageVo(String mseq, String id, int mmoney, Date mdate, String mstate) {
+	public MileageVo(String mseq, String id, int mmoney, Date mdate, String mstate, int paymentnum) {
 		super();
 		this.mseq = mseq;
 		this.id = id;
 		this.mmoney = mmoney;
 		this.mdate = mdate;
 		this.mstate = mstate;
+		this.paymentnum = paymentnum;
 	}
 
 	@Override
 	public String toString() {
 		return "MileageVo [mseq=" + mseq + ", id=" + id + ", mmoney=" + mmoney + ", mdate=" + mdate + ", mstate="
-				+ mstate + "]";
+				+ mstate + ", paymentnum=" + paymentnum + "]";
 	}
 
 	public String getMseq() {
@@ -68,5 +70,15 @@ public class MileageVo {
 	public void setMstate(String mstate) {
 		this.mstate = mstate;
 	}
+
+	public int getPaymentnum() {
+		return paymentnum;
+	}
+
+	public void setPaymentnum(int paymentnum) {
+		this.paymentnum = paymentnum;
+	}
+
+	
 
 }

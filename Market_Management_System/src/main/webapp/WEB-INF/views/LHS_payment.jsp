@@ -26,6 +26,7 @@ function cpchk(){
 }
 
 </script>
+<%@ include file="./header.jsp" %>
 <body>
 <form action="#" id="frm" method="post">
 	<div>
@@ -65,6 +66,7 @@ function cpchk(){
 </div>
 </form>
 </body>
+<%@ include file="./footer.jsp" %>
 <script type="text/javascript">
 
 $(document).ready(function(){

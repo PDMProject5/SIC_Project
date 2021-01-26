@@ -14,13 +14,36 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-table, th, td{
-	border: 1px solid black;
-	padding: 5px;
-	margin: auto;
-	text-align: center;
+
+table{
+/*  	border: 1px solid black;  */
+/* 	padding: 5px; */
+ 	margin: auto; 
+ 	text-align: center; 
+	margin-top:10px; 
+/* 	border-top:5px solid beige;  */
+	border-spacing:0;
 }
 
+#th{
+	background-color : beige;
+	text-align:center; 
+	color:#2f231c; 
+/* 	background-color: beige; */
+/* 	text-align: center; */
+/* 	height: 70px; */
+/* 	width: 100px; */
+}
+td{
+	border-bottom:1px solid #dadada; 
+	text-align:center; 
+	color:#2f231c; 
+	font-size:13px;
+}
+tbody{
+	margin: 50px;
+	padding: 50px;
+}
 a {
 	text-decoration: none;
 	font-weight: bold;
@@ -43,19 +66,20 @@ div {
 	<table>
 		<thead>
 			<tr>
-				<th>주문날짜</th>
-				<th>주문번호</th>
-				<th>제품명</th>
-				<th>수량</th>
-				<th>가격</th>
-				<th>지점</th>
-				<th>상태</th>
-				<th>이름</th>
-				<th>주소</th>
-				<th>휴대폰</th>
-				<th>결제 금액</th>
-				<th>할인 금액</th>
-				<th>환불 요청</th>
+				<th id="th" width="8%">주문날짜</th>
+				<th id="th" style="">주문 상세번호</th>
+				<th id="th">주문번호</th>
+				<th id="th">제품명</th>
+				<th id="th">수량</th>
+				<th id="th">가격</th>
+				<th id="th">지점</th>
+				<th id="th">상태</th>
+				<th id="th">이름</th>
+				<th id="th">주소</th>
+				<th id="th">휴대폰</th>
+				<th id="th">결제 금액</th>
+				<th id="th">할인 금액</th>
+				<th id="th">환불 요청</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -65,6 +89,7 @@ div {
 			<tr>
 				<td><%=oddto.getOdate() %></td>
 				<td><%=oddto.getOdnum() %></td>
+				<td><%=oddto.getOnum() %>
 				<td><%=oddto.getIname() %></td>
 				<td><%=oddto.getOdstock() %></td>
 				<td><%=oddto.getOprice() %></td>
@@ -83,9 +108,11 @@ div {
 				%>
 		</tbody>
 	</table>
+	
 	<div>
 		<input type="button" value="돌아가기" onclick="history.back(-1)">
 	</div>
 </body>
 <%@ include file="./footer.jsp" %>
+
 </html>

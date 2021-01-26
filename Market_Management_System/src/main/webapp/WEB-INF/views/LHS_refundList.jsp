@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-table, th, td{
+.table_order{
 	border: 1px solid black;
 	padding: 5px;
 	margin: auto;
@@ -38,7 +38,7 @@ div {
 	<div>
 		<h1>환불 요청 목록 조회</h1>
 	</div>
-		<table>
+		<table id="table_order">
 			<thead>
 				<tr>
 					<th>주문번호</th>

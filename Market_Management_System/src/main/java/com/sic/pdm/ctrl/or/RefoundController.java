@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sic.pdm.model.mileage.Mileage_IService;
 import com.sic.pdm.model.or.Refound_IService;
+import com.sic.pdm.vo.mileage.MileageVo;
 import com.sic.pdm.vo.or.OrderVo;
 import com.sic.pdm.vo.or.RefoundVo;
 import com.sic.pdm.vo.or.RefounddetailVo;
@@ -20,6 +22,9 @@ public class RefoundController {
 	
 	@Autowired
 	private Refound_IService iService;
+	
+	@Autowired
+	private Mileage_IService mService;
 	
 	@RequestMapping(value = "/refoundList.do", method = RequestMethod.GET)
 	public String refoundList(Model model) {
@@ -51,7 +56,7 @@ public class RefoundController {
 	// 환불요청 페이지 이동
 	@RequestMapping(value = "/refundinsert.do", method = RequestMethod.GET)
 	public String refundinsert(String onum, Model model) {
-		
+		System.out.println(onum);
 		OrderVo vo = iService.gorefund(onum);
 		
 		model.addAttribute("vo",vo);
@@ -88,11 +93,14 @@ public class RefoundController {
 //	}
 	
 	@RequestMapping(value = "/refoundApprove.do", method = RequestMethod.GET)
-	public String refoundApprove(String onum) {
+	public String refoundApprove(String onum, MileageVo mvo) {
 		
 		System.out.println(onum);
 		boolean isc = iService.refoundApprove(onum);
 		System.out.println("환불 요청 승인 완료" +isc);
+		boolean msc = mService.mileagerefund(mvo);
+		System.out.println("환불금액 마일리지로 반환 완료" + msc);
+		
 		return "redirect:/refoundList.do";
 	}
 	
