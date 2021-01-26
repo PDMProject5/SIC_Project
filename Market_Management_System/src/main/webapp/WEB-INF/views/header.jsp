@@ -67,6 +67,7 @@
   			<a href="./userModified.do" class="w3-bar-item w3-button">회원 정보 수정</a>
   			<a href="./mileage.do" class="w3-bar-item w3-button">마일리지 내역 조회</a>
   			<a href="./myCouponList.do" class="w3-bar-item w3-button">쿠폰 내역 조회</a>
+  			<a href="./delList.do" class="w3-bar-item w3-button">배송 내역 조회</a>
  			<a href="./orderlist.do" class="w3-bar-item w3-button">주문내역  조회</a>
 			</div>
 			<div style="color: gray;">

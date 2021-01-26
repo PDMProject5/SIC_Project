@@ -85,6 +85,7 @@
    <span id="total"><c:out value="${sum}"/> </span>원
    </h2>
 </div>
+   </form>
 <div>
    <h2>배송여부</h2>
 </div>
@@ -131,7 +132,7 @@
       <input type="button" value="다음으로 " onclick="payment()">
    </div>
 
-   </form>
+
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
