@@ -12,10 +12,10 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <style type="text/css">
-		table{
+		.tablebasket{
 		margin: auto; 
  	text-align: center; 
-	margin-top:10px; 
+ 	margin-top:10px;  
 /* 	border-top:5px solid beige;  */
 	margin-bottom: 10px;
 	}
@@ -23,7 +23,7 @@
 	background-color : beige;
 	text-align:center; 
 	color:#8A6F24; 
-	height: 70px;
+	height: 50px;
 	width: 200px;
 	
 /* 	background-color: beige; */
@@ -36,11 +36,12 @@
 	text-align:center; 
 	color:#2f231c; 
 	height: 50px;
-	width: 300px;
+	width: 200px;
 	}
 	#result {
 		text-align: center;
 		margin: auto;
+		margin-bottom: 20px;
 	}
 	.counter{
 		text-align: center;
@@ -95,12 +96,13 @@
 		color: #8A6F24;
 		border-radius: 8px;
 	}
-	.btnplus{
+	.btn{
 		border: 2px solid #8A6F24;
 		padding: 4px 8px;
 		background-color:beige;
 		color: #8A6F24;
 		border-radius: 8px;
+		text-align: center;
 	}
 	.button{
 		margin: 10px 10px;
@@ -109,18 +111,20 @@
 </style>
 </head>
 <body>
-<h1>장바구니</h1>
-<div id="container">
+<h1 id="result">장바구니</h1>
+<div>
 	<form action="#" method="post" id="frm" name="frm" onsubmit="return chkbox();">
-		<div class="panel-group" id="accordion">
-			<table id="del" class="table table-bordered">
+		<div>
+
+			<table id="del" class="tablebasket">
 				<thead>	
 					<c:if test="${not empty lists}" >
 					<tr>
-						<th><input type="checkbox" id="allchk" onclick="checkAll(this.checked)" checked></th>
-						<th>제품정보</th>
-						<th>수량</th>
-						<th>제품금액</th>
+						<th id="th">
+						<input type="checkbox" id="allchk" onclick="checkAll(this.checked)" checked></th>
+						<th id="th">제품정보</th>
+						<th id="th">수량</th>
+						<th id="th">제품금액</th>
 					</tr>
 					</c:if>
 				</thead>
@@ -129,7 +133,7 @@
 					<c:forEach var="dto" items="${lists}" varStatus="vs">		
 						<tr>
 							<td>
-								<input type='checkbox' id="chkVal" name='chkVal' value='${dto.odnum}' checked>
+								<input type='checkbox' id="chkVal" name='chkVal' class="chk" value='${dto.odnum}' checked>
 							</td>
 							<td>	
 								<strong><a  href="productDetail.do?iname=${dto.iname}">${dto.iname}</a></strong><br>
@@ -137,7 +141,7 @@
 							</td>
 							<td>
 								<a >${dto.odstock}</a>&nbsp;개&nbsp;
-								<input type="button" value="변경" onclick="modifyStock(${dto.odnum})">
+								<input type="button" value="변경" onclick="modifyStock(${dto.odnum})" class="btn button1">
 							</td>
 							<td>
 								<c:set var="odto" value="${dto.odstock}"/>
@@ -160,21 +164,21 @@
 						<h3>장바구니에 담긴 제품이 없습니다..</h3>
 				</c:if>	
 				<c:if test="${not empty lists}" >
-				<div>
-					<input type="submit" value="선택 삭제">
+				<div class="counter">
+					<input type="submit" value="선택 삭제" class="btn button">
 				</div>
 					
-				<div>
-					<h2>
-					<span>총 주문 금액:</span>
+				<div id="result">
+					<h2 class="total">
+					<span >총 주문 금액 :</span>
 					<span id="oprice"><c:out value="${sum}"/></span>원
 					</h2>
 				</div>
 				</c:if>
-				<div>
-					<input class="btn-success btn btn-primary" type="button" value="쇼핑 계속하기" onclick="shopping()">
+				<div id="result">
+					<input class="cart button1" type="button" value="쇼핑 계속하기" onclick="shopping()">
 					<c:if test="${not empty lists}" >
-					<input class="btn-success btn btn-primary" type="button" value="주문하기" onclick="order()">
+					<input class="back button2" type="button" value="주문하기" onclick="order()">
 					</c:if>
 				</div>
 		</div>
@@ -243,7 +247,7 @@ var ajaxModify = function(val){
          html += "<input type='hidden' id='iname' name='iname' value='"+v.iname+"'/>";
          html += "<input type='hidden' id='oprice' name='oprice' value='"+v.oprice+"' />";
             
-        html += "<table>";
+        html += "<table class='tablebasket'>";
 		html += "<tr>";
 		html += "</tr>";			
 		html += "<tr>";
