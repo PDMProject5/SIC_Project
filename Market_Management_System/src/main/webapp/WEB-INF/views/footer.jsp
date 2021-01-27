@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <style type="text/css">
 #footer {
- 	height: 80px; 
+ 	 height: 80px; 
      width: 100%; 
-     position: fixed;
+     position: fixed; 
      bottom: 0; 
      left: 0; 
      color: #9b9b9b;

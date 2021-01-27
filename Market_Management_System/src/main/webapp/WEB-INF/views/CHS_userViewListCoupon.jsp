@@ -5,45 +5,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="./header.jsp" %>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <style type="text/css">
-	#userViewCouponList{
+	#storeCouponList{
+			width: 70%;
+			height: 70%;
+			margin: 0 auto;
+	}
+	
+	#couponList{
+		margin: auto;
+		margin-left: 60px;
 		float: left;
+	}
+	
+	table{
+	 	padding: 30px; 
 		text-align: center;
+		height: 300px;
+	}
+	
+	th,td{
+		padding-bottom: 2px;
+		padding-top: 2px;
+	}
+	
+	img {
+		height: 150px;
+	
 	}
 </style>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
-	<div id = "userViewCouponList">
+	<div id = "#container">
 		<div>
 			<c:choose>
 				<c:when test="${not empty ucvList}">
-					<table>
-						<thead>
-							<tr>
-								<th>쿠폰이미지</th>
-								<th>쿠폰내용</th>
-								<th>지급기간</th>
-							</tr>
-						</thead>
-						<tbody>
 					<c:forEach items="${ucvList}" var="ucvList">
-					<tr>
-						<td><a href="./userViewOneCoupon.do?cseq=${ucvList.cseq}"><img src="${pageContext.request.contextPath}${ucvList.cthumbimg}"></a></td>
-						<td>${ucvList.cnotify}</td>
-						<td>
-								<fmt:parseDate var="startDate" value="${ucvList.cdate}" pattern="yyyy-MM-dd" />
-								<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd" />
-								~
-								<fmt:parseDate var="endDate" value="${ucvList.clastdate}" pattern="yyyy-MM-dd" />
-								<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" />
-						</td>
-					</tr>
+						<div id = "couponList">
+							<table>
+								<tr>
+									<td>
+										<a href="./userViewOneCoupon.do?cseq=${ucvList.cseq}">
+											<img src="${pageContext.request.contextPath}${ucvList.cthumbimg}">
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td>${ucvList.cnotify}</td>
+								</tr>
+								<tr>
+									<td>
+										<fmt:parseDate var="startDate" value="${ucvList.cdate}" pattern="yyyy-MM-dd" />
+										<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd" />
+										~
+										<fmt:parseDate var="endDate" value="${ucvList.clastdate}" pattern="yyyy-MM-dd" />
+										<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" />
+									</td>
+								</tr>
+							</table>
+						</div>
 					</c:forEach>
-					</tbody>
-					</table>
 				</c:when>
 				<c:otherwise>
 					<h1>현재 진행 중인 이벤트가 없습니다.<br/> 

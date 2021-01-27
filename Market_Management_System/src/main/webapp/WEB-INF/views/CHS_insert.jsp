@@ -5,6 +5,58 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#container{
+		width: 750px;
+		height: 750px;
+		margin: 0 auto;
+	}
+	#frm{
+		height: 600px;
+	}
+	table{
+		width: 60%;
+		margin: 30px auto;
+		text-align: center;
+	}
+	tr{
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	th,td{
+		height: 50px;
+		
+	}
+	input[type="text"]{
+		width: 80%;
+		border-radius: 8px;
+	}
+	
+	input[type="button"]{
+		width: 90%;
+		height: 100%;
+	}
+	.select_img{
+		text-align: center;
+	}
+	img {
+		width: 300px;
+		height: 300px;
+	}
+	#btn_reset{
+		height: 50px;
+		color: #8A6F24;
+		background-color: beige;
+	}
+	#btn_submit{
+		color: #8A6F24;
+		background-color: beige;
+	}
+	#btn_back{
+		color: #8A6F24;
+		background-color: beige;
+	}
+</style>
 <link type="text/css" rel="stylesheet" href="./css/sweetalert.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
@@ -92,7 +144,7 @@
 </head>
 <%@ include file="./header.jsp" %>
 <body>
-	<div id="insertCouponForm">
+	<div id="container">
 		<form id = "frm" enctype="multipart/form-data" method="post" action="./insertCoupon.do">
 			<table>
 				<tr>
@@ -104,7 +156,7 @@
 					<td><input type="file" id="cImg" name="file"></td>
 				</tr>
 				<tr>
-					<td>
+					<td colspan="3">
 						<div class="select_img">
 							<img src="" />
 						</div>
@@ -112,8 +164,10 @@
 				</tr>
 				<tr>
 					<th>쿠폰종류</th>
-					<td><input type="radio" name="cdstate" id="cdstate" value="A" onchange="setDisplay()"><label for="r1">차감금액</label></td>
- 					<td><input type="radio" name="cdstate" id="cdstate" value="B" onchange="setDisplay()"><label for="r2">할인율</label></td>
+					<td>
+						<input type="radio" name="cdstate" id="cdstate" value="A" onchange="setDisplay()"><label for="r1">차감금액</label>
+	 					<input type="radio" name="cdstate" id="cdstate" value="B" onchange="setDisplay()"><label for="r2">할인율</label>
+	 				</td>
 				</tr>
 				<tr>
 					<th>설정금액</th>
@@ -121,8 +175,8 @@
 						<input type="text" id="coupon" name="coupon" min="1">
 					<td>
 					<td>
-						<div id="divWon">원</div>
-						<div id="divPer">%</div>
+						<div id="divWon"><h3>원</h3></div>
+						<div id="divPer"><h3>%</h3></div>
 					</td>
 				</tr>
 				<tr>
@@ -139,7 +193,7 @@
 								var reader = new FileReader;
 								reader.onload = function(data) {
 									$(".select_img img").attr("src",
-											data.target.result).width(250).height(250);
+											data.target.result).width(300).height(300);
 								}
 								reader.readAsDataURL(this.files[0]);
 							}
