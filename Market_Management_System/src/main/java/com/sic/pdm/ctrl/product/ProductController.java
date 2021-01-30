@@ -36,6 +36,7 @@ public class ProductController {
 	@RequestMapping(value = "/product.do")
 	public String test(Model model,HttpSession session) {
 		String store = (String)session.getAttribute("store");
+		System.out.println("코등ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + store);
 		SellerVo svo = selService.sellerOne(store);
 		String sellerid = svo.getSellerid();
 		System.out.println("판매자 아이디"+sellerid);

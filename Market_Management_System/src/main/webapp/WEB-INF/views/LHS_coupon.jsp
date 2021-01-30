@@ -58,18 +58,13 @@ div {
 </body>
 <script type="text/javascript">
 function couponSelect(val){
-	var price = window.opener.document.getElementById("price").innerHTML 
-	if(price == 0){
-		alert("쿠폰을 적용할 수 없습니다.");
-		window.close();
-	}else{
-		
 	ajaxSel(val);
-	}
+
+	
 	
 }
 
-
+// 쿠폰값만 가져와
 var ajaxSel = function(val){
 	$.ajax({
 		url : './couponSelect.do',
@@ -78,21 +73,28 @@ var ajaxSel = function(val){
 		dataType : 'json',
 		success : function(c){
 			console.log(c.cseq, c.coupon)
-			window.opener.document.getElementById("coupon").value = c.coupon;
-			var a = window.opener.document.getElementById("price").innerHTML;
+			var mileVal = window.opener.document.getElementById("mileVal").value;
 			var b = window.opener.document.getElementById("distotal").innerHTML;
-				var result = a - c.coupon;
-				var results = b + c.coupon;
+			var pprice = window.opener.document.getElementById("pprice").innerHTML;
+			var price = window.opener.document.getElementById("price").innerHTML;
+			if(Number(price) < Number(c.coupon)){
+				alert("쿠폰을 적용할 수 없습니다.");
+				window.close();
+				return false;
+			}
 
-// 			alert(result)
+			window.opener.document.getElementById("coupon").value = c.coupon;
 			window.opener.document.getElementById("cseq").value = c.cseq;
-			window.opener.document.getElementById("price").innerHTML = result;
-			window.opener.document.getElementById("distotal").innerHTML = results;
+// 			window.opener.document.getElementById("price").innerHTML = a;
+// 			window.opener.document.getElementById("distotal").innerHTML = b;
+			window.opener.document.getElementById("couponVal").value = c.coupon;
+			window.opener.document.getElementById("distotal").innerHTML = Number(c.coupon) + Number(mileVal);
+			window.opener.document.getElementById("price").innerHTML = Number(pprice) - (Number(c.coupon) + Number(mileVal));
+			
+			
 			window.close();
 		},
-		error : function(){
-			alert("에러");
-		}
+		
 	});
 }
 

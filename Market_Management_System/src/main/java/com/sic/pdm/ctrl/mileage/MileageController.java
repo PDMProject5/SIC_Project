@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sic.pdm.model.mileage.Mileage_IService;
+import com.sic.pdm.model.or.OrderList_IService;
 import com.sic.pdm.vo.mileage.MileageVo;
 @Controller
 public class MileageController {
 	
 	@Autowired
 	private Mileage_IService iService;
+	
+	@Autowired
+	private OrderList_IService oService;
 	
 	@RequestMapping(value = "/mileage.do", method = RequestMethod.GET)
 	public String Mileage(Model model, HttpSession session) {
@@ -40,10 +44,9 @@ public class MileageController {
 	public int mileageApply(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
 		
-		MileageVo mvo = iService.totalMiles(id);
+		int mm = oService.getMPrice(id);
 		System.out.println("아이디 확인"+ id);
 		
-		int mm = mvo.getMmoney();
 		
 		System.out.println(mm);
 		return mm;

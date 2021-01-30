@@ -72,7 +72,7 @@ public class PaymentController {
 	@RequestMapping(value = "/orderupdate.do", method = RequestMethod.POST)
 	public String updateorder(Model model, HttpSession session, PaymentVo pvo, CouponVo cvo, MileageVo mvo) {
 		String id = (String)session.getAttribute("id");
-		System.out.println(id);
+		System.out.println("아이디 확인"+id);
 		
 		Map<String, Object>map = new HashMap<String, Object>();
 		
@@ -96,36 +96,45 @@ public class PaymentController {
 			Pservice.orderdel(pvo);
 		}
 		
-		System.out.println("총가격"+pvo.getPaymentamt());
-		System.out.println("쿠폰값"+cvo.getCoupon());
-		System.out.println("마일리지 값"+mvo.getMmoney());
-		
-		
-		
 		
 		System.out.println("주문 업데이트 성공"+onum);
 		
 		
-		
+		// 결제 확인
 		boolean isc = Pservice.payment(pvo);
 		System.out.println("결제 성공 " + isc);
 		
+		
+		// 쿠폰 사용 확인
 		System.out.println(cvo.getCseq());
-		System.out.println(cvo.getId());
 		cvo.setId(id);
-		boolean sc = Pservice.delCoupon(cvo);
-		System.out.println("사용한 쿠폰 삭제" + sc);
+		System.out.println(cvo.getId());
+		System.out.println("판매금액"+pvo.getSaleamt());
+		System.out.println("할인금액"+pvo.getDiscountamt());
+		System.out.println("결제금액"+pvo.getPaymentamt());
+		String coupon =cvo.getCseq();
+		if(!coupon.isEmpty()) {
+			boolean sc = Pservice.delCoupon(cvo);
+			System.out.println("사용한 쿠폰 삭제" + sc);
+			
+		}
 		
-		System.out.println(mvo.getId());
-		System.out.println(mvo.getMmoney());
+		// 마일리지 사용 확인
 		mvo.setId(id);
-		boolean msc = Mservice.useMileage(mvo);
-		System.out.println("사용한 마일리지"+msc);
+		int n = mvo.getMmoney();
+		System.out.println("사용 마일리지"+mvo.getMmoney());
+		if(n>0) {			
+			boolean msc = Mservice.useMileage(mvo);
+			System.out.println("마일리지 사용 확인"+msc);
+			
+		}
 		
-//		boolean mmsc = Pservice.mileage(mvo);
-//		System.out.println("적립된 마일리지"+mmsc);
-		
-		
+		// 마일리지 적립
+		int sale = (Integer)(Object)pvo.getSaleamt();
+		mvo.setMmoney(sale);
+		System.out.println(mvo.getMmoney());
+		boolean isc2 = Pservice.mileage(mvo);
+		System.out.println("마일리지 적립 성공"+isc2);
 		
 		
 		
@@ -167,6 +176,8 @@ public class PaymentController {
 		boolean isc = Oservice.mmoney(id);
 		return isc?"true":"false";
 	}
+	
+
 	
 
 }
