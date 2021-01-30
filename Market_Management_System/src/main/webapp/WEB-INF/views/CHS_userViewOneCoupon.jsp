@@ -10,8 +10,8 @@
 <title>Insert title here</title>
 <style type="text/css">
 	img {
-		width: 250px;
-		height: 250px;		
+		width: 50%;
+		height: 150%;		
 	}
 	table{
 		width: 60%;
@@ -27,6 +27,13 @@
 		width: 100px;
 		
 	}
+	
+	.date{
+		position: absolute;
+		margin-bottom: 20px;
+	}
+	
+ 
 	#container{
 		width: 70%;
 		height: 70%;
@@ -44,6 +51,20 @@
 		height: 50px;
 		width: 100px;
 	}
+	
+	
+	@media only screen and (max-width: 600px){
+		table{
+			width: 50%;
+		}
+		
+		h2{
+			font-size: 20px;
+		}
+	
+	}
+	
+}	
 </style>
 <link type="text/css" rel="stylesheet" href="./css/sweetalert.css">
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
@@ -104,7 +125,7 @@
 			<td>
 				<h2>쿠폰 지급 기간</h2>
 			</td>
-			<td>
+			<td class="date">
 				<h4>
 					<fmt:parseDate var="startDate" value="${ucv.cdate}" pattern="yyyy-MM-dd" />
             		<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>

@@ -123,14 +123,14 @@
 				<td>${vo.oprice}</td>
 			</tr>
 		</table>
-			<div class="counter">갯수: 
+			<div class="counter">
 				<input type="button" value="-" onclick="minus()" class="btnminus">
 				<input type="text" id="odstock" name="odstock" value="1">
 				<input type="button" value="+" onclick="plus()" class="btnplus">
 			</div>
 			<div id="result">
 				<span>제품명 : ${vo.iname}</span><br>
-				<span>총 수량 개수 : </span>
+				<span>총 수량 : </span>
 				<span id="rstock" class="rstock"> 개</span><br>
 				<span>총 제품금액 : </span> 
 				<span id="rmoney"></span>
