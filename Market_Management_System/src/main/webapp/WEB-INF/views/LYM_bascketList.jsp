@@ -165,7 +165,7 @@
 							
 			</table>
 				<c:if test="${empty lists}">
-						<h3>장바구니에 담긴 제품이 없습니다..</h3>
+						<h3 style="text-align: center; margin-bottom: 50px;">장바구니에 담긴 제품이 없습니다.</h3>
 				</c:if>	
 				<c:if test="${not empty lists}" >
 				<div class="counter">
@@ -195,7 +195,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">수량 변경</h4>
+					<h4 class="modal-title" style="text-align: center;">수량 변경</h4>
 				</div>
 				<div class="modal-body">
 					<form action="#" class="form-margin" method="post" id="StoUpdate"></form>
@@ -210,27 +210,23 @@
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
-	
+
+// 체크한 제품 금액만 계산
 function sum(){
 	var chkval = document.getElementsByName('chkVal');
 	var n = 0;
 	var sum = 0;
 
-	// 체크박스를 클릭했을때 일어나는 기능이어야해
 		// chkva.length 체크박스 개수만큼 돌아감 ex)length가 2라면 두번돌아감
 		for (var i = 0; i < chkval.length; i++) {
 			
 			// [0] true라면  n =4050 sum [1] true => 4050+1500 =6550   4050+6550 => 11100나옴 
 			if (chkval[i].checked == true) {
-				n+= Number($(".price").eq(i).text());
-	
-			}
-				
+				n+= Number($(".price").eq(i).text());	
+			}		
 		}
-	
-			sum= n;
-			$("#oprice").html(sum);		
-
+		sum = n;
+		$("#oprice").html(sum);		
 }
 
 function modifyStock(val){
@@ -296,6 +292,7 @@ function modStock(){
 		location.href = "product.do";
 	}
 
+	// 체크박스 전체 선택/해제
 	function checkAll(bool) {
 		var chkval = document.getElementsByName('chkVal');
 		for (var i = 0; i < chkval.length; i++) {
@@ -314,12 +311,11 @@ function modStock(){
 			} else {
 				allCheck.checked = false;
 				sum();
-			}
-			
-			
+			}		
 		}
 	}
 
+	// 체크박스 선택
 	function chsConfirm() {
 		var chs = document.getElementsByName("chkVal");
 		var cnt = 0;
@@ -332,7 +328,7 @@ function modStock(){
 	}
 
 
-	
+	// 체크된 제품만 삭제
 	function chkbox() {
 		var chkval = document.getElementsByName('chkVal');
 		var n = 0;
@@ -343,8 +339,7 @@ function modStock(){
 				sum();
 			}
 		}
-		
-		
+				
 		if (n > 0) {
 			var con = confirm("선택한 제품을 삭제하시겠습니까?");
 			if(con){

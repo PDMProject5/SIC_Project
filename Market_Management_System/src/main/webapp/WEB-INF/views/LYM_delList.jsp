@@ -121,29 +121,29 @@ td{
 		</div>
 	</form>
 </div>
-
-<div id="modify" class="modal fade" role="dialog">
+	
+	<!-- 배송지 수정 모달창 -->
+	<div id="modify" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">배송지 수정</h4>
+					<h4 class="modal-title" style="text-align: center;">배송지 수정</h4>
 				</div>
 				<div class="modal-body">
 					<form action="#" class="form-margin" method="post" id="frmModify"></form>
-				</div>
-				
+				</div>				
 			</div>
-
 		</div>
 	</div>
 
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
-    
+
+// 배송지 최대 갯수
 function insertForm(){
 		var rowCount = $('#del >tbody >tr').length;
 		if(rowCount >= '3'){
@@ -154,6 +154,7 @@ function insertForm(){
 		}
 }
 
+// 배송지 삭제
 function deleteDel(val){
 	var dvo = document.getElementById("dvo").value;
 	var con = confirm("정말 삭제하시겠습니까?");

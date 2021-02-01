@@ -262,6 +262,11 @@ function keyevent() {
       alert("보유하신 마일리지 금액을 초과했습니다.");
       document.getElementById("mmoney").value = mile;
       document.getElementById("mileVal").value = mile;
+      if(mile>pprice){
+      	document.getElementById("mmoney").value = pprice;
+      	document.getElementById("mileVal").value = pprice;
+    	  
+      }
       disSum();
       
    }
