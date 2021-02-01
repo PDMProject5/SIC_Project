@@ -14,19 +14,42 @@
 	#frm{
 	height: 600px;
 	}
-	table{
-		width: 60%;
-		margin: 30px auto;
-		text-align: center;
-	}
-	tr{
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
-	th,td{
-		height: 50px;
+/* 	table{ */
+/* 		width: 60%; */
+/* 		margin: 30px auto; */
+/* 		text-align: center; */
+/* 	} */
+/* 	tr{ */
+/* 		margin-top: 5px; */
+/* 		margin-bottom: 5px; */
+/* 	} */
+/* 	th,td{ */
+/* 		height: 50px; */
 		
-	}
+/* 	} */
+	
+	  table {
+        width: 500px;
+        border-collapse: collapse;
+        text-align: center;
+        font-family: 'Trebuchet MS';
+    }
+    td, th {
+        font-size: 10pt;
+        border: 1px solid #98bf21;
+        height: 30px;
+    }
+    th {
+        background-color:#A7C942;
+        color:#ffffff;
+        font-family: Georgia;
+    }
+    tr.alt td {
+        color:#000000;
+        background-color:#EAF2D3;
+    }
+
+	
 	input[type="text"]{
 		width: 80%;
 		border-radius: 8px;
@@ -68,6 +91,7 @@
 <script type="text/javascript">
 
 	function deleteCoupon(cseq) {
+		var cseq = cseq;
 		swal({
 			  title: "쿠폰 삭제",
 			  text: "쿠폰을 삭제하면 복구가 불가능 합니다.",
@@ -77,7 +101,7 @@
 			  confirmButtonText: "삭제",
 			  closeOnConfirm: false
 			},
-			function(cseq){
+			function(){
 				location.href='./deleteCoupon.do?cseq='+cseq;
 			});
 		
@@ -169,11 +193,13 @@
 			<table>
 					<tr>
 						<th>쿠폰내용</th>
-						<td><input type="text" id="cnotify" name="cnotify" value = "${cv.cnotify}"></td>
+						<td colspan="2">
+							<input type="text" id="cnotify" name="cnotify" value = "${cv.cnotify}">
+						</td>
 					</tr>
 					<tr>
 						<th>파일업로드</th>
-						<td>
+						<td colspan="2">
 						<input type="file" id="cImg" name="file">
 						<input type="hidden" id="cthumbimg" value = "${cv.cthumbimg}">
 						</td>
@@ -202,14 +228,14 @@
 					</tr>
 					<tr>
 						<td>
-						<input type = "button" id = "btn_update" value = "수정" onclick = "updateCoupon()">
-					</td>
-					<td>
-						<input type = "button" id = "btn_delete" value = "삭제" onclick = "deleteCoupon(${cv.cseq})">
-					</td>
-					<td>
-						<input type = "button" id = "btn_back" value = "뒤로가기" onclick = "backBtn()">
-					</td>
+							<input type = "button" id = "btn_update" value = "수정" onclick = "updateCoupon()">
+						</td>
+						<td>
+							<input type = "button" id = "btn_delete" value = "삭제" onclick = "deleteCoupon(${cv.cseq})">
+						</td>
+						<td>
+							<input type = "button" id = "btn_back" value = "뒤로가기" onclick = "backBtn()">
+						</td>
 					</tr>
 			</table>
 			<script>

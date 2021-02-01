@@ -22,19 +22,6 @@
 	h3{
 		text-align: center;
 	}
-	table{
-		padding: 30px; 
-		text-align: center;
-		height: 300px;
-	}
-	tr{
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
-	td{
-		padding-bottom: 2px;
-		padding-top: 2px;
-	} 
 	#btn{
 		width: 20%;
 		height: 200px;
@@ -47,6 +34,7 @@
 		background-color: beige;
 		height: 50px;
 		width: 100px;
+		margin-bottom: 30px;
 	}
 	
 	img {
@@ -70,14 +58,12 @@
 				<h3>${id}님의 쿠폰 내역 조회</h3>
 				<c:forEach items="${cbList}" var="cbList">
 					<div id = "couponList">
-						<table>
-							<tr>
-								<td><img src="${pageContext.request.contextPath}${cbList.cthumbimg}"></td>
-							</tr>
-							<tr>
-								<td>${cbList.cnotify}</td>
-							</tr>
-						</table>
+						<div>
+							<img src="${pageContext.request.contextPath}${cbList.cthumbimg}">
+						</div>
+						<div>
+							${cbList.cnotify}
+						</div>
 					</div>
 				</c:forEach>
 			</c:when>
@@ -86,9 +72,9 @@
 				<br />
 			</c:otherwise>
 		</c:choose>
-		<div id = "btn">
-			<input type="button" id="btn_back" value="뒤로가기" onclick="backBtn()">
-		</div>
+	</div>
+	<div id = "btn">
+		<input type="button" id="btn_back" value="뒤로가기" onclick="backBtn()">
 	</div>
 </body>
 <%@ include file="footer.jsp" %>
