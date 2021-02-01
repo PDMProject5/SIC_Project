@@ -108,6 +108,10 @@
 		margin: 10px 10px;
 		text-align: center;
 	}
+	
+	#odstock{
+		width:50px;
+	}
 </style>
 </head>
 <body>
@@ -251,17 +255,17 @@ var ajaxModify = function(val){
 		html += "<tr>";
 		html += "</tr>";			
 		html += "<tr>";
-		html += "<td>제품명: <input type='text' id='iname' name='iname' value='"+v.iname+"' readonly='readonly'></td>";
+		html += "<td>제품명 <input type='text' id='iname' name='iname' value='"+v.iname+"' readonly='readonly'></td>";
 		html += "</tr>";
 		html += "<tr>";
-		html += "<td>가격: <input type='text' id='oprice' name='oprice' value='"+v.oprice+"' readonly='readonly'></td>";
+		html += "<td>가격 <input type='text' id='oprice' name='oprice' value='"+v.oprice+"' readonly='readonly'></td>";
 		html += "</tr>";						
 		html += "<tr>";
 		html += "<td>";
-		html += "갯수: <input type='button' value='-' onclick='minus()'>";
+		html += "갯수 <br><input type='button' value='-' onclick='minus()'>";
 		html += "			<input type='text' id='odstock' name='odstock' value='1'>";
 		html += "			<input type='button' value='+' onclick='plus()'>";
-		html += "		</td>";
+		html += "</td>";
 		html += "	</tr>";
 		html += "</table>";
 		html += "</div>";

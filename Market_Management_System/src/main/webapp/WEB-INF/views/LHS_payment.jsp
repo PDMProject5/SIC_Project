@@ -159,21 +159,21 @@
             <input type="text" id="mmoney" name="mmoney" onkeyup="javascript:keyevent(this);">
             <input type="hidden" id="id" name="id">
             <input type="button" class="btn button1" value="전체 적용" id="apply" onclick="miles(${mil.id})">
-            <p >보유 마일리지 금액 : <a id="mileage">${mil.mmoney}</a></p>
+            <p >보유 마일리지 금액 : <a id="mileage"><c:if test="${mil.mmoney eq null}">0</c:if> ${mil.mmoney}</a></p>
          </td>
       </tr>
       <tr>
          <th id="th3">할인금액</th>
          <th>
             <span id="distotal">0</span>원
-            <input type="hidden" id="discountamt" name="discountamt" value="">
+            <input type="hidden" id="discountamt" name="discountamt" value="0">
          </th>
       </tr>
       <tr>
          <th id="th3">총 결제 금액</th>
          <th>
             <span id="price" style="font-size: 20px;">${price}</span>원
-            <input type="hidden" id="paymentamt" name="paymentamt" value="">
+            <input type="hidden" id="paymentamt" name="paymentamt" value="0">
          </th>
       </tr>
       <tr>
@@ -303,6 +303,7 @@ var ajaxmiles = function(val){
       data : "id="+val,
       success : function(m){
          console.log(m);
+         
          document.getElementById("mmoney").value = m; // 전체 마일리지
          document.getElementById("mileVal").value = m;
          var pprice = document.getElementById("pprice").innerHTML; // 제품 금액
@@ -356,6 +357,10 @@ function paymentVal(){
    var discountamt = $("#distotal").text();
    var paymentamt = $("#price").text();
 
+   if(discountamt=='0'){
+	   document.getElementById("mmoney").value = '0';
+   }
+   
    document.getElementById("saleamt").value = saleamt;
    document.getElementById("discountamt").value = discountamt;
    document.getElementById("paymentamt").value = paymentamt;

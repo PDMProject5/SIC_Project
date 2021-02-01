@@ -109,5 +109,10 @@ public class CouponServiceImpl implements ICouponService {
 		return icDao.coupon(id);
 	}
 
-
+	@Override
+	public List<CouponVo> getCouponList2(Map<String, Object> map) {
+		return icDao.getCouponList2(map);
+	}
+	
+	
 }

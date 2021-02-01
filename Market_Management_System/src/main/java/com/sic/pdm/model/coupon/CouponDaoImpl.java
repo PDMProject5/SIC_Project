@@ -124,5 +124,10 @@ public class CouponDaoImpl implements ICouponDao {
 		return sqlSession.selectList(NS + "coupon", id);
 	}
 
+	@Override
+	public List<CouponVo> getCouponList2(Map<String, Object> map) {
+		
+		return sqlSession.selectList(NS+"getCouponList2",map);
+	}
 
 }

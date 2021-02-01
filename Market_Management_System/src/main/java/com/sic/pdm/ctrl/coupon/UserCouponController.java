@@ -105,7 +105,12 @@ public class UserCouponController {
 	@RequestMapping(value = "/coupon.do", method = RequestMethod.GET)
 	public String coupon(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		List<CouponVo> cList = icsvc.getCouponList(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		String store = (String)session.getAttribute("store");
+		map.put("id", id);
+		map.put("store", store);
+		
+		List<CouponVo> cList = icsvc.getCouponList2(map);
 		model.addAttribute("cList",cList);
 		return "LHS_coupon";
 	}
