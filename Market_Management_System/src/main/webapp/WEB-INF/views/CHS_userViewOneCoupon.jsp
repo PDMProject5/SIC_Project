@@ -15,7 +15,7 @@
 	}
 	#userViewOneCoupon{
 		text-align: center;
-		width: 50%;
+		width: 70%;
 		height: 500px;
 		margin-top: 60px;
 		margin-bottom: 100px;

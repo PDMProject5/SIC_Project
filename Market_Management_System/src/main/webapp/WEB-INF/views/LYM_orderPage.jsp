@@ -23,6 +23,7 @@
 	}
 	.total{
 		margin: auto;
+		margin-bottom: 100px;
 		width: 60%;
 	}
 	.del1{
