@@ -3,41 +3,41 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<%@ include file="./header.jsp" %>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <style type="text/css">
-	img {
-		width: 50%;
-		height: 150%;		
+	#container{
+		width: 80%;
+		height: 100%;
+		margin: 0 auto;
 	}
-	table{
-		width: 60%;
-		margin: 30px auto;
+	#userViewOneCoupon{
 		text-align: center;
+		width: 50%;
+		height: 500px;
+		margin-top: 60px;
+		margin-bottom: 100px;
+		margin-left: 20%;
+		margin-right: 20%;
+		border-radius: 25px;
+ 		border: 2px solid black;
 	}
-	tr{
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
-	td{
-		height: 50px;
-		width: 100px;
-		
-	}
+	#userViewOneCNotify{
 	
-	.date{
-		position: absolute;
+	}
+	#userViewOneCThumbimg{
+	
+		margin-top: 100px;
+	
+	}
+	#userViewOneCDate{
+		margin-top: 50px;
 		margin-bottom: 20px;
 	}
-	
- 
-	#container{
-		width: 70%;
-		height: 70%;
-		margin: 0 auto;
+	#userViewOneCBtn{
+		margin-top: 50px;
 	}
 	#btn_getCoupon{
 		color: #8A6F24;
@@ -52,19 +52,23 @@
 		width: 100px;
 	}
 	
-	
-	@media only screen and (max-width: 600px){
-		table{
-			width: 50%;
-		}
-		
-		h2{
-			font-size: 20px;
-		}
-	
+	img {
+		width: 150px; 
+		height: 100px;
 	}
 	
-}	
+	@media screen and (max-width: 768px) {
+		#userViewOneCoupon{
+			text-align: center;
+		}
+		
+		img {
+			width: 150px; 
+			height: 100px;
+		}
+	}
+
+
 </style>
 <link type="text/css" rel="stylesheet" href="./css/sweetalert.css">
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
@@ -111,40 +115,30 @@
 
 </script>
 </head>
+<%@ include file="./header.jsp" %>
 <body>
 	<div id="container">
-	<table>
-		<tr>
-			<td><h2>쿠폰내용</h2></td>
-			<td><h4>${ucv.cnotify}</h4></td>
-		</tr>
-		<tr>
-			<td><img src="${pageContext.request.contextPath}${ucv.cthumbimg}" /></td>
-		</tr>
-		<tr>
-			<td>
+		<div id = "userViewOneCoupon">
+			<div id ="userViewOneCThumbimg">
+				<h3>쿠 폰</h3>
+				<img src="${pageContext.request.contextPath}${ucv.cthumbimg}" />
+			</div>
+			<div id ="userViewOneCDate">
 				<h2>쿠폰 지급 기간</h2>
-			</td>
-			<td class="date">
 				<h4>
 					<fmt:parseDate var="startDate" value="${ucv.cdate}" pattern="yyyy-MM-dd" />
-            		<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
-           		</h4>
-           		~
-           		<h4>
-            		<fmt:parseDate var="endDate" value="${ucv.clastdate}" pattern="yyyy-MM-dd" />
-           			<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
+					<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd" />
+					~
+					<fmt:parseDate var="endDate" value="${ucv.clastdate}" pattern="yyyy-MM-dd" />
+					<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" />
 				</h4>
-			</td>
-		</tr>
-		<tr>
-			<td>
+			</div>
+			<div id ="userViewOneCBtn">
 				<input type="button" id="btn_getCoupon" value="쿠폰 받기" onclick="getCouponBtn(${ucv.cseq})">
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" id="btn_back" value="뒤로가기" onclick="backBtn()">
-			</td>
-		</tr>
-	</table>
+			</div>
+		</div>
 	</div>
 </body>
 <%@ include file="./footer.jsp" %>

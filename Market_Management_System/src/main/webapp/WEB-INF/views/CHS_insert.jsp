@@ -14,19 +14,28 @@
 	#frm{
 		height: 600px;
 	}
-	table{
-		width: 60%;
-		margin: 30px auto;
-		text-align: center;
-	}
-	tr{
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
-	th,td{
-		height: 50px;
-		
-	}
+	
+	  table {
+        width: 500px;
+        border-collapse: collapse;
+        text-align: center;
+        font-family: 'Trebuchet MS';
+    }
+    td, th {
+        font-size: 10pt;
+        border: 1px solid #98bf21;
+        height: 30px;
+    }
+    th {
+        background-color:#A7C942;
+        color:#ffffff;
+        font-family: Georgia;
+    }
+    tr.alt td {
+        color:#000000;
+        background-color:#EAF2D3;
+    }
+
 	input[type="text"]{
 		width: 80%;
 		border-radius: 8px;
@@ -149,11 +158,11 @@
 			<table>
 				<tr>
 					<th>쿠폰내용</th>
-					<td><input type="text" id="cnotify" name="cnotify"></td>
+					<td colspan="2"><input type="text" id="cnotify" name="cnotify"></td>
 				</tr>
 				<tr>
 					<th>파일업로드</th>
-					<td><input type="file" id="cImg" name="file"></td>
+					<td colspan="2"><input type="file" id="cImg" name="file"></td>
 				</tr>
 				<tr>
 					<td colspan="3">
@@ -164,7 +173,7 @@
 				</tr>
 				<tr>
 					<th>쿠폰종류</th>
-					<td>
+					<td colspan="2">
 						<input type="radio" name="cdstate" id="cdstate" value="A" onchange="setDisplay()"><label for="r1">차감금액</label>
 	 					<input type="radio" name="cdstate" id="cdstate" value="B" onchange="setDisplay()"><label for="r2">할인율</label>
 	 				</td>
