@@ -81,7 +81,7 @@
 		width : 50px;
 		height: 50px;
 	}
-	.del{
+	.btn{
 		text-align: center;
 	color: beige;
 	background-color: #8A6F24;
@@ -150,7 +150,7 @@
 			<td>
 				<input type="text" id="coupon" name="coupon" readonly >
 				<input type="hidden" id="cseq" name="cseq">
-				<input type="button" value="할인 쿠폰" onclick="cpchk()">
+				<input type="button" class="btn button1" value="할인 쿠폰" onclick="cpchk()">
 			</td>
 		</tr>
 		<tr>
@@ -158,7 +158,7 @@
 			<td>
 				<input type="text" id="mmoney" name="mmoney" onkeyup="javascript:keyevent(this);">
 				<input type="hidden" id="id" name="id">
-				<input type="button" value="전체 적용" id="apply" onclick="miles(${mil.id})">
+				<input type="button" class="btn button1" value="전체 적용" id="apply" onclick="miles(${mil.id})">
 				<p >보유 마일리지 금액 : <a id="mileage">${mil.mmoney}</a></p>
 			</td>
 		</tr>

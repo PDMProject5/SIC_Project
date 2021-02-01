@@ -55,6 +55,27 @@ div {
 	padding: 10px;
 }
 
+.next{
+	margin : auto;
+		text-align: center;
+	color: beige;
+	background-color: #8A6F24;
+	border: 2px solid #8A6F24;
+	padding: 15px 15px;
+	border-radius: 8px;
+ 	transition-duration: 0.4s; 
+ 	 cursor: pointer;
+	}
+	.button1 {
+ 	 background-color: #8A6F24; 
+ 	 color: beige; 
+ 	 border: 2px solid #8A6F24;
+	}
+	.button1:hover {
+  	background-color: beige;
+  	color: #8A6F24;
+	}
+
 </style>
 </head>
 <%@ include file="./header.jsp" %>
@@ -107,7 +128,7 @@ div {
 			</tbody>
 		</table>
 	<div>
-		<input type="button" value="돌아가기" onclick="history.back(-1)">
+		<input type="button" class="next button1" value="돌아가기" onclick="history.back(-1)">
 	</div>
 
 </body>
