@@ -12,6 +12,119 @@
 <head>
 <meta charset="UTF-8">
 <title>주문/결제 페이지</title>
+<style type="text/css">
+	div{
+/* 		text-align: center; */
+	}
+	table{
+		margin: auto; 
+	margin-top:10px; 
+	margin-bottom: 50px;
+	}
+	.total{
+		margin: auto;
+		width: 60%;
+	}
+	.del1{
+		text-align: center;
+	}
+	.delth{
+		width: 100px;
+	}
+	td{
+		margin: auto;
+		width: 100px;
+	}
+	#th{
+	background-color : beige;
+	text-align:center; 
+	color:#8A6F24; 
+	height: 30px;
+	width: 30px;
+	
+	/* 	background-color: beige; */
+	/* 	text-align: center; */
+	/* 	height: 70px; */
+	/* 	width: 100px; */
+	}
+	#th1{
+		background-color : beige;
+		text-align:center; 
+		color:black; 
+		height: 50px;
+		width: 50px;
+		font-size: 30px;
+	}
+	.th{
+	margin : auto;
+		background-color : beige;
+		text-align:center; 
+		color:#8A6F24; 
+		width:600px;
+		height: 50px;
+	}
+	#total{
+		margin : auto;
+		width:600px;
+		height: 50px;
+	}
+	
+	#th2{
+		margin : auto;
+		background-color : beige;
+		text-align:center; 
+		color:#8A6F24; 
+		width:600px;
+		height: 50px;
+	}
+	
+	#th3{
+		margin : auto;
+		background-color : beige;
+		text-align:center; 
+		color:#8A6F24; 
+		width : 50px;
+		height: 50px;
+	}
+	.del{
+		text-align: center;
+	color: beige;
+	background-color: #8A6F24;
+	border: 2px solid #8A6F24;
+	padding: 2px 2px;
+	border-radius: 8px;
+/* 	transition-duration: 0.4s; */
+ 	 cursor: pointer;
+	}
+	
+	.next{
+	margin : auto;
+		text-align: center;
+	color: beige;
+	background-color: #8A6F24;
+	border: 2px solid #8A6F24;
+	padding: 15px 15px;
+	border-radius: 8px;
+ 	transition-duration: 0.4s; 
+ 	 cursor: pointer;
+	}
+	.button1 {
+ 	 background-color: #8A6F24; 
+ 	 color: beige; 
+ 	 border: 2px solid #8A6F24;
+	}
+	.button1:hover {
+  	background-color: beige;
+  	color: #8A6F24;
+	}
+	
+	
+/* 	input { */
+/* 	width: 300px; */
+	
+/* } */
+
+</style>
 </head>
 
 <script type="text/javascript">
@@ -42,25 +155,38 @@
 </script>
 <%@ include file="./header.jsp" %>
 <body>
+<div class="total">
 <form action="#" method="post" id="frm">
 <div id="container">
+	<h1 style="padding: 20px;">주문 / 결제</h1>
+	<hr><br><br>
+	<h2 style="padding: 10px;">상품 정보</h2>
 <input type="hidden" id="onum" name="onum" value="${bvo.onum}">
 <table class="table table-bordered">
-   <thead>
-   <tr>
-      <th>제품정보</th>
-      <th>지점명</th>
-      <th>수량</th>
-      <th>제품금액</th>
-   </tr>
-   </thead>
+<!--    <thead> -->
+<!--    <tr> -->
+<!--       <th>제품정보</th> -->
+<!--       <th>지점명</th> -->
+<!--       <th>수량</th> -->
+<!--       <th>제품금액</th> -->
+<!--    </tr> -->
+<!--    </thead> -->
    <tbody>
       <c:forEach var="order" items="${list}" varStatus="vs">
       <input type="hidden" name="odnum" value="${order.odnum}">
    <tr>
-      <td class="asdf">${order.iname}</td>
+      <th id="th1" class="asdf" rowspan="4">${order.iname}</th>
+   </tr>
+   <tr>
+   		<th id="th">지점명</th>
       <td>${order.store}</td>
+   </tr>
+   <tr>
+   		<th id="th">수량</th>
       <td>${order.odstock} 개</td>      
+   </tr>
+   <tr>
+   		<th id="th">가격</th>
       <td>
       
          <span id="price">
@@ -79,60 +205,116 @@
 </table>
 
 </div>
-<div>
-   <h2>
-   <span>총 주문 금액:</span>
-   <span id="total"><c:out value="${sum}"/> </span>원
-   </h2>
-</div>
    
 <div>
-   <h2>배송여부</h2>
+   <h2 style="padding: 10px;">배송지 정보</h2>
 </div>
 
-<div style="width:200px;">
-  <input type="radio" name="radio" id="r2" value="0" checked><label for="r2">배송 X</label>
-  <input type="radio" name="radio" id="r1" value="1" ><label for="r1">배송</label>
+<div class="del1">
+<table>
+	<tr>
+	<th id="th2" class="delth"><input type="radio" name="radio" id="r2" value="0" checked><label for="r2">배송 X</label></th>
+	<th id="th2" class="delth"><input type="radio" name="radio" id="r1" value="1" ><label for="r1">배송</label></th>
+  	</tr>
+</table>
 </div>
 
-<div id="content">
-  <input type="radio" id="r3" name="raddr" value="1" checked><label for="r3">기본 배송지</label>
-  <input type="radio" id="r4" name="raddr" value= "2"><label for="r4">신규 배송지</label>
-   <input type="button" value="배송지 목록" onclick="selectOne()">
+<div id="content" class="del2">
+<table>
+	<tr>
+  		<th id="th2"><input type="radio" id="r3" name="raddr" value="1" checked><label for="r3">기본 배송지</label></th>
+  		<th id="th2">
+  			<input type="radio" id="r4" name="raddr" value= "2"><label for="r4">신규 배송지</label>
+   			<input type="button" class="del button1" value="배송지 목록" onclick="selectOne()">
+   		</th>
+   	</tr>
+</table>
 </div>  
 
-    <div id="defaultaddr">
-        <strong class="cell_title">배송지명 : </strong>   
-        <input type="text" id="dname" name="dname" value="${vo.dname}" maxlength="150" readonly><br>       
-         <strong>도로명 주소 : </strong>
-         <input type="text" id="roadaddr" name="roadaddr" value="${vo.roadaddr}" readonly><br>
+    <div id="defaultaddr" class="del3">
+   	<table class="table table-bordered">
+   		<tr>
+   			<th id="th3" class="cell_title">배송지 명</th>
+   			<td><input type="text" id="dname" name="dname" value="${vo.dname}" maxlength="150" readonly></td>
+   		</tr>
+   		<tr>
+   			<th id="th3">도로명 주소</th>
+   			<td><input type="text" id="roadaddr" name="roadaddr" value="${vo.roadaddr}" readonly></td>
+   		</tr>
+   		<tr>
+   			<th id="th3">상세 주소 </th>
+   			<td><input type="text" id="addr" name="addr" value="${vo.addr}" readonly></td>
+   		</tr>
+   		<tr>
+   			<th id="th3">전화번호</th>
+   			<td><input type="text" id="phone" name="phone" maxlength="11" value="${vo.phone}" readonly></td>
+   		</tr>
+   	</table>
+<!--         <strong class="cell_title">배송지명 : </strong>    -->
+<%--         <input type="text" id="dname" name="dname" value="${vo.dname}" maxlength="150" readonly><br>        --%>
+<!--          <strong>도로명 주소 : </strong> -->
+<%--          <input type="text" id="roadaddr" name="roadaddr" value="${vo.roadaddr}" readonly><br> --%>
 		
-      <strong>상세 주소 : </strong>         
-         <input type="text" id="addr" name="addr" value="${vo.addr}" readonly><br>
+<!--       <strong>상세 주소 : </strong>          -->
+<%--          <input type="text" id="addr" name="addr" value="${vo.addr}" readonly><br> --%>
      
-      <strong>전화번호 : </strong>         
-        <input type="text" id="phone" name="phone" maxlength="11" value="${vo.phone}" readonly><br>
+<!--       <strong>전화번호 : </strong>          -->
+<%--         <input type="text" id="phone" name="phone" maxlength="11" value="${vo.phone}" readonly><br> --%>
    </div>
 </form>
 
-    <div id="newaddr">
-        <strong class="cell_title">배송지명 : </strong>   
-        <input type="text" id="dname2" name="dname" maxlength="150"><br>       
+    <div id="newaddr" class="del3">
+    	<table class="table table-bordered">
+	   		<tr>
+	   			<th id="th3" class="cell_title">배송지 명</th>
+	   			<td><input type="text" id="dname2" name="dname" maxlength="150"></td>
+	   		</tr>
+	   		<tr>
+	   			<th id="th3">도로명 주소</th>
+	   			<td>
+	   				<input type="text" id="roadaddr2" name="roadaddr" readonly="readonly">
+	   				<input type="button" class="del button1" onclick="sample6_execDaumPostcode()" value="주소 찾기">
+	   			</td>
+	   		</tr>
+	   		<tr>
+	   			<th id="th3">상세 주소</th>
+	   			<td><input type="text" id="addr2" name="addr"></td>
+	   		</tr>
+	   		<tr>
+	   			<th id="th3">전화번호</th>
+	   			<td><input type="text" id="phone2" name="phone" maxlength="11"></td>
+	   		</tr>
+   		</table>
+<!--         <strong class="cell_title">배송지명 : </strong>    -->
+<!--         <input type="text" id="dname2" name="dname" maxlength="150"><br>        -->
      
-         <strong>도로명 주소 : </strong>
-         <input type="text" id="roadaddr2" name="roadaddr" readonly="readonly">
-         <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
-      <strong>상세 주소 : </strong>         
-         <input type="text" id="addr2" name="addr"><br>
+<!--          <strong>도로명 주소 : </strong> -->
+<!--          <input type="text" id="roadaddr2" name="roadaddr" readonly="readonly"> -->
+<!--          <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br> -->
+<!--       <strong>상세 주소 : </strong>          -->
+<!--          <input type="text" id="addr2" name="addr"><br> -->
      
-      <strong>전화번호 : </strong>         
-        <input type="text" id="phone2" name="phone" maxlength="11"><br>
+<!--       <strong>전화번호 : </strong>          -->
+<!--         <input type="text" id="phone2" name="phone" maxlength="11"><br> -->
    </div>
    
    <div>
-      <input type="button" value="다음으로 " onclick="payment()">
+	   <h2 style="padding: 10px;">총 주문 금액</h2>
+	   <table >
+	   <tbody>
+	   	<tr>
+	   		<th class="th">총 주문 금액</th>
+	   		<td id="total"><h2><c:out value="${sum}"/>원</h2></td>
+	   	</tr>
+	   	</tbody>
+	   </table>
+	   
+	</div>
+   
+   <div style="text-align: center; padding: ">
+      <input type="button" class="next button1" value="다음으로 " onclick="payment()">
    </div>
-
+</div>
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">

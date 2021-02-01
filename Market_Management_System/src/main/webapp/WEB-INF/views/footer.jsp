@@ -10,7 +10,7 @@
 #footer {
  	 height: 80px; 
      width: 100%; 
-     position: fixed; 
+     position: relative; 
      bottom: 0; 
      left: 0; 
      color: #9b9b9b;
