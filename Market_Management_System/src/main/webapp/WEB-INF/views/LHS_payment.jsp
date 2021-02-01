@@ -166,14 +166,14 @@
          <th id="th3">할인금액</th>
          <th>
             <span id="distotal">0</span>원
-            <input type="hidden" id="discountamt" name="discountamt" value="0">
+            <input type="hidden" id="discountamt" name="discountamt" value="">
          </th>
       </tr>
       <tr>
          <th id="th3">총 결제 금액</th>
          <th>
             <span id="price" style="font-size: 20px;">${price}</span>원
-            <input type="hidden" id="paymentamt" name="paymentamt" value="0">
+            <input type="hidden" id="paymentamt" name="paymentamt" value="">
          </th>
       </tr>
       <tr>
@@ -356,10 +356,6 @@ function paymentVal(){
    var discountamt = $("#distotal").text();
    var paymentamt = $("#price").text();
 
-   if(discountamt=='0'){
-	   document.getElementById("mmoney").value = '0';
-   }
-   
    document.getElementById("saleamt").value = saleamt;
    document.getElementById("discountamt").value = discountamt;
    document.getElementById("paymentamt").value = paymentamt;
