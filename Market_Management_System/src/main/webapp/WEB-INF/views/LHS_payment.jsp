@@ -7,6 +7,119 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	div{
+/* 		text-align: center; */
+	}
+	table{
+		margin: auto; 
+	margin-top:10px; 
+	margin-bottom: 50px;
+	}
+	.total{
+		margin: auto;
+		width: 60%;
+	}
+	.del1{
+		text-align: center;
+	}
+	.delth{
+		width: 100px;
+	}
+	td{
+		margin: auto;
+		width: 100px;
+	}
+	#th{
+	background-color : beige;
+	text-align:center; 
+	color:#8A6F24; 
+	height: 30px;
+	width: 30px;
+	
+	/* 	background-color: beige; */
+	/* 	text-align: center; */
+	/* 	height: 70px; */
+	/* 	width: 100px; */
+	}
+	#th1{
+		background-color : beige;
+		text-align:center; 
+		color:black; 
+		height: 50px;
+		width: 50px;
+		font-size: 30px;
+	}
+	.th{
+	margin : auto;
+		background-color : beige;
+		text-align:center; 
+		color:#8A6F24; 
+		width:600px;
+		height: 50px;
+	}
+	#total{
+		margin : auto;
+		width:600px;
+		height: 50px;
+	}
+	
+	#th2{
+		margin : auto;
+		background-color : beige;
+		text-align:center; 
+		color:#8A6F24; 
+		width:600px;
+		height: 50px;
+	}
+	
+	#th3{
+		margin : auto;
+		background-color : beige;
+		text-align:center; 
+		color:#8A6F24; 
+		width : 50px;
+		height: 50px;
+	}
+	.del{
+		text-align: center;
+	color: beige;
+	background-color: #8A6F24;
+	border: 2px solid #8A6F24;
+	padding: 2px 2px;
+	border-radius: 8px;
+/* 	transition-duration: 0.4s; */
+ 	 cursor: pointer;
+	}
+	
+	.next{
+	margin : auto;
+		text-align: center;
+	color: beige;
+	background-color: #8A6F24;
+	border: 2px solid #8A6F24;
+	padding: 15px 15px;
+	border-radius: 8px;
+ 	transition-duration: 0.4s; 
+ 	 cursor: pointer;
+	}
+	.button1 {
+ 	 background-color: #8A6F24; 
+ 	 color: beige; 
+ 	 border: 2px solid #8A6F24;
+	}
+	.button1:hover {
+  	background-color: beige;
+  	color: #8A6F24;
+	}
+	
+	
+/* 	input { */
+/* 	width: 300px; */
+	
+/* } */
+
+</style>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -14,54 +127,101 @@
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <%@ include file="./header.jsp" %>
 <body>
+<div class="total">
 <form action="#" id="frm" method="post">
 	<input id="roadaddr" name="roadaddr" type="hidden" value="${delvo.roadaddr}">
 	<input id="addr" name="addr" type="hidden" value="${delvo.addr}">
 	<input id="oprice" type="hidden" value="${price}">
 	<div>
-	<h2>결제</h2>
+	<h1 style="padding: 20px;">주문 / 결제</h1>
 	<hr>
-	<strong style="margin: 24px; ">쿠폰 적용 </strong>
-		<input type="text" id="coupon" name="coupon" readonly >
-		<input type="hidden" id="cseq" name="cseq">
-		<input type="button" value="할인 쿠폰" onclick="cpchk()">
-	<br>
-	<strong style="margin: 10px; text-align: center;">마일리지 적용 </strong>
-		<input type="text" id="mmoney" name="mmoney" onkeyup="javascript:keyevent(this);">
-		<input type="hidden" id="id" name="id">
-		<input type="button" value="전체 적용" id="apply" onclick="miles(${mil.id})">
-		<p >보유 마일리지 금액 : <a id="mileage">${mil.mmoney}</a></p>
+	<h2 style="padding: 10px;">결제</h2>
+	<table class="table table-bordered">
+		<tr>
+			<th id="th3">제품금액</th>
+			<th>
+				<span id="pprice">${price}</span>원
+				<input type="hidden" id="saleamt" name="saleamt" value="${price}">
+			</th>
+		</tr>
 	
-</div>
-<div>
+		<tr>
+			<th id="th3">쿠폰 적용</th>
+			<td>
+				<input type="text" id="coupon" name="coupon" readonly >
+				<input type="hidden" id="cseq" name="cseq">
+				<input type="button" value="할인 쿠폰" onclick="cpchk()">
+			</td>
+		</tr>
+		<tr>
+			<th id="th3">마일리지 적용</th>
+			<td>
+				<input type="text" id="mmoney" name="mmoney" onkeyup="javascript:keyevent(this);">
+				<input type="hidden" id="id" name="id">
+				<input type="button" value="전체 적용" id="apply" onclick="miles(${mil.id})">
+				<p >보유 마일리지 금액 : <a id="mileage">${mil.mmoney}</a></p>
+			</td>
+		</tr>
+		<tr>
+			<th id="th3">할인금액</th>
+			<th>
+				<span id="distotal">0</span>원
+				<input type="hidden" id="discountamt" name="discountamt" value="">
+			</th>
+		</tr>
+		<tr>
+			<th id="th3">총 결제 금액</th>
+			<th>
+				<span id="price" style="font-size: 20px;">${price}</span>원
+				<input type="hidden" id="paymentamt" name="paymentamt" value="">
+			</th>
+		</tr>
+		<tr>
+			<th id="th3">결제 방법</th>
+			<th>
+				카카오페이
+			</th>
+		</tr>
+	</table>
+<!-- 	<strong style="margin: 24px; ">쿠폰 적용 </strong> -->
+<!-- 		<input type="text" id="coupon" name="coupon" readonly > -->
+<!-- 		<input type="hidden" id="cseq" name="cseq"> -->
+<!-- 		<input type="button" value="할인 쿠폰" onclick="cpchk()"> -->
+<!-- 	<br> -->
+<!-- 	<strong style="margin: 10px; text-align: center;">마일리지 적용 </strong> -->
+<!-- 		<input type="text" id="mmoney" name="mmoney" onkeyup="javascript:keyevent(this);"> -->
+<!-- 		<input type="hidden" id="id" name="id"> -->
+<%-- 		<input type="button" value="전체 적용" id="apply" onclick="miles(${mil.id})"> --%>
+<%-- 		<p >보유 마일리지 금액 : <a id="mileage">${mil.mmoney}</a></p> --%>
 	
 				
-	<h2>
-		<span >제품금액 : <span id="pprice">${price}</span>원</span>
-		<input type="hidden" id="saleamt" name="saleamt" value="${price}">
-	</h2>
+<!-- 	<h2> -->
+<%-- 		<span >제품금액 : <span id="pprice">${price}</span>원</span> --%>
+<%-- 		<input type="hidden" id="saleamt" name="saleamt" value="${price}"> --%>
+<!-- 	</h2> -->
 
 	<input type="hidden" id="couponVal" oninput="disSum()" >
 	<input type="hidden" id="mileVal" oninput="disSum()">
 	
 	
 	
-	<h2>
-		<span>할인금액  : <span id="distotal">0</span>원</span>
-		<input type="hidden" id="discountamt" name="discountamt" value="">
-	</h2>
+<!-- 	<h2> -->
+<!-- 		<span>할인금액  : <span id="distotal">0</span>원</span> -->
+<!-- 		<input type="hidden" id="discountamt" name="discountamt" value=""> -->
+<!-- 	</h2> -->
 
-	<h2>
-		<span >총 결제 금액 : <span id="price">${price}</span>원</span>
-		<input type="hidden" id="paymentamt" name="paymentamt" value="">
-	</h2>
+<!-- 	<h2> -->
+<%-- 		<span >총 결제 금액 : <span id="price">${price}</span>원</span> --%>
+<!-- 		<input type="hidden" id="paymentamt" name="paymentamt" value=""> -->
+<!-- 	</h2> -->
 </div>
 
 <br>
-<div>
-	<input class="btn-success btn btn-primary" type="button" id="check_module" value="결제하기" >
+<div style="text-align: center; padding: 20px;">
+	<input class="next button1" type="button" id="check_module" value="결제하기" >
 </div>
 </form>
+</div>
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">

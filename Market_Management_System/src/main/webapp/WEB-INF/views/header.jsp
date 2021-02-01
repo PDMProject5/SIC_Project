@@ -73,7 +73,7 @@
  			<a href="./orderlist.do" class="w3-bar-item w3-button">주문내역  조회</a>
 			</div>
 			<div style="color: gray;">
-  				<button onclick="openRightMenu()" style="background-color: #101010; margin-top: 10px; border-color: black;">MyPage</button>
+  				 <button onclick="openRightMenu()" style="background-color: #101010; margin-top: 10px; border-color: black;">MyPage</button>
 			</div>
 		</li>
     	</c:when>

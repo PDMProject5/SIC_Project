@@ -12,12 +12,15 @@
 #container{
 	margin: 0 auto;
 	text-align: center;
-	width: 100%;
+	width: 70%;
 	height: 100%;
 }
 
 th{
-	text-align: center;
+	
+	background-color : beige;
+		text-align:center; 
+		color:#8A6F24; 
 }
 
 
