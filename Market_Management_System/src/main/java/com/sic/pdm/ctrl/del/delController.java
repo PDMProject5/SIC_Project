@@ -35,6 +35,7 @@ public class delController {
 	@Autowired
 	private DelIService dservice;
 	
+	// 배송지 목록 조회
 	@RequestMapping(value="/delList.do", method=RequestMethod.GET )
 	public String getDelList(Model model,HttpSession session) {
 		logger.info("welcome delList.do");
@@ -55,6 +56,7 @@ public class delController {
 		return "LYM_insertDel";
 	}
 	
+	// 배송지 등록
 	@RequestMapping(value = "/insertDel.do", method=RequestMethod.POST)
 	public String insertDel(DelVo vo, HttpSession session) {
 		String mvo = (String)session.getAttribute("id");
@@ -65,6 +67,7 @@ public class delController {
 		return "redirect:delList.do";
 	}
 	
+	// 배송지 수정
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/modifyForm.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8;")
 	@ResponseBody
@@ -104,6 +107,7 @@ public class delController {
 		return "redirect:/delList.do";
 	}
 	
+	// 배송지 삭제
 	@RequestMapping(value = "/deleteDel.do", method = RequestMethod.GET)
 	public String deleteDel(String dnum,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();

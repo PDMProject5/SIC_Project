@@ -46,35 +46,36 @@ var ajaxModify = function(val){
          html += "<input type='hidden' id='flag' name='flag' value='"+v.addrflag+"' />";
             
     
-         html += "<table class='tbl_delivery_info'>";
+         html += "<table id='modelDel' class='tbl_delivery_info'>";
          html += "  <tbody>";
          html += " <tr>";
-         html += "<th class='cell_title'>배송지명</th>";
+         html += "<th class='cell_title' style='text-align: center;'>배송지명</th>";
 	     html += "<td><input type='text' id='dname' name='dname' value='"+v.dname+"' maxlength='150'>";
 	     html += "</td></tr>";
-	     html += "<tr><th class='cell_title'>도로명 주소</th>";
+	     html += "<tr><th class='cell_title' style='text-align: center;'>도로명 주소</th>";
 	     html += "<td><input type='text' id='roadaddr' name='roadaddr' value='"+v.roadaddr+"' readonly='readonly'>";
-	     html += "<input type='button' onclick='sample6_execDaumPostcode()' value='주소 찾기'><br>";
+	     html += "<input type='button' id='findaddr' onclick='sample6_execDaumPostcode()' value='주소 찾기'><br>";
 	     html += "</td></tr>";				
-	     html += "<tr><th>상세 주소</th>";			
+	     html += "<tr><th style='text-align: center;'>상세 주소</th>";			
 	     html += "<td class='cell_title'>";  
 	     html += "<input type='text' id='addr' name='addr' value='"+v.addr+"'>";
 	     html += "</td></tr>";
-	     html += "<tr><th class='cell_title'>전화번호</th>";			
+	     html += "<tr><th class='cell_title' style='text-align: center;'>전화번호</th>";			
 	     html += "<td>";  
 	     html += "<span><input type='text'  id='phone' name='phone' maxlength='11' value='"+v.phone+"'></span>";
 	     html += "</td></tr>";      
 	
-	     html += "<tr><th>기본배송지로 설정</th></tr>";
-	     html += "<td><input type='checkbox' id='addrchk' name='addrchk'></td>";
+	     html += "<tr><th style='text-align: center;'>기본배송지</th>";
+	     html += "<td><input type='checkbox' id='addrchk' name='addrchk'>기본 배송지로 설정</td></tr>";
 	     html += "<input type='hidden' id='addrflag' name='addrflag'>";
 	     html += "<div class='modal-footer'>";
 	     html += "</tbody></table>";
 	     html += "</div>";
-	      
-	     html += "<input class='btn btn-success' type='button' value='수정' onclick='update()'/>";
+	   
+	     html += "<div style='margin-left: 43%;'>";
+	     html += "<div><input class='btn btn-success' type='button' value='수정' onclick='update()'/>";
 	     html += "<button type='button' class='btn btn-default' data-dismiss='modal'>취소</button>";
-	     html += "</div>";
+	     html += "</div></div>";
 		 $('#frmModify').html(html);
 		    
 		},

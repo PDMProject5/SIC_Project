@@ -250,16 +250,7 @@
    			<td><input type="text" id="phone" name="phone" maxlength="11" value="${vo.phone}" readonly></td>
    		</tr>
    	</table>
-<!--         <strong class="cell_title">배송지명 : </strong>    -->
-<%--         <input type="text" id="dname" name="dname" value="${vo.dname}" maxlength="150" readonly><br>        --%>
-<!--          <strong>도로명 주소 : </strong> -->
-<%--          <input type="text" id="roadaddr" name="roadaddr" value="${vo.roadaddr}" readonly><br> --%>
-		
-<!--       <strong>상세 주소 : </strong>          -->
-<%--          <input type="text" id="addr" name="addr" value="${vo.addr}" readonly><br> --%>
-     
-<!--       <strong>전화번호 : </strong>          -->
-<%--         <input type="text" id="phone" name="phone" maxlength="11" value="${vo.phone}" readonly><br> --%>
+
    </div>
 </form>
 
@@ -285,17 +276,7 @@
 	   			<td><input type="text" id="phone2" name="phone" maxlength="11"></td>
 	   		</tr>
    		</table>
-<!--         <strong class="cell_title">배송지명 : </strong>    -->
-<!--         <input type="text" id="dname2" name="dname" maxlength="150"><br>        -->
-     
-<!--          <strong>도로명 주소 : </strong> -->
-<!--          <input type="text" id="roadaddr2" name="roadaddr" readonly="readonly"> -->
-<!--          <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br> -->
-<!--       <strong>상세 주소 : </strong>          -->
-<!--          <input type="text" id="addr2" name="addr"><br> -->
-     
-<!--       <strong>전화번호 : </strong>          -->
-<!--         <input type="text" id="phone2" name="phone" maxlength="11"><br> -->
+
    </div>
    
    <div>
@@ -324,9 +305,25 @@ function payment(){
    var price = $("#total").text();
    console.log(price);
    var frm = document.getElementById("frm");
-   	  del();
-      frm.action = "./payment.do";
-      frm.submit();
+   	  
+  		var dname = document.getElementById("dname2");
+		var roadaddr = document.getElementById("roadaddr2");
+		var phone = document.getElementById("phone2");
+  		var phonereg = /^\d{10,11}$/;
+  	if($("input[name=raddr]:checked").val() == "2"){
+		
+		if (dname.value == "" || roadaddr.value == "" || phone.value == "") {
+			alert("필수 값을 입력해 주세요");
+			return false;
+		}else if(!phonereg.test(phone.value)){
+			alert("정확한 휴대폰 번호를 입력해주세요.");
+			return false;
+		}
+  	}
+  		del();	
+   		frm.action = "./payment.do";
+		frm.submit();
+		
       
 }
 

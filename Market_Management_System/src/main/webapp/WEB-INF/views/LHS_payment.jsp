@@ -138,7 +138,7 @@
 	<h2 style="padding: 10px;">결제</h2>
 	<table class="table table-bordered">
 		<tr>
-			<th id="th3">제품금액</th>
+			<th id="th3">주문금액</th>
 			<th>
 				<span id="pprice">${price}</span>원
 				<input type="hidden" id="saleamt" name="saleamt" value="${price}">
@@ -170,7 +170,7 @@
 			</th>
 		</tr>
 		<tr>
-			<th id="th3">총 결제 금액</th>
+			<th id="th3">남은 결제금액</th>
 			<th>
 				<span id="price" style="font-size: 20px;">${price}</span>원
 				<input type="hidden" id="paymentamt" name="paymentamt" value="">

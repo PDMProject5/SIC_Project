@@ -9,37 +9,96 @@
 <meta charset="UTF-8">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="./js/delList2.js"></script>
+<style type="text/css">
+
+#frm{
+	margin: auto; 
+	width: auto;
+ 	text-align: center;
+}
+
+#del{
+		margin: auto; 
+		width: auto;
+ 	text-align: center; 
+	margin-top:10px; 
+	margin-bottom: 10px;
+	border: solid 1px black;
+	}
+	
+#modelDel{
+	margin: auto; 
+	width: 600px;
+ 	text-align: center; 
+	margin-top:10px; 
+	margin-bottom: 10px;
+	border: solid 1px black;
+	
+}
+
+#roadaddr{
+	width: 220px;
+}
+input[type=text]{
+	width: 300px;
+}
+
+#findaddr{
+	width: 80px;
+}
+
+th{
+	
+	background-color : beige;
+	text-align: center; 
+ 	color:#8A6F24;  
+ 	height: 70px; 
+ 	width: 100px; 
+ 	font-size: 20px;
+}
+
+td{
+	text-align: center;
+}
+
+
+/* #regB{ */
+
+/* 	margin-left: 45%; */
+/* 	margin-bottom: 50px; */
+	
+/* } */
+</style>
 <title>배송지 목록 확인</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <%@ include file="./header.jsp" %>
 <body>
 
-
-
 	<div id="container">
 	<form action="#" method="post" id="frm" name="frm" onsubmit="return chkbox();">
+		<h2>배송지 목록</h2>
 		<div class="panel-group" id="accordion">
 			<table id="del" class="table table-bordered">
 				<thead>	
 	
 					<tr>
-						<th rowspan="3">배송지</th>
-						<th>주소</th>
-						<th>연락처</th>
-						<th>수정·삭제</th>
+						<th rowspan="3" style="text-align: center;">배송지</th>
+						<th colspan="2" style="text-align: center;">주소</th>
+						<th style="text-align: center;">연락처</th>
+						<th colspan="2" style="text-align: center;">수정·삭제</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="dto" items="${lists}" varStatus="vs">		
 						<tr>
-							<td>	
+							<td colspan="2">	
 								<strong>${dto.dname}</strong>
 								<c:if test="${dto.addrflag eq 'Y' }">
-									(기본배송지)
+									<br>(기본배송지)
 								</c:if>
 								
 
@@ -56,11 +115,11 @@
 					</c:forEach>
 				</tbody>		
 			</table>
+<div id="regB">
+	<input class="btn-info btn btn-primary" type="button" value="등록하기" onclick="insertForm()">
+</div>
 		</div>
 	</form>
-</div>
-<div>
-	<input class="btn-info btn btn-primary" type="button" value="등록하기" onclick="insertForm()">
 </div>
 
 <div id="modify" class="modal fade" role="dialog">
