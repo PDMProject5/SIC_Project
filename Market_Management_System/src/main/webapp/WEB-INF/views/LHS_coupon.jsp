@@ -85,8 +85,6 @@ var ajaxSel = function(val){
 
 			window.opener.document.getElementById("coupon").value = c.coupon;
 			window.opener.document.getElementById("cseq").value = c.cseq;
-// 			window.opener.document.getElementById("price").innerHTML = a;
-// 			window.opener.document.getElementById("distotal").innerHTML = b;
 			window.opener.document.getElementById("couponVal").value = c.coupon;
 			window.opener.document.getElementById("distotal").innerHTML = Number(c.coupon) + Number(mileVal);
 			window.opener.document.getElementById("price").innerHTML = Number(pprice) - (Number(c.coupon) + Number(mileVal));

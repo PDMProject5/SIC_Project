@@ -20,6 +20,7 @@ public class OrderListController {
 	@Autowired
 	private OrderList_IService iService;
 	
+	// 주문 목록 조회
 	@RequestMapping(value = "/orderlist.do", method = RequestMethod.GET)
 	public String orderList(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
@@ -32,18 +33,14 @@ public class OrderListController {
 		return "LHS_orderlist";
 	}
 	
+	// 주문 목록 상세조회
 	@RequestMapping(value = "/orderdetail.do", method = RequestMethod.GET)
 	public String orderDetail(Model model, String onum, HttpSession session) {
 		System.out.println(onum);
-//		OrderVo vo = (OrderVo) iService.orderDetail(onum);
 		List<OrderdetailVo> list = iService.orderDetail(onum);
-//		OrderVo vo = iService.oVo(onum);
 		System.out.println(list);
-		
 		model.addAttribute("list", list);
-//		model.addAttribute("vo",vo);
-//		model.addAttribute("vo",vo);
-		
+
 		return "LHS_orderdetail";
 	}
 	

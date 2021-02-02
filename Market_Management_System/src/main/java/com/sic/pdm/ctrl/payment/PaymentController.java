@@ -104,7 +104,6 @@ public class PaymentController {
       boolean isc = Pservice.payment(pvo);
       System.out.println("결제 성공 " + isc);
       
-      
       // 쿠폰 사용 확인
       System.out.println(cvo.getCseq());
       cvo.setId(id);
@@ -135,8 +134,6 @@ public class PaymentController {
       System.out.println(mvo.getMmoney());
       boolean isc2 = Pservice.mileage(mvo);
       System.out.println("마일리지 적립 성공"+isc2);
-      
-      
       
       return "redirect:/orderlist.do";
    }

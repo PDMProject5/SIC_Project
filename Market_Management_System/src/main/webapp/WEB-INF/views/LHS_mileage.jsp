@@ -100,7 +100,7 @@ div {
 		<table>
 			<thead>
 				<tr>
-					<th id="th">주문 번호</th>
+					<th id="th">번호</th>
 					<th id="th">아이디</th>
 					<th id="th">마일리지</th>
 					<th id="th">적립/사용</th>
