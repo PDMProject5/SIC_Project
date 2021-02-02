@@ -85,6 +85,14 @@
 		AND c2.CENABLE = 'Y'
 	</select>
 	
+	<select id="getCouponList2" parameterType="java.util.Map" resultType="CouponVo">
+		SELECT c.CSEQ, c2.COUPON, c2.CNOTIFY, c2.CTHUMBIMG FROM COUPONBOX c, COUPON c2, SELLER s 
+		WHERE c.CSEQ = c2.CSEQ
+		AND c2.SELLERID = s.SELLERID  
+		AND ID = #{id} AND s.STORE = #{store}
+		AND c2.CENABLE = 'Y'
+	</select>
+	
 	<select id = "userViewOneCoupon" resultType="CouponVo" parameterType="java.lang.String">
 		SELECT CSEQ, COUPON,CNOTIFY, CTHUMBIMG, CDATE, CDATE+30 AS CLASTDATE FROM COUPON WHERE CSEQ = #{cseq} ORDER BY CLASTDATE DESC
 	</select>

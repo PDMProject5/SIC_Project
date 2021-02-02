@@ -328,6 +328,7 @@ function payment(){
       
 }
 
+// 배송x일때 배송정보와 배송지 입력값 구분 
 function del(){
 	if($("input[name=radio]:checked").val() == "0"){
 		document.getElementById("dname").value = "";
@@ -363,7 +364,6 @@ $(document).ready(function(){
    
     // 라디오버튼 클릭시 이벤트 발생
     $("input:radio[name=radio]").click(function(){
- 
         if($("input[name=radio]:checked").val() == "1"){
             $("#content").show();
            $("#defaultaddr").show();
@@ -385,16 +385,13 @@ $(document).ready(function(){
        $("#dname2").val("");
        $("#roadaddr2").val("");
        $("#addr2").val("");
-       $("#phone2").val("");
-      
+       $("#phone2").val("");    
     })
     
-
     $("input:radio[name=raddr]").click(function(){
        if($("input[name=raddr]:checked").val() == "1"){
           $("#defaultaddr").show();
-              $("#newaddr").hide();
-              
+              $("#newaddr").hide();           
        }else if($("input[name=raddr]:checked").val() == "2"){
               $("#defaultaddr").hide();
               $("#newaddr").show();       

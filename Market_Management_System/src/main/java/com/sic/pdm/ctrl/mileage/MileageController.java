@@ -44,7 +44,10 @@ public class MileageController {
 	public int mileageApply(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
 		
-		int mm = oService.getMPrice(id);
+		Integer mm = oService.getMPrice(id);
+		if(mm.equals(null)) {
+			mm = 0;
+		}
 		System.out.println("아이디 확인"+ id);
 		
 		

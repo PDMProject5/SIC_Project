@@ -44,8 +44,6 @@ var ajaxModify = function(val){
          html += "<input type='hidden' id='dnum' name='dnum' value='"+v.dnum+"' />";
          html += "<input type='hidden' id='id' name='id' value='"+v.id+"'/>";
          html += "<input type='hidden' id='flag' name='flag' value='"+v.addrflag+"' />";
-            
-    
          html += "<table id='modelDel' class='tbl_delivery_info'>";
          html += "  <tbody>";
          html += " <tr>";

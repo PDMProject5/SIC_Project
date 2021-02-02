@@ -25,6 +25,7 @@
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--  다음 도로명 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -99,8 +100,8 @@
 </body>
 <%@ include file="./footer.jsp" %>
 <script type="text/javascript">
+// 배송지 등록 유효값 처리
 function insertDel(){
-	
 		var form = document.forms[0];
 		var dname = document.getElementById("dname");
 		var roadaddr = document.getElementById("roadaddr");
@@ -117,7 +118,7 @@ function insertDel(){
 			form.submit();
 		}
 }
-
+	
 function back(){
 	history.back(-1);
 }
