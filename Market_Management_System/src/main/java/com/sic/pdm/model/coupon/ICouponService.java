@@ -54,7 +54,10 @@ public interface ICouponService {
 				
 	// 회원 - 쿠폰 내역 조회
 	public List<CouponVo> getCouponList(String id);
-		
+	
+	public List<CouponVo> getCouponList2(Map<String, Object> map);
+	
+	
 	// 회원 - 쿠폰 수령 7일 이후 삭제
 	public boolean autoGetCouponDel();
 	

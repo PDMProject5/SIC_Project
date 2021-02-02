@@ -54,11 +54,14 @@ public interface ICouponDao {
 					
 		// 회원 - 쿠폰 내역 조회
 		public List<CouponVo> getCouponList(String id);
-			
+		
+		public List<CouponVo> getCouponList2(Map<String, Object> map);
+		
 		// 회원 - 쿠폰 수령 7일 이후 삭제
 		public boolean autoGetCouponDel();
 		
 		// 사용가능 쿠폰조회 - 결제
 		public List<CouponVo> coupon(String id);
 
+		
 }

@@ -50,6 +50,7 @@ public class BascketController {
 	@Autowired
 	private ISellerService selService;
 	
+	// 장바구니 조회
 	@RequestMapping(value = "/bascketList.do", method=RequestMethod.GET)
 	public String bascketList(Model model,HttpSession session) {
 		String store = (String)session.getAttribute("store");
@@ -70,13 +71,11 @@ public class BascketController {
 		model.addAttribute("lists", lists);
 		logger.info("리스트 값: "+lists);
 
-		// 장바구니에서 선택한 제품 재고와  재고수량 비교
-//		List<ProductVo> plists = pservice.getProdList("admin01");
-//		model.addAttribute("plists", plists);
 		return "LYM_bascketList";
 		}
 	}
 	
+	// 장바구니 추가
 	@RequestMapping(value = "/insertBascket.do", method=RequestMethod.POST)
 	public String insertBascket(BascketVo vo, HttpSession session,Model model) {
 		String id = (String)session.getAttribute("id");
@@ -86,8 +85,6 @@ public class BascketController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("store", store);
-		System.out.println(id);
-		System.out.println(store);
 		
 		if(bservice.checkBascket(map) == null ) {
 			bservice.addBascket(vo);
@@ -102,16 +99,13 @@ public class BascketController {
 			System.out.println("chkstore값"+chkStore);
 						
 			if(state.equalsIgnoreCase("B") && chkStore.equalsIgnoreCase(store)) {
-				bservice.addDetailBascket(vo);
-				
-			}
-			
+				bservice.addDetailBascket(vo);			
+			}	
 		}
-		
-
 		return "redirect:/bascketList.do";
 	}
 	
+	// 장바구니 삭제
 	@RequestMapping(value = "/multiDel.do", method=RequestMethod.POST)
 	public String multiDel(@RequestParam(value = "chkVal", required = true) List<String> chkVal) {
 		logger.info("welcome multiDel.do : \t {}",chkVal);
@@ -139,7 +133,8 @@ public class BascketController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/modifyStock.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8;")
+	@RequestMapping(value = "/modifyStock.do", method = RequestMethod.POST, 
+					produces = "application/text; charset=UTF-8;")
 	@ResponseBody
 	public String modifyForm(String odnum, HttpSession session) {
 		
@@ -160,6 +155,7 @@ public class BascketController {
 		return json.toString();
 	}
 	
+	// 장바구니 제품 수량 변경
 	@RequestMapping(value = "/StoUpdate.do",method= RequestMethod.POST)
 	public String StoUpdate(BascketVo vo) {
 		Map<String, Object> map = new HashMap<String, Object>();

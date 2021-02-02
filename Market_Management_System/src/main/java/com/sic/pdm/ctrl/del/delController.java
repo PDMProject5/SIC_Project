@@ -69,7 +69,8 @@ public class delController {
 	
 	// 배송지 수정
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/modifyForm.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8;")
+	@RequestMapping(value = "/modifyForm.do", method = RequestMethod.POST, 
+					produces = "application/text; charset=UTF-8;")
 	@ResponseBody
 	public String modifyForm(String dnum) {
 		DelVo dto = dservice.getOneDelList(dnum);
