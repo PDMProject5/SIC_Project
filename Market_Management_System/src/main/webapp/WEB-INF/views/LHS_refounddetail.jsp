@@ -52,6 +52,26 @@ div {
 	margin: auto;
 	padding: 10px;
 }
+.next{
+   margin : auto;
+      text-align: center;
+   color: beige;
+   background-color: #8A6F24;
+   border: 2px solid #8A6F24;
+   padding: 15px 15px;
+   border-radius: 8px;
+    transition-duration: 0.4s; 
+     cursor: pointer;
+   }
+   .button1 {
+     background-color: #8A6F24; 
+     color: beige; 
+     border: 2px solid #8A6F24;
+   }
+   .button1:hover {
+     background-color: beige;
+     color: #8A6F24;
+   }
 
 </style>
 </head>
@@ -81,8 +101,8 @@ div {
 		</table>
 		
 		<div>
-			<input type="button" value="환불 불가능" onclick="location.href='./refoundRefuse.do?onum=<%=rvo.getOnum() %>'">
-			<input type="button" value="환불 승인" onclick="location.href='./refoundApprove.do?onum=<%=rvo.getOnum() %>'">
+			<input type="button" class="next button1" value="환불 불가능" onclick="location.href='./refoundRefuse.do?onum=<%=rvo.getOnum() %>'">
+			<input type="button" class="next button1" value="환불 승인" onclick="location.href='./refoundApprove.do?onum=<%=rvo.getOnum() %>'">
 		</div>
 </body>
 </html>

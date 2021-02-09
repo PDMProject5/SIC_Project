@@ -26,6 +26,7 @@ public class RefoundController {
 	@Autowired
 	private Mileage_IService mService;
 	
+	// 환불 요청 목록 조회
 	@RequestMapping(value = "/refoundList.do", method = RequestMethod.GET)
 	public String refoundList(Model model) {
 		List<RefoundVo> list = iService.refoundList();
@@ -36,6 +37,7 @@ public class RefoundController {
 		return "LHS_refundList";
 	}
 	
+	// 환불 요청 목록 상세조회
 	@RequestMapping(value = "/refounddetail.do", method = RequestMethod.GET)
 	public String refoundDetail(Model model, RefoundVo vo) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -92,6 +94,7 @@ public class RefoundController {
 //		return "redirect:/orderlist.do";
 //	}
 	
+	// 환불 승인
 	@RequestMapping(value = "/refoundApprove.do", method = RequestMethod.GET)
 	public String refoundApprove(String onum, MileageVo mvo) {
 		
@@ -99,12 +102,10 @@ public class RefoundController {
 		boolean isc = iService.refoundApprove(onum);
 		System.out.println("환불 요청 승인 완료" +isc);
 		
-//		boolean msc = mService.mileagerefund(mvo);
-//		System.out.println("환불금액 마일리지로 반환 완료" + msc);
-		
 		return "redirect:/refoundList.do";
 	}
 	
+	// 환불 불가능
 	@RequestMapping(value = "/refoundRefuse.do", method = RequestMethod.GET)
 	public String refoundRefuse(String onum) {
 		boolean isc = iService.refoundRefuse(onum);

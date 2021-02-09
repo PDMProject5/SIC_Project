@@ -47,6 +47,26 @@ div {
 	margin: auto;
 	padding: 10px;
 }
+.next{
+   margin : auto;
+      text-align: center;
+   color: beige;
+   background-color: #8A6F24;
+   border: 2px solid #8A6F24;
+   padding: 15px 15px;
+   border-radius: 8px;
+    transition-duration: 0.4s; 
+     cursor: pointer;
+   }
+   .button1 {
+     background-color: #8A6F24; 
+     color: beige; 
+     border: 2px solid #8A6F24;
+   }
+   .button1:hover {
+     background-color: beige;
+     color: #8A6F24;
+   }
  </style>
 </head>
 <script type="text/javascript">
@@ -61,7 +81,9 @@ div {
 		}
 	}
 </script>
+<%@ include file="./header.jsp" %>
 <body>
+<div>
 	<h1 align="center">환불 요청</h1>
 	<form action="./refund.do" method="post">
 	<input type="hidden" id="onum" name="onum" value="${vo.onum}">
@@ -80,12 +102,12 @@ div {
 			</tr>
 		</table>
 		<div>
-			<input type="button" value="환불 요청하기" onclick="refund()">
+			<input type="button" class="next button1" value="환불 요청하기" onclick="refund()">
+			<input type="button" class="next button1" value="돌아가기" onclick="history.back(-1)">
 		</div>
 		
 	</form>
-	<div>
-		<input type="button" value="돌아가기" onclick="history.back(-1)">
-		</div>
+</div>
 </body>
+<%@ include file="./footer.jsp" %>
 </html>

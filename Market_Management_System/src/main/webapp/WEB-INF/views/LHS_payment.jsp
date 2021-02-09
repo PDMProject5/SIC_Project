@@ -300,7 +300,7 @@ function miles(val){
    
 }
 
-// 전체 적용 클릭시 마일리지 가져와
+// 전체 적용 클릭시 마일리지
 var ajaxmiles = function(val){
    $.ajax({
       url : './mileageaply.do',
@@ -379,7 +379,6 @@ $("#check_module").click(function () {
    paymentVal();
    var p = $('#price').text();
    var frm = document.getElementById("frm");
-//    console.log(p)
    if(p==0){
       alert("결제가 완료되었습니다.");
       frm.action = "./orderupdate.do";
@@ -395,9 +394,8 @@ $("#check_module").click(function () {
         name: 'CU',
         amount: p,
         buyer_name: 'asdf',
-          buyer_tel: 'asdf',
+         buyer_tel: 'asdf',
         buyer_postcode: '123-456'
-//         m_redirect_url: 'https://admin.iamport.kr/payments/complete'
     }, function (rsp) { // callback
         console.log(rsp);
         if (rsp.success) {
